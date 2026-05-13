@@ -2,9 +2,11 @@
 연구 분야 프로필.
 대학원생이 자신의 분야를 선택하면 거기에 맞는 arXiv 카테고리와 seed 키워드를 자동으로 매핑.
 
-분야는 단일 선택 — 한 사람이 보통 한 분야 깊이 파니까.
-필요하면 본인이 keywords.json 수정해서 customize.
+다중 선택 지원: ["data-mining", "nlp"] 식으로 여러 분야 동시 선택 가능.
 """
+
+from typing import List, Dict
+
 
 PROFILES = {
     "data-mining": {
@@ -29,7 +31,7 @@ PROFILES = {
     },
     "nlp": {
         "label": "자연어처리 (NLP)",
-        "description": "ACL, EMNLP, NAACL, NeurIPS NLP track",
+        "description": "ACL, EMNLP, NAACL",
         "arxiv_categories": ["cs.CL", "cs.LG", "cs.AI"],
         "seed_keywords": [
             "large language model", "instruction tuning", "rag",
@@ -84,21 +86,49 @@ PROFILES = {
             "membership inference",
         ],
     },
-    "all": {
-        "label": "전체 AI/ML (분야 미정)",
-        "description": "분야 정하기 전 광범위 탐색",
-        "arxiv_categories": ["cs.LG", "cs.AI", "cs.CL", "cs.CV", "cs.IR"],
-        "seed_keywords": [],
-    },
 }
 
 
 def get_profile(profile_id: str) -> dict:
-    """profile_id로 프로필 dict 반환. 없으면 'all' 반환."""
-    return PROFILES.get(profile_id, PROFILES["all"])
+    """단일 profile_id로 프로필 dict 반환."""
+    return PROFILES.get(profile_id, PROFILES["data-mining"])
 
 
-def list_profiles() -> list:
+def get_combined_profile(profile_ids: List[str]) -> Dict:
+    """
+    여러 프로필을 합쳐서 하나의 dict로.
+    - arxiv_categories: union (중복 제거, 순서 유지)
+    - seed_keywords: union
+    - label: "데이터 마이닝, NLP" 식으로 결합
+    """
+    if not profile_ids:
+        profile_ids = ["data-mining"]
+
+    categories_set = []
+    keywords_set = []
+    labels = []
+
+    for pid in profile_ids:
+        if pid not in PROFILES:
+            continue
+        p = PROFILES[pid]
+        for cat in p["arxiv_categories"]:
+            if cat not in categories_set:
+                categories_set.append(cat)
+        for kw in p["seed_keywords"]:
+            if kw not in keywords_set:
+                keywords_set.append(kw)
+        labels.append(p["label"])
+
+    return {
+        "ids": profile_ids,
+        "label": " · ".join(labels) if labels else "데이터 마이닝",
+        "arxiv_categories": categories_set or ["cs.LG", "cs.AI"],
+        "seed_keywords": keywords_set,
+    }
+
+
+def list_profiles() -> List[Dict]:
     """profile 리스트 (UI 표시용)."""
     return [
         {"id": pid, "label": p["label"], "description": p["description"]}
@@ -107,5 +137,7 @@ def list_profiles() -> list:
 
 
 if __name__ == "__main__":
-    for pid, p in PROFILES.items():
-        print(f"{pid:15s} {p['label']:35s} {p['arxiv_categories']}")
+    combined = get_combined_profile(["data-mining", "nlp"])
+    print("Combined:", combined["label"])
+    print("Categories:", combined["arxiv_categories"])
+    print("Keywords:", combined["seed_keywords"])
