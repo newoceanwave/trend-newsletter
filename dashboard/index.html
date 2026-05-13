@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 트렌드 뉴스레터 — 2026-05-13</title>
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', 'Segoe UI', sans-serif;
+  background: #f9fafb;
+  color: #191f28;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+.header { margin-bottom: 32px; }
+.header-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.header-date { font-size: 13px; color: #8b95a1; font-weight: 500; }
+.nav-link {
+  font-size: 13px;
+  color: #3182f6;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.nav-link:hover { background: #e8f3ff; }
+.header-title { font-size: 28px; font-weight: 700; color: #191f28; margin-bottom: 8px; letter-spacing: -0.02em; }
+.header-subtitle { font-size: 15px; color: #4e5968; }
+
+.kw-panel {
+  background: #ffffff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.kw-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kw-panel-title { font-size: 15px; font-weight: 600; color: #191f28; }
+.kw-panel-hint { font-size: 12px; color: #8b95a1; }
+
+.kw-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+  min-height: 32px;
+}
+.kw-empty { font-size: 13px; color: #8b95a1; padding: 6px 0; }
+
+.kw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e8f3ff;
+  color: #3182f6;
+  padding: 6px 6px 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.kw-chip:hover { background: #d3e7ff; }
+.kw-chip.active {
+  background: #3182f6;
+  color: #ffffff;
+}
+.kw-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.06);
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+.kw-chip.active .kw-chip-remove { background: rgba(255,255,255,0.25); }
+.kw-chip-remove:hover { background: rgba(0,0,0,0.12); }
+
+.kw-add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.kw-input {
+  flex: 1;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #191f28;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.kw-input:focus { border-color: #3182f6; }
+.kw-add-btn {
+  height: 38px;
+  padding: 0 16px;
+  background: #191f28;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.kw-add-btn:hover { background: #333d4b; }
+.kw-add-btn:disabled { background: #d1d6db; cursor: not-allowed; }
+
+.kw-suggested-section {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px dashed #e5e8eb;
+}
+.kw-suggested-label {
+  font-size: 12px;
+  color: #6b7684;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.kw-suggested {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.kw-suggest-chip {
+  background: #f2f4f6;
+  color: #4e5968;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.kw-suggest-chip:hover { background: #e5e8eb; color: #191f28; }
+.kw-suggest-chip:before { content: "+ "; color: #8b95a1; }
+
+.save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px dashed #e5e8eb;
+  font-size: 12px;
+  color: #8b95a1;
+}
+.save-bar.dirty { color: #c08401; }
+.save-btn {
+  padding: 8px 14px;
+  background: #ffffff;
+  color: #191f28;
+  border: 1px solid #d1d6db;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.save-btn:hover { background: #f9fafb; }
+.save-btn:disabled { color: #b0b8c1; cursor: not-allowed; background: #f9fafb; }
+.save-help {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #8b95a1;
+  line-height: 1.5;
+}
+.save-help code {
+  background: #f2f4f6;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: 10px;
+}
+
+.filter-status {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  background: #fff5e0;
+  color: #c08401;
+  border-radius: 10px;
+  font-size: 13px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+.filter-status.show { display: flex; }
+.filter-clear {
+  background: transparent;
+  color: #c08401;
+  border: 1px solid #c08401;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.filter-clear:hover { background: rgba(192, 132, 1, 0.1); }
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4e5968;
+  margin: 32px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title .count {
+  background: #f2f4f6;
+  color: #6b7684;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.paper-card {
+  background: #ffffff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  transition: border-color 0.15s ease;
+}
+.paper-card:hover { border-color: #d1d6db; }
+.paper-card.hidden { display: none; }
+.paper-rank {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: #f2f4f6;
+  color: #4e5968;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 24px;
+  margin-bottom: 12px;
+}
+.paper-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #191f28;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+.paper-title a { color: inherit; text-decoration: none; }
+.paper-title a:hover { color: #3182f6; }
+.paper-summary {
+  font-size: 14px;
+  color: #4e5968;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.paper-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+}
+.tag {
+  background: #f2f4f6;
+  color: #6b7684;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.tag.matched { background: #e8f3ff; color: #3182f6; }
+.tag.trending { background: #fff5e0; color: #c08401; }
+.paper-links { margin-left: auto; display: flex; gap: 12px; }
+.paper-links a { color: #6b7684; text-decoration: none; font-size: 12px; font-weight: 500; }
+.paper-links a:hover { color: #3182f6; }
+.empty {
+  background: #ffffff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 40px 24px;
+  text-align: center;
+  color: #8b95a1;
+  font-size: 14px;
+}
+.footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid #f2f4f6;
+  font-size: 12px;
+  color: #8b95a1;
+  text-align: center;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-top-row">
+        <div class="header-date">2026-05-13</div>
+        <a href="trending.html" class="nav-link">온라인 트렌딩 →</a>
+      </div>
+      <h1 class="header-title">AI 트렌드 뉴스레터</h1>
+      <p class="header-subtitle">arXiv + Hugging Face Daily Papers에서 어제자 큐레이션</p>
+    </div>
+
+    <div class="kw-panel">
+      <div class="kw-panel-header">
+        <div class="kw-panel-title">내 키워드</div>
+        <div class="kw-panel-hint">클릭해서 필터 · ×로 제거</div>
+      </div>
+
+      <div class="kw-list" id="kw-list"></div>
+
+      <div class="kw-add-row">
+        <input type="text" class="kw-input" id="kw-input" placeholder="키워드 추가 (예: diffusion model)" />
+        <button class="kw-add-btn" id="kw-add-btn">추가</button>
+      </div>
+
+      <div class="kw-suggested-section" id="kw-suggested-section">
+        <div class="kw-suggested-label">추천 키워드 (오늘 자주 등장)</div>
+        <div class="kw-suggested" id="kw-suggested"></div>
+      </div>
+
+      <div class="save-bar" id="save-bar">
+        <span id="dirty-msg">변경 없음</span>
+        <button class="save-btn" id="save-btn" disabled>keywords.json 다운로드</button>
+      </div>
+      <div class="save-help">
+        다운로드한 <code>keywords.json</code>을 GitHub repo 루트에 업로드(또는 덮어쓰기)하면 다음 실행부터 적용됩니다.
+      </div>
+    </div>
+
+    <div class="filter-status" id="filter-status">
+      <span id="filter-label"></span>
+      <button class="filter-clear" id="filter-clear">필터 해제</button>
+    </div>
+
+    <div class="section-title">오늘의 추천 <span class="count">2</span></div>
+    <div class="paper-card" data-matched='["rag"]'>
+      <div class="paper-rank">1</div>
+      <h3 class="paper-title"><a href="https://arxiv.org/abs/2505.12345" target="_blank">Retrieval-Augmented Generation with Self-Reflective Critique</a></h3>
+      <p class="paper-summary">본 논문은 RAG 시스템에 self-reflection 메커니즘을 결합하여 retrieval 품질을 동적으로 평가하고 hallucination을 줄이는 방법을 제안한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">RAG</span><span class="tag trending">🔥 142 likes</span><span class="tag">cs.CL</span>
+        <div class="paper-links"><a href="https://arxiv.org/abs/2505.12345" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2505.12345" target="_blank">PDF</a><a href="https://huggingface.co/papers/2505.12345" target="_blank">HF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["data quality"]'>
+      <div class="paper-rank">2</div>
+      <h3 class="paper-title"><a href="https://arxiv.org/abs/2505.12346" target="_blank">Data Quality Matters: A Systematic Study of Pretraining Data Curation</a></h3>
+      <p class="paper-summary">사전학습 데이터 큐레이션 전략을 체계적으로 비교한 연구.</p>
+      <div class="paper-meta">
+        <span class="tag matched">data quality</span><span class="tag trending">🔥 89 likes</span><span class="tag">cs.CL</span>
+        <div class="paper-links"><a href="https://arxiv.org/abs/2505.12346" target="_blank">arXiv</a><a href="#" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    
+    <div class="section-title" style="margin-top:48px">아카이브</div>
+    <div class="paper-card">
+      <ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0"><a href="posts/2026-05-14.html" style="color:#3182f6;text-decoration:none">2026-05-14</a></li>
+<li style="padding:6px 0"><a href="posts/2026-05-13.html" style="color:#3182f6;text-decoration:none">2026-05-13</a></li></ul>
+    </div>
+    <div class="footer">
+      <strong>출처:</strong> arXiv (cs.LG, cs.IR, cs.DB, cs.CL, cs.AI) · Hugging Face Daily Papers<br>
+      Generated by trend-newsletter
+    </div>
+  </div>
+  <script>
+(function() {
+  const INITIAL_KEYWORDS = ["data quality", "RAG", "graph neural network", "time series"];
+  const SUGGESTED_KEYWORDS = ["diffusion", "fine-tuning", "alignment"];
+  const STORAGE_KEY = 'trend_newsletter_keywords';
+
+  function loadKeywords() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
+    return INITIAL_KEYWORDS.slice();
+  }
+
+  function saveKeywords(keywords) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(keywords));
+  }
+
+  let keywords = loadKeywords();
+  let activeFilters = new Set();
+
+  function isDirty() {
+    const a = keywords.slice().sort().join('|');
+    const b = INITIAL_KEYWORDS.slice().sort().join('|');
+    return a !== b;
+  }
+
+  function render() {
+    const list = document.getElementById('kw-list');
+    const suggBox = document.getElementById('kw-suggested');
+    const saveBar = document.getElementById('save-bar');
+    const dirtyMsg = document.getElementById('dirty-msg');
+    const saveBtn = document.getElementById('save-btn');
+
+    list.innerHTML = '';
+    if (keywords.length === 0) {
+      list.innerHTML = '<div class="kw-empty">아직 등록된 키워드가 없어요. 아래에서 추가해보세요.</div>';
+    } else {
+      keywords.forEach(kw => {
+        const chip = document.createElement('span');
+        chip.className = 'kw-chip' + (activeFilters.has(kw.toLowerCase()) ? ' active' : '');
+        chip.innerHTML = kw + '<span class="kw-chip-remove" title="제거">&times;</span>';
+
+        chip.addEventListener('click', (e) => {
+          if (e.target.classList.contains('kw-chip-remove')) {
+            keywords = keywords.filter(k => k !== kw);
+            activeFilters.delete(kw.toLowerCase());
+            saveKeywords(keywords);
+            render();
+            applyFilter();
+          } else {
+            const lo = kw.toLowerCase();
+            if (activeFilters.has(lo)) activeFilters.delete(lo);
+            else activeFilters.add(lo);
+            render();
+            applyFilter();
+          }
+        });
+        list.appendChild(chip);
+      });
+    }
+
+    suggBox.innerHTML = '';
+    const notRegistered = SUGGESTED_KEYWORDS.filter(
+      kw => !keywords.map(k => k.toLowerCase()).includes(kw.toLowerCase())
+    );
+    if (notRegistered.length === 0) {
+      document.getElementById('kw-suggested-section').style.display = 'none';
+    } else {
+      document.getElementById('kw-suggested-section').style.display = 'block';
+      notRegistered.forEach(kw => {
+        const chip = document.createElement('span');
+        chip.className = 'kw-suggest-chip';
+        chip.textContent = kw;
+        chip.addEventListener('click', () => {
+          if (!keywords.map(k => k.toLowerCase()).includes(kw.toLowerCase())) {
+            keywords.push(kw);
+            saveKeywords(keywords);
+            render();
+          }
+        });
+        suggBox.appendChild(chip);
+      });
+    }
+
+    if (isDirty()) {
+      saveBar.classList.add('dirty');
+      dirtyMsg.textContent = '변경됨 — 다운로드해서 repo에 업로드하세요';
+      saveBtn.disabled = false;
+    } else {
+      saveBar.classList.remove('dirty');
+      dirtyMsg.textContent = '변경 없음';
+      saveBtn.disabled = true;
+    }
+  }
+
+  function applyFilter() {
+    const filterStatus = document.getElementById('filter-status');
+    const filterLabel = document.getElementById('filter-label');
+    const cards = document.querySelectorAll('.paper-card');
+    let visibleCount = 0;
+
+    if (activeFilters.size === 0) {
+      cards.forEach(c => c.classList.remove('hidden'));
+      filterStatus.classList.remove('show');
+      return;
+    }
+
+    cards.forEach(card => {
+      const matched = JSON.parse(card.dataset.matched || '[]');
+      const hasOverlap = matched.some(m => activeFilters.has(m.toLowerCase()));
+      if (hasOverlap) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    const filterArr = Array.from(activeFilters);
+    filterLabel.textContent = filterArr.join(', ') + ' 필터 적용 중 — ' + visibleCount + '편 표시';
+    filterStatus.classList.add('show');
+  }
+
+  function addKeyword() {
+    const input = document.getElementById('kw-input');
+    const value = input.value.trim();
+    if (!value) return;
+    if (!keywords.map(k => k.toLowerCase()).includes(value.toLowerCase())) {
+      keywords.push(value);
+      saveKeywords(keywords);
+      render();
+    }
+    input.value = '';
+    input.focus();
+  }
+
+  function downloadKeywords() {
+    const data = {
+      keywords: keywords,
+      updated_at: new Date().toISOString().split('T')[0]
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'keywords.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearFilters() {
+    activeFilters.clear();
+    render();
+    applyFilter();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('kw-add-btn').addEventListener('click', addKeyword);
+    document.getElementById('kw-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') addKeyword();
+    });
+    document.getElementById('save-btn').addEventListener('click', downloadKeywords);
+    document.getElementById('filter-clear').addEventListener('click', clearFilters);
+    render();
+  });
+})();
+</script>
+</body>
+</html>

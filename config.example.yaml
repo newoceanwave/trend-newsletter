@@ -1,0 +1,57 @@
+# config.yaml
+# 이 파일을 복사해서 config.yaml로 만들고 본인 정보 채워넣으세요.
+# config.yaml은 .gitignore에 포함되어 GitHub에 올라가지 않아야 합니다.
+
+# ===== 연구 분야 프로필 =====
+# 본인 분야 선택 — arXiv 카테고리와 seed 키워드가 자동 매핑됩니다.
+# 옵션: data-mining, ml-general, nlp, cv, speech, robotics, database, security, all
+# 자세한 매핑은 profile.py 참조
+research_profile: "data-mining"
+
+# ===== 관심 키워드 =====
+# 비워두면 (빈 리스트) 자동으로 트렌딩 키워드 추천 모드로 동작합니다.
+# 또는 keywords.json 파일을 만들어서 거기에 등록하면 그게 우선됩니다 (대시보드에서 관리).
+keywords:
+  - "data quality"
+  - "data curation"
+  - "retrieval augmented generation"
+  - "RAG"
+  - "graph neural network"
+  - "recommender system"
+  - "time series"
+  - "LLM agent"
+
+# ===== arXiv 카테고리 (수동 override) =====
+# research_profile에서 자동 매핑되니까 보통 비워두세요.
+# 명시하면 profile의 카테고리를 덮어씁니다.
+arxiv_categories: []
+
+# ===== 일일 수집량 =====
+# arXiv에서 매일 가져올 최대 논문 수 (필터링 전)
+max_papers_per_day: 200
+
+# 최종 뉴스레터에 표시할 논문 수
+top_n_in_newsletter: 10
+
+# ===== LLM (요약 생성용) =====
+# Anthropic Claude 권장. https://console.anthropic.com 에서 키 발급
+# 환경변수 ANTHROPIC_API_KEY 로도 설정 가능 (GitHub Actions에서 권장)
+llm:
+  provider: "anthropic"  # "anthropic" 또는 "openai"
+  model: "claude-haiku-4-5-20251001"  # 빠르고 저렴, 요약에 충분
+  # api_key는 환경변수 ANTHROPIC_API_KEY 로 설정 (보안)
+
+# ===== 이메일 발송 =====
+# Gmail SMTP 또는 SendGrid 등 사용 가능
+# 비밀번호는 환경변수 EMAIL_PASSWORD 로 설정
+email:
+  enabled: true
+  sender: "your-email@gmail.com"
+  recipient: "your-email@gmail.com"  # 본인한테 보내기
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
+  # Gmail의 경우 "앱 비밀번호" 필요 (https://myaccount.google.com/apppasswords)
+
+# ===== 대시보드 출력 =====
+# 대시보드 HTML을 저장할 폴더 (GitHub Pages로 배포 가능)
+output_dir: "dashboard"

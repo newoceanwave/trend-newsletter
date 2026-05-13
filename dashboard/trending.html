@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>온라인 트렌딩 — AI 트렌드 뉴스레터</title>
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', 'Segoe UI', sans-serif;
+  background: #f9fafb;
+  color: #191f28;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+.header { margin-bottom: 32px; }
+.header-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.header-date { font-size: 13px; color: #8b95a1; font-weight: 500; }
+.nav-link {
+  font-size: 13px;
+  color: #3182f6;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.nav-link:hover { background: #e8f3ff; }
+.header-title { font-size: 28px; font-weight: 700; color: #191f28; margin-bottom: 8px; letter-spacing: -0.02em; }
+.header-subtitle { font-size: 15px; color: #4e5968; }
+
+.kw-panel {
+  background: #ffffff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.kw-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kw-panel-title { font-size: 15px; font-weight: 600; color: #191f28; }
+.kw-panel-hint { font-size: 12px; color: #8b95a1; }
+
+.kw-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+  min-height: 32px;
+}
+.kw-empty { font-size: 13px; color: #8b95a1; padding: 6px 0; }
+
+.kw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e8f3ff;
+  color: #3182f6;
+  padding: 6px 6px 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.kw-chip:hover { background: #d3e7ff; }
+.kw-chip.active {
+  background: #3182f6;
+  color: #ffffff;
+}
+.kw-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.06);
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+.kw-chip.active .kw-chip-remove { background: rgba(255,255,255,0.25); }
+.kw-chip-remove:hover { background: rgba(0,0,0,0.12); }
+
+.kw-add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.kw-input {
+  flex: 1;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #191f28;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.kw-input:focus { border-color: #3182f6; }
+.kw-add-btn {
+  height: 38px;
+  padding: 0 16px;
+  background: #191f28;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.kw-add-btn:hover { background: #333d4b; }
+.kw-add-btn:disabled { background: #d1d6db; cursor: not-allowed; }
+
+.kw-suggested-section {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px dashed #e5e8eb;
+}
+.kw-suggested-label {
+  font-size: 12px;
+  color: #6b7684;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.kw-suggested {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.kw-suggest-chip {
+  background: #f2f4f6;
+  color: #4e5968;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.kw-suggest-chip:hover { background: #e5e8eb; color: #191f28; }
+.kw-suggest-chip:before { content: "+ "; color: #8b95a1; }
+
+.save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px dashed #e5e8eb;
+  font-size: 12px;
+  color: #8b95a1;
+}
+.save-bar.dirty { color: #c08401; }
+.save-btn {
+  padding: 8px 14px;
+  background: #ffffff;
+  color: #191f28;
+  border: 1px solid #d1d6db;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.save-btn:hover { background: #f9fafb; }
+.save-btn:disabled { color: #b0b8c1; cursor: not-allowed; background: #f9fafb; }
+.save-help {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #8b95a1;
+  line-height: 1.5;
+}
+.save-help code {
+  background: #f2f4f6;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: 10px;
+}
+
+.filter-status {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  background: #fff5e0;
+  color: #c08401;
+  border-radius: 10px;
+  font-size: 13px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+.filter-status.show { display: flex; }
+.filter-clear {
+  background: transparent;
+  color: #c08401;
+  border: 1px solid #c08401;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.filter-clear:hover { background: rgba(192, 132, 1, 0.1); }
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4e5968;
+  margin: 32px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title .count {
+  background: #f2f4f6;
+  color: #6b7684;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.paper-card {
+  background: #ffffff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  transition: border-color 0.15s ease;
+}
+.paper-card:hover { border-color: #d1d6db; }
+.paper-card.hidden { display: none; }
+.paper-rank {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: #f2f4f6;
+  color: #4e5968;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 24px;
+  margin-bottom: 12px;
+}
+.paper-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #191f28;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+.paper-title a { color: inherit; text-decoration: none; }
+.paper-title a:hover { color: #3182f6; }
+.paper-summary {
+  font-size: 14px;
+  color: #4e5968;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.paper-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+}
+.tag {
+  background: #f2f4f6;
+  color: #6b7684;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.tag.matched { background: #e8f3ff; color: #3182f6; }
+.tag.trending { background: #fff5e0; color: #c08401; }
+.paper-links { margin-left: auto; display: flex; gap: 12px; }
+.paper-links a { color: #6b7684; text-decoration: none; font-size: 12px; font-weight: 500; }
+.paper-links a:hover { color: #3182f6; }
+.empty {
+  background: #ffffff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 40px 24px;
+  text-align: center;
+  color: #8b95a1;
+  font-size: 14px;
+}
+.footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid #f2f4f6;
+  font-size: 12px;
+  color: #8b95a1;
+  text-align: center;
+  line-height: 1.6;
+}
+
+    .trend-section { margin-bottom: 40px; }
+    .trend-section-header { margin-bottom: 16px; }
+    .trend-section-title { font-size: 18px; font-weight: 700; color: #191f28; margin-bottom: 4px; letter-spacing: -0.01em; }
+    .trend-section-desc { font-size: 13px; color: #8b95a1; }
+    .trend-legend { font-size: 11px; color: #8b95a1; margin-top: 8px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .trend-list { background: #ffffff; border: 1px solid #f2f4f6; border-radius: 16px; overflow: hidden; }
+    .trend-row { border-bottom: 1px solid #f2f4f6; }
+    .trend-row:last-child { border-bottom: none; }
+    .trend-row-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      gap: 12px;
+    }
+    .trend-row-head:hover { background: #f9fafb; }
+    .trend-row-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+    .trend-row-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .trend-rank {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      background: #f2f4f6;
+      color: #6b7684;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 22px;
+      flex-shrink: 0;
+    }
+    .trend-kw { font-size: 14px; font-weight: 600; color: #191f28; }
+    .trend-count { font-size: 12px; color: #8b95a1; min-width: 32px; text-align: right; }
+    .trend-source-mini {
+      display: inline-block;
+      font-size: 10px;
+      color: #6b7684;
+      background: #f2f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .trend-bar {
+      display: inline-block;
+      width: 60px;
+      height: 6px;
+      background: #f2f4f6;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .trend-bar-fill { display: block; height: 100%; background: #3182f6; border-radius: 3px; }
+    .trend-toggle { color: #8b95a1; font-size: 12px; transition: transform 0.2s ease; }
+    .trend-row.open .trend-toggle { transform: rotate(180deg); }
+    .trend-papers { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #f9fafb; }
+    .trend-row.open .trend-papers { max-height: 2500px; }
+    .trend-paper { padding: 12px 20px 14px; border-top: 1px solid #f2f4f6; }
+    .trend-paper-title { font-size: 14px; font-weight: 600; color: #191f28; text-decoration: none; display: inline-block; margin-bottom: 6px; }
+    .trend-paper-title:hover { color: #3182f6; }
+    .paper-likes { display: inline-block; background: #fff5e0; color: #c08401; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 500; margin-left: 8px; vertical-align: middle; }
+    .trend-paper-abs { font-size: 13px; color: #4e5968; line-height: 1.6; margin: 0; }
+    .change-up { color: #f04452; font-size: 11px; font-weight: 600; }
+    .change-down { color: #3182f6; font-size: 11px; font-weight: 600; }
+    .change-flat { color: #d1d6db; font-size: 11px; font-weight: 600; }
+    .change-new { color: #f7931a; font-size: 10px; font-weight: 700; background: #fff5e0; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px; }
+    .kw-register {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid #d1d6db;
+      background: #ffffff;
+      color: #4e5968;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .kw-register:hover { background: #3182f6; color: #ffffff; border-color: #3182f6; }
+    .kw-register.added { background: #00c896; color: #ffffff; border-color: #00c896; cursor: default; }
+    .kw-registered {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: #00c896;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trend-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #f2f4f6;
+    }
+    .trend-tab {
+      padding: 10px 16px;
+      background: transparent;
+      border: none;
+      color: #8b95a1;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .trend-tab:hover { color: #4e5968; }
+    .trend-tab.active {
+      color: #191f28;
+      border-bottom-color: #191f28;
+      font-weight: 600;
+    }
+    .trend-section { display: none; }
+    .trend-section.active { display: block; }
+
+    .save-floating {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: #fff5e0;
+      border-radius: 12px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #c08401;
+    }
+    .save-floating.show { display: flex; }
+    .save-floating-btn {
+      padding: 8px 14px;
+      background: #c08401;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .save-floating-btn:hover { background: #a87000; }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-top-row">
+        <div class="header-date">수집: 2026-05-13</div>
+        <a href="index.html" class="nav-link">← 내 키워드</a>
+      </div>
+      <h1 class="header-title">온라인 트렌딩</h1>
+      <p class="header-subtitle">전 세계 학계에서 지금 자주 언급되는 키워드 · ▲▼는 어제 대비 순위 변화</p>
+    </div>
+
+    <div class="trend-tabs"><button class="trend-tab active" data-tab="agg">종합</button><button class="trend-tab " data-tab="arxiv">arXiv 최근 7일</button><button class="trend-tab " data-tab="hf">Hugging Face Daily</button><button class="trend-tab " data-tab="pwc">Papers with Code</button></div>
+
+    
+        <div class="trend-section active" id="section-agg">
+          <div class="trend-section-header">
+            <h2 class="trend-section-title">종합 ranking</h2>
+            <p class="trend-section-desc">3개 출처 점수를 정규화해서 평균 · 여러 출처에서 등장하면 가중치 +</p>
+            <div class="trend-legend">
+              <span class="trend-source-mini">A</span> arXiv 7일
+              <span class="trend-source-mini">H</span> Hugging Face
+              <span class="trend-source-mini">P</span> Papers with Code
+            </div>
+          </div>
+          <div class="trend-list">
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-0">
+            <div class="trend-row-left">
+              <span class="trend-rank">1</span>
+              
+              <span class="trend-kw">large language model</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 100</span><span class="trend-source-mini">H 100</span><span class="trend-source-mini">P 87</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 100%"></span></span>
+              <button class="kw-register" data-kw="large language model" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-0">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99001" target="_blank" class="trend-paper-title">Scaling Laws for Multilingual LLMs at 100B+</a>
+          
+          <p class="trend-paper-abs">We study how scaling laws change when training multilingual LLMs at scale.</p>
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99002" target="_blank" class="trend-paper-title">Better Pretraining Mixtures through Data Influence</a>
+          
+          <p class="trend-paper-abs">We propose a method to estimate the influence of pretraining data subsets.</p>
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.88001" target="_blank" class="trend-paper-title">Llama-4-Reasoning: An Open Reasoning Model</a>
+          <span class="paper-likes">🔥 487</span>
+          <p class="trend-paper-abs">Open-weight reasoning LLM.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-1">
+            <div class="trend-row-left">
+              <span class="trend-rank">2</span>
+              
+              <span class="trend-kw">diffusion</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 77</span><span class="trend-source-mini">H 33</span><span class="trend-source-mini">P 100</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 73%"></span></span>
+              <button class="kw-register" data-kw="diffusion" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-1">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99004" target="_blank" class="trend-paper-title">Consistent Video Diffusion via Spatio-Temporal Attention</a>
+          
+          <p class="trend-paper-abs">Video generation with temporal consistency.</p>
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.77001" target="_blank" class="trend-paper-title">Flux-2: Open Text-to-Image Diffusion</a>
+          
+          <p class="trend-paper-abs">Open weight diffusion.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-2">
+            <div class="trend-row-left">
+              <span class="trend-rank">3</span>
+              
+              <span class="trend-kw">agent</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 49</span><span class="trend-source-mini">H 66</span><span class="trend-source-mini">P 42</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 55%"></span></span>
+              <button class="kw-register" data-kw="agent" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-2">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99007" target="_blank" class="trend-paper-title">Multi-Agent Coordination with LLMs at Scale</a>
+          
+          <p class="trend-paper-abs">Coordinating 100+ LLM agents for complex tasks.</p>
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.88003" target="_blank" class="trend-paper-title">AutoAgent: Self-Improving Multi-Agent Systems</a>
+          <span class="paper-likes">🔥 256</span>
+          <p class="trend-paper-abs">Agents that improve themselves.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-3">
+            <div class="trend-row-left">
+              <span class="trend-rank">4</span>
+              
+              <span class="trend-kw">fine-tuning</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 35</span><span class="trend-source-mini">H 0</span><span class="trend-source-mini">P 64</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 34%"></span></span>
+              <button class="kw-register" data-kw="fine-tuning" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-3">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-4">
+            <div class="trend-row-left">
+              <span class="trend-rank">5</span>
+              
+              <span class="trend-kw">rag</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 46</span><span class="trend-source-mini">H 39</span><span class="trend-source-mini">P 0</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 30%"></span></span>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-4">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99006" target="_blank" class="trend-paper-title">Self-RAG v2</a>
+          
+          <p class="trend-paper-abs">Improved self-reflective RAG.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-5">
+            <div class="trend-row-left">
+              <span class="trend-rank">6</span>
+              
+              <span class="trend-kw">reasoning</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 30</span><span class="trend-source-mini">H 53</span><span class="trend-source-mini">P 0</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 29%"></span></span>
+              <button class="kw-register" data-kw="reasoning" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-5">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-6">
+            <div class="trend-row-left">
+              <span class="trend-rank">7</span>
+              
+              <span class="trend-kw">lora</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 0</span><span class="trend-source-mini">H 0</span><span class="trend-source-mini">P 50</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 17%"></span></span>
+              <button class="kw-register" data-kw="lora" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-6">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-7">
+            <div class="trend-row-left">
+              <span class="trend-rank">8</span>
+              
+              <span class="trend-kw">graph neural network</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 38</span><span class="trend-source-mini">H 0</span><span class="trend-source-mini">P 0</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 15%"></span></span>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-7">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99010" target="_blank" class="trend-paper-title">Temporal GNN for Recommender Systems</a>
+          
+          <p class="trend-paper-abs">Real-time temporal GNN.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-8">
+            <div class="trend-row-left">
+              <span class="trend-rank">9</span>
+              
+              <span class="trend-kw">evaluation</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 27</span><span class="trend-source-mini">H 0</span><span class="trend-source-mini">P 0</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 15%"></span></span>
+              <button class="kw-register" data-kw="evaluation" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-8">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        </div>
+        </div>
+        
+        <div class="trend-section" id="section-arxiv">
+          <div class="trend-section-header">
+            <h2 class="trend-section-title">arXiv 최근 7일</h2>
+            <p class="trend-section-desc">submission 빈도 — 학계 활동 그 자체</p>
+          </div>
+          <div class="trend-list">
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-arxiv-0">
+            <div class="trend-row-left">
+              <span class="trend-rank">1</span>
+              <span class="change-up">▲1</span>
+              <span class="trend-kw">large language model</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">62편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 100%"></span></span>
+              <button class="kw-register" data-kw="large language model" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-arxiv-0">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99001" target="_blank" class="trend-paper-title">Scaling Laws for Multilingual LLMs at 100B+</a>
+          
+          <p class="trend-paper-abs">We study how scaling laws change when training multilingual LLMs at scale.</p>
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99002" target="_blank" class="trend-paper-title">Better Pretraining Mixtures through Data Influence</a>
+          
+          <p class="trend-paper-abs">We propose a method to estimate the influence of pretraining data subsets.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-arxiv-1">
+            <div class="trend-row-left">
+              <span class="trend-rank">2</span>
+              <span class="change-down">▼1</span>
+              <span class="trend-kw">diffusion</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">48편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 77%"></span></span>
+              <button class="kw-register" data-kw="diffusion" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-arxiv-1">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99004" target="_blank" class="trend-paper-title">Consistent Video Diffusion via Spatio-Temporal Attention</a>
+          
+          <p class="trend-paper-abs">Video generation with temporal consistency.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-arxiv-2">
+            <div class="trend-row-left">
+              <span class="trend-rank">3</span>
+              <span class="change-up">▲2</span>
+              <span class="trend-kw">agent</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">31편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 49%"></span></span>
+              <button class="kw-register" data-kw="agent" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-arxiv-2">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99007" target="_blank" class="trend-paper-title">Multi-Agent Coordination with LLMs at Scale</a>
+          
+          <p class="trend-paper-abs">Coordinating 100+ LLM agents for complex tasks.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-arxiv-3">
+            <div class="trend-row-left">
+              <span class="trend-rank">4</span>
+              <span class="change-down">▼1</span>
+              <span class="trend-kw">rag</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">28편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 46%"></span></span>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-arxiv-3">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99006" target="_blank" class="trend-paper-title">Self-RAG v2</a>
+          
+          <p class="trend-paper-abs">Improved self-reflective RAG.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-arxiv-4">
+            <div class="trend-row-left">
+              <span class="trend-rank">5</span>
+              <span class="change-up">▲1</span>
+              <span class="trend-kw">graph neural network</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">24편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 38%"></span></span>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-arxiv-4">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.99010" target="_blank" class="trend-paper-title">Temporal GNN for Recommender Systems</a>
+          
+          <p class="trend-paper-abs">Real-time temporal GNN.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-arxiv-5">
+            <div class="trend-row-left">
+              <span class="trend-rank">6</span>
+              <span class="change-down">▼2</span>
+              <span class="trend-kw">fine-tuning</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">22편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 35%"></span></span>
+              <button class="kw-register" data-kw="fine-tuning" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-arxiv-5">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-arxiv-6">
+            <div class="trend-row-left">
+              <span class="trend-rank">7</span>
+              <span class="change-new">NEW</span>
+              <span class="trend-kw">reasoning</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">19편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 30%"></span></span>
+              <button class="kw-register" data-kw="reasoning" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-arxiv-6">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-arxiv-7">
+            <div class="trend-row-left">
+              <span class="trend-rank">8</span>
+              <span class="change-down">▼1</span>
+              <span class="trend-kw">evaluation</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">18편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 27%"></span></span>
+              <button class="kw-register" data-kw="evaluation" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-arxiv-7">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        </div>
+        </div>
+        
+        <div class="trend-section" id="section-hf">
+          <div class="trend-section-header">
+            <h2 class="trend-section-title">Hugging Face Daily</h2>
+            <p class="trend-section-desc">전문가 큐레이션 + likes — 신호 강도 높음</p>
+          </div>
+          <div class="trend-list">
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-hf-0">
+            <div class="trend-row-left">
+              <span class="trend-rank">1</span>
+              <span class="change-up">▲1</span>
+              <span class="trend-kw">large language model</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">18편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 100%"></span></span>
+              <button class="kw-register" data-kw="large language model" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-hf-0">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.88001" target="_blank" class="trend-paper-title">Llama-4-Reasoning: An Open Reasoning Model</a>
+          <span class="paper-likes">🔥 487</span>
+          <p class="trend-paper-abs">Open-weight reasoning LLM.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-hf-1">
+            <div class="trend-row-left">
+              <span class="trend-rank">2</span>
+              <span class="change-down">▼1</span>
+              <span class="trend-kw">agent</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">14편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 66%"></span></span>
+              <button class="kw-register" data-kw="agent" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-hf-1">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.88003" target="_blank" class="trend-paper-title">AutoAgent: Self-Improving Multi-Agent Systems</a>
+          <span class="paper-likes">🔥 256</span>
+          <p class="trend-paper-abs">Agents that improve themselves.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-hf-2">
+            <div class="trend-row-left">
+              <span class="trend-rank">3</span>
+              <span class="change-new">NEW</span>
+              <span class="trend-kw">reasoning</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">11편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 53%"></span></span>
+              <button class="kw-register" data-kw="reasoning" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-hf-2">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-hf-3">
+            <div class="trend-row-left">
+              <span class="trend-rank">4</span>
+              <span class="change-flat">–</span>
+              <span class="trend-kw">rag</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">9편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 39%"></span></span>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-hf-3">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-hf-4">
+            <div class="trend-row-left">
+              <span class="trend-rank">5</span>
+              <span class="change-down">▼2</span>
+              <span class="trend-kw">diffusion</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">7편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 33%"></span></span>
+              <button class="kw-register" data-kw="diffusion" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-hf-4">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        </div>
+        </div>
+        
+        <div class="trend-section" id="section-pwc">
+          <div class="trend-section-header">
+            <h2 class="trend-section-title">Papers with Code</h2>
+            <p class="trend-section-desc">코드 공개된 — 재현 가능성 신호</p>
+          </div>
+          <div class="trend-list">
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-pwc-0">
+            <div class="trend-row-left">
+              <span class="trend-rank">1</span>
+              <span class="change-flat">–</span>
+              <span class="trend-kw">diffusion</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">23편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 100%"></span></span>
+              <button class="kw-register" data-kw="diffusion" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-pwc-0">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2505.77001" target="_blank" class="trend-paper-title">Flux-2: Open Text-to-Image Diffusion</a>
+          
+          <p class="trend-paper-abs">Open weight diffusion.</p>
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-pwc-1">
+            <div class="trend-row-left">
+              <span class="trend-rank">2</span>
+              <span class="change-up">▲2</span>
+              <span class="trend-kw">large language model</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">18편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 87%"></span></span>
+              <button class="kw-register" data-kw="large language model" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-pwc-1">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-pwc-2">
+            <div class="trend-row-left">
+              <span class="trend-rank">3</span>
+              <span class="change-down">▼1</span>
+              <span class="trend-kw">fine-tuning</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">14편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 64%"></span></span>
+              <button class="kw-register" data-kw="fine-tuning" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-pwc-2">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-pwc-3">
+            <div class="trend-row-left">
+              <span class="trend-rank">4</span>
+              <span class="change-down">▼1</span>
+              <span class="trend-kw">lora</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">11편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 50%"></span></span>
+              <button class="kw-register" data-kw="lora" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-pwc-3">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-pwc-4">
+            <div class="trend-row-left">
+              <span class="trend-rank">5</span>
+              <span class="change-flat">–</span>
+              <span class="trend-kw">agent</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">9편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 42%"></span></span>
+              <button class="kw-register" data-kw="agent" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-pwc-4">
+            <div class="trend-paper" style="color:#8b95a1;font-size:13px">관련 논문 미수집</div>
+          </div>
+        </div>
+        </div>
+        </div>
+        
+
+    <div class="save-floating" id="save-floating">
+      <span>키워드가 추가됐어요 — 다운로드해서 repo에 업로드하면 다음 실행부터 적용됩니다</span>
+      <button class="save-floating-btn" id="save-floating-btn">keywords.json 다운로드</button>
+    </div>
+
+    <div class="footer" style="margin-top:40px">
+      <strong>출처:</strong> arXiv 최근 7일 · Hugging Face Daily Papers · Papers with Code trending<br>
+      ＋ 버튼으로 키워드 등록 · 클릭하면 관련 논문 펼쳐짐
+    </div>
+  </div>
+  <script>
+    (function() {
+      const STORAGE_KEY = 'trend_newsletter_keywords';
+      const INITIAL_KEYWORDS = ["data quality", "RAG", "graph neural network", "time series"];
+
+      function loadKeywords() {
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored) return JSON.parse(stored);
+        } catch (e) {}
+        return INITIAL_KEYWORDS.slice();
+      }
+      function saveKeywords(kws) { localStorage.setItem(STORAGE_KEY, JSON.stringify(kws)); }
+      function isDirty(kws) {
+        return kws.slice().sort().join('|') !== INITIAL_KEYWORDS.slice().sort().join('|');
+      }
+
+      let keywords = loadKeywords();
+
+      function refreshSaveBar() {
+        const bar = document.getElementById('save-floating');
+        if (isDirty(keywords)) bar.classList.add('show');
+        else bar.classList.remove('show');
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.trend-row-head').forEach(head => {
+          head.addEventListener('click', (e) => {
+            if (e.target.closest('.kw-register')) return;
+            const row = head.closest('.trend-row');
+            row.classList.toggle('open');
+          });
+        });
+
+        document.querySelectorAll('.kw-register').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const kw = btn.dataset.kw;
+            if (!keywords.map(k => k.toLowerCase()).includes(kw.toLowerCase())) {
+              keywords.push(kw);
+              saveKeywords(keywords);
+            }
+            btn.classList.add('added');
+            btn.textContent = '✓';
+            btn.disabled = true;
+            refreshSaveBar();
+          });
+        });
+
+        document.querySelectorAll('.trend-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            const target = tab.dataset.tab;
+            document.querySelectorAll('.trend-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelectorAll('.trend-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('section-' + target).classList.add('active');
+          });
+        });
+
+        document.getElementById('save-floating-btn').addEventListener('click', () => {
+          const data = {
+            keywords: keywords,
+            updated_at: new Date().toISOString().split('T')[0]
+          };
+          const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'keywords.json';
+          a.click();
+          URL.revokeObjectURL(url);
+        });
+
+        refreshSaveBar();
+      });
+    })();
+    </script>
+</body>
+</html>
