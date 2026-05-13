@@ -84,7 +84,9 @@ def main():
     max_papers = config.get("max_papers_per_day", 200)
     top_n = config.get("top_n_in_newsletter", 10)
     output_dir = config.get("output_dir", "dashboard")
-    llm_model = config.get("llm", {}).get("model", "claude-haiku-4-5-20251001")
+    llm_config = config.get("llm", {})
+    llm_provider = llm_config.get("provider", "google")
+    llm_model = llm_config.get("model", "gemini-2.5-flash")
 
     today = datetime.now().strftime("%Y-%m-%d")
     print(f"📅 날짜: {today}")
@@ -112,8 +114,8 @@ def main():
 
     # 4) 요약 생성
     if top_papers:
-        print(f"📝 상위 {len(top_papers)}편 LLM 요약 생성 중... (모델: {llm_model})")
-        top_papers = summarize_papers(top_papers, model=llm_model)
+        print(f"📝 상위 {len(top_papers)}편 LLM 요약 생성 중... (provider: {llm_provider}, 모델: {llm_model})")
+        top_papers = summarize_papers(top_papers, model=llm_model, provider=llm_provider)
         print()
 
     # 5) HTML 저장 + 이메일 발송
