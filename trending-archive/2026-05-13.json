@@ -2591,7 +2591,7 @@
   "hf": [
     {
       "keyword": "agent",
-      "score": 43.8,
+      "score": 44.1,
       "paper_count": 14,
       "papers": [
         {
@@ -2608,7 +2608,7 @@
           "id": "2605.10899",
           "title": "RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards",
           "abstract": "Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their trajectories span many tool-augmented decisions, and standard post-training offers little mechanism for turning past attempts into reusable experience. In this work, we argue that rubrics should serve not merely as final-answer evaluators, but as the shared interface that structures policy execution, judge feedback, and agent memory. Based on this view, we introduce RubricEM, a rubric-guided reinforcement learning framework that combines stagewise policy decomposition with reflection-based meta-policy evolution. RubricEM first makes research trajectories stage-aware by conditioning planning, evidence gathering, review, and synthesis on self-generated rubrics. It then assigns credit with Stage-Structured GRPO, which uses stagewise rubric judgments to provide denser semantic feedback for long-horizon optimization. In parallel, RubricEM trains a shared-backbone reflection meta-policy that distills judged trajectories into reusable rubric-grounded guidance for future attempts. The resulting RubricEM-8B achieves strong performance across four long-form research benchmarks, outperforming comparable open models and approaching proprietary deep-research systems. Beyond final performance, we perform thorough analyses to understand the key ingredients of RubricEM.",
-          "likes": 25,
+          "likes": 29,
           "arxiv_url": "https://arxiv.org/abs/2605.10899",
           "pdf_url": "https://arxiv.org/pdf/2605.10899",
           "hf_url": "https://huggingface.co/papers/2605.10899",
@@ -2618,7 +2618,7 @@
           "id": "2605.12178",
           "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
           "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
-          "likes": 14,
+          "likes": 15,
           "arxiv_url": "https://arxiv.org/abs/2605.12178",
           "pdf_url": "https://arxiv.org/pdf/2605.12178",
           "hf_url": "https://huggingface.co/papers/2605.12178",
@@ -2685,27 +2685,27 @@
           "published": "2026-05-07T00:00:00.000Z"
         },
         {
-          "id": "2605.12493",
-          "title": "LongMemEval-V2: Evaluating Long-Term Agent Memory Toward Experienced Colleagues",
-          "abstract": "Long-term memory is crucial for agents in specialized web environments, where success depends on recalling interface affordances, state dynamics, workflows, and recurring failure modes. However, existing memory benchmarks for agents mostly focus on user histories, short traces, or downstream task success, leaving open how to directly evaluate whether memory systems effectively internalize environment-specific experience. To address this gap, we introduce LongMemEval-V2 (LME-V2), a benchmark for evaluating whether memory systems can help agents acquire the experience needed to become knowledgeable colleagues in customized environments. LME-V2 contains 451 manually curated questions covering five core memory abilities for web agents: static state recall, dynamic state tracking, workflow knowledge, environment gotchas, and premise awareness. Questions are paired with history trajectories containing up to 500 trajectories and 115M tokens. We use a context gathering formulation: memory systems consume history trajectories and return compact evidence for downstream question answering. We propose a suite of two memory methods: AgentRunbook-R, an efficient RAG-based memory with knowledge pools for raw state observations, events, and strategy notes, and AgentRunbook-C, which stores trajectories as files and invokes a coding agent to gather evidence in an augmented sandbox. Experiments show that AgentRunbook-C achieves the best performance with 72.5% average accuracy, outperforming the strongest RAG baseline (48.5%) and the off-the-shelf coding agent baseline (69.3%). Despite the strong performance gains, coding agent based methods have high latency costs. While AgentRunbook-C advances the accuracy-latency Pareto frontier, substantial room for improvement remains. Together, these results establish LME-V2 as a challenging testbed for developing long-term memory systems for environment experience.",
+          "id": "2605.10832",
+          "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
+          "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
           "likes": 3,
-          "arxiv_url": "https://arxiv.org/abs/2605.12493",
-          "pdf_url": "https://arxiv.org/pdf/2605.12493",
-          "hf_url": "https://huggingface.co/papers/2605.12493",
-          "published": "2026-05-12T00:00:00.000Z"
+          "arxiv_url": "https://arxiv.org/abs/2605.10832",
+          "pdf_url": "https://arxiv.org/pdf/2605.10832",
+          "hf_url": "https://huggingface.co/papers/2605.10832",
+          "published": "2026-05-11T00:00:00.000Z"
         }
       ]
     },
     {
       "keyword": "multimodal",
-      "score": 36.8,
+      "score": 37.8,
       "paper_count": 6,
       "papers": [
         {
           "id": "2605.12500",
           "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
           "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
-          "likes": 56,
+          "likes": 58,
           "arxiv_url": "https://arxiv.org/abs/2605.12500",
           "pdf_url": "https://arxiv.org/pdf/2605.12500",
           "hf_url": "https://huggingface.co/papers/2605.12500",
@@ -2715,7 +2715,7 @@
           "id": "2605.09266",
           "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
           "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
-          "likes": 8,
+          "likes": 9,
           "arxiv_url": "https://arxiv.org/abs/2605.09266",
           "pdf_url": "https://arxiv.org/pdf/2605.09266",
           "hf_url": "https://huggingface.co/papers/2605.09266",
@@ -2735,7 +2735,7 @@
           "id": "2605.10832",
           "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
           "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
-          "likes": 2,
+          "likes": 3,
           "arxiv_url": "https://arxiv.org/abs/2605.10832",
           "pdf_url": "https://arxiv.org/pdf/2605.10832",
           "hf_url": "https://huggingface.co/papers/2605.10832",
@@ -2765,14 +2765,14 @@
     },
     {
       "keyword": "reasoning",
-      "score": 34.9,
+      "score": 35.4,
       "paper_count": 17,
       "papers": [
         {
           "id": "2605.12500",
           "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
           "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
-          "likes": 56,
+          "likes": 58,
           "arxiv_url": "https://arxiv.org/abs/2605.12500",
           "pdf_url": "https://arxiv.org/pdf/2605.12500",
           "hf_url": "https://huggingface.co/papers/2605.12500",
@@ -2782,7 +2782,7 @@
           "id": "2605.12178",
           "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
           "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
-          "likes": 14,
+          "likes": 15,
           "arxiv_url": "https://arxiv.org/abs/2605.12178",
           "pdf_url": "https://arxiv.org/pdf/2605.12178",
           "hf_url": "https://huggingface.co/papers/2605.12178",
@@ -2792,7 +2792,7 @@
           "id": "2605.07237",
           "title": "Teaching Language Models to Think in Code",
           "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
-          "likes": 9,
+          "likes": 10,
           "arxiv_url": "https://arxiv.org/abs/2605.07237",
           "pdf_url": "https://arxiv.org/pdf/2605.07237",
           "hf_url": "https://huggingface.co/papers/2605.07237",
@@ -2802,7 +2802,7 @@
           "id": "2605.09266",
           "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
           "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
-          "likes": 8,
+          "likes": 9,
           "arxiv_url": "https://arxiv.org/abs/2605.09266",
           "pdf_url": "https://arxiv.org/pdf/2605.09266",
           "hf_url": "https://huggingface.co/papers/2605.09266",
@@ -2859,20 +2859,20 @@
           "published": "2026-05-11T00:00:00.000Z"
         },
         {
-          "id": "2605.12449",
-          "title": "LychSim: A Controllable and Interactive Simulation Framework for Vision Research",
-          "abstract": "While self-supervised pretraining has reduced vision systems' reliance on synthetic data, simulation remains an indispensable tool for closed-loop optimization and rigorous out-of-distribution (OOD) evaluation. However, modern simulation platforms often present steep technical barriers, requiring extensive expertise in computer graphics and game development. In this work, we present LychSim, a highly controllable and interactive simulation framework built upon Unreal Engine 5 to bridge this gap. LychSim is built around three key designs: (1) a streamlined Python API that abstracts away underlying engine complexities; (2) a procedural data pipeline capable of generating diverse, high-fidelity environments with varying out-of-distribution (OOD) visual challenges, paired with rich 2D and 3D ground truths; and (3) a native integration of the Model Context Protocol (MCP) that transforms the simulator into a dynamic, closed-loop playground for reasoning agentic LLMs. We further annotate scene-level procedural rules and object-level pose alignments to enable semantically aligned 3D ground truths and automated scene modification. We demonstrate LychSim's capability across multiple downstream applications, including serving as a synthetic data engine, powering reinforcement learning-based adversarial examiners, and facilitating interactive, language-driven scene layout generation. To benefit the broader vision community, LychSim will be made publicly available, including full source code and various data annotations.",
+          "id": "2605.10832",
+          "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
+          "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
           "likes": 3,
-          "arxiv_url": "https://arxiv.org/abs/2605.12449",
-          "pdf_url": "https://arxiv.org/pdf/2605.12449",
-          "hf_url": "https://huggingface.co/papers/2605.12449",
-          "published": "2026-05-12T00:00:00.000Z"
+          "arxiv_url": "https://arxiv.org/abs/2605.10832",
+          "pdf_url": "https://arxiv.org/pdf/2605.10832",
+          "hf_url": "https://huggingface.co/papers/2605.10832",
+          "published": "2026-05-11T00:00:00.000Z"
         }
       ]
     },
     {
       "keyword": "llm",
-      "score": 29.6,
+      "score": 30.0,
       "paper_count": 10,
       "papers": [
         {
@@ -2906,6 +2906,16 @@
           "published": "2026-05-10T00:00:00.000Z"
         },
         {
+          "id": "2605.10977",
+          "title": "PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks",
+          "abstract": "Watermarking for large language models (LLMs) is a promising approach for detecting LLM-generated text and enabling responsible deployment. However, existing watermarking methods are often vulnerable to semantic-invariant attacks, such as paraphrasing. We propose PASA, a principled, robust, and distortion-free watermarking algorithm that embeds and detects a watermark at the semantic level. PASA operates on semantic clusters in a latent embedding space and constructs a distributional dependency between token and auxiliary sequences via shared randomness synchronized by a secret key and semantic history. This design is grounded in our theoretical framework that characterizes a jointly optimal embedding-detection pair, achieving the fundamental trade-offs among detection accuracy, robustness, and distortion. Evaluations across multiple LLMs and semantic-invariant attacks demonstrate that PASA remains robust even under strong paraphrasing attacks while preserving high text quality, outperforming standard vocabulary-space baselines. Ablation studies further validate the effectiveness of our hyperparameter choices. Webpage: https://ai-kunkun.github.io/PASA_page/.",
+          "likes": 6,
+          "arxiv_url": "https://arxiv.org/abs/2605.10977",
+          "pdf_url": "https://arxiv.org/pdf/2605.10977",
+          "hf_url": "https://huggingface.co/papers/2605.10977",
+          "published": "2026-05-09T00:00:00.000Z"
+        },
+        {
           "id": "2605.10365",
           "title": "Agent-ValueBench: A Comprehensive Benchmark for Evaluating Agent Values",
           "abstract": "Autonomous agents have rapidly matured as task executors and seen widespread deployment via harnesses such as OpenClaw. Safety concerns have rightly drawn growing research attention, and beneath them lie the values silently steering agent behavior. Existing value benchmarks, however, remain confined to LLMs, leaving agent values largely uncharted. From intuitive, empirical, and theoretical vantage points, we show that an agent's values diverge from those of its underlying LLM, and the agentic modality further introduces dataset-, evaluation-, and system-level challenges absent from text-only protocols. We close this gap with Agent-ValueBench, the first benchmark dedicated to agent values. It features 394 executable environments across 16 domains, offering 4,335 value-conflict tasks that cover 28 value systems and 332 dimensions. Every instance is co-synthesized through our purpose-built end-to-end pipeline and curated per-instance by professional psychologists. Each task ships with two pole-aligned golden trajectories whose checkpoints anchor a trajectory-level rubric-based judge. Benchmarking 14 frontier proprietary and open-weights models across 4 mainstream harnesses, we uncover three concerted findings. Agent values first manifest as a Value Tide of cross-model homogeneity beneath interpretable counter-currents. This tide bends non-additively under harness pull, and yet more decisively under deliberate steering via embedded skills. Together these results signal that the agent-alignment lever is shifting from classical model alignment and prompt steering toward harness alignment and skill steering.",
@@ -2924,16 +2934,6 @@
           "pdf_url": "https://arxiv.org/pdf/2605.12477",
           "hf_url": "https://huggingface.co/papers/2605.12477",
           "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.10977",
-          "title": "PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks",
-          "abstract": "Watermarking for large language models (LLMs) is a promising approach for detecting LLM-generated text and enabling responsible deployment. However, existing watermarking methods are often vulnerable to semantic-invariant attacks, such as paraphrasing. We propose PASA, a principled, robust, and distortion-free watermarking algorithm that embeds and detects a watermark at the semantic level. PASA operates on semantic clusters in a latent embedding space and constructs a distributional dependency between token and auxiliary sequences via shared randomness synchronized by a secret key and semantic history. This design is grounded in our theoretical framework that characterizes a jointly optimal embedding-detection pair, achieving the fundamental trade-offs among detection accuracy, robustness, and distortion. Evaluations across multiple LLMs and semantic-invariant attacks demonstrate that PASA remains robust even under strong paraphrasing attacks while preserving high text quality, outperforming standard vocabulary-space baselines. Ablation studies further validate the effectiveness of our hyperparameter choices. Webpage: https://ai-kunkun.github.io/PASA_page/.",
-          "likes": 5,
-          "arxiv_url": "https://arxiv.org/abs/2605.10977",
-          "pdf_url": "https://arxiv.org/pdf/2605.10977",
-          "hf_url": "https://huggingface.co/papers/2605.10977",
-          "published": "2026-05-09T00:00:00.000Z"
         },
         {
           "id": "2605.12495",
@@ -2979,7 +2979,7 @@
     },
     {
       "keyword": "evaluation",
-      "score": 22.2,
+      "score": 22.5,
       "paper_count": 11,
       "papers": [
         {
@@ -2993,30 +2993,30 @@
           "published": "2026-05-10T00:00:00.000Z"
         },
         {
-          "id": "2605.12178",
-          "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
-          "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
-          "likes": 14,
-          "arxiv_url": "https://arxiv.org/abs/2605.12178",
-          "pdf_url": "https://arxiv.org/pdf/2605.12178",
-          "hf_url": "https://huggingface.co/papers/2605.12178",
-          "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
           "id": "2605.12090",
           "title": "World Action Models: The Next Frontier in Embodied AI",
           "abstract": "Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervention. A growing body of work addresses this limitation by integrating world models, predictive models of environment dynamics, into the action generation pipeline. We term this emerging paradigm World Action Models (WAMs): embodied foundation models that unify predictive state modeling with action generation, targeting a joint distribution over future states and actions rather than actions alone. However, the literature remains fragmented across architectures, learning objectives, and application scenarios, lacking a unified conceptual framework. We formally define WAMs and disambiguate them from related concepts, and trace the foundations and early integration of VLA and world model research that gave rise to this paradigm. We organize existing methods into a structured taxonomy of Cascaded and Joint WAMs, with further subdivision by generation modality, conditioning mechanism, and action decoding strategy. We systematically analyze the data ecosystem fueling WAMs development, spanning robot teleoperation, portable human demonstrations, simulation, and internet-scale egocentric video, and synthesize emerging evaluation protocols organized around visual fidelity, physical commonsense, and action plausibility. Overall, this survey provides the first systematic account of the WAMs landscape, clarifies key architectural paradigms and their trade-offs, and identifies open challenges and future opportunities for this rapidly evolving field.",
-          "likes": 12,
+          "likes": 18,
           "arxiv_url": "https://arxiv.org/abs/2605.12090",
           "pdf_url": "https://arxiv.org/pdf/2605.12090",
           "hf_url": "https://huggingface.co/papers/2605.12090",
           "published": "2026-05-12T00:00:00.000Z"
         },
         {
+          "id": "2605.12178",
+          "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
+          "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
+          "likes": 15,
+          "arxiv_url": "https://arxiv.org/abs/2605.12178",
+          "pdf_url": "https://arxiv.org/pdf/2605.12178",
+          "hf_url": "https://huggingface.co/papers/2605.12178",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
           "id": "2605.09266",
           "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
           "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
-          "likes": 8,
+          "likes": 9,
           "arxiv_url": "https://arxiv.org/abs/2605.09266",
           "pdf_url": "https://arxiv.org/pdf/2605.09266",
           "hf_url": "https://huggingface.co/papers/2605.09266",
@@ -3093,7 +3093,7 @@
           "id": "2605.12178",
           "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
           "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
-          "likes": 14,
+          "likes": 15,
           "arxiv_url": "https://arxiv.org/abs/2605.12178",
           "pdf_url": "https://arxiv.org/pdf/2605.12178",
           "hf_url": "https://huggingface.co/papers/2605.12178",
@@ -3103,7 +3103,7 @@
           "id": "2605.09266",
           "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
           "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
-          "likes": 8,
+          "likes": 9,
           "arxiv_url": "https://arxiv.org/abs/2605.09266",
           "pdf_url": "https://arxiv.org/pdf/2605.09266",
           "hf_url": "https://huggingface.co/papers/2605.09266",
@@ -3173,14 +3173,14 @@
     },
     {
       "keyword": "reinforcement learning",
-      "score": 20.1,
+      "score": 20.4,
       "paper_count": 8,
       "papers": [
         {
           "id": "2605.10899",
           "title": "RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards",
           "abstract": "Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their trajectories span many tool-augmented decisions, and standard post-training offers little mechanism for turning past attempts into reusable experience. In this work, we argue that rubrics should serve not merely as final-answer evaluators, but as the shared interface that structures policy execution, judge feedback, and agent memory. Based on this view, we introduce RubricEM, a rubric-guided reinforcement learning framework that combines stagewise policy decomposition with reflection-based meta-policy evolution. RubricEM first makes research trajectories stage-aware by conditioning planning, evidence gathering, review, and synthesis on self-generated rubrics. It then assigns credit with Stage-Structured GRPO, which uses stagewise rubric judgments to provide denser semantic feedback for long-horizon optimization. In parallel, RubricEM trains a shared-backbone reflection meta-policy that distills judged trajectories into reusable rubric-grounded guidance for future attempts. The resulting RubricEM-8B achieves strong performance across four long-form research benchmarks, outperforming comparable open models and approaching proprietary deep-research systems. Beyond final performance, we perform thorough analyses to understand the key ingredients of RubricEM.",
-          "likes": 25,
+          "likes": 29,
           "arxiv_url": "https://arxiv.org/abs/2605.10899",
           "pdf_url": "https://arxiv.org/pdf/2605.10899",
           "hf_url": "https://huggingface.co/papers/2605.10899",
@@ -3190,7 +3190,7 @@
           "id": "2605.07237",
           "title": "Teaching Language Models to Think in Code",
           "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
-          "likes": 9,
+          "likes": 10,
           "arxiv_url": "https://arxiv.org/abs/2605.07237",
           "pdf_url": "https://arxiv.org/pdf/2605.07237",
           "hf_url": "https://huggingface.co/papers/2605.07237",
@@ -3217,6 +3217,16 @@
           "published": "2026-04-30T00:00:00.000Z"
         },
         {
+          "id": "2605.10832",
+          "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
+          "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
+          "likes": 3,
+          "arxiv_url": "https://arxiv.org/abs/2605.10832",
+          "pdf_url": "https://arxiv.org/pdf/2605.10832",
+          "hf_url": "https://huggingface.co/papers/2605.10832",
+          "published": "2026-05-11T00:00:00.000Z"
+        },
+        {
           "id": "2605.12449",
           "title": "LychSim: A Controllable and Interactive Simulation Framework for Vision Research",
           "abstract": "While self-supervised pretraining has reduced vision systems' reliance on synthetic data, simulation remains an indispensable tool for closed-loop optimization and rigorous out-of-distribution (OOD) evaluation. However, modern simulation platforms often present steep technical barriers, requiring extensive expertise in computer graphics and game development. In this work, we present LychSim, a highly controllable and interactive simulation framework built upon Unreal Engine 5 to bridge this gap. LychSim is built around three key designs: (1) a streamlined Python API that abstracts away underlying engine complexities; (2) a procedural data pipeline capable of generating diverse, high-fidelity environments with varying out-of-distribution (OOD) visual challenges, paired with rich 2D and 3D ground truths; and (3) a native integration of the Model Context Protocol (MCP) that transforms the simulator into a dynamic, closed-loop playground for reasoning agentic LLMs. We further annotate scene-level procedural rules and object-level pose alignments to enable semantically aligned 3D ground truths and automated scene modification. We demonstrate LychSim's capability across multiple downstream applications, including serving as a synthetic data engine, powering reinforcement learning-based adversarial examiners, and facilitating interactive, language-driven scene layout generation. To benefit the broader vision community, LychSim will be made publicly available, including full source code and various data annotations.",
@@ -3225,16 +3235,6 @@
           "pdf_url": "https://arxiv.org/pdf/2605.12449",
           "hf_url": "https://huggingface.co/papers/2605.12449",
           "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.10832",
-          "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
-          "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
-          "likes": 2,
-          "arxiv_url": "https://arxiv.org/abs/2605.10832",
-          "pdf_url": "https://arxiv.org/pdf/2605.10832",
-          "hf_url": "https://huggingface.co/papers/2605.10832",
-          "published": "2026-05-11T00:00:00.000Z"
         },
         {
           "id": "2605.10488",
@@ -3260,14 +3260,14 @@
     },
     {
       "keyword": "world model",
-      "score": 18.4,
+      "score": 18.6,
       "paper_count": 4,
       "papers": [
         {
           "id": "2605.12500",
           "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
           "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
-          "likes": 56,
+          "likes": 58,
           "arxiv_url": "https://arxiv.org/abs/2605.12500",
           "pdf_url": "https://arxiv.org/pdf/2605.12500",
           "hf_url": "https://huggingface.co/papers/2605.12500",
@@ -3277,7 +3277,7 @@
           "id": "2605.12090",
           "title": "World Action Models: The Next Frontier in Embodied AI",
           "abstract": "Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervention. A growing body of work addresses this limitation by integrating world models, predictive models of environment dynamics, into the action generation pipeline. We term this emerging paradigm World Action Models (WAMs): embodied foundation models that unify predictive state modeling with action generation, targeting a joint distribution over future states and actions rather than actions alone. However, the literature remains fragmented across architectures, learning objectives, and application scenarios, lacking a unified conceptual framework. We formally define WAMs and disambiguate them from related concepts, and trace the foundations and early integration of VLA and world model research that gave rise to this paradigm. We organize existing methods into a structured taxonomy of Cascaded and Joint WAMs, with further subdivision by generation modality, conditioning mechanism, and action decoding strategy. We systematically analyze the data ecosystem fueling WAMs development, spanning robot teleoperation, portable human demonstrations, simulation, and internet-scale egocentric video, and synthesize emerging evaluation protocols organized around visual fidelity, physical commonsense, and action plausibility. Overall, this survey provides the first systematic account of the WAMs landscape, clarifies key architectural paradigms and their trade-offs, and identifies open challenges and future opportunities for this rapidly evolving field.",
-          "likes": 12,
+          "likes": 18,
           "arxiv_url": "https://arxiv.org/abs/2605.12090",
           "pdf_url": "https://arxiv.org/pdf/2605.12090",
           "hf_url": "https://huggingface.co/papers/2605.12090",
@@ -3431,14 +3431,14 @@
     },
     {
       "keyword": "embodied",
-      "score": 11.9,
+      "score": 12.6,
       "paper_count": 3,
       "papers": [
         {
           "id": "2605.12090",
           "title": "World Action Models: The Next Frontier in Embodied AI",
           "abstract": "Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervention. A growing body of work addresses this limitation by integrating world models, predictive models of environment dynamics, into the action generation pipeline. We term this emerging paradigm World Action Models (WAMs): embodied foundation models that unify predictive state modeling with action generation, targeting a joint distribution over future states and actions rather than actions alone. However, the literature remains fragmented across architectures, learning objectives, and application scenarios, lacking a unified conceptual framework. We formally define WAMs and disambiguate them from related concepts, and trace the foundations and early integration of VLA and world model research that gave rise to this paradigm. We organize existing methods into a structured taxonomy of Cascaded and Joint WAMs, with further subdivision by generation modality, conditioning mechanism, and action decoding strategy. We systematically analyze the data ecosystem fueling WAMs development, spanning robot teleoperation, portable human demonstrations, simulation, and internet-scale egocentric video, and synthesize emerging evaluation protocols organized around visual fidelity, physical commonsense, and action plausibility. Overall, this survey provides the first systematic account of the WAMs landscape, clarifies key architectural paradigms and their trade-offs, and identifies open challenges and future opportunities for this rapidly evolving field.",
-          "likes": 12,
+          "likes": 18,
           "arxiv_url": "https://arxiv.org/abs/2605.12090",
           "pdf_url": "https://arxiv.org/pdf/2605.12090",
           "hf_url": "https://huggingface.co/papers/2605.12090",
@@ -3468,14 +3468,14 @@
     },
     {
       "keyword": "diffusion",
-      "score": 11.7,
+      "score": 11.8,
       "paper_count": 6,
       "papers": [
         {
           "id": "2605.12013",
           "title": "L2P: Unlocking Latent Potential for Pixel Generation",
           "abstract": "Pixel diffusion models have recently regained attention for visual generation. However, training advanced pixel-space models from scratch demands prohibitive computational and data resources. To address this, we propose the Latent-to-Pixel (L2P) transfer paradigm, an efficient framework that directly harnesses the rich knowledge of pre-trained LDMs to build powerful pixel-space models. Specifically, L2P discards the VAE in favor of large-patch tokenization and freezes the source LDM's intermediate layers, exclusively training shallow layers to learn the latent-to-pixel transformation. By utilizing LDM-generated synthetic images as the sole training corpus, L2P fits an already smooth data manifold, enabling rapid convergence with zero real-data collection. This strategy allows L2P to seamlessly migrate massive latent priors to the pixel space using only 8 GPUs. Furthermore, eliminating the VAE memory bottleneck unlocks native 4K ultra-high resolution generation. Extensive experiments across mainstream LDM architectures show that L2P incurs negligible training overhead, yet performs on par with the source LDM on DPG-Bench and reaches 93% performance on GenEval.",
-          "likes": 8,
+          "likes": 11,
           "arxiv_url": "https://arxiv.org/abs/2605.12013",
           "pdf_url": "https://arxiv.org/pdf/2605.12013",
           "hf_url": "https://huggingface.co/papers/2605.12013",
@@ -3535,9 +3535,19 @@
     },
     {
       "keyword": "embedding",
-      "score": 10.9,
+      "score": 11.2,
       "paper_count": 4,
       "papers": [
+        {
+          "id": "2605.10977",
+          "title": "PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks",
+          "abstract": "Watermarking for large language models (LLMs) is a promising approach for detecting LLM-generated text and enabling responsible deployment. However, existing watermarking methods are often vulnerable to semantic-invariant attacks, such as paraphrasing. We propose PASA, a principled, robust, and distortion-free watermarking algorithm that embeds and detects a watermark at the semantic level. PASA operates on semantic clusters in a latent embedding space and constructs a distributional dependency between token and auxiliary sequences via shared randomness synchronized by a secret key and semantic history. This design is grounded in our theoretical framework that characterizes a jointly optimal embedding-detection pair, achieving the fundamental trade-offs among detection accuracy, robustness, and distortion. Evaluations across multiple LLMs and semantic-invariant attacks demonstrate that PASA remains robust even under strong paraphrasing attacks while preserving high text quality, outperforming standard vocabulary-space baselines. Ablation studies further validate the effectiveness of our hyperparameter choices. Webpage: https://ai-kunkun.github.io/PASA_page/.",
+          "likes": 6,
+          "arxiv_url": "https://arxiv.org/abs/2605.10977",
+          "pdf_url": "https://arxiv.org/pdf/2605.10977",
+          "hf_url": "https://huggingface.co/papers/2605.10977",
+          "published": "2026-05-09T00:00:00.000Z"
+        },
         {
           "id": "2605.10938",
           "title": "ELF: Embedded Language Flows",
@@ -3547,16 +3557,6 @@
           "pdf_url": "https://arxiv.org/pdf/2605.10938",
           "hf_url": "https://huggingface.co/papers/2605.10938",
           "published": "2026-05-11T00:00:00.000Z"
-        },
-        {
-          "id": "2605.10977",
-          "title": "PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks",
-          "abstract": "Watermarking for large language models (LLMs) is a promising approach for detecting LLM-generated text and enabling responsible deployment. However, existing watermarking methods are often vulnerable to semantic-invariant attacks, such as paraphrasing. We propose PASA, a principled, robust, and distortion-free watermarking algorithm that embeds and detects a watermark at the semantic level. PASA operates on semantic clusters in a latent embedding space and constructs a distributional dependency between token and auxiliary sequences via shared randomness synchronized by a secret key and semantic history. This design is grounded in our theoretical framework that characterizes a jointly optimal embedding-detection pair, achieving the fundamental trade-offs among detection accuracy, robustness, and distortion. Evaluations across multiple LLMs and semantic-invariant attacks demonstrate that PASA remains robust even under strong paraphrasing attacks while preserving high text quality, outperforming standard vocabulary-space baselines. Ablation studies further validate the effectiveness of our hyperparameter choices. Webpage: https://ai-kunkun.github.io/PASA_page/.",
-          "likes": 5,
-          "arxiv_url": "https://arxiv.org/abs/2605.10977",
-          "pdf_url": "https://arxiv.org/pdf/2605.10977",
-          "hf_url": "https://huggingface.co/papers/2605.10977",
-          "published": "2026-05-09T00:00:00.000Z"
         },
         {
           "id": "2605.08384",
@@ -3599,7 +3599,7 @@
     },
     {
       "keyword": "fine-tuning",
-      "score": 10.0,
+      "score": 10.2,
       "paper_count": 4,
       "papers": [
         {
@@ -3616,7 +3616,7 @@
           "id": "2605.07237",
           "title": "Teaching Language Models to Think in Code",
           "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
-          "likes": 9,
+          "likes": 10,
           "arxiv_url": "https://arxiv.org/abs/2605.07237",
           "pdf_url": "https://arxiv.org/pdf/2605.07237",
           "hf_url": "https://huggingface.co/papers/2605.07237",
@@ -3626,7 +3626,7 @@
           "id": "2605.10832",
           "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
           "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
-          "likes": 2,
+          "likes": 3,
           "arxiv_url": "https://arxiv.org/abs/2605.10832",
           "pdf_url": "https://arxiv.org/pdf/2605.10832",
           "hf_url": "https://huggingface.co/papers/2605.10832",
@@ -3646,14 +3646,14 @@
     },
     {
       "keyword": "planning",
-      "score": 10.0,
+      "score": 10.1,
       "paper_count": 5,
       "papers": [
         {
           "id": "2605.10899",
           "title": "RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards",
           "abstract": "Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their trajectories span many tool-augmented decisions, and standard post-training offers little mechanism for turning past attempts into reusable experience. In this work, we argue that rubrics should serve not merely as final-answer evaluators, but as the shared interface that structures policy execution, judge feedback, and agent memory. Based on this view, we introduce RubricEM, a rubric-guided reinforcement learning framework that combines stagewise policy decomposition with reflection-based meta-policy evolution. RubricEM first makes research trajectories stage-aware by conditioning planning, evidence gathering, review, and synthesis on self-generated rubrics. It then assigns credit with Stage-Structured GRPO, which uses stagewise rubric judgments to provide denser semantic feedback for long-horizon optimization. In parallel, RubricEM trains a shared-backbone reflection meta-policy that distills judged trajectories into reusable rubric-grounded guidance for future attempts. The resulting RubricEM-8B achieves strong performance across four long-form research benchmarks, outperforming comparable open models and approaching proprietary deep-research systems. Beyond final performance, we perform thorough analyses to understand the key ingredients of RubricEM.",
-          "likes": 25,
+          "likes": 29,
           "arxiv_url": "https://arxiv.org/abs/2605.10899",
           "pdf_url": "https://arxiv.org/pdf/2605.10899",
           "hf_url": "https://huggingface.co/papers/2605.10899",
@@ -3673,7 +3673,7 @@
           "id": "2605.07237",
           "title": "Teaching Language Models to Think in Code",
           "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
-          "likes": 9,
+          "likes": 10,
           "arxiv_url": "https://arxiv.org/abs/2605.07237",
           "pdf_url": "https://arxiv.org/pdf/2605.07237",
           "hf_url": "https://huggingface.co/papers/2605.07237",
@@ -3740,14 +3740,14 @@
     },
     {
       "keyword": "vision-language",
-      "score": 4.8,
+      "score": 5.0,
       "paper_count": 2,
       "papers": [
         {
           "id": "2605.12500",
           "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
           "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
-          "likes": 56,
+          "likes": 58,
           "arxiv_url": "https://arxiv.org/abs/2605.12500",
           "pdf_url": "https://arxiv.org/pdf/2605.12500",
           "hf_url": "https://huggingface.co/papers/2605.12500",
@@ -3757,7 +3757,7 @@
           "id": "2605.12090",
           "title": "World Action Models: The Next Frontier in Embodied AI",
           "abstract": "Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervention. A growing body of work addresses this limitation by integrating world models, predictive models of environment dynamics, into the action generation pipeline. We term this emerging paradigm World Action Models (WAMs): embodied foundation models that unify predictive state modeling with action generation, targeting a joint distribution over future states and actions rather than actions alone. However, the literature remains fragmented across architectures, learning objectives, and application scenarios, lacking a unified conceptual framework. We formally define WAMs and disambiguate them from related concepts, and trace the foundations and early integration of VLA and world model research that gave rise to this paradigm. We organize existing methods into a structured taxonomy of Cascaded and Joint WAMs, with further subdivision by generation modality, conditioning mechanism, and action decoding strategy. We systematically analyze the data ecosystem fueling WAMs development, spanning robot teleoperation, portable human demonstrations, simulation, and internet-scale egocentric video, and synthesize emerging evaluation protocols organized around visual fidelity, physical commonsense, and action plausibility. Overall, this survey provides the first systematic account of the WAMs landscape, clarifies key architectural paradigms and their trade-offs, and identifies open challenges and future opportunities for this rapidly evolving field.",
-          "likes": 12,
+          "likes": 18,
           "arxiv_url": "https://arxiv.org/abs/2605.12090",
           "pdf_url": "https://arxiv.org/pdf/2605.12090",
           "hf_url": "https://huggingface.co/papers/2605.12090",
@@ -3767,7 +3767,7 @@
     },
     {
       "keyword": "tool use",
-      "score": 4.4,
+      "score": 4.6,
       "paper_count": 3,
       "papers": [
         {
@@ -3784,7 +3784,7 @@
           "id": "2605.10832",
           "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
           "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
-          "likes": 2,
+          "likes": 3,
           "arxiv_url": "https://arxiv.org/abs/2605.10832",
           "pdf_url": "https://arxiv.org/pdf/2605.10832",
           "hf_url": "https://huggingface.co/papers/2605.10832",
@@ -3841,5 +3841,5 @@
     }
   ],
   "pwc": [],
-  "collected_at": "2026-05-13T05:44:34.014101"
+  "collected_at": "2026-05-13T05:59:45.714159"
 }
