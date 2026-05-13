@@ -13,7 +13,7 @@ top_n_in_newsletter: 10
 
 llm:
   provider: "google"
-  model: "gemini-2.5-flash"
+  model: "gemini-2.5-flash-lite"
 
 email:
   enabled: true
