@@ -16,11 +16,32 @@ import yaml
 from datetime import datetime
 
 from fetcher import fetch_all
-from filter import filter_and_rank, suggest_keywords
+from filter import filter_and_rank, suggest_keywords, compute_score
 from summarizer import summarize_papers
 from sender import save_dashboard, send_email, save_trending_page
 from trending import collect_trending, save_trending
-from profile import get_profile
+from profile import get_combined_profile
+
+
+def load_profiles_file(path: str = "profiles.json") -> list:
+    """
+    profiles.json 우선 로드. 없으면 None → config.yaml의 research_profile 사용.
+
+    파일 구조:
+    {
+      "profiles": ["data-mining", "nlp"],
+      "updated_at": "2026-05-13"
+    }
+    """
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data.get("profiles", [])
+    except Exception as e:
+        print(f"  ⚠ {path} 로드 실패: {e}")
+        return None
 
 
 def load_keywords_file(path: str = "keywords.json") -> list:
@@ -66,9 +87,22 @@ def main():
 
     config = load_config()
 
-    # 연구 분야 프로필 적용
-    profile_id = config.get("research_profile", "all")
-    profile = get_profile(profile_id)
+    # 연구 분야 프로필 적용 (다중 분야 지원)
+    # 우선순위: profiles.json > config.yaml의 research_profile (단일/리스트 둘 다 지원)
+    profile_ids = load_profiles_file()
+    if profile_ids is None:
+        config_profile = config.get("research_profile", "data-mining")
+        if isinstance(config_profile, str):
+            profile_ids = [config_profile]
+        elif isinstance(config_profile, list):
+            profile_ids = config_profile
+        else:
+            profile_ids = ["data-mining"]
+        print(f"   (profiles.json 없음 — config.yaml에서 {profile_ids} 사용)")
+    else:
+        print(f"   (profiles.json에서 {len(profile_ids)}개 분야 로드: {profile_ids})")
+
+    profile = get_combined_profile(profile_ids)
     print(f"🎓 연구 분야: {profile['label']}")
 
     user_keywords = load_keywords_file()
@@ -112,15 +146,33 @@ def main():
     top_papers = filter_and_rank(papers, user_keywords, top_n=top_n)
     print()
 
+    # 3-2) 내 분야 소식 — seed 키워드 기반 별도 추천 (user_keywords와 별개)
+    field_papers = []
+    seed_keywords = profile.get("seed_keywords", [])
+    if seed_keywords:
+        print(f"🎓 내 분야 소식 — '{profile['label']}' seed 키워드로 별도 추천...")
+        # 이미 top_papers에 포함된 건 제외 (중복 방지)
+        top_ids = {p.get("id") for p in top_papers}
+        remaining = [p for p in papers if p.get("id") not in top_ids]
+        field_papers = filter_and_rank(remaining, seed_keywords, top_n=10)
+        print()
+
     # 4) 요약 생성
     if top_papers:
         print(f"📝 상위 {len(top_papers)}편 LLM 요약 생성 중... (provider: {llm_provider}, 모델: {llm_model})")
         top_papers = summarize_papers(top_papers, model=llm_model, provider=llm_provider)
         print()
 
+    if field_papers:
+        print(f"📝 내 분야 소식 {len(field_papers)}편 요약 생성 중...")
+        field_papers = summarize_papers(field_papers, model=llm_model, provider=llm_provider)
+        print()
+
     # 5) HTML 저장 + 이메일 발송
     print("📤 출력 생성 중...")
-    save_dashboard(top_papers, today, user_keywords, suggested, output_dir)
+    save_dashboard(top_papers, today, user_keywords, suggested, output_dir,
+                   field_papers=field_papers, profile_label=profile["label"],
+                   profile_ids=profile["ids"])
 
     email_config = config.get("email", {})
     if email_config.get("enabled"):
@@ -147,23 +199,24 @@ def main():
         print(f"  ✓ 종합 ranking 생성 ({len(aggregate)}개 키워드)")
 
         # 트렌딩 펼침 논문 번역 (제목 + abstract)
-        print(f"  📝 트렌딩 논문 번역 중...")
+        # 무료 한도 절약을 위해 각 키워드의 상위 5편만 번역 + 캐시 활용
+        print(f"  📝 트렌딩 논문 번역 중... (각 키워드 상위 5편)")
         all_trending_papers = []
         seen_ids = set()
         for src in ("arxiv", "hf", "pwc"):
             for kw_data in trending.get(src, []):
-                for p in kw_data.get("papers", []):
+                for p in kw_data.get("papers", [])[:5]:  # 키워드당 상위 5편만
                     pid = p.get("id") or p.get("arxiv_url", "")
                     if pid and pid not in seen_ids:
                         seen_ids.add(pid)
                         all_trending_papers.append(p)
-        # aggregate에도 추가
         for kw_data in aggregate or []:
-            for p in kw_data.get("papers", []):
+            for p in kw_data.get("papers", [])[:5]:
                 pid = p.get("id") or p.get("arxiv_url", "")
                 if pid and pid not in seen_ids:
                     seen_ids.add(pid)
                     all_trending_papers.append(p)
+        print(f"     중복 제거 후 {len(all_trending_papers)}편 번역 대상")
 
         if all_trending_papers:
             translated = translate_papers(all_trending_papers, model=llm_model, provider=llm_provider)

@@ -78,6 +78,31 @@ body {
 }
 .kw-empty { font-size: 13px; color: #8b95a1; padding: 6px 0; }
 
+.profile-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.profile-chip {
+  padding: 8px 14px;
+  background: #f9fafb;
+  color: #4e5968;
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.profile-chip:hover { background: #f2f4f6; border-color: #d1d6db; }
+.profile-chip.active {
+  background: #3182f6;
+  color: #ffffff;
+  border-color: #3182f6;
+}
+.profile-chip.active:hover { background: #2872dc; }
+
 .kw-chip {
   display: inline-flex;
   align-items: center;
@@ -372,17 +397,33 @@ def _format_paper_card(paper: Dict, rank: int) -> str:
     """
 
 
-def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -> str:
+def _build_kw_management_js(initial_keywords: List[str], suggested: List[str],
+                             initial_profiles: List[str] = None) -> str:
     initial_json = json.dumps(initial_keywords)
     suggested_json = json.dumps(suggested)
+    initial_profiles_json = json.dumps(initial_profiles or [])
+    # 분야 목록은 profile.py PROFILES에서 가져옴 (하드코딩 — JS에 인라인)
+    profiles_json = json.dumps([
+        {"id": "data-mining", "label": "데이터 마이닝 / Knowledge Discovery"},
+        {"id": "ml-general", "label": "Machine Learning (일반)"},
+        {"id": "nlp", "label": "자연어처리 (NLP)"},
+        {"id": "cv", "label": "컴퓨터 비전 (Computer Vision)"},
+        {"id": "speech", "label": "음성 / 오디오"},
+        {"id": "robotics", "label": "로보틱스 / 강화학습"},
+        {"id": "database", "label": "데이터베이스 / 시스템"},
+        {"id": "security", "label": "AI 보안 / 프라이버시"},
+    ])
 
     return f"""
 (function() {{
   const INITIAL_KEYWORDS = {initial_json};
   const SUGGESTED_KEYWORDS = {suggested_json};
+  const INITIAL_PROFILES_FROM_SERVER = {initial_profiles_json};
+  const ALL_PROFILES = {profiles_json};
   const STORAGE_KEY = 'trend_newsletter_keywords';
+  const PROFILE_STORAGE_KEY = 'trend_newsletter_profiles';
   const PAT_KEY = 'trend_newsletter_github_pat';
-  const REPO_KEY = 'trend_newsletter_repo';  // "username/reponame"
+  const REPO_KEY = 'trend_newsletter_repo';
 
   function loadKeywords() {{
     try {{
@@ -396,49 +437,58 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
     localStorage.setItem(STORAGE_KEY, JSON.stringify(keywords));
   }}
 
+  // 분야 — 서버에서 받은 초기값 + localStorage 임시변경분
+  let INITIAL_PROFILES = INITIAL_PROFILES_FROM_SERVER.slice();
+  function loadProfiles() {{
+    try {{
+      const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
+      if (stored) return JSON.parse(stored);
+    }} catch (e) {{}}
+    return INITIAL_PROFILES.slice();
+  }}
+  function saveProfiles(profiles) {{
+    localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profiles));
+  }}
+
   let keywords = loadKeywords();
+  let profiles = loadProfiles();
   let activeFilters = new Set();
 
   function isDirty() {{
-    const a = keywords.slice().sort().join('|');
-    const b = INITIAL_KEYWORDS.slice().sort().join('|');
-    return a !== b;
+    return keywords.slice().sort().join('|') !== INITIAL_KEYWORDS.slice().sort().join('|');
+  }}
+  function isProfileDirty() {{
+    return profiles.slice().sort().join('|') !== INITIAL_PROFILES.slice().sort().join('|');
   }}
 
-  async function commitToGitHub() {{
-    const pat = localStorage.getItem(PAT_KEY);
-    const repo = localStorage.getItem(REPO_KEY);
+  async function ensurePATandRepo() {{
+    let pat = localStorage.getItem(PAT_KEY);
+    let repo = localStorage.getItem(REPO_KEY);
+    if (pat && repo) return {{ pat, repo }};
 
-    if (!pat || !repo) {{
-      const wantSetup = confirm('GitHub API 자동 commit을 설정하시겠어요?\\n\\nGitHub Personal Access Token을 한 번만 등록하면, 이후 키워드 추가/제거가 즉시 적용됩니다.\\n\\n계속하시려면 OK, 다운로드로 돌아가려면 Cancel.');
-      if (!wantSetup) {{
-        downloadKeywords();
-        return;
-      }}
-      const repoInput = prompt('GitHub repo 입력 (형식: 사용자명/repo명)\\n예: newoceanwave/trend-newsletter');
-      if (!repoInput) return;
-      const patInput = prompt('GitHub Personal Access Token (ghp_... 또는 github_pat_...)\\n\\n생성: https://github.com/settings/tokens?type=beta\\n권한: Contents - Read and write (해당 repo만)');
-      if (!patInput) return;
-      localStorage.setItem(REPO_KEY, repoInput);
-      localStorage.setItem(PAT_KEY, patInput);
-      alert('설정 완료! 다시 시도합니다.');
-      return commitToGitHub();
-    }}
+    const wantSetup = confirm('GitHub API 자동 commit을 설정하시겠어요?\\n\\nPersonal Access Token을 한 번만 등록하면 이후 즉시 적용됩니다.');
+    if (!wantSetup) return null;
+    const repoInput = prompt('GitHub repo (예: newoceanwave/trend-newsletter)');
+    if (!repoInput) return null;
+    const patInput = prompt('GitHub Personal Access Token\\n\\n생성: https://github.com/settings/tokens?type=beta\\n권한: Contents - Read and write + Actions - Read and write');
+    if (!patInput) return null;
+    localStorage.setItem(REPO_KEY, repoInput);
+    localStorage.setItem(PAT_KEY, patInput);
+    return {{ pat: patInput, repo: repoInput }};
+  }}
 
-    const btn = document.getElementById('save-btn');
-    btn.disabled = true;
-    btn.textContent = '커밋 중...';
+  async function commitToGitHub(filename, contentObj, btnId, btnText) {{
+    const auth = await ensurePATandRepo();
+    if (!auth) return false;
+    const {{ pat, repo }} = auth;
+    const btn = document.getElementById(btnId);
+    if (btn) {{ btn.disabled = true; btn.textContent = '커밋 중...'; }}
 
     try {{
-      const newContent = JSON.stringify({{
-        keywords: keywords,
-        updated_at: new Date().toISOString().split('T')[0]
-      }}, null, 2);
-
-      // 1. 기존 파일 sha 가져오기 (있으면)
+      const newContent = JSON.stringify(contentObj, null, 2);
       let sha = null;
       try {{
-        const getResp = await fetch(`https://api.github.com/repos/${{repo}}/contents/keywords.json`, {{
+        const getResp = await fetch(`https://api.github.com/repos/${{repo}}/contents/${{filename}}`, {{
           headers: {{ 'Authorization': `Bearer ${{pat}}`, 'Accept': 'application/vnd.github+json' }}
         }});
         if (getResp.ok) {{
@@ -447,14 +497,13 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
         }}
       }} catch (e) {{}}
 
-      // 2. PUT (생성 또는 업데이트)
       const putBody = {{
-        message: `Update keywords (${{keywords.length}} keywords)`,
+        message: `Update ${{filename}}`,
         content: btoa(unescape(encodeURIComponent(newContent))),
       }};
       if (sha) putBody.sha = sha;
 
-      const putResp = await fetch(`https://api.github.com/repos/${{repo}}/contents/keywords.json`, {{
+      const putResp = await fetch(`https://api.github.com/repos/${{repo}}/contents/${{filename}}`, {{
         method: 'PUT',
         headers: {{
           'Authorization': `Bearer ${{pat}}`,
@@ -469,7 +518,7 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
         throw new Error(err.message || 'API 호출 실패');
       }}
 
-      // 3. workflow_dispatch 트리거 (즉시 실행)
+      // workflow trigger
       const triggerResp = await fetch(`https://api.github.com/repos/${{repo}}/actions/workflows/daily.yml/dispatches`, {{
         method: 'POST',
         headers: {{
@@ -481,21 +530,41 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
       }});
 
       if (triggerResp.ok) {{
-        alert('✅ 키워드 업데이트 완료!\\n\\nGitHub Actions가 자동 실행됩니다 (2-3분 후 새 데이터 반영). Actions 탭에서 진행 확인 가능.');
+        alert('✅ 업데이트 완료!\\n\\nGitHub Actions가 자동 실행됩니다 (3-5분 후 새 데이터 반영).');
       }} else {{
-        alert('✅ keywords.json 업데이트 완료!\\n\\n⚠️ 자동 실행 실패. Actions 탭에서 수동으로 "Run workflow" 클릭하세요.');
+        alert('✅ 파일 업데이트 완료!\\n\\n⚠️ 자동 실행 실패. Actions 탭에서 수동으로 "Run workflow" 클릭.');
       }}
+      return true;
+    }} catch (e) {{
+      alert('❌ 실패: ' + e.message);
+      console.error(e);
+      return false;
+    }} finally {{
+      if (btn) {{ btn.disabled = false; btn.textContent = btnText; }}
+    }}
+  }}
 
-      // INITIAL_KEYWORDS 업데이트해서 dirty 상태 해제
+  async function commitKeywords() {{
+    const ok = await commitToGitHub('keywords.json', {{
+      keywords: keywords,
+      updated_at: new Date().toISOString().split('T')[0]
+    }}, 'save-btn', '키워드 즉시 적용');
+    if (ok) {{
       INITIAL_KEYWORDS.length = 0;
       INITIAL_KEYWORDS.push(...keywords);
       render();
-    }} catch (e) {{
-      alert('❌ 실패: ' + e.message + '\\n\\n토큰 권한 확인하거나, 파일로 다운로드 후 수동 업로드해주세요.');
-      console.error(e);
-    }} finally {{
-      btn.disabled = false;
-      btn.textContent = '키워드 즉시 적용';
+    }}
+  }}
+
+  async function commitProfiles() {{
+    const ok = await commitToGitHub('profiles.json', {{
+      profiles: profiles,
+      updated_at: new Date().toISOString().split('T')[0]
+    }}, 'profile-save-btn', '분야 즉시 적용');
+    if (ok) {{
+      INITIAL_PROFILES.length = 0;
+      INITIAL_PROFILES.push(...profiles);
+      renderProfiles();
     }}
   }}
 
@@ -511,6 +580,42 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
     a.download = 'keywords.json';
     a.click();
     URL.revokeObjectURL(url);
+  }}
+
+  function renderProfiles() {{
+    const list = document.getElementById('profile-list');
+    if (!list) return;
+    list.innerHTML = '';
+
+    ALL_PROFILES.forEach(p => {{
+      const chip = document.createElement('span');
+      const selected = profiles.includes(p.id);
+      chip.className = 'profile-chip' + (selected ? ' active' : '');
+      chip.textContent = p.label;
+      chip.addEventListener('click', () => {{
+        if (profiles.includes(p.id)) {{
+          profiles = profiles.filter(x => x !== p.id);
+        }} else {{
+          profiles.push(p.id);
+        }}
+        saveProfiles(profiles);
+        renderProfiles();
+      }});
+      list.appendChild(chip);
+    }});
+
+    const saveBar = document.getElementById('profile-save-bar');
+    const msg = document.getElementById('profile-dirty-msg');
+    const btn = document.getElementById('profile-save-btn');
+    if (isProfileDirty()) {{
+      saveBar.classList.add('dirty');
+      msg.textContent = '변경됨 — 적용하려면 클릭';
+      btn.disabled = false;
+    }} else {{
+      saveBar.classList.remove('dirty');
+      msg.textContent = profiles.length > 0 ? `선택: ${{profiles.length}}개 분야` : '선택된 분야 없음';
+      btn.disabled = true;
+    }}
   }}
 
   function render() {{
@@ -634,17 +739,22 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
     document.getElementById('kw-input').addEventListener('keydown', (e) => {{
       if (e.key === 'Enter') addKeyword();
     }});
-    document.getElementById('save-btn').addEventListener('click', commitToGitHub);
+    document.getElementById('save-btn').addEventListener('click', commitKeywords);
     document.getElementById('save-btn-download').addEventListener('click', downloadKeywords);
     document.getElementById('filter-clear').addEventListener('click', clearFilters);
+    document.getElementById('profile-save-btn').addEventListener('click', commitProfiles);
     render();
+    renderProfiles();
   }});
 }})();
 """
 
 
-def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=None):
+def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=None,
+                              field_papers=None, profile_label="", profile_ids=None):
     suggested_keywords = suggested_keywords or []
+    field_papers = field_papers or []
+    profile_ids = profile_ids or []
     has_papers = bool(papers)
 
     if has_papers:
@@ -655,7 +765,23 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
     else:
         papers_html = '<div class="empty">오늘은 키워드에 매칭되는 논문이 없어요.<br>키워드를 더 추가하거나 범위를 넓혀보세요.</div>'
 
-    js_code = _build_kw_management_js(user_keywords, suggested_keywords)
+    # 내 분야 소식
+    field_html = ""
+    if field_papers:
+        field_cards = "\n".join(
+            _format_paper_card(p, i + 1) for i, p in enumerate(field_papers)
+        )
+        field_html = f"""
+        <div class="section-title" style="margin-top:40px">
+          내 분야 소식
+          <span class="count">{len(field_papers)}</span>
+          <span style="margin-left:8px;font-size:12px;color:#8b95a1;font-weight:400">{profile_label}</span>
+        </div>
+        <p style="font-size:13px;color:#8b95a1;margin-bottom:16px">키워드 무관 · 내 분야 전반 트렌드</p>
+        {field_cards}
+        """
+
+    js_code = _build_kw_management_js(user_keywords, suggested_keywords, initial_profiles=profile_ids)
 
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -674,6 +800,18 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
       </div>
       <h1 class="header-title">AI 트렌드 뉴스레터</h1>
       <p class="header-subtitle">arXiv + Hugging Face Daily Papers에서 어제자 큐레이션</p>
+    </div>
+
+    <div class="kw-panel" id="profile-panel">
+      <div class="kw-panel-header">
+        <div class="kw-panel-title">내 연구 분야</div>
+        <div class="kw-panel-hint">여러 개 선택 가능</div>
+      </div>
+      <div class="profile-list" id="profile-list"></div>
+      <div class="save-bar" id="profile-save-bar" style="margin-top:14px">
+        <span id="profile-dirty-msg">변경 없음</span>
+        <button class="save-btn" id="profile-save-btn" disabled style="background:#3182f6;color:#fff;border-color:#3182f6">분야 즉시 적용</button>
+      </div>
     </div>
 
     <div class="kw-panel">
@@ -713,6 +851,8 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
 
     {papers_html}
 
+    {field_html}
+
     <div class="footer">
       <strong>출처:</strong> arXiv (cs.LG, cs.IR, cs.DB, cs.CL, cs.AI) · Hugging Face Daily Papers<br>
       Generated by trend-newsletter
@@ -724,8 +864,11 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
 """
 
 
-def save_dashboard(papers, date_str, user_keywords, suggested_keywords, output_dir):
-    html = generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords)
+def save_dashboard(papers, date_str, user_keywords, suggested_keywords, output_dir,
+                    field_papers=None, profile_label="", profile_ids=None):
+    html = generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords,
+                                    field_papers=field_papers, profile_label=profile_label,
+                                    profile_ids=profile_ids)
 
     posts_dir = os.path.join(output_dir, "posts")
     os.makedirs(posts_dir, exist_ok=True)
@@ -735,10 +878,13 @@ def save_dashboard(papers, date_str, user_keywords, suggested_keywords, output_d
         f.write(html)
     print(f"  ✓ {daily_path}")
 
-    update_index(output_dir, date_str, papers, user_keywords, suggested_keywords)
+    update_index(output_dir, date_str, papers, user_keywords, suggested_keywords,
+                  field_papers=field_papers, profile_label=profile_label,
+                  profile_ids=profile_ids)
 
 
-def update_index(output_dir, latest_date, papers, user_keywords, suggested_keywords):
+def update_index(output_dir, latest_date, papers, user_keywords, suggested_keywords,
+                  field_papers=None, profile_label="", profile_ids=None):
     posts_dir = os.path.join(output_dir, "posts")
     files = sorted(
         [f for f in os.listdir(posts_dir) if f.endswith(".html")],
@@ -750,7 +896,9 @@ def update_index(output_dir, latest_date, papers, user_keywords, suggested_keywo
         for f in files[:30]
     )
 
-    latest_html = generate_dashboard_html(papers, latest_date, user_keywords, suggested_keywords)
+    latest_html = generate_dashboard_html(papers, latest_date, user_keywords, suggested_keywords,
+                                           field_papers=field_papers, profile_label=profile_label,
+                                           profile_ids=profile_ids)
 
     archive_section = f"""
     <div class="section-title" style="margin-top:48px">아카이브</div>
