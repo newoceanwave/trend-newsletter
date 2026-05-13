@@ -1,0 +1,25 @@
+research_profile: "data-mining"
+
+keywords:
+  - "data quality"
+  - "RAG"
+  - "graph neural network"
+  - "recommender system"
+  - "time series"
+
+arxiv_categories: []
+max_papers_per_day: 200
+top_n_in_newsletter: 10
+
+llm:
+  provider: "google"
+  model: "gemini-2.5-flash"
+
+email:
+  enabled: true
+  sender: "leeseohyun02@sookmyung.ac.kr"
+  recipient: "leeseohyun02@sookmyung.ac.kr"
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
+
+output_dir: "dashboard"
