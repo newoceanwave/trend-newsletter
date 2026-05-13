@@ -1,0 +1,56 @@
+{
+  "2605.12357v1": {
+    "summary_ko": "$δ$-mem은 LLM이 장기 정보를 효율적으로 기억하고 재사용하도록 돕는 경량 메모리 메커니즘입니다. 이는 frozen full-attention backbone에 compact online state of associative memory를 통합하고 delta-rule learning으로 과거 정보를 고정 크기 상태 행렬로 압축하여 attention 계산에 low-rank corrections를 생성함으로써, context 확장이나 full fine-tuning 없이도 메모리 의존적인 작업에서 상당한 성능 향상을 달성합니다."
+  },
+  "2605.12069v1": {
+    "summary_ko": "본 논문은 정상 및 비정상 데이터의 근본적인 비대칭 분포를 활용하여 zero-shot anomaly detection 성능을 개선하는 anomaly-aware vision-language adaptation 프레임워크인 AVA-DINO를 제안합니다. AVA-DINO는 고정된 DINOv3 시각 특징을 정상 및 비정상 패턴을 위한 이중 특수 브랜치(dual specialized branches)로 적응시키고 텍스트 기반 라우팅 메커니즘을 통해 context-specific feature transformations을 가능하게 합니다."
+  },
+  "2605.11749v1": {
+    "summary_ko": "본 논문은 약지도 그래프 이상 탐지를 위해 정상 그래프를 교란하여 생성한 합성 이상(synthetic anomalies)을 multi-task learning 방식으로 활용, 각 이상 유형에 전용 탐지 헤드(detection head)를 할당하여 강력한 특징 표현(feature representations)을 학습하는 방법론을 제안합니다. 이를 통해 제한된 수의 레이블된 이상만으로도 이상에 민감한 특징을 효과적으로 추출합니다."
+  },
+  "2605.12213v1": {
+    "summary_ko": "LLM 기반 대화형 에이전트의 RAG 메모리 시스템이 기존의 단순 의미 유사성 기반 retrieval로는 복잡한 질문에 대한 추론 능력이 제한된다는 문제를 지적합니다. Goal-Mem은 사용자 발화를 목표로 삼아 이를 원자적 subgoal로 분해하고 backward chaining을 통해 각 subgoal에 대한 타겟팅된 memory retrieval을 수행함으로써, Natural Language Logic으로 정형화된 더 효과적인 추론을 가능하게 합니다."
+  },
+  "2605.11996v1": {
+    "summary_ko": "기존 backdoor attack이 soft prompt 기반 KG-enhanced LLM에 비효율적임을 발견하고 그 원인을 semantic anchoring으로 분석하며, 이에 graph-to-prompt 인터페이스를 타겟하여 그래프 수준 표현을 조작함으로써 LLM을 오도하는 새로운 backdoor attack인 BadSKP를 제안한다."
+  },
+  "2605.11946v1": {
+    "summary_ko": "본 논문은 LLM 에이전트 스킬이 에이전트 행동을 어떻게 변화시키는지 측정하는 'Counterfactual Trace Auditing (CTA)' 프레임워크를 제안한다. CTA는 스킬 적용 전후의 에이전트 트레이스를 비교하여 행동 변화를 나타내는 Skill Influence Pattern (SIP)을 생성하며, 이를 통해 패스율 변화가 미미하더라도 스킬이 에이전트 행동을 크게 재구성함을 밝혀내 기존 평가 방법의 한계를 지적한다."
+  },
+  "2605.12495v1": {
+    "title_ko": "AlphaGRPO: Decompositional Verifiable Reward를 통한 UMMs의 자가 성찰적 멀티모달 생성 능력 개방",
+    "abstract_ko": "본 논문에서는 추가적인 cold-start stage 없이 멀티모달 생성 능력을 향상시키기 위해 AR-Diffusion Unified Multimodal Models (UMMs)에 Group Relative Policy Optimization (GRPO)를 적용한 새로운 프레임워크인 AlphaGRPO를 제안합니다. 저희 접근 방식은 모델이 고급 추론 작업을 수행할 수 있는 본질적인 잠재력을 개방합니다. 이러한 작업으로는 모델이 내재된 사용자 의도를 능동적으로 추론하는 Reasoning Text-to-Image Generation과 생성된 출력물에서 불일치를 자율적으로 진단하고 수정하는 Self-Reflective Refinement가 있습니다. 실제 멀티모달 생성을 위한 안정적인 감독(supervision)을 제공하는 문제를 해결하기 위해 Decompositional Verifiable Reward (DVReward)를 소개합니다. 전체론적인 scalar rewards와 달리, DVReward는 LLM을 활용하여 복잡한 사용자 요청을 원자적(atomic)이고 검증 가능한 semantic 및 quality 질문들로 분해하며, 이 질문들은 일반 MLLM에 의해 평가되어 신뢰할 수 있고 해석 가능한 피드백을 제공합니다. 광범위한 실험을 통해 AlphaGRPO가 GenEval, TIIF-Bench, DPG-Bench, WISE를 포함한 멀티모달 생성 벤치마크 전반에 걸쳐 강력한 개선을 이루었음을 입증했으며, 편집 작업에 대한 훈련 없이 GEdit에서의 편집 작업에서도 상당한 이득을 달성했습니다."
+  },
+  "2605.12492v1": {
+    "title_ko": "Pion: 직교 등가 변환을 통한 스펙트럼 보존 옵티마이저",
+    "abstract_ko": "우리는 직교 등가 변환을 기반으로 하는 거대 언어 모델(LLM) 훈련을 위한 스펙트럼 보존 옵티마이저인 Pion을 소개합니다. Adam 및 Muon과 같은 가산형 옵티마이저와 달리, Pion은 각 가중치 행렬을 좌우 직교 변환을 통해 업데이트하여 훈련 내내 singular values를 보존합니다. 이는 가중치 행렬의 기하학적 구조를 조절하면서도 spectral norm을 고정된 상태로 유지하는 최적화 메커니즘을 제공합니다. 우리는 Pion 업데이트 규칙을 도출하고, 그 설계 선택 사항들을 체계적으로 검토하며, 여러 핵심 속성과 함께 수렴 동작을 분석합니다. 실험 결과에 따르면 Pion은 LLM pretraining과 fine-tuning 모두에서 표준 옵티마이저에 대한 안정적이고 경쟁력 있는 대안을 제공합니다."
+  },
+  "2605.12487v1": {
+    "title_ko": "테스트 시점 LLM 안내를 통한 태스크 적응형 임베딩 정제",
+    "abstract_ko": "우리는 어려운 zero-shot 검색 및 분류 태스크에 embedding 모델의 유용성을 확장하기 위한 LLM 안내 쿼리 정제 패러다임의 효과를 탐구합니다. 우리의 접근 방식은 소수의 문서에 대한 생성형 LLM의 피드백을 사용하여 사용자 쿼리의 embedding 표현을 정제하며, 이를 통해 embedding이 타겟 태스크에 실시간으로 적응할 수 있도록 합니다. 우리는 다양하고 어려운 검색 및 분류 벤치마크 세트 전반에 걸쳐 최첨단 텍스트 embedding 모델을 사용하여 광범위한 실험을 수행합니다. 실증적 결과는 LLM 안내 쿼리 정제가 모든 모델과 데이터셋에서 일관된 성능 향상을 가져오며, 문헌 검색, 의도 감지, 핵심 포인트 매칭 및 미묘한 쿼리-지시 따르기에서 최대 +25%의 상대적 개선을 보인다는 것을 나타냅니다. 정제된 쿼리는 랭킹 품질을 향상시키고 코퍼스 전반에 걸쳐 더 명확한 이진 분리를 유도하여, embedding 공간이 각 ad-hoc 사용자 쿼리의 미묘하고 태스크별 제약 조건을 더 잘 반영할 수 있도록 합니다. 중요하게도, 이는 embedding 모델이 효과적으로 배포될 수 있는 실제 적용 가능한 환경의 범위를 확장하여, 비용이 많이 드는 LLM 파이프라인이 코퍼스-스케일에서 실행 불가능할 때 매력적인 대안이 되도록 합니다."
+  },
+  "2605.12484v1": {
+    "title_ko": "고속 및 저속 학습: 지속적으로 적응하는 LLM을 향하여",
+    "abstract_ko": "대규모 언어 모델(LLM)은 파라미터를 업데이트하여 (예: RL을 통해) 다운스트림 태스크를 위해 훈련됩니다. 하지만 파라미터 업데이트는 모델이 태스크별 정보를 흡수하도록 강제하여, 치명적 망각 및 유연성 손실을 초래할 수 있습니다. 이와 대조적으로, 고정된 LLM 파라미터를 사용하는 인컨텍스트 학습은 저렴하고 빠르게 태스크별 요구사항에 적응할 수 있지만 (예: 프롬프트 최적화), LLM 파라미터 업데이트를 통해 얻을 수 있는 성능 향상에는 일반적으로 미치지 못합니다. 학습을 인컨텍스트 또는 가중치 내(파라미터 업데이트)로 제한할 좋은 이유는 없습니다. 더욱이, 인간 또한 다른 시간 척도에서 학습하는 것으로 보입니다 (예: 시스템 1 vs 2). 이를 위해, 우리는 모델 파라미터를 \"느린\" 가중치로, 최적화된 컨텍스트를 \"빠른\" 가중치로 사용하는 LLM을 위한 고속-저속 학습 프레임워크를 소개합니다. 이 \"빠른\" 가중치는 텍스트 피드백으로부터 학습하여 태스크별 정보를 흡수하는 동시에, \"느린\" 가중치가 기본 모델에 더 가깝게 유지되고 일반적인 추론 행동을 지속하도록 합니다. 고속-저속 훈련(FST)은 추론 태스크 전반에서 저속 학습(RL)만 사용하는 것보다 최대 3배 더 샘플 효율적이며, 지속적으로 더 높은 성능 점근선에 도달합니다. 또한, FST는-"
+  },
+  "2605.12477v1": {
+    "title_ko": "MEME: 다중 엔티티 & 진화하는 메모리 평가",
+    "abstract_ko": "LLM 기반 에이전트는 점점 더 지속적인 환경에서 작동하며, 여러 세션에 걸쳐 정보를 저장, 업데이트, 추론해야 합니다. 이전 벤치마크는 단일 엔티티 업데이트만 평가하는 반면, MEME는 다중 엔티티 및 진화하는 축에 의해 정의된 전체 공간을 포괄하는 여섯 가지 태스크를 정의하며, 이전 연구에서 점수화되지 않은 세 가지(Cascade 및 Absence (의존성 추론) 그리고 Deletion (제거 후 상태))를 포함합니다. 세 가지 메모리 패러다임을 포괄하는 여섯 가지 메모리 시스템을 100개의 통제된 에피소드에서 평가한 결과, 모든 시스템이 적절한 정적 retrieval 성능에도 불구하고 기본 구성에서 의존성 추론에서 붕괴한다는 것을 발견했습니다 (Cascade: 3%, Absence: 평균 정확도 1%). prompt 최적화, 더 깊은 retrieval, 감소된 filler 노이즈, 그리고 대부분의 더 강력한 LLM은 이 격차를 좁히지 못했습니다. 내부 LLM으로 Claude Opus 4.7과 페어링된 파일 기반 에이전트만이 부분적으로 격차를 좁혔지만, 이는 기준 비용의 약 70배에 달하며, 현재 격차 해소가 규모에서 실용적이지 않은 구성에 달려 있음을 나타냅니다. 코드와 데이터는 프로젝트 페이지(https://seokwonjung-jay.github.io/meme-eval/)에서 확인할 수 있습니다."
+  },
+  "2605.12456v1": {
+    "title_ko": "TextSeal: 출처 및 Distillation 보호를 위한 지역화된 LLM 워터마크",
+    "abstract_ko": "저희는 대규모 언어 모델을 위한 최첨단 워터마크인 TextSeal을 소개합니다. Gumbel-max sampling을 기반으로, TextSeal은 출력 다양성을 복원하기 위한 듀얼 키(dual-key) 생성과 함께, 향상된 탐지를 위해 엔트로피 가중 스코어링(entropy-weighted scoring) 및 다중 영역 지역화(multi-region localization)를 도입합니다. 이는 speculative decoding 및 multi-token prediction과 같은 서비스 최적화를 지원하며, 추론 오버헤드(inference overhead)를 전혀 추가하지 않습니다. TextSeal은 탐지 강도에서 SynthID-text와 같은 베이스라인(baselines)을 압도하며, 희석(dilution)에 강하여 인간/AI 문서가 심하게 혼합된 경우에도 신뢰할 수 있는 지역화된 탐지(localized detection)를 유지합니다. 이 방식은 이론적으로 왜곡이 없으며(distortion-free), 추론 벤치마크(reasoning benchmarks) 전반의 평가에서 다운스트림 성능(downstream performance)을 보존함을 확인했습니다. 또한, 다국어 인간 평가(6000개의 A/B 비교, 5개 언어)에서는 인지할 수 있는 품질 차이가 없음을 보여줍니다. 출처(provenance) 탐지를 위한 사용을 넘어, TextSeal은 \"방사성(radioactive)\"이기도 합니다. 즉, 워터마크 신호가 모델 distillation을 통해 전달되어 무단 사용을 탐지할 수 있게 합니다."
+  },
+  "2605.12452v1": {
+    "title_ko": "알고리즘적 캐리커처: 위기 사건 전반에 걸친 LLM 생성 정치적 담론 감사",
+    "abstract_ko": "대규모 언어 모델(LLM)은 대규모로 유창한 정치적 텍스트를 생성할 수 있으며, 이는 위기와 사회적 갈등 중 합성 담론에 대한 우려를 제기합니다. 기존 AI 텍스트 탐지는 종종 perplexity, burstiness 또는 토큰 불규칙성과 같은 문장 수준의 단서에 중점을 두지만, 생성 시스템이 개선됨에 따라 이러한 신호는 약해질 수 있습니다. 우리는 대신 계산 사회 과학(Computational Social Science) 관점을 채택하여 합성 정치적 담론이 관찰된 온라인 인구 집단처럼 행동하는지 질문합니다. 우리는 COVID-19, 1월 6일 국회의사당 습격, 2020년 및 2024년 미국 선거, Dobbs/Roe v. Wade, 2020년 BLM 시위, 미국 중간 선거, 유타 총격 사건, 그리고 미-이란 전쟁 등 9가지 위기 사건 전반에 걸쳐 1,789,406개의 게시물로 구성된 쌍을 이룬 코퍼스(corpus)를 구축합니다. 각 사건에 대해, 우리는 소셜 플랫폼에서 관찰된 담론을 동일한 맥락에서 생성된 합성 담론과 비교합니다. 우리는 평균 차이와 분산 증거를 사용하여 감정 강도, 구조적 규칙성, 어휘적-이념적 프레이밍(framing), 그리고 교차 사건 의존성이라는 네 가지 차원을 평가합니다. 여러 사건에 걸쳐, 합성 담론은 유창하지만 인구 집단 수준에서는 비현실적입니다. 이는 일반적으로 감정 면에서 더 부정적이고 덜 분산되어 있으며, 구조적으로 더 규칙적이고, 어휘적..."
+  },
+  "2605.12466v1": {
+    "title_ko": "루프 해결: 언어 및 추론을 위한 Attractor 모델",
+    "abstract_ko": "Looped Transformer는 잠재(latent) representation을 반복적으로 정제하여 언어 모델링 및 추론을 개선함으로써 순수한 feed-forward 연산에 대한 유망한 대안을 제공합니다. 하지만 recurrent 아키텍처는 훈련하기 불안정하고, 최적화 및 배포 비용이 많이 들며, 작고 고정된 recurrence depth에 제약받습니다. 우리는 Attractor 모델을 소개합니다. 이 모델에서는 backbone 모듈이 먼저 output embedding을 제안한 다음, attractor 모듈이 fixed point를 찾아 해결함으로써 이를 정제하며, gradient는 implicit differentiation을 통해 얻어집니다. 따라서 훈련 메모리는 유효(effective) depth에서 일정하게 유지되며, iteration은 수렴(convergence)에 따라 적응적으로 선택됩니다. 경험적으로 Attractor 모델은 대규모 언어 모델 pretraining과 작은 모델을 사용한 추론이라는 두 가지 regime에서 기존 모델을 능가합니다. 언어 모델링에서 Attractor 모델은 모든 크기에서 표준 Transformer 및 안정적인 looped 모델에 비해 Pareto improvement를 제공하며, perplexity를 최대 46.6%, downstream 정확도를 최대 19.7% 개선하는 동시에 훈련 비용을 절감합니다. 특히 770M Attractor 모델은 두 배 많은 token으로 훈련된 1.3B Transformer를 능가합니다. 도전적인 추론(reasoning) task에서, 우리는 단 27M parameter를 가진 우리 모델이"
+  },
+  "2605.12446v1": {
+    "title_ko": "ORCE: 대규모 언어 모델에서 언어화된 신뢰도의 순서 인지 정렬",
+    "abstract_ko": "대규모 언어 모델(LLM)은 오답일 때조차 높은 확신을 가지고 답변을 생성하는 경우가 많으며, 이는 실제 환경 배포를 위해 신뢰할 수 있는 신뢰도 추정을 필수적으로 만듭니다. 모델이 자연어로 자신의 신뢰도를 명시적으로 표현하는 언어화된 신뢰도는 유연하고 사용자 친화적인 불확실성 신호를 제공하며, token logit을 사용할 수 없을 때도 적용될 수 있습니다. 그러나 기존의 언어화된 신뢰도 방법들은 답변 생성과 신뢰도 생성을 종종 함께 최적화하여, 신뢰도 정렬 목표가 답변 정확도를 방해할 수 있습니다. 본 연구에서는 언어화된 신뢰도 calibration을 위한 분리되고 순서 인지적인 프레임워크를 제안합니다. 우리의 방법은 먼저 답변을 생성한 다음, 고정된 질문-답변 쌍에 기반하여 신뢰도를 추정하며, 이는 답변 생성 프로세스를 직접 방해하지 않고 신뢰도 최적화를 가능하게 합니다. 신뢰도를 정확도 likelihood와 정렬하기 위해, 우리는 여러 모델 완성(completions)으로부터 sampling-based surrogate를 구축하고, 추정된 정확도 likelihood가 높은 응답이 더 높은 언어화된 신뢰도를 받도록 장려하는 rank-based reinforcement learning 목표를 최적화합니다."
+  }
+}

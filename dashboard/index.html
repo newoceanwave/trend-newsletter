@@ -351,10 +351,13 @@ body {
 
       <div class="save-bar" id="save-bar">
         <span id="dirty-msg">변경 없음</span>
-        <button class="save-btn" id="save-btn" disabled>keywords.json 다운로드</button>
+        <div style="display:flex;gap:6px">
+          <button class="save-btn" id="save-btn-download" title="파일로 다운로드 (수동 업로드)">📥 파일</button>
+          <button class="save-btn" id="save-btn" disabled style="background:#3182f6;color:#fff;border-color:#3182f6">키워드 즉시 적용</button>
+        </div>
       </div>
       <div class="save-help">
-        다운로드한 <code>keywords.json</code>을 GitHub repo 루트에 업로드(또는 덮어쓰기)하면 다음 실행부터 적용됩니다.
+        <strong>즉시 적용</strong>: GitHub API로 자동 commit + workflow 실행 (PAT 1회 등록). <strong>파일</strong>: 수동 업로드용 다운로드.
       </div>
     </div>
 
@@ -367,18 +370,40 @@ body {
     <div class="paper-card" data-matched='[]'>
       <div class="paper-rank">1</div>
       <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12357v1" target="_blank">$δ$-mem: Efficient Online Memory for Large Language Models</a></h3>
-      <p class="paper-summary">$δ$-mem은 LLM의 장기 기억을 위해 frozen full-attention backbone에 delta-rule learning으로 업데이트되는 compact online state의 associative memory를 증강하여 attention 계산에 low-rank corrections를 생성하는 경량화된 온라인 메모리 메커니즘입니다. 이를 통해 $δ$-mem은 full fine-tuning이나 명시적 컨텍스트 확장 없이도 기존 방식 대비 큰 폭의 성능 향상을 달성하며 효율적인 메모리를 구현합니다.</p>
+      <p class="paper-summary">$δ$-mem은 LLM이 장기 정보를 효율적으로 기억하고 재사용하도록 돕는 경량 메모리 메커니즘입니다. 이는 frozen full-attention backbone에 compact online state of associative memory를 통합하고 delta-rule learning으로 과거 정보를 고정 크기 상태 행렬로 압축하여 attention 계산에 low-rank corrections를 생성함으로써, context 확장이나 full fine-tuning 없이도 메모리 의존적인 작업에서 상당한 성능 향상을 달성합니다.</p>
       <div class="paper-meta">
-        <span class="tag trending">🔥 52 likes</span><span class="tag">cs.AI</span>
+        <span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수 — ML 연구자들의 큐레이션 신호">🔥 HF 59</span><span class="tag">cs.AI</span>
         <div class="paper-links"><a href="http://arxiv.org/abs/2605.12357v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12357v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.12357" target="_blank">HF</a></div>
       </div>
     </div>
     
 
-    <div class="paper-card" data-matched='["rag"]'>
+    <div class="paper-card" data-matched='["anomaly detection"]'>
       <div class="paper-rank">2</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12069v1" target="_blank">Anomaly-Aware Vision-Language Adapters for Zero-Shot Anomaly Detection</a></h3>
+      <p class="paper-summary">본 논문은 정상 및 비정상 데이터의 근본적인 비대칭 분포를 활용하여 zero-shot anomaly detection 성능을 개선하는 anomaly-aware vision-language adaptation 프레임워크인 AVA-DINO를 제안합니다. AVA-DINO는 고정된 DINOv3 시각 특징을 정상 및 비정상 패턴을 위한 이중 특수 브랜치(dual specialized branches)로 적응시키고 텍스트 기반 라우팅 메커니즘을 통해 context-specific feature transformations을 가능하게 합니다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">anomaly detection</span><span class="tag">cs.CV</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.12069v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12069v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["anomaly detection"]'>
+      <div class="paper-rank">3</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.11749v1" target="_blank">Learning Feature Encoder with Synthetic Anomalies for Weakly Supervised Graph Anomaly Detection</a></h3>
+      <p class="paper-summary">본 논문은 약지도 그래프 이상 탐지를 위해 정상 그래프를 교란하여 생성한 합성 이상(synthetic anomalies)을 multi-task learning 방식으로 활용, 각 이상 유형에 전용 탐지 헤드(detection head)를 할당하여 강력한 특징 표현(feature representations)을 학습하는 방법론을 제안합니다. 이를 통해 제한된 수의 레이블된 이상만으로도 이상에 민감한 특징을 효과적으로 추출합니다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">anomaly detection</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.11749v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.11749v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["rag"]'>
+      <div class="paper-rank">4</div>
       <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12213v1" target="_blank">Goal-Oriented Reasoning for RAG-based Memory in Conversational Agentic LLM Systems</a></h3>
-      <p class="paper-summary">기존 RAG 기반 LLM 에이전트의 메모리 검색은 단순한 의미론적 유사성에 기반하여 복잡한 추론 질문에 비효율적이다. 이에 본 논문은 사용자 발화를 '목표'로 삼아 역방향 체이닝을 통해 하위 목표로 분해하고 각 하위 목표에 대해 타겟팅된 메모리 검색을 수행하는 목표 지향적 추론 프레임워크인 Goal-Mem을 제안한다.</p>
+      <p class="paper-summary">LLM 기반 대화형 에이전트의 RAG 메모리 시스템이 기존의 단순 의미 유사성 기반 retrieval로는 복잡한 질문에 대한 추론 능력이 제한된다는 문제를 지적합니다. Goal-Mem은 사용자 발화를 목표로 삼아 이를 원자적 subgoal로 분해하고 backward chaining을 통해 각 subgoal에 대한 타겟팅된 memory retrieval을 수행함으로써, Natural Language Logic으로 정형화된 더 효과적인 추론을 가능하게 합니다.</p>
       <div class="paper-meta">
         <span class="tag matched">RAG</span><span class="tag">cs.AI</span>
         <div class="paper-links"><a href="http://arxiv.org/abs/2605.12213v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12213v1" target="_blank">PDF</a></div>
@@ -386,10 +411,32 @@ body {
     </div>
     
 
+    <div class="paper-card" data-matched='["knowledge graph"]'>
+      <div class="paper-rank">5</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.11996v1" target="_blank">BadSKP: Backdoor Attacks on Knowledge Graph-Enhanced LLMs with Soft Prompts</a></h3>
+      <p class="paper-summary">기존 backdoor attack이 soft prompt 기반 KG-enhanced LLM에 비효율적임을 발견하고 그 원인을 semantic anchoring으로 분석하며, 이에 graph-to-prompt 인터페이스를 타겟하여 그래프 수준 표현을 조작함으로써 LLM을 오도하는 새로운 backdoor attack인 BadSKP를 제안한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">knowledge graph</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.11996v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.11996v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["llm agent"]'>
+      <div class="paper-rank">6</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.11946v1" target="_blank">Counterfactual Trace Auditing of LLM Agent Skills</a></h3>
+      <p class="paper-summary">본 논문은 LLM 에이전트 스킬이 에이전트 행동을 어떻게 변화시키는지 측정하는 'Counterfactual Trace Auditing (CTA)' 프레임워크를 제안한다. CTA는 스킬 적용 전후의 에이전트 트레이스를 비교하여 행동 변화를 나타내는 Skill Influence Pattern (SIP)을 생성하며, 이를 통해 패스율 변화가 미미하더라도 스킬이 에이전트 행동을 크게 재구성함을 밝혀내 기존 평가 방법의 한계를 지적한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">LLM agent</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.11946v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.11946v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
     <div class="paper-card" data-matched='["rag"]'>
-      <div class="paper-rank">3</div>
+      <div class="paper-rank">7</div>
       <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.11611v1" target="_blank">CuSearch: Curriculum Rollout Sampling via Search Depth for Agentic RAG</a></h3>
-      <p class="paper-summary">Agentic RAG 시스템의 RLVR 훈련에서 CuSearch는 Search-Depth Greedy Allocation (SDGA)를 통해 더 깊은 search depth를 가진 rollout 궤적에 업데이트 예산을 재할당합니다. 이는 retrieval sub-policy에 더 밀도 높은 supervision을 제공하여 균일 샘플링 방식보다 성능을 크게 향상시킵니다.</p>
+      <p class="paper-summary">Reinforcement Learning with Verifiable Rewards (RLVR) has emerged as a promising paradigm for training agentic retrieval-augmented generation (RAG) systems from outcome-only supervision. Most existing...</p>
       <div class="paper-meta">
         <span class="tag matched">RAG</span><span class="tag">cs.AI</span>
         <div class="paper-links"><a href="http://arxiv.org/abs/2605.11611v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.11611v1" target="_blank">PDF</a></div>
@@ -398,78 +445,34 @@ body {
     
 
     <div class="paper-card" data-matched='[]'>
-      <div class="paper-rank">4</div>
+      <div class="paper-rank">8</div>
       <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12178v1" target="_blank">Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics</a></h3>
-      <p class="paper-summary">기존 world model은 기업 시스템의 동적으로 변화하는 비즈니스 로직과 deployment shift에 취약하므로, 본 논문은 추론 시 규칙을 읽을 수 있을 때 agent가 여전히 동역학을 학습해야 하는지에 대한 질문을 던집니다. 이에, 시스템 configuration을 읽어 runtime에 관련 transition dynamics를 복구하는 `enterprise discovery agents`를 제안하며, 이들이 오프라인 학습된 world model보다 `deployment shift`에 더 강건함을 `CascadeBench` 벤치마크를 통해 실증적으로 보여줍니다.</p>
+      <p class="paper-summary">World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific busines...</p>
       <div class="paper-meta">
-        <span class="tag trending">🔥 11 likes</span><span class="tag">cs.AI</span><span class="tag">cs.CL</span>
+        <span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수 — ML 연구자들의 큐레이션 신호">🔥 HF 14</span><span class="tag">cs.AI</span><span class="tag">cs.CL</span>
         <div class="paper-links"><a href="http://arxiv.org/abs/2605.12178v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12178v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.12178" target="_blank">HF</a></div>
       </div>
     </div>
     
 
     <div class="paper-card" data-matched='[]'>
-      <div class="paper-rank">5</div>
+      <div class="paper-rank">9</div>
       <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12481v1" target="_blank">ToolCUA: Towards Optimal GUI-Tool Path Orchestration for Computer Use Agents</a></h3>
-      <p class="paper-summary">본 논문은 Computer Use Agents (CUA)가 GUI 액션과 high-level tool 호출 사이에서 최적의 경로를 선택하는 문제를 해결하기 위해 ToolCUA를 제안합니다. ToolCUA는 Interleaved GUI-Tool Trajectory Scaling Pipeline으로 학습 데이터를 확보하고, Tool-Bootstrapped GUI RFT 및 Tool-Efficient Path Reward 기반의 Online Agentic RL을 활용하는 staged training paradigm을 통해 GUI-Tool 전환 지점의 의사결정을 개선하여 최적의 경로를 학습합니다.</p>
+      <p class="paper-summary">Computer Use Agents (CUAs) can act through both atomic GUI actions, such as click and type, and high-level tool calls, such as API-based file operations, but this hybrid action space often leaves them...</p>
       <div class="paper-meta">
-        <span class="tag trending">🔥 11 likes</span><span class="tag">cs.AI</span>
+        <span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수 — ML 연구자들의 큐레이션 신호">🔥 HF 13</span><span class="tag">cs.AI</span>
         <div class="paper-links"><a href="http://arxiv.org/abs/2605.12481v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12481v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.12481" target="_blank">HF</a></div>
       </div>
     </div>
     
 
     <div class="paper-card" data-matched='[]'>
-      <div class="paper-rank">6</div>
-      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12483v1" target="_blank">Beyond GRPO and On-Policy Distillation: An Empirical Sparse-to-Dense Reward Principle for Language-Model Post-Training</a></h3>
-      <p class="paper-summary">이 논문은 희소한 레이블 데이터 할당의 비효율성을 지적하며, GRPO와 OPD를 다른 '보상 밀도 체제'로 통합하는 '보상 밀도 원칙'을 제안한다. 이 원칙에 따라, 강력한 상위 모델을 희소한 시퀀스 레벨 보상으로 훈련한 후 그 행동을 조밀한 토큰 레벨 보상으로 하위 모델에 증류하는 방식이 직접적인 GRPO보다 우수한 성능을 달성한다.</p>
-      <div class="paper-meta">
-        <span class="tag trending">🔥 6 likes</span><span class="tag">cs.LG</span><span class="tag">cs.AI</span>
-        <div class="paper-links"><a href="http://arxiv.org/abs/2605.12483v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12483v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.12483" target="_blank">HF</a></div>
-      </div>
-    </div>
-    
-
-    <div class="paper-card" data-matched='[]'>
-      <div class="paper-rank">7</div>
-      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12495v1" target="_blank">AlphaGRPO: Unlocking Self-Reflective Multimodal Generation in UMMs via Decompositional Verifiable Reward</a></h3>
-      <p class="paper-summary">In this paper, we propose AlphaGRPO, a novel framework that applies Group Relative Policy Optimization (GRPO) to AR-Diffusion Unified Multimodal Models (UMMs) to enhance multimodal generation capabili...</p>
-      <div class="paper-meta">
-        <span class="tag trending">🔥 5 likes</span><span class="tag">cs.CV</span><span class="tag">cs.AI</span>
-        <div class="paper-links"><a href="http://arxiv.org/abs/2605.12495v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12495v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.12495" target="_blank">HF</a></div>
-      </div>
-    </div>
-    
-
-    <div class="paper-card" data-matched='[]'>
-      <div class="paper-rank">8</div>
-      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12477v1" target="_blank">MEME: Multi-entity & Evolving Memory Evaluation</a></h3>
-      <p class="paper-summary">LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity upd...</p>
-      <div class="paper-meta">
-        <span class="tag trending">🔥 4 likes</span><span class="tag">cs.LG</span><span class="tag">cs.CL</span>
-        <div class="paper-links"><a href="http://arxiv.org/abs/2605.12477v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12477v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.12477" target="_blank">HF</a></div>
-      </div>
-    </div>
-    
-
-    <div class="paper-card" data-matched='[]'>
-      <div class="paper-rank">9</div>
+      <div class="paper-rank">10</div>
       <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12013v1" target="_blank">L2P: Unlocking Latent Potential for Pixel Generation</a></h3>
       <p class="paper-summary">Pixel diffusion models have recently regained attention for visual generation. However, training advanced pixel-space models from scratch demands prohibitive computational and data resources. To addre...</p>
       <div class="paper-meta">
-        <span class="tag trending">🔥 4 likes</span><span class="tag">cs.CV</span><span class="tag">cs.AI</span>
+        <span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수 — ML 연구자들의 큐레이션 신호">🔥 HF 7</span><span class="tag">cs.CV</span><span class="tag">cs.AI</span>
         <div class="paper-links"><a href="http://arxiv.org/abs/2605.12013v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12013v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.12013" target="_blank">HF</a></div>
-      </div>
-    </div>
-    
-
-    <div class="paper-card" data-matched='["rag"]'>
-      <div class="paper-rank">10</div>
-      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.12313v1" target="_blank">Overview of the MedHopQA track at BioCreative IX: track description, participation and evaluation of systems for multi-hop medical question answering</a></h3>
-      <p class="paper-summary">Multi-hop question answering (QA) remains a significant challenge in the biomedical domain, requiring systems to integrate information across multiple sources to answer complex questions. To address t...</p>
-      <div class="paper-meta">
-        <span class="tag matched">RAG</span><span class="tag">cs.CL</span><span class="tag">cs.IR</span>
-        <div class="paper-links"><a href="http://arxiv.org/abs/2605.12313v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.12313v1" target="_blank">PDF</a></div>
       </div>
     </div>
     
@@ -487,9 +490,11 @@ body {
   </div>
   <script>
 (function() {
-  const INITIAL_KEYWORDS = ["data quality", "RAG", "graph neural network", "recommender system", "time series"];
+  const INITIAL_KEYWORDS = ["graph neural network", "recommender system", "retrieval augmented generation", "RAG", "LLM agent", "knowledge graph", "time series", "anomaly detection"];
   const SUGGESTED_KEYWORDS = [];
   const STORAGE_KEY = 'trend_newsletter_keywords';
+  const PAT_KEY = 'trend_newsletter_github_pat';
+  const REPO_KEY = 'trend_newsletter_repo';  // "username/reponame"
 
   function loadKeywords() {
     try {
@@ -510,6 +515,114 @@ body {
     const a = keywords.slice().sort().join('|');
     const b = INITIAL_KEYWORDS.slice().sort().join('|');
     return a !== b;
+  }
+
+  async function commitToGitHub() {
+    const pat = localStorage.getItem(PAT_KEY);
+    const repo = localStorage.getItem(REPO_KEY);
+
+    if (!pat || !repo) {
+      const wantSetup = confirm('GitHub API 자동 commit을 설정하시겠어요?\n\nGitHub Personal Access Token을 한 번만 등록하면, 이후 키워드 추가/제거가 즉시 적용됩니다.\n\n계속하시려면 OK, 다운로드로 돌아가려면 Cancel.');
+      if (!wantSetup) {
+        downloadKeywords();
+        return;
+      }
+      const repoInput = prompt('GitHub repo 입력 (형식: 사용자명/repo명)\n예: newoceanwave/trend-newsletter');
+      if (!repoInput) return;
+      const patInput = prompt('GitHub Personal Access Token (ghp_... 또는 github_pat_...)\n\n생성: https://github.com/settings/tokens?type=beta\n권한: Contents - Read and write (해당 repo만)');
+      if (!patInput) return;
+      localStorage.setItem(REPO_KEY, repoInput);
+      localStorage.setItem(PAT_KEY, patInput);
+      alert('설정 완료! 다시 시도합니다.');
+      return commitToGitHub();
+    }
+
+    const btn = document.getElementById('save-btn');
+    btn.disabled = true;
+    btn.textContent = '커밋 중...';
+
+    try {
+      const newContent = JSON.stringify({
+        keywords: keywords,
+        updated_at: new Date().toISOString().split('T')[0]
+      }, null, 2);
+
+      // 1. 기존 파일 sha 가져오기 (있으면)
+      let sha = null;
+      try {
+        const getResp = await fetch(`https://api.github.com/repos/${repo}/contents/keywords.json`, {
+          headers: { 'Authorization': `Bearer ${pat}`, 'Accept': 'application/vnd.github+json' }
+        });
+        if (getResp.ok) {
+          const data = await getResp.json();
+          sha = data.sha;
+        }
+      } catch (e) {}
+
+      // 2. PUT (생성 또는 업데이트)
+      const putBody = {
+        message: `Update keywords (${keywords.length} keywords)`,
+        content: btoa(unescape(encodeURIComponent(newContent))),
+      };
+      if (sha) putBody.sha = sha;
+
+      const putResp = await fetch(`https://api.github.com/repos/${repo}/contents/keywords.json`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${pat}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(putBody)
+      });
+
+      if (!putResp.ok) {
+        const err = await putResp.json();
+        throw new Error(err.message || 'API 호출 실패');
+      }
+
+      // 3. workflow_dispatch 트리거 (즉시 실행)
+      const triggerResp = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/daily.yml/dispatches`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${pat}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ref: 'main' })
+      });
+
+      if (triggerResp.ok) {
+        alert('✅ 키워드 업데이트 완료!\n\nGitHub Actions가 자동 실행됩니다 (2-3분 후 새 데이터 반영). Actions 탭에서 진행 확인 가능.');
+      } else {
+        alert('✅ keywords.json 업데이트 완료!\n\n⚠️ 자동 실행 실패. Actions 탭에서 수동으로 "Run workflow" 클릭하세요.');
+      }
+
+      // INITIAL_KEYWORDS 업데이트해서 dirty 상태 해제
+      INITIAL_KEYWORDS.length = 0;
+      INITIAL_KEYWORDS.push(...keywords);
+      render();
+    } catch (e) {
+      alert('❌ 실패: ' + e.message + '\n\n토큰 권한 확인하거나, 파일로 다운로드 후 수동 업로드해주세요.');
+      console.error(e);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '키워드 즉시 적용';
+    }
+  }
+
+  function downloadKeywords() {
+    const data = {
+      keywords: keywords,
+      updated_at: new Date().toISOString().split('T')[0]
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'keywords.json';
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   function render() {
@@ -572,7 +685,7 @@ body {
 
     if (isDirty()) {
       saveBar.classList.add('dirty');
-      dirtyMsg.textContent = '변경됨 — 다운로드해서 repo에 업로드하세요';
+      dirtyMsg.textContent = '변경됨 — 즉시 적용 또는 다운로드';
       saveBtn.disabled = false;
     } else {
       saveBar.classList.remove('dirty');
@@ -622,20 +735,6 @@ body {
     input.focus();
   }
 
-  function downloadKeywords() {
-    const data = {
-      keywords: keywords,
-      updated_at: new Date().toISOString().split('T')[0]
-    };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'keywords.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
   function clearFilters() {
     activeFilters.clear();
     render();
@@ -647,7 +746,8 @@ body {
     document.getElementById('kw-input').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') addKeyword();
     });
-    document.getElementById('save-btn').addEventListener('click', downloadKeywords);
+    document.getElementById('save-btn').addEventListener('click', commitToGitHub);
+    document.getElementById('save-btn-download').addEventListener('click', downloadKeywords);
     document.getElementById('filter-clear').addEventListener('click', clearFilters);
     render();
   });

@@ -2591,14 +2591,14 @@
   "hf": [
     {
       "keyword": "agent",
-      "score": 42.4,
+      "score": 43.7,
       "paper_count": 14,
       "papers": [
         {
           "id": "2605.12357",
           "title": "δ-mem: Efficient Online Memory for Large Language Models",
           "abstract": "Large language models increasingly need to accumulate and reuse historical information in long-term assistants and agent systems. Simply expanding the context window is costly and often fails to ensure effective context utilization. We propose δ-mem, a lightweight memory mechanism that augments a frozen full-attention backbone with a compact online state of associative memory. δ-mem compresses past information into a fixed-size state matrix updated by delta-rule learning, and uses its readout to generate low-rank corrections to the backbone's attention computation during generation. With only an 8times8 online memory state, δ-mem improves the average score to 1.10times that of the frozen backbone and 1.15times that of the strongest non-δ-mem memory baseline. It achieves larger gains on memory-heavy benchmarks, reaching 1.31times on MemoryAgentBench and 1.20times on LoCoMo, while largely preserving general capabilities. These results show that effective memory can be realized through a compact online state directly coupled with attention computation, without full fine-tuning, backbone replacement, or explicit context extension.",
-          "likes": 52,
+          "likes": 59,
           "arxiv_url": "https://arxiv.org/abs/2605.12357",
           "pdf_url": "https://arxiv.org/pdf/2605.12357",
           "hf_url": "https://huggingface.co/papers/2605.12357",
@@ -2618,7 +2618,7 @@
           "id": "2605.12178",
           "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
           "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
-          "likes": 12,
+          "likes": 14,
           "arxiv_url": "https://arxiv.org/abs/2605.12178",
           "pdf_url": "https://arxiv.org/pdf/2605.12178",
           "hf_url": "https://huggingface.co/papers/2605.12178",
@@ -2628,7 +2628,7 @@
           "id": "2605.12481",
           "title": "ToolCUA: Towards Optimal GUI-Tool Path Orchestration for Computer Use Agents",
           "abstract": "Computer Use Agents (CUAs) can act through both atomic GUI actions, such as click and type, and high-level tool calls, such as API-based file operations, but this hybrid action space often leaves them uncertain about when to continue with GUI actions or switch to tools, leading to suboptimal execution paths. This difficulty stems from the scarcity of high-quality interleaved GUI-Tool trajectories, the cost and brittleness of collecting real tool trajectories, and the lack of trajectory-level supervision for GUI-Tool path selection. In this paper, we propose ToolCUA, an end-to-end agent designed to learn optimal GUI-Tool path selection through a staged training paradigm. We first introduce an Interleaved GUI-Tool Trajectory Scaling Pipeline that repurposes abundant static GUI trajectories and synthesizes a grounded tool library, enabling diverse GUI-Tool trajectories without manual engineering or real tool-trajectory collection. We then perform Tool-Bootstrapped GUI RFT, combining warmup SFT with single-turn RL to improve decisions at critical GUI-Tool switching points. Finally, we optimize ToolCUA with Online Agentic RL in a high-fidelity GUI-Tool environment, guided by a Tool-Efficient Path Reward that encourages appropriate tool use and shorter execution paths. Experiments on OSWorld-MCP show that ToolCUA achieves 46.85% accuracy, a relative improvement of approximately 66% over the baseline, establishing a new state of the art among models of comparable scale. It also improves by 3.9% over GUI-only settings, demonstrating effective GUI-Tool orchestration. The results further suggest that training in a hybrid action space is a promising paradigm for real-world digital agents. Open-sourced here: https://x-plug.github.io/ToolCUA/",
-          "likes": 11,
+          "likes": 13,
           "arxiv_url": "https://arxiv.org/abs/2605.12481",
           "pdf_url": "https://arxiv.org/pdf/2605.12481",
           "hf_url": "https://huggingface.co/papers/2605.12481",
@@ -2638,7 +2638,7 @@
           "id": "2605.09131",
           "title": "MCP-Cosmos: World Model-Augmented Agents for Complex Task Execution in MCP Environments",
           "abstract": "The Model Context Protocol (MCP) has unified the interface between Large Language Models (LLMs) and external tools, yet a fundamental gap remains in how agents conceptualize the environments within which they operate. Current paradigms are bifurcated: Task-level planning often ignores execution-time dynamics, while reactive execution lacks long-horizon foresight. We present MCP-Cosmos, a framework that infuses generative World Models (WM) into the MCP ecosystem to enable predictive task automation. By unifying three disparate technologies, namely MCP, World Model, and Agent, we demonstrate that a \"Bring Your Own World Model\" (BYOWM) strategy allows agents to simulate state transitions and refine plans in a latent space before execution. We conducted experiments using two strategies, namely ReAct and SPIRAL with 2 planning models and 3 representative world models over 20+ MCP-Bench tasks. We observed improvements in Agent's environment interaction KPI such as tool success rate and tool parameter accuracy. The framework also offers new metrics such as Execution Quality to generate new insights about the effectiveness of world models compared to baseline.",
-          "likes": 9,
+          "likes": 10,
           "arxiv_url": "https://arxiv.org/abs/2605.09131",
           "pdf_url": "https://arxiv.org/pdf/2605.09131",
           "hf_url": "https://huggingface.co/papers/2605.09131",
@@ -2648,10 +2648,30 @@
           "id": "2605.10365",
           "title": "Agent-ValueBench: A Comprehensive Benchmark for Evaluating Agent Values",
           "abstract": "Autonomous agents have rapidly matured as task executors and seen widespread deployment via harnesses such as OpenClaw. Safety concerns have rightly drawn growing research attention, and beneath them lie the values silently steering agent behavior. Existing value benchmarks, however, remain confined to LLMs, leaving agent values largely uncharted. From intuitive, empirical, and theoretical vantage points, we show that an agent's values diverge from those of its underlying LLM, and the agentic modality further introduces dataset-, evaluation-, and system-level challenges absent from text-only protocols. We close this gap with Agent-ValueBench, the first benchmark dedicated to agent values. It features 394 executable environments across 16 domains, offering 4,335 value-conflict tasks that cover 28 value systems and 332 dimensions. Every instance is co-synthesized through our purpose-built end-to-end pipeline and curated per-instance by professional psychologists. Each task ships with two pole-aligned golden trajectories whose checkpoints anchor a trajectory-level rubric-based judge. Benchmarking 14 frontier proprietary and open-weights models across 4 mainstream harnesses, we uncover three concerted findings. Agent values first manifest as a Value Tide of cross-model homogeneity beneath interpretable counter-currents. This tide bends non-additively under harness pull, and yet more decisively under deliberate steering via embedded skills. Together these results signal that the agent-alignment lever is shifting from classical model alignment and prompt steering toward harness alignment and skill steering.",
-          "likes": 5,
+          "likes": 6,
           "arxiv_url": "https://arxiv.org/abs/2605.10365",
           "pdf_url": "https://arxiv.org/pdf/2605.10365",
           "hf_url": "https://huggingface.co/papers/2605.10365",
+          "published": "2026-05-11T00:00:00.000Z"
+        },
+        {
+          "id": "2605.12477",
+          "title": "MEME: Multi-entity & Evolving Memory Evaluation",
+          "abstract": "LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity updates, MEME defines six tasks spanning the full space defined by the multi-entity and evolving axes, including three not scored by prior work: Cascade and Absence (dependency reasoning) and Deletion (post-removal state). Evaluating six memory systems spanning three memory paradigms on 100 controlled episodes, we find that all systems collapse on dependency reasoning under the default configuration (Cascade: 3%, Absence: 1% in average accuracy) despite adequate static retrieval performance. Prompt optimization, deeper retrieval, reduced filler noise, and most stronger LLMs fail to close this gap. Only a file-based agent paired with Claude Opus 4.7 as its internal LLM partially closes the gap, but at ~70x the baseline cost, indicating closure currently depends on configurations that are not practical at scale. Code and data are available on the project page: https://seokwonjung-jay.github.io/meme-eval/.",
+          "likes": 5,
+          "arxiv_url": "https://arxiv.org/abs/2605.12477",
+          "pdf_url": "https://arxiv.org/pdf/2605.12477",
+          "hf_url": "https://huggingface.co/papers/2605.12477",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.09998",
+          "title": "Continual Harness: Online Adaptation for Self-Improving Foundation Agents",
+          "abstract": "Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays Pokemon (GPP) experiments. With iterative human-in-the-loop harness refinement, GPP became the first AI system to complete Pokemon Blue, Yellow Legacy on hard mode, and Crystal without a lost battle. In the hardest stages, the agent itself began iterating on its strategy through long-context memory, surfacing emergent self-improvement signals alongside human-in-the-loop refinement. Continual Harness removes the human fully from this loop: a reset-free self-improving harness for embodied agents that formalizes and automates what we observed. Starting from only a minimal environment interface, the agent alternates between acting and refining its own prompt, sub-agents, skills, and memory, drawing on any past trajectory data. Prompt-optimization methods require episode resets; Continual Harness adapts online within a single run. On Pokemon Red and Emerald across frontier models, Continual Harness starting from scratch substantially reduces button-press cost relative to the minimalist baseline and recovers a majority of the gap to a hand-engineered expert harness, with capability-dependent gains, despite starting from the same raw interface with no curated knowledge, no hand-crafted tools, and no domain scaffolding. We then close the loop with the model itself: an online process-reward co-learning loop, in which an open-source agent's rollouts through the refining harness are relabeled by a frontier teacher and used to update the model, drives sustained in-game milestone progress on Pokemon Red without resetting the environment between training iterations.",
+          "likes": 5,
+          "arxiv_url": "https://arxiv.org/abs/2605.09998",
+          "pdf_url": "https://arxiv.org/pdf/2605.09998",
+          "hf_url": "https://huggingface.co/papers/2605.09998",
           "published": "2026-05-11T00:00:00.000Z"
         },
         {
@@ -2663,26 +2683,6 @@
           "pdf_url": "https://arxiv.org/pdf/2605.06788",
           "hf_url": "https://huggingface.co/papers/2605.06788",
           "published": "2026-05-07T00:00:00.000Z"
-        },
-        {
-          "id": "2605.12477",
-          "title": "MEME: Multi-entity & Evolving Memory Evaluation",
-          "abstract": "LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity updates, MEME defines six tasks spanning the full space defined by the multi-entity and evolving axes, including three not scored by prior work: Cascade and Absence (dependency reasoning) and Deletion (post-removal state). Evaluating six memory systems spanning three memory paradigms on 100 controlled episodes, we find that all systems collapse on dependency reasoning under the default configuration (Cascade: 3%, Absence: 1% in average accuracy) despite adequate static retrieval performance. Prompt optimization, deeper retrieval, reduced filler noise, and most stronger LLMs fail to close this gap. Only a file-based agent paired with Claude Opus 4.7 as its internal LLM partially closes the gap, but at ~70x the baseline cost, indicating closure currently depends on configurations that are not practical at scale. Code and data are available on the project page: https://seokwonjung-jay.github.io/meme-eval/.",
-          "likes": 4,
-          "arxiv_url": "https://arxiv.org/abs/2605.12477",
-          "pdf_url": "https://arxiv.org/pdf/2605.12477",
-          "hf_url": "https://huggingface.co/papers/2605.12477",
-          "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.09998",
-          "title": "Continual Harness: Online Adaptation for Self-Improving Foundation Agents",
-          "abstract": "Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays Pokemon (GPP) experiments. With iterative human-in-the-loop harness refinement, GPP became the first AI system to complete Pokemon Blue, Yellow Legacy on hard mode, and Crystal without a lost battle. In the hardest stages, the agent itself began iterating on its strategy through long-context memory, surfacing emergent self-improvement signals alongside human-in-the-loop refinement. Continual Harness removes the human fully from this loop: a reset-free self-improving harness for embodied agents that formalizes and automates what we observed. Starting from only a minimal environment interface, the agent alternates between acting and refining its own prompt, sub-agents, skills, and memory, drawing on any past trajectory data. Prompt-optimization methods require episode resets; Continual Harness adapts online within a single run. On Pokemon Red and Emerald across frontier models, Continual Harness starting from scratch substantially reduces button-press cost relative to the minimalist baseline and recovers a majority of the gap to a hand-engineered expert harness, with capability-dependent gains, despite starting from the same raw interface with no curated knowledge, no hand-crafted tools, and no domain scaffolding. We then close the loop with the model itself: an online process-reward co-learning loop, in which an open-source agent's rollouts through the refining harness are relabeled by a frontier teacher and used to update the model, drives sustained in-game milestone progress on Pokemon Red without resetting the environment between training iterations.",
-          "likes": 4,
-          "arxiv_url": "https://arxiv.org/abs/2605.09998",
-          "pdf_url": "https://arxiv.org/pdf/2605.09998",
-          "hf_url": "https://huggingface.co/papers/2605.09998",
-          "published": "2026-05-11T00:00:00.000Z"
         },
         {
           "id": "2605.12493",
@@ -2697,68 +2697,28 @@
       ]
     },
     {
-      "keyword": "reasoning",
-      "score": 32.4,
-      "paper_count": 16,
+      "keyword": "multimodal",
+      "score": 36.7,
+      "paper_count": 6,
       "papers": [
         {
           "id": "2605.12500",
           "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
           "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
-          "likes": 49,
+          "likes": 54,
           "arxiv_url": "https://arxiv.org/abs/2605.12500",
           "pdf_url": "https://arxiv.org/pdf/2605.12500",
           "hf_url": "https://huggingface.co/papers/2605.12500",
           "published": "2026-05-12T00:00:00.000Z"
         },
         {
-          "id": "2605.12178",
-          "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
-          "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
-          "likes": 12,
-          "arxiv_url": "https://arxiv.org/abs/2605.12178",
-          "pdf_url": "https://arxiv.org/pdf/2605.12178",
-          "hf_url": "https://huggingface.co/papers/2605.12178",
-          "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.07237",
-          "title": "Teaching Language Models to Think in Code",
-          "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
-          "likes": 8,
-          "arxiv_url": "https://arxiv.org/abs/2605.07237",
-          "pdf_url": "https://arxiv.org/pdf/2605.07237",
-          "hf_url": "https://huggingface.co/papers/2605.07237",
-          "published": "2026-05-11T00:00:00.000Z"
-        },
-        {
-          "id": "2605.11011",
-          "title": "LoopUS: Recasting Pretrained LLMs into Looped Latent Refinement Models",
-          "abstract": "Looped computation shows promise in improving the reasoning-oriented performance of LLMs by scaling test-time compute. However, existing approaches typically require either training recurrent models from scratch or applying disruptive retrofits, which involve substantial computational costs and may compromise pretrained capabilities. To address these limitations, we introduce Looped Depth Up-Scaling (LoopUS), a post-training framework that converts a standard pretrained LLM into a looped architecture. As a key technical contribution, LoopUS recasts the pretrained LLM into an encoder, a looped reasoning block, and a decoder. It operationalizes this latent-refinement architecture through four core components: (1) block decomposition, guided by staged representation dynamics; (2) an input-dependent selective gate to mitigate hidden-state drift; (3) random deep supervision for memory-efficient learning over long recursive horizons; and (4) a confidence head for adaptive early exiting. Collectively, these mechanisms transform a standard non-looped model into a looped form while stabilizing it against both computational bottlenecks and representation collapse. Through stable latent looping, LoopUS improves reasoning-oriented performance without extending the generated traces or requiring recurrent training from scratch. For more details, see https://thrillcrazyer.github.io/LoopUS",
-          "likes": 7,
-          "arxiv_url": "https://arxiv.org/abs/2605.11011",
-          "pdf_url": "https://arxiv.org/pdf/2605.11011",
-          "hf_url": "https://huggingface.co/papers/2605.11011",
-          "published": "2026-05-10T00:00:00.000Z"
-        },
-        {
           "id": "2605.09266",
           "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
           "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
-          "likes": 6,
+          "likes": 8,
           "arxiv_url": "https://arxiv.org/abs/2605.09266",
           "pdf_url": "https://arxiv.org/pdf/2605.09266",
           "hf_url": "https://huggingface.co/papers/2605.09266",
-          "published": "2026-05-10T00:00:00.000Z"
-        },
-        {
-          "id": "2604.26326",
-          "title": "Addressing Performance Saturation for LLM RL via Precise Entropy Curve Control",
-          "abstract": "Reinforcement learning (RL) has enabled complex reasoning abilities in large language models (LLMs). However, most RL algorithms suffer from performance saturation, preventing continued gains as RL training scales. This problem can be characterized by the collapse of entropy, a key diagnostic for exploration in RL. Existing attempts focus on preventing entropy collapse through regularization or clipping. However, their resulting entropy curves often exhibit instability in the long term, which hinders performance gains. In this paper, we introduce Entrocraft, a simple rejection-sampling approach that realizes user-customized entropy schedule by biasing the advantage distributions. Entrocraft requires no objective regularization and is advantage-estimator-agnostic. Theoretically, we relate per-step entropy change to the advantage distribution under minimal assumptions. This explains the behavior of existing RL and entropy-preserving methods. Entrocraft also enables a systematic study of entropy schedules, which reveals that linear annealing, which starts high and decays to a slightly lower target, performs best. Empirically, Entrocraft addresses performance saturation, significantly improving generalization, output diversity, and long-term training. It enables a 4B model to outperform an 8B baseline, sustains improvement for up to 4x longer before plateauing, and raises pass@K by 50% over the baseline.",
-          "likes": 6,
-          "arxiv_url": "https://arxiv.org/abs/2604.26326",
-          "pdf_url": "https://arxiv.org/pdf/2604.26326",
-          "hf_url": "https://huggingface.co/papers/2604.26326",
           "published": "2026-05-10T00:00:00.000Z"
         },
         {
@@ -2772,13 +2732,120 @@
           "published": "2026-05-12T00:00:00.000Z"
         },
         {
+          "id": "2605.10832",
+          "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
+          "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
+          "likes": 2,
+          "arxiv_url": "https://arxiv.org/abs/2605.10832",
+          "pdf_url": "https://arxiv.org/pdf/2605.10832",
+          "hf_url": "https://huggingface.co/papers/2605.10832",
+          "published": "2026-05-11T00:00:00.000Z"
+        },
+        {
+          "id": "2605.08384",
+          "title": "jina-embeddings-v5-omni: Text-Geometry-Preserving Multimodal Embeddings via Frozen-Tower Composition",
+          "abstract": "In this work, we introduce frozen-encoder model composition, a novel approach to multimodal embedding models. We build on the VLM-style architecture, in which non-text encoders are adapted to produce input for a language model, which in turn generates embeddings for all varieties of input. We present the result: the jina-embeddings-v5-omni suite, a pair of models that encode text, image, audio, and video input into a single semantic embedding space. Our method is to extend the two Jina Embeddings v5 Text models to support additional media by adding encoders for images and audio. The backbone text embedding models and the added non-text media encoders remain frozen. We only trained the connecting components, representing 0.35% of the total weights of the joint model. Training is therefore much more efficient than full-parameter retraining. Additionally, the language model remains effectively unaltered, producing exactly the same embeddings for text inputs as the Jina Embeddings v5 Text models. Our evaluations show that this approach produces results that are competitive with the state-of-the-art, yielding nearly equal performance to larger multimodal embedding models.",
+          "likes": 2,
+          "arxiv_url": "https://arxiv.org/abs/2605.08384",
+          "pdf_url": "https://arxiv.org/pdf/2605.08384",
+          "hf_url": "https://huggingface.co/papers/2605.08384",
+          "published": "2026-05-08T00:00:00.000Z"
+        },
+        {
+          "id": "2605.12305",
+          "title": "Images in Sentences: Scaling Interleaved Instructions for Unified Visual Generation",
+          "abstract": "While recent advancements in multimodal language models have enabled image generation from expressive multi-image instructions, existing methods struggle to maintain performance under complex interleaved instructions. This limitation stems from the structural separation of images and text in current paradigms, which forces models to bridge difficult long-range dependencies to match descriptions with visual targets. To address these challenges, we propose Images iN SEnTences (a.k.a, INSET), a unified generation model that seamlessly embeds images as native vocabulary within textual instructions. By positioning visual features directly at their corresponding semantic slots, INSET leverages the contextual locality of transformers for precise object binding, effectively treating images as dense, expressive language tokens. Furthermore, we introduce a scalable data engine that synthesizes 15M high-quality interleaved samples from standard image and video datasets, utilizing VLMs and LLMs to construct rich, long-horizon sequences. Evaluation results on InterleaveBench demonstrate that INSET significantly outperforms state-of-the-art methods in multi-image consistency and text alignment, with performance gaps widening as input complexity increases. Beyond standard generation, our approach inherently extends to multimodal image editing, integrating visual content as part of the instruction to facilitate highly expressive and creative visual manipulations.",
+          "likes": 0,
+          "arxiv_url": "https://arxiv.org/abs/2605.12305",
+          "pdf_url": "https://arxiv.org/pdf/2605.12305",
+          "hf_url": "https://huggingface.co/papers/2605.12305",
+          "published": "2026-05-12T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "keyword": "reasoning",
+      "score": 34.9,
+      "paper_count": 17,
+      "papers": [
+        {
+          "id": "2605.12500",
+          "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
+          "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
+          "likes": 54,
+          "arxiv_url": "https://arxiv.org/abs/2605.12500",
+          "pdf_url": "https://arxiv.org/pdf/2605.12500",
+          "hf_url": "https://huggingface.co/papers/2605.12500",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.12178",
+          "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
+          "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
+          "likes": 14,
+          "arxiv_url": "https://arxiv.org/abs/2605.12178",
+          "pdf_url": "https://arxiv.org/pdf/2605.12178",
+          "hf_url": "https://huggingface.co/papers/2605.12178",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.07237",
+          "title": "Teaching Language Models to Think in Code",
+          "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
+          "likes": 9,
+          "arxiv_url": "https://arxiv.org/abs/2605.07237",
+          "pdf_url": "https://arxiv.org/pdf/2605.07237",
+          "hf_url": "https://huggingface.co/papers/2605.07237",
+          "published": "2026-05-11T00:00:00.000Z"
+        },
+        {
+          "id": "2605.09266",
+          "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
+          "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
+          "likes": 8,
+          "arxiv_url": "https://arxiv.org/abs/2605.09266",
+          "pdf_url": "https://arxiv.org/pdf/2605.09266",
+          "hf_url": "https://huggingface.co/papers/2605.09266",
+          "published": "2026-05-10T00:00:00.000Z"
+        },
+        {
+          "id": "2604.26326",
+          "title": "Addressing Performance Saturation for LLM RL via Precise Entropy Curve Control",
+          "abstract": "Reinforcement learning (RL) has enabled complex reasoning abilities in large language models (LLMs). However, most RL algorithms suffer from performance saturation, preventing continued gains as RL training scales. This problem can be characterized by the collapse of entropy, a key diagnostic for exploration in RL. Existing attempts focus on preventing entropy collapse through regularization or clipping. However, their resulting entropy curves often exhibit instability in the long term, which hinders performance gains. In this paper, we introduce Entrocraft, a simple rejection-sampling approach that realizes user-customized entropy schedule by biasing the advantage distributions. Entrocraft requires no objective regularization and is advantage-estimator-agnostic. Theoretically, we relate per-step entropy change to the advantage distribution under minimal assumptions. This explains the behavior of existing RL and entropy-preserving methods. Entrocraft also enables a systematic study of entropy schedules, which reveals that linear annealing, which starts high and decays to a slightly lower target, performs best. Empirically, Entrocraft addresses performance saturation, significantly improving generalization, output diversity, and long-term training. It enables a 4B model to outperform an 8B baseline, sustains improvement for up to 4x longer before plateauing, and raises pass@K by 50% over the baseline.",
+          "likes": 8,
+          "arxiv_url": "https://arxiv.org/abs/2604.26326",
+          "pdf_url": "https://arxiv.org/pdf/2604.26326",
+          "hf_url": "https://huggingface.co/papers/2604.26326",
+          "published": "2026-05-10T00:00:00.000Z"
+        },
+        {
+          "id": "2605.11011",
+          "title": "LoopUS: Recasting Pretrained LLMs into Looped Latent Refinement Models",
+          "abstract": "Looped computation shows promise in improving the reasoning-oriented performance of LLMs by scaling test-time compute. However, existing approaches typically require either training recurrent models from scratch or applying disruptive retrofits, which involve substantial computational costs and may compromise pretrained capabilities. To address these limitations, we introduce Looped Depth Up-Scaling (LoopUS), a post-training framework that converts a standard pretrained LLM into a looped architecture. As a key technical contribution, LoopUS recasts the pretrained LLM into an encoder, a looped reasoning block, and a decoder. It operationalizes this latent-refinement architecture through four core components: (1) block decomposition, guided by staged representation dynamics; (2) an input-dependent selective gate to mitigate hidden-state drift; (3) random deep supervision for memory-efficient learning over long recursive horizons; and (4) a confidence head for adaptive early exiting. Collectively, these mechanisms transform a standard non-looped model into a looped form while stabilizing it against both computational bottlenecks and representation collapse. Through stable latent looping, LoopUS improves reasoning-oriented performance without extending the generated traces or requiring recurrent training from scratch. For more details, see https://thrillcrazyer.github.io/LoopUS",
+          "likes": 7,
+          "arxiv_url": "https://arxiv.org/abs/2605.11011",
+          "pdf_url": "https://arxiv.org/pdf/2605.11011",
+          "hf_url": "https://huggingface.co/papers/2605.11011",
+          "published": "2026-05-10T00:00:00.000Z"
+        },
+        {
           "id": "2605.12477",
           "title": "MEME: Multi-entity & Evolving Memory Evaluation",
           "abstract": "LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity updates, MEME defines six tasks spanning the full space defined by the multi-entity and evolving axes, including three not scored by prior work: Cascade and Absence (dependency reasoning) and Deletion (post-removal state). Evaluating six memory systems spanning three memory paradigms on 100 controlled episodes, we find that all systems collapse on dependency reasoning under the default configuration (Cascade: 3%, Absence: 1% in average accuracy) despite adequate static retrieval performance. Prompt optimization, deeper retrieval, reduced filler noise, and most stronger LLMs fail to close this gap. Only a file-based agent paired with Claude Opus 4.7 as its internal LLM partially closes the gap, but at ~70x the baseline cost, indicating closure currently depends on configurations that are not practical at scale. Code and data are available on the project page: https://seokwonjung-jay.github.io/meme-eval/.",
-          "likes": 4,
+          "likes": 5,
           "arxiv_url": "https://arxiv.org/abs/2605.12477",
           "pdf_url": "https://arxiv.org/pdf/2605.12477",
           "hf_url": "https://huggingface.co/papers/2605.12477",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.12495",
+          "title": "AlphaGRPO: Unlocking Self-Reflective Multimodal Generation in UMMs via Decompositional Verifiable Reward",
+          "abstract": "In this paper, we propose AlphaGRPO, a novel framework that applies Group Relative Policy Optimization (GRPO) to AR-Diffusion Unified Multimodal Models (UMMs) to enhance multimodal generation capabilities without an additional cold-start stage. Our approach unlocks the model's intrinsic potential to perform advanced reasoning tasks: Reasoning Text-to-Image Generation, where the model actively infers implicit user intents, and Self-Reflective Refinement, where it autonomously diagnoses and corrects misalignments in generated outputs. To address the challenge of providing stable supervision for real-world multimodal generation, we introduce the Decompositional Verifiable Reward (DVReward). Unlike holistic scalar rewards, DVReward utilizes an LLM to decompose complex user requests into atomic, verifiable semantic and quality questions, which are then evaluated by a general MLLM to provide reliable and interpretable feedback. Extensive experiments demonstrate that AlphaGRPO yields robust improvements across multimodal generation benchmarks, including GenEval, TIIF-Bench, DPG-Bench and WISE, while also achieving significant gains in editing tasks on GEdit without training on editing tasks. These results validate that our self-reflective reinforcement approach effectively leverages inherent understanding to guide high-fidelity generation. Project page: https://huangrh99.github.io/AlphaGRPO/",
+          "likes": 5,
+          "arxiv_url": "https://arxiv.org/abs/2605.12495",
+          "pdf_url": "https://arxiv.org/pdf/2605.12495",
+          "hf_url": "https://huggingface.co/papers/2605.12495",
           "published": "2026-05-12T00:00:00.000Z"
         },
         {
@@ -2804,75 +2871,28 @@
       ]
     },
     {
-      "keyword": "multimodal",
-      "score": 30.9,
-      "paper_count": 5,
-      "papers": [
-        {
-          "id": "2605.12500",
-          "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
-          "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
-          "likes": 49,
-          "arxiv_url": "https://arxiv.org/abs/2605.12500",
-          "pdf_url": "https://arxiv.org/pdf/2605.12500",
-          "hf_url": "https://huggingface.co/papers/2605.12500",
-          "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.09266",
-          "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
-          "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
-          "likes": 6,
-          "arxiv_url": "https://arxiv.org/abs/2605.09266",
-          "pdf_url": "https://arxiv.org/pdf/2605.09266",
-          "hf_url": "https://huggingface.co/papers/2605.09266",
-          "published": "2026-05-10T00:00:00.000Z"
-        },
-        {
-          "id": "2605.12495",
-          "title": "AlphaGRPO: Unlocking Self-Reflective Multimodal Generation in UMMs via Decompositional Verifiable Reward",
-          "abstract": "In this paper, we propose AlphaGRPO, a novel framework that applies Group Relative Policy Optimization (GRPO) to AR-Diffusion Unified Multimodal Models (UMMs) to enhance multimodal generation capabilities without an additional cold-start stage. Our approach unlocks the model's intrinsic potential to perform advanced reasoning tasks: Reasoning Text-to-Image Generation, where the model actively infers implicit user intents, and Self-Reflective Refinement, where it autonomously diagnoses and corrects misalignments in generated outputs. To address the challenge of providing stable supervision for real-world multimodal generation, we introduce the Decompositional Verifiable Reward (DVReward). Unlike holistic scalar rewards, DVReward utilizes an LLM to decompose complex user requests into atomic, verifiable semantic and quality questions, which are then evaluated by a general MLLM to provide reliable and interpretable feedback. Extensive experiments demonstrate that AlphaGRPO yields robust improvements across multimodal generation benchmarks, including GenEval, TIIF-Bench, DPG-Bench and WISE, while also achieving significant gains in editing tasks on GEdit without training on editing tasks. These results validate that our self-reflective reinforcement approach effectively leverages inherent understanding to guide high-fidelity generation. Project page: https://huangrh99.github.io/AlphaGRPO/",
-          "likes": 5,
-          "arxiv_url": "https://arxiv.org/abs/2605.12495",
-          "pdf_url": "https://arxiv.org/pdf/2605.12495",
-          "hf_url": "https://huggingface.co/papers/2605.12495",
-          "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.08384",
-          "title": "jina-embeddings-v5-omni: Text-Geometry-Preserving Multimodal Embeddings via Frozen-Tower Composition",
-          "abstract": "In this work, we introduce frozen-encoder model composition, a novel approach to multimodal embedding models. We build on the VLM-style architecture, in which non-text encoders are adapted to produce input for a language model, which in turn generates embeddings for all varieties of input. We present the result: the jina-embeddings-v5-omni suite, a pair of models that encode text, image, audio, and video input into a single semantic embedding space. Our method is to extend the two Jina Embeddings v5 Text models to support additional media by adding encoders for images and audio. The backbone text embedding models and the added non-text media encoders remain frozen. We only trained the connecting components, representing 0.35% of the total weights of the joint model. Training is therefore much more efficient than full-parameter retraining. Additionally, the language model remains effectively unaltered, producing exactly the same embeddings for text inputs as the Jina Embeddings v5 Text models. Our evaluations show that this approach produces results that are competitive with the state-of-the-art, yielding nearly equal performance to larger multimodal embedding models.",
-          "likes": 2,
-          "arxiv_url": "https://arxiv.org/abs/2605.08384",
-          "pdf_url": "https://arxiv.org/pdf/2605.08384",
-          "hf_url": "https://huggingface.co/papers/2605.08384",
-          "published": "2026-05-08T00:00:00.000Z"
-        },
-        {
-          "id": "2605.12305",
-          "title": "Images in Sentences: Scaling Interleaved Instructions for Unified Visual Generation",
-          "abstract": "While recent advancements in multimodal language models have enabled image generation from expressive multi-image instructions, existing methods struggle to maintain performance under complex interleaved instructions. This limitation stems from the structural separation of images and text in current paradigms, which forces models to bridge difficult long-range dependencies to match descriptions with visual targets. To address these challenges, we propose Images iN SEnTences (a.k.a, INSET), a unified generation model that seamlessly embeds images as native vocabulary within textual instructions. By positioning visual features directly at their corresponding semantic slots, INSET leverages the contextual locality of transformers for precise object binding, effectively treating images as dense, expressive language tokens. Furthermore, we introduce a scalable data engine that synthesizes 15M high-quality interleaved samples from standard image and video datasets, utilizing VLMs and LLMs to construct rich, long-horizon sequences. Evaluation results on InterleaveBench demonstrate that INSET significantly outperforms state-of-the-art methods in multi-image consistency and text alignment, with performance gaps widening as input complexity increases. Beyond standard generation, our approach inherently extends to multimodal image editing, integrating visual content as part of the instruction to facilitate highly expressive and creative visual manipulations.",
-          "likes": 0,
-          "arxiv_url": "https://arxiv.org/abs/2605.12305",
-          "pdf_url": "https://arxiv.org/pdf/2605.12305",
-          "hf_url": "https://huggingface.co/papers/2605.12305",
-          "published": "2026-05-12T00:00:00.000Z"
-        }
-      ]
-    },
-    {
       "keyword": "llm",
-      "score": 29.7,
-      "paper_count": 11,
+      "score": 29.6,
+      "paper_count": 10,
       "papers": [
         {
           "id": "2605.09530",
           "title": "MemPrivacy: Privacy-Preserving Personalized Memory Management for Edge-Cloud Agents",
           "abstract": "As LLM-powered agents are increasingly deployed in edge-cloud environments, personalized memory has become a key enabler of long-term adaptation and user-centric interaction. However, cloud-assisted memory management exposes sensitive user information, while existing privacy protection methods typically rely on aggressive masking that removes task-relevant semantics and consequently degrades memory utility and personalization quality. To address this challenge, We propose MemPrivacy, which identifies privacy-sensitive spans on edge devices, replaces them with semantically structured type-aware placeholders for cloud-side memory processing, and restores the original values locally when needed. By decoupling privacy protection from semantic destruction, MemPrivacy minimizes sensitive data exposure while retaining the information required for effective memory formation and retrieval. We also construct MemPrivacy-Bench for systematic evaluation, a dataset covering 200 users and over 52k privacy instances, and introduce a four-level privacy taxonomy for configurable protection policies. Experiments show that MemPrivacy achieves strong performance in privacy information extraction, substantially surpassing strong general-purpose models such as GPT-5.2 and Gemini-3.1-Pro, while also reducing inference latency. Across multiple widely used memory systems, MemPrivacy limits utility loss to within 1.6%, outperforming baseline masking strategies. Overall, MemPrivacy offers an effective balance between privacy protection and personalized memory utility for edge-cloud agents, enabling secure, practical, and user-transparent deployment.",
-          "likes": 40,
+          "likes": 41,
           "arxiv_url": "https://arxiv.org/abs/2605.09530",
           "pdf_url": "https://arxiv.org/pdf/2605.09530",
           "hf_url": "https://huggingface.co/papers/2605.09530",
+          "published": "2026-05-10T00:00:00.000Z"
+        },
+        {
+          "id": "2604.26326",
+          "title": "Addressing Performance Saturation for LLM RL via Precise Entropy Curve Control",
+          "abstract": "Reinforcement learning (RL) has enabled complex reasoning abilities in large language models (LLMs). However, most RL algorithms suffer from performance saturation, preventing continued gains as RL training scales. This problem can be characterized by the collapse of entropy, a key diagnostic for exploration in RL. Existing attempts focus on preventing entropy collapse through regularization or clipping. However, their resulting entropy curves often exhibit instability in the long term, which hinders performance gains. In this paper, we introduce Entrocraft, a simple rejection-sampling approach that realizes user-customized entropy schedule by biasing the advantage distributions. Entrocraft requires no objective regularization and is advantage-estimator-agnostic. Theoretically, we relate per-step entropy change to the advantage distribution under minimal assumptions. This explains the behavior of existing RL and entropy-preserving methods. Entrocraft also enables a systematic study of entropy schedules, which reveals that linear annealing, which starts high and decays to a slightly lower target, performs best. Empirically, Entrocraft addresses performance saturation, significantly improving generalization, output diversity, and long-term training. It enables a 4B model to outperform an 8B baseline, sustains improvement for up to 4x longer before plateauing, and raises pass@K by 50% over the baseline.",
+          "likes": 8,
+          "arxiv_url": "https://arxiv.org/abs/2604.26326",
+          "pdf_url": "https://arxiv.org/pdf/2604.26326",
+          "hf_url": "https://huggingface.co/papers/2604.26326",
           "published": "2026-05-10T00:00:00.000Z"
         },
         {
@@ -2886,14 +2906,34 @@
           "published": "2026-05-10T00:00:00.000Z"
         },
         {
-          "id": "2604.26326",
-          "title": "Addressing Performance Saturation for LLM RL via Precise Entropy Curve Control",
-          "abstract": "Reinforcement learning (RL) has enabled complex reasoning abilities in large language models (LLMs). However, most RL algorithms suffer from performance saturation, preventing continued gains as RL training scales. This problem can be characterized by the collapse of entropy, a key diagnostic for exploration in RL. Existing attempts focus on preventing entropy collapse through regularization or clipping. However, their resulting entropy curves often exhibit instability in the long term, which hinders performance gains. In this paper, we introduce Entrocraft, a simple rejection-sampling approach that realizes user-customized entropy schedule by biasing the advantage distributions. Entrocraft requires no objective regularization and is advantage-estimator-agnostic. Theoretically, we relate per-step entropy change to the advantage distribution under minimal assumptions. This explains the behavior of existing RL and entropy-preserving methods. Entrocraft also enables a systematic study of entropy schedules, which reveals that linear annealing, which starts high and decays to a slightly lower target, performs best. Empirically, Entrocraft addresses performance saturation, significantly improving generalization, output diversity, and long-term training. It enables a 4B model to outperform an 8B baseline, sustains improvement for up to 4x longer before plateauing, and raises pass@K by 50% over the baseline.",
+          "id": "2605.10365",
+          "title": "Agent-ValueBench: A Comprehensive Benchmark for Evaluating Agent Values",
+          "abstract": "Autonomous agents have rapidly matured as task executors and seen widespread deployment via harnesses such as OpenClaw. Safety concerns have rightly drawn growing research attention, and beneath them lie the values silently steering agent behavior. Existing value benchmarks, however, remain confined to LLMs, leaving agent values largely uncharted. From intuitive, empirical, and theoretical vantage points, we show that an agent's values diverge from those of its underlying LLM, and the agentic modality further introduces dataset-, evaluation-, and system-level challenges absent from text-only protocols. We close this gap with Agent-ValueBench, the first benchmark dedicated to agent values. It features 394 executable environments across 16 domains, offering 4,335 value-conflict tasks that cover 28 value systems and 332 dimensions. Every instance is co-synthesized through our purpose-built end-to-end pipeline and curated per-instance by professional psychologists. Each task ships with two pole-aligned golden trajectories whose checkpoints anchor a trajectory-level rubric-based judge. Benchmarking 14 frontier proprietary and open-weights models across 4 mainstream harnesses, we uncover three concerted findings. Agent values first manifest as a Value Tide of cross-model homogeneity beneath interpretable counter-currents. This tide bends non-additively under harness pull, and yet more decisively under deliberate steering via embedded skills. Together these results signal that the agent-alignment lever is shifting from classical model alignment and prompt steering toward harness alignment and skill steering.",
           "likes": 6,
-          "arxiv_url": "https://arxiv.org/abs/2604.26326",
-          "pdf_url": "https://arxiv.org/pdf/2604.26326",
-          "hf_url": "https://huggingface.co/papers/2604.26326",
-          "published": "2026-05-10T00:00:00.000Z"
+          "arxiv_url": "https://arxiv.org/abs/2605.10365",
+          "pdf_url": "https://arxiv.org/pdf/2605.10365",
+          "hf_url": "https://huggingface.co/papers/2605.10365",
+          "published": "2026-05-11T00:00:00.000Z"
+        },
+        {
+          "id": "2605.12477",
+          "title": "MEME: Multi-entity & Evolving Memory Evaluation",
+          "abstract": "LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity updates, MEME defines six tasks spanning the full space defined by the multi-entity and evolving axes, including three not scored by prior work: Cascade and Absence (dependency reasoning) and Deletion (post-removal state). Evaluating six memory systems spanning three memory paradigms on 100 controlled episodes, we find that all systems collapse on dependency reasoning under the default configuration (Cascade: 3%, Absence: 1% in average accuracy) despite adequate static retrieval performance. Prompt optimization, deeper retrieval, reduced filler noise, and most stronger LLMs fail to close this gap. Only a file-based agent paired with Claude Opus 4.7 as its internal LLM partially closes the gap, but at ~70x the baseline cost, indicating closure currently depends on configurations that are not practical at scale. Code and data are available on the project page: https://seokwonjung-jay.github.io/meme-eval/.",
+          "likes": 5,
+          "arxiv_url": "https://arxiv.org/abs/2605.12477",
+          "pdf_url": "https://arxiv.org/pdf/2605.12477",
+          "hf_url": "https://huggingface.co/papers/2605.12477",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.10977",
+          "title": "PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks",
+          "abstract": "Watermarking for large language models (LLMs) is a promising approach for detecting LLM-generated text and enabling responsible deployment. However, existing watermarking methods are often vulnerable to semantic-invariant attacks, such as paraphrasing. We propose PASA, a principled, robust, and distortion-free watermarking algorithm that embeds and detects a watermark at the semantic level. PASA operates on semantic clusters in a latent embedding space and constructs a distributional dependency between token and auxiliary sequences via shared randomness synchronized by a secret key and semantic history. This design is grounded in our theoretical framework that characterizes a jointly optimal embedding-detection pair, achieving the fundamental trade-offs among detection accuracy, robustness, and distortion. Evaluations across multiple LLMs and semantic-invariant attacks demonstrate that PASA remains robust even under strong paraphrasing attacks while preserving high text quality, outperforming standard vocabulary-space baselines. Ablation studies further validate the effectiveness of our hyperparameter choices. Webpage: https://ai-kunkun.github.io/PASA_page/.",
+          "likes": 5,
+          "arxiv_url": "https://arxiv.org/abs/2605.10977",
+          "pdf_url": "https://arxiv.org/pdf/2605.10977",
+          "hf_url": "https://huggingface.co/papers/2605.10977",
+          "published": "2026-05-09T00:00:00.000Z"
         },
         {
           "id": "2605.12495",
@@ -2904,36 +2944,6 @@
           "pdf_url": "https://arxiv.org/pdf/2605.12495",
           "hf_url": "https://huggingface.co/papers/2605.12495",
           "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.10365",
-          "title": "Agent-ValueBench: A Comprehensive Benchmark for Evaluating Agent Values",
-          "abstract": "Autonomous agents have rapidly matured as task executors and seen widespread deployment via harnesses such as OpenClaw. Safety concerns have rightly drawn growing research attention, and beneath them lie the values silently steering agent behavior. Existing value benchmarks, however, remain confined to LLMs, leaving agent values largely uncharted. From intuitive, empirical, and theoretical vantage points, we show that an agent's values diverge from those of its underlying LLM, and the agentic modality further introduces dataset-, evaluation-, and system-level challenges absent from text-only protocols. We close this gap with Agent-ValueBench, the first benchmark dedicated to agent values. It features 394 executable environments across 16 domains, offering 4,335 value-conflict tasks that cover 28 value systems and 332 dimensions. Every instance is co-synthesized through our purpose-built end-to-end pipeline and curated per-instance by professional psychologists. Each task ships with two pole-aligned golden trajectories whose checkpoints anchor a trajectory-level rubric-based judge. Benchmarking 14 frontier proprietary and open-weights models across 4 mainstream harnesses, we uncover three concerted findings. Agent values first manifest as a Value Tide of cross-model homogeneity beneath interpretable counter-currents. This tide bends non-additively under harness pull, and yet more decisively under deliberate steering via embedded skills. Together these results signal that the agent-alignment lever is shifting from classical model alignment and prompt steering toward harness alignment and skill steering.",
-          "likes": 5,
-          "arxiv_url": "https://arxiv.org/abs/2605.10365",
-          "pdf_url": "https://arxiv.org/pdf/2605.10365",
-          "hf_url": "https://huggingface.co/papers/2605.10365",
-          "published": "2026-05-11T00:00:00.000Z"
-        },
-        {
-          "id": "2605.12477",
-          "title": "MEME: Multi-entity & Evolving Memory Evaluation",
-          "abstract": "LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity updates, MEME defines six tasks spanning the full space defined by the multi-entity and evolving axes, including three not scored by prior work: Cascade and Absence (dependency reasoning) and Deletion (post-removal state). Evaluating six memory systems spanning three memory paradigms on 100 controlled episodes, we find that all systems collapse on dependency reasoning under the default configuration (Cascade: 3%, Absence: 1% in average accuracy) despite adequate static retrieval performance. Prompt optimization, deeper retrieval, reduced filler noise, and most stronger LLMs fail to close this gap. Only a file-based agent paired with Claude Opus 4.7 as its internal LLM partially closes the gap, but at ~70x the baseline cost, indicating closure currently depends on configurations that are not practical at scale. Code and data are available on the project page: https://seokwonjung-jay.github.io/meme-eval/.",
-          "likes": 4,
-          "arxiv_url": "https://arxiv.org/abs/2605.12477",
-          "pdf_url": "https://arxiv.org/pdf/2605.12477",
-          "hf_url": "https://huggingface.co/papers/2605.12477",
-          "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.10977",
-          "title": "PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks",
-          "abstract": "Watermarking for large language models (LLMs) is a promising approach for detecting LLM-generated text and enabling responsible deployment. However, existing watermarking methods are often vulnerable to semantic-invariant attacks, such as paraphrasing. We propose PASA, a principled, robust, and distortion-free watermarking algorithm that embeds and detects a watermark at the semantic level. PASA operates on semantic clusters in a latent embedding space and constructs a distributional dependency between token and auxiliary sequences via shared randomness synchronized by a secret key and semantic history. This design is grounded in our theoretical framework that characterizes a jointly optimal embedding-detection pair, achieving the fundamental trade-offs among detection accuracy, robustness, and distortion. Evaluations across multiple LLMs and semantic-invariant attacks demonstrate that PASA remains robust even under strong paraphrasing attacks while preserving high text quality, outperforming standard vocabulary-space baselines. Ablation studies further validate the effectiveness of our hyperparameter choices. Webpage: https://ai-kunkun.github.io/PASA_page/.",
-          "likes": 4,
-          "arxiv_url": "https://arxiv.org/abs/2605.10977",
-          "pdf_url": "https://arxiv.org/pdf/2605.10977",
-          "hf_url": "https://huggingface.co/papers/2605.10977",
-          "published": "2026-05-09T00:00:00.000Z"
         },
         {
           "id": "2605.11518",
@@ -2956,27 +2966,27 @@
           "published": "2026-05-11T00:00:00.000Z"
         },
         {
-          "id": "2605.08423",
-          "title": "Queryable LoRA: Instruction-Regularized Routing Over Shared Low-Rank Update Atoms",
-          "abstract": "We present a data-adaptive method for parameter-efficient fine-tuning of large neural networks. Standard low-rank adaptation methods improve efficiency by restricting each layer update to a fixed low-rank form, but this static parameterization can be too rigid when the appropriate correction depends on the input and on the evolving depth-wise computation of the network. Our approach replaces a purely layer-local adapter with a shared queryable memory of low-rank update atoms. For each block of layers, the model forms a query from the current low-rank state and a running summary of previous blocks, uses this query to retrieve a content-dependent combination of shared update components via attention, and applies the resulting routed operator within the low-rank bottleneck. In this way, the method retains the efficiency and scalability of low-rank adaptation while allowing the effective update to vary across inputs and to share reusable structure across layers. The resulting architecture provides a principled middle ground between static LoRA-style updates and fully generated parameter updates: it remains compact and parameter-efficient while supporting dynamic, context-sensitive adaptation. Further, we incorporate instruction-regularization by augmenting routing logits with a language-induced prior over update atoms, thereby biasing the selection of low-rank transformations toward semantically relevant directions without generating unconstrained parameter updates. Experiments on noisy non-linear regression tasks and LLM fine-tuning suggest that this queryable update-memory formulation can improve final test performance and training stability compared to standard low-rank adaptation, while using a comparable number of trainable parameters.",
-          "likes": 1,
-          "arxiv_url": "https://arxiv.org/abs/2605.08423",
-          "pdf_url": "https://arxiv.org/pdf/2605.08423",
-          "hf_url": "https://huggingface.co/papers/2605.08423",
-          "published": "2026-05-08T00:00:00.000Z"
+          "id": "2605.02364",
+          "title": "InfoLaw: Information Scaling Laws for Large Language Models with Quality-Weighted Mixture Data and Repetition",
+          "abstract": "Upweighting high-quality data in LLM pretraining often improves performance, but in datalimited regimes, especially under overtraining, stronger upweighting increases repetition and can degrade performance. However, standard scaling laws do not reliably extrapolate across mixture recipes or under repetitions, making the selection for optimal data recipes at scaling underdetermined. To solve this, we introduce InfoLaw (Information Scaling Laws), a data-aware scaling framework that predicts loss from consumed tokens, model size, data mixture weights, and repetition. The key idea is to model pretraining as information accumulation, where quality controls information density and repetition induces scaledependent diminishing returns. We first collect the model performance after training on datasets that vary in scale, quality distribution, and repetition level. Then we build up the modeling for information so that information accurately predicts those model performance. InfoLaw predicts performance on unseen data recipes and larger scale runs (up to 7B, 425B tokens) with 0.15% mean and 0.96% max absolute error in loss, and it extrapolates reliably across overtraining levels, enabling efficient data-recipe selection under varying compute budgets.",
+          "likes": 0,
+          "arxiv_url": "https://arxiv.org/abs/2605.02364",
+          "pdf_url": "https://arxiv.org/pdf/2605.02364",
+          "hf_url": "https://huggingface.co/papers/2605.02364",
+          "published": "2026-05-04T00:00:00.000Z"
         }
       ]
     },
     {
       "keyword": "evaluation",
-      "score": 23.5,
+      "score": 21.6,
       "paper_count": 11,
       "papers": [
         {
           "id": "2605.09530",
           "title": "MemPrivacy: Privacy-Preserving Personalized Memory Management for Edge-Cloud Agents",
           "abstract": "As LLM-powered agents are increasingly deployed in edge-cloud environments, personalized memory has become a key enabler of long-term adaptation and user-centric interaction. However, cloud-assisted memory management exposes sensitive user information, while existing privacy protection methods typically rely on aggressive masking that removes task-relevant semantics and consequently degrades memory utility and personalization quality. To address this challenge, We propose MemPrivacy, which identifies privacy-sensitive spans on edge devices, replaces them with semantically structured type-aware placeholders for cloud-side memory processing, and restores the original values locally when needed. By decoupling privacy protection from semantic destruction, MemPrivacy minimizes sensitive data exposure while retaining the information required for effective memory formation and retrieval. We also construct MemPrivacy-Bench for systematic evaluation, a dataset covering 200 users and over 52k privacy instances, and introduce a four-level privacy taxonomy for configurable protection policies. Experiments show that MemPrivacy achieves strong performance in privacy information extraction, substantially surpassing strong general-purpose models such as GPT-5.2 and Gemini-3.1-Pro, while also reducing inference latency. Across multiple widely used memory systems, MemPrivacy limits utility loss to within 1.6%, outperforming baseline masking strategies. Overall, MemPrivacy offers an effective balance between privacy protection and personalized memory utility for edge-cloud agents, enabling secure, practical, and user-transparent deployment.",
-          "likes": 40,
+          "likes": 41,
           "arxiv_url": "https://arxiv.org/abs/2605.09530",
           "pdf_url": "https://arxiv.org/pdf/2605.09530",
           "hf_url": "https://huggingface.co/papers/2605.09530",
@@ -2986,7 +2996,7 @@
           "id": "2605.12178",
           "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
           "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
-          "likes": 12,
+          "likes": 14,
           "arxiv_url": "https://arxiv.org/abs/2605.12178",
           "pdf_url": "https://arxiv.org/pdf/2605.12178",
           "hf_url": "https://huggingface.co/papers/2605.12178",
@@ -2996,7 +3006,7 @@
           "id": "2605.09266",
           "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
           "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
-          "likes": 6,
+          "likes": 8,
           "arxiv_url": "https://arxiv.org/abs/2605.09266",
           "pdf_url": "https://arxiv.org/pdf/2605.09266",
           "hf_url": "https://huggingface.co/papers/2605.09266",
@@ -3006,7 +3016,7 @@
           "id": "2605.00080",
           "title": "World Model for Robot Learning: A Comprehensive Survey",
           "abstract": "World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanced rapidly with the rise of foundation models and large-scale video generation. However, the literature remains fragmented across architectures, functional roles, and embodied application domains. To address this gap, we present a comprehensive review of world models from a robot-learning perspective. We examine how world models are coupled with robot policies, how they serve as learned simulators for reinforcement learning and evaluation, and how robotic video world models have progressed from imagination-based generation to controllable, structured, and foundation-scale formulations. We further connect these ideas to navigation and autonomous driving, and summarize representative datasets, benchmarks, and evaluation protocols. Overall, this survey systematically reviews the rapidly growing literature on world models for robot learning, clarifies key paradigms and applications, and highlights major challenges and future directions for predictive modeling in embodied agents. To facilitate continued access to newly emerging works, benchmarks, and resources, we will maintain and regularly update the accompanying GitHub repository alongside this survey.",
-          "likes": 6,
+          "likes": 7,
           "arxiv_url": "https://arxiv.org/abs/2605.00080",
           "pdf_url": "https://arxiv.org/pdf/2605.00080",
           "hf_url": "https://huggingface.co/papers/2605.00080",
@@ -3016,7 +3026,7 @@
           "id": "2605.10365",
           "title": "Agent-ValueBench: A Comprehensive Benchmark for Evaluating Agent Values",
           "abstract": "Autonomous agents have rapidly matured as task executors and seen widespread deployment via harnesses such as OpenClaw. Safety concerns have rightly drawn growing research attention, and beneath them lie the values silently steering agent behavior. Existing value benchmarks, however, remain confined to LLMs, leaving agent values largely uncharted. From intuitive, empirical, and theoretical vantage points, we show that an agent's values diverge from those of its underlying LLM, and the agentic modality further introduces dataset-, evaluation-, and system-level challenges absent from text-only protocols. We close this gap with Agent-ValueBench, the first benchmark dedicated to agent values. It features 394 executable environments across 16 domains, offering 4,335 value-conflict tasks that cover 28 value systems and 332 dimensions. Every instance is co-synthesized through our purpose-built end-to-end pipeline and curated per-instance by professional psychologists. Each task ships with two pole-aligned golden trajectories whose checkpoints anchor a trajectory-level rubric-based judge. Benchmarking 14 frontier proprietary and open-weights models across 4 mainstream harnesses, we uncover three concerted findings. Agent values first manifest as a Value Tide of cross-model homogeneity beneath interpretable counter-currents. This tide bends non-additively under harness pull, and yet more decisively under deliberate steering via embedded skills. Together these results signal that the agent-alignment lever is shifting from classical model alignment and prompt steering toward harness alignment and skill steering.",
-          "likes": 5,
+          "likes": 6,
           "arxiv_url": "https://arxiv.org/abs/2605.10365",
           "pdf_url": "https://arxiv.org/pdf/2605.10365",
           "hf_url": "https://huggingface.co/papers/2605.10365",
@@ -3026,10 +3036,20 @@
           "id": "2605.12477",
           "title": "MEME: Multi-entity & Evolving Memory Evaluation",
           "abstract": "LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity updates, MEME defines six tasks spanning the full space defined by the multi-entity and evolving axes, including three not scored by prior work: Cascade and Absence (dependency reasoning) and Deletion (post-removal state). Evaluating six memory systems spanning three memory paradigms on 100 controlled episodes, we find that all systems collapse on dependency reasoning under the default configuration (Cascade: 3%, Absence: 1% in average accuracy) despite adequate static retrieval performance. Prompt optimization, deeper retrieval, reduced filler noise, and most stronger LLMs fail to close this gap. Only a file-based agent paired with Claude Opus 4.7 as its internal LLM partially closes the gap, but at ~70x the baseline cost, indicating closure currently depends on configurations that are not practical at scale. Code and data are available on the project page: https://seokwonjung-jay.github.io/meme-eval/.",
-          "likes": 4,
+          "likes": 5,
           "arxiv_url": "https://arxiv.org/abs/2605.12477",
           "pdf_url": "https://arxiv.org/pdf/2605.12477",
           "hf_url": "https://huggingface.co/papers/2605.12477",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.12090",
+          "title": "World Action Models: The Next Frontier in Embodied AI",
+          "abstract": "Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervention. A growing body of work addresses this limitation by integrating world models, predictive models of environment dynamics, into the action generation pipeline. We term this emerging paradigm World Action Models (WAMs): embodied foundation models that unify predictive state modeling with action generation, targeting a joint distribution over future states and actions rather than actions alone. However, the literature remains fragmented across architectures, learning objectives, and application scenarios, lacking a unified conceptual framework. We formally define WAMs and disambiguate them from related concepts, and trace the foundations and early integration of VLA and world model research that gave rise to this paradigm. We organize existing methods into a structured taxonomy of Cascaded and Joint WAMs, with further subdivision by generation modality, conditioning mechanism, and action decoding strategy. We systematically analyze the data ecosystem fueling WAMs development, spanning robot teleoperation, portable human demonstrations, simulation, and internet-scale egocentric video, and synthesize emerging evaluation protocols organized around visual fidelity, physical commonsense, and action plausibility. Overall, this survey provides the first systematic account of the WAMs landscape, clarifies key architectural paradigms and their trade-offs, and identifies open challenges and future opportunities for this rapidly evolving field.",
+          "likes": 3,
+          "arxiv_url": "https://arxiv.org/abs/2605.12090",
+          "pdf_url": "https://arxiv.org/pdf/2605.12090",
+          "hf_url": "https://huggingface.co/papers/2605.12090",
           "published": "2026-05-12T00:00:00.000Z"
         },
         {
@@ -3061,33 +3081,33 @@
           "pdf_url": "https://arxiv.org/pdf/2605.10032",
           "hf_url": "https://huggingface.co/papers/2605.10032",
           "published": "2026-05-11T00:00:00.000Z"
-        },
-        {
-          "id": "2605.12305",
-          "title": "Images in Sentences: Scaling Interleaved Instructions for Unified Visual Generation",
-          "abstract": "While recent advancements in multimodal language models have enabled image generation from expressive multi-image instructions, existing methods struggle to maintain performance under complex interleaved instructions. This limitation stems from the structural separation of images and text in current paradigms, which forces models to bridge difficult long-range dependencies to match descriptions with visual targets. To address these challenges, we propose Images iN SEnTences (a.k.a, INSET), a unified generation model that seamlessly embeds images as native vocabulary within textual instructions. By positioning visual features directly at their corresponding semantic slots, INSET leverages the contextual locality of transformers for precise object binding, effectively treating images as dense, expressive language tokens. Furthermore, we introduce a scalable data engine that synthesizes 15M high-quality interleaved samples from standard image and video datasets, utilizing VLMs and LLMs to construct rich, long-horizon sequences. Evaluation results on InterleaveBench demonstrate that INSET significantly outperforms state-of-the-art methods in multi-image consistency and text alignment, with performance gaps widening as input complexity increases. Beyond standard generation, our approach inherently extends to multimodal image editing, integrating visual content as part of the instruction to facilitate highly expressive and creative visual manipulations.",
-          "likes": 0,
-          "arxiv_url": "https://arxiv.org/abs/2605.12305",
-          "pdf_url": "https://arxiv.org/pdf/2605.12305",
-          "hf_url": "https://huggingface.co/papers/2605.12305",
-          "published": "2026-05-12T00:00:00.000Z"
         }
       ]
     },
     {
       "keyword": "benchmark",
-      "score": 21.7,
-      "paper_count": 9,
+      "score": 21.3,
+      "paper_count": 8,
       "papers": [
         {
           "id": "2605.12178",
           "title": "Do Enterprise Systems Need Learned World Models? The Importance of Context to Infer Dynamics",
           "abstract": "World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments and evolves over time, making models trained on historical transitions brittle under deployment shift. We ask a question the world-models literature has not addressed: when the rules can be read at inference time, does an agent still need to learn them? We argue, and demonstrate empirically, that in settings where transition dynamics are configurable and readable, runtime discovery complements offline training by grounding predictions in the active system instance. We propose enterprise discovery agents, which recover relevant transition dynamics at runtime by reading the system's configuration rather than relying solely on internalized representations. We introduce CascadeBench, a reasoning-focused benchmark for enterprise cascade prediction that adopts the evaluation methodology of World of Workflows on diverse synthetic environments, and use it together with deployment-shift evaluation to show that offline-trained world models can perform well in-distribution but degrade as dynamics change, whereas discovery-based agents are more robust under shift by grounding their predictions in the current instance. Our findings suggest that, in configurable enterprise environments, agents should not rely solely on fixed internalized dynamics, but should incorporate mechanisms for discovering relevant transition logic at runtime.",
-          "likes": 12,
+          "likes": 14,
           "arxiv_url": "https://arxiv.org/abs/2605.12178",
           "pdf_url": "https://arxiv.org/pdf/2605.12178",
           "hf_url": "https://huggingface.co/papers/2605.12178",
           "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.09266",
+          "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
+          "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
+          "likes": 8,
+          "arxiv_url": "https://arxiv.org/abs/2605.09266",
+          "pdf_url": "https://arxiv.org/pdf/2605.09266",
+          "hf_url": "https://huggingface.co/papers/2605.09266",
+          "published": "2026-05-10T00:00:00.000Z"
         },
         {
           "id": "2605.10664",
@@ -3100,20 +3120,10 @@
           "published": "2026-05-11T00:00:00.000Z"
         },
         {
-          "id": "2605.09266",
-          "title": "SeePhys Pro: Diagnosing Modality Transfer and Blind-Training Effects in Multimodal RLVR for Physics Reasoning",
-          "abstract": "We introduce SeePhys Pro, a fine-grained modality transfer benchmark that studies whether models preserve the same reasoning capability when critical information is progressively transferred from text to image. Unlike standard vision-essential benchmarks that evaluate a single input form, SeePhys Pro features four semantically aligned variants for each problem with progressively increasing visual elements. Our evaluation shows that current frontier models are far from representation-invariant reasoners: performance degrades on average as information moves from language to diagrams, with visual variable grounding as the most critical bottleneck. Motivated by this inference-time fragility, we further develop large training corpora for multimodal RLVR and use blind training as a diagnostic control, finding that RL with all training images masked can still improve performance on unmasked validation sets. To analyze this effect, text-deletion, image-mask-rate, and format-saturation controls suggest that such gains can arise from residual textual and distributional cues rather than valid visual evidence. Our results highlight the need to evaluate multimodal reasoning not only by final-answer accuracy, but also by robustness under modality transfer and by diagnostics that test whether improvements rely on task-critical visual evidence.",
-          "likes": 6,
-          "arxiv_url": "https://arxiv.org/abs/2605.09266",
-          "pdf_url": "https://arxiv.org/pdf/2605.09266",
-          "hf_url": "https://huggingface.co/papers/2605.09266",
-          "published": "2026-05-10T00:00:00.000Z"
-        },
-        {
           "id": "2605.10365",
           "title": "Agent-ValueBench: A Comprehensive Benchmark for Evaluating Agent Values",
           "abstract": "Autonomous agents have rapidly matured as task executors and seen widespread deployment via harnesses such as OpenClaw. Safety concerns have rightly drawn growing research attention, and beneath them lie the values silently steering agent behavior. Existing value benchmarks, however, remain confined to LLMs, leaving agent values largely uncharted. From intuitive, empirical, and theoretical vantage points, we show that an agent's values diverge from those of its underlying LLM, and the agentic modality further introduces dataset-, evaluation-, and system-level challenges absent from text-only protocols. We close this gap with Agent-ValueBench, the first benchmark dedicated to agent values. It features 394 executable environments across 16 domains, offering 4,335 value-conflict tasks that cover 28 value systems and 332 dimensions. Every instance is co-synthesized through our purpose-built end-to-end pipeline and curated per-instance by professional psychologists. Each task ships with two pole-aligned golden trajectories whose checkpoints anchor a trajectory-level rubric-based judge. Benchmarking 14 frontier proprietary and open-weights models across 4 mainstream harnesses, we uncover three concerted findings. Agent values first manifest as a Value Tide of cross-model homogeneity beneath interpretable counter-currents. This tide bends non-additively under harness pull, and yet more decisively under deliberate steering via embedded skills. Together these results signal that the agent-alignment lever is shifting from classical model alignment and prompt steering toward harness alignment and skill steering.",
-          "likes": 5,
+          "likes": 6,
           "arxiv_url": "https://arxiv.org/abs/2605.10365",
           "pdf_url": "https://arxiv.org/pdf/2605.10365",
           "hf_url": "https://huggingface.co/papers/2605.10365",
@@ -3123,7 +3133,7 @@
           "id": "2605.12497",
           "title": "From Web to Pixels: Bringing Agentic Search into Visual Perception",
           "abstract": "Visual perception connects high-level semantic understanding to pixel-level perception, but most existing settings assume that the decisive evidence for identifying a target is already in the image or frozen model knowledge. We study a more practical yet harder open-world case where a visible object must first be resolved from external facts, recent events, long-tail entities, or multi-hop relations before it can be localized. We formalize this challenge as Perception Deep Research and introduce WebEye, an object-anchored benchmark with verifiable evidence, knowledge-intensive queries, precise box/mask annotations, and three task views: Search-based Grounding, Search-based Segmentation, and Search-based VQA. WebEyes contains 120 images, 473 annotated object instances, 645 unique QA pairs, and 1,927 task samples. We further propose Pixel-Searcher, an agentic search-to-pixel workflow that resolves hidden target identities and binds them to boxes, masks, or grounded answers. Experiments show that Pixel-Searcher achieves the strongest open-source performance across all three task views, while failures mainly arise from evidence acquisition, identity resolution, and visual instance binding.",
-          "likes": 5,
+          "likes": 6,
           "arxiv_url": "https://arxiv.org/abs/2605.12497",
           "pdf_url": "https://arxiv.org/pdf/2605.12497",
           "hf_url": "https://huggingface.co/papers/2605.12497",
@@ -3158,23 +3168,13 @@
           "pdf_url": "https://arxiv.org/pdf/2605.09169",
           "hf_url": "https://huggingface.co/papers/2605.09169",
           "published": "2026-05-09T00:00:00.000Z"
-        },
-        {
-          "id": "2605.07630",
-          "title": "Safe, or Simply Incapable? Rethinking Safety Evaluation for Phone-Use Agents",
-          "abstract": "When a phone-use agent avoids harm, does that show safety, or simply inability to act? Existing evaluations often cannot tell. A harmful outcome may be avoided because the agent recognized the risk and chose the safe action, or because it failed to understand the screen or execute any relevant action at all. These cases have different causes and call for different fixes, yet current benchmarks often merge them under task success, refusal, or final harmful outcome. We address this problem with PhoneSafety, a benchmark of 700 safety-critical moments drawn from real phone interactions across more than 130 apps. Each instance isolates the next decision at a risky moment and asks a simple question: does the model take the safe action, take the unsafe action, or fail to do anything useful? We evaluate eight representative phone-use agents under this framework. Our results reveal two main patterns. First, stronger general phone-use ability does not reliably imply safer choices at risky moments. Models that perform better on ordinary app tasks are not always the ones that behave more safely when the next action matters. Second, failures to do anything useful behave like a capability signal rather than a safety signal: they are concentrated in more visually and operationally demanding settings and remain stable when the evaluation protocol changes. Across models, failures split into two recurring patterns: unsafe choices in settings where the model can act but chooses wrongly, and inability to act in more visually and operationally demanding screens. Overall, a harmless outcome is not enough to count as evidence of safety. Evaluating phone-use agents requires separating unsafe judgment from inability to act.",
-          "likes": 0,
-          "arxiv_url": "https://arxiv.org/abs/2605.07630",
-          "pdf_url": "https://arxiv.org/pdf/2605.07630",
-          "hf_url": "https://huggingface.co/papers/2605.07630",
-          "published": "2026-05-08T00:00:00.000Z"
         }
       ]
     },
     {
       "keyword": "reinforcement learning",
-      "score": 18.5,
-      "paper_count": 7,
+      "score": 20.1,
+      "paper_count": 8,
       "papers": [
         {
           "id": "2605.10899",
@@ -3190,31 +3190,31 @@
           "id": "2605.07237",
           "title": "Teaching Language Models to Think in Code",
           "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
-          "likes": 8,
+          "likes": 9,
           "arxiv_url": "https://arxiv.org/abs/2605.07237",
           "pdf_url": "https://arxiv.org/pdf/2605.07237",
           "hf_url": "https://huggingface.co/papers/2605.07237",
           "published": "2026-05-11T00:00:00.000Z"
         },
         {
-          "id": "2605.00080",
-          "title": "World Model for Robot Learning: A Comprehensive Survey",
-          "abstract": "World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanced rapidly with the rise of foundation models and large-scale video generation. However, the literature remains fragmented across architectures, functional roles, and embodied application domains. To address this gap, we present a comprehensive review of world models from a robot-learning perspective. We examine how world models are coupled with robot policies, how they serve as learned simulators for reinforcement learning and evaluation, and how robotic video world models have progressed from imagination-based generation to controllable, structured, and foundation-scale formulations. We further connect these ideas to navigation and autonomous driving, and summarize representative datasets, benchmarks, and evaluation protocols. Overall, this survey systematically reviews the rapidly growing literature on world models for robot learning, clarifies key paradigms and applications, and highlights major challenges and future directions for predictive modeling in embodied agents. To facilitate continued access to newly emerging works, benchmarks, and resources, we will maintain and regularly update the accompanying GitHub repository alongside this survey.",
-          "likes": 6,
-          "arxiv_url": "https://arxiv.org/abs/2605.00080",
-          "pdf_url": "https://arxiv.org/pdf/2605.00080",
-          "hf_url": "https://huggingface.co/papers/2605.00080",
-          "published": "2026-04-30T00:00:00.000Z"
-        },
-        {
           "id": "2604.26326",
           "title": "Addressing Performance Saturation for LLM RL via Precise Entropy Curve Control",
           "abstract": "Reinforcement learning (RL) has enabled complex reasoning abilities in large language models (LLMs). However, most RL algorithms suffer from performance saturation, preventing continued gains as RL training scales. This problem can be characterized by the collapse of entropy, a key diagnostic for exploration in RL. Existing attempts focus on preventing entropy collapse through regularization or clipping. However, their resulting entropy curves often exhibit instability in the long term, which hinders performance gains. In this paper, we introduce Entrocraft, a simple rejection-sampling approach that realizes user-customized entropy schedule by biasing the advantage distributions. Entrocraft requires no objective regularization and is advantage-estimator-agnostic. Theoretically, we relate per-step entropy change to the advantage distribution under minimal assumptions. This explains the behavior of existing RL and entropy-preserving methods. Entrocraft also enables a systematic study of entropy schedules, which reveals that linear annealing, which starts high and decays to a slightly lower target, performs best. Empirically, Entrocraft addresses performance saturation, significantly improving generalization, output diversity, and long-term training. It enables a 4B model to outperform an 8B baseline, sustains improvement for up to 4x longer before plateauing, and raises pass@K by 50% over the baseline.",
-          "likes": 6,
+          "likes": 8,
           "arxiv_url": "https://arxiv.org/abs/2604.26326",
           "pdf_url": "https://arxiv.org/pdf/2604.26326",
           "hf_url": "https://huggingface.co/papers/2604.26326",
           "published": "2026-05-10T00:00:00.000Z"
+        },
+        {
+          "id": "2605.00080",
+          "title": "World Model for Robot Learning: A Comprehensive Survey",
+          "abstract": "World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanced rapidly with the rise of foundation models and large-scale video generation. However, the literature remains fragmented across architectures, functional roles, and embodied application domains. To address this gap, we present a comprehensive review of world models from a robot-learning perspective. We examine how world models are coupled with robot policies, how they serve as learned simulators for reinforcement learning and evaluation, and how robotic video world models have progressed from imagination-based generation to controllable, structured, and foundation-scale formulations. We further connect these ideas to navigation and autonomous driving, and summarize representative datasets, benchmarks, and evaluation protocols. Overall, this survey systematically reviews the rapidly growing literature on world models for robot learning, clarifies key paradigms and applications, and highlights major challenges and future directions for predictive modeling in embodied agents. To facilitate continued access to newly emerging works, benchmarks, and resources, we will maintain and regularly update the accompanying GitHub repository alongside this survey.",
+          "likes": 7,
+          "arxiv_url": "https://arxiv.org/abs/2605.00080",
+          "pdf_url": "https://arxiv.org/pdf/2605.00080",
+          "hf_url": "https://huggingface.co/papers/2605.00080",
+          "published": "2026-04-30T00:00:00.000Z"
         },
         {
           "id": "2605.12449",
@@ -3225,6 +3225,16 @@
           "pdf_url": "https://arxiv.org/pdf/2605.12449",
           "hf_url": "https://huggingface.co/papers/2605.12449",
           "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.10832",
+          "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
+          "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
+          "likes": 2,
+          "arxiv_url": "https://arxiv.org/abs/2605.10832",
+          "pdf_url": "https://arxiv.org/pdf/2605.10832",
+          "hf_url": "https://huggingface.co/papers/2605.10832",
+          "published": "2026-05-11T00:00:00.000Z"
         },
         {
           "id": "2605.10488",
@@ -3244,6 +3254,53 @@
           "arxiv_url": "https://arxiv.org/abs/2605.12474",
           "pdf_url": "https://arxiv.org/pdf/2605.12474",
           "hf_url": "https://huggingface.co/papers/2605.12474",
+          "published": "2026-05-12T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "keyword": "world model",
+      "score": 17.7,
+      "paper_count": 4,
+      "papers": [
+        {
+          "id": "2605.12500",
+          "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
+          "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
+          "likes": 54,
+          "arxiv_url": "https://arxiv.org/abs/2605.12500",
+          "pdf_url": "https://arxiv.org/pdf/2605.12500",
+          "hf_url": "https://huggingface.co/papers/2605.12500",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.09131",
+          "title": "MCP-Cosmos: World Model-Augmented Agents for Complex Task Execution in MCP Environments",
+          "abstract": "The Model Context Protocol (MCP) has unified the interface between Large Language Models (LLMs) and external tools, yet a fundamental gap remains in how agents conceptualize the environments within which they operate. Current paradigms are bifurcated: Task-level planning often ignores execution-time dynamics, while reactive execution lacks long-horizon foresight. We present MCP-Cosmos, a framework that infuses generative World Models (WM) into the MCP ecosystem to enable predictive task automation. By unifying three disparate technologies, namely MCP, World Model, and Agent, we demonstrate that a \"Bring Your Own World Model\" (BYOWM) strategy allows agents to simulate state transitions and refine plans in a latent space before execution. We conducted experiments using two strategies, namely ReAct and SPIRAL with 2 planning models and 3 representative world models over 20+ MCP-Bench tasks. We observed improvements in Agent's environment interaction KPI such as tool success rate and tool parameter accuracy. The framework also offers new metrics such as Execution Quality to generate new insights about the effectiveness of world models compared to baseline.",
+          "likes": 10,
+          "arxiv_url": "https://arxiv.org/abs/2605.09131",
+          "pdf_url": "https://arxiv.org/pdf/2605.09131",
+          "hf_url": "https://huggingface.co/papers/2605.09131",
+          "published": "2026-05-09T00:00:00.000Z"
+        },
+        {
+          "id": "2605.00080",
+          "title": "World Model for Robot Learning: A Comprehensive Survey",
+          "abstract": "World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanced rapidly with the rise of foundation models and large-scale video generation. However, the literature remains fragmented across architectures, functional roles, and embodied application domains. To address this gap, we present a comprehensive review of world models from a robot-learning perspective. We examine how world models are coupled with robot policies, how they serve as learned simulators for reinforcement learning and evaluation, and how robotic video world models have progressed from imagination-based generation to controllable, structured, and foundation-scale formulations. We further connect these ideas to navigation and autonomous driving, and summarize representative datasets, benchmarks, and evaluation protocols. Overall, this survey systematically reviews the rapidly growing literature on world models for robot learning, clarifies key paradigms and applications, and highlights major challenges and future directions for predictive modeling in embodied agents. To facilitate continued access to newly emerging works, benchmarks, and resources, we will maintain and regularly update the accompanying GitHub repository alongside this survey.",
+          "likes": 7,
+          "arxiv_url": "https://arxiv.org/abs/2605.00080",
+          "pdf_url": "https://arxiv.org/pdf/2605.00080",
+          "hf_url": "https://huggingface.co/papers/2605.00080",
+          "published": "2026-04-30T00:00:00.000Z"
+        },
+        {
+          "id": "2605.12090",
+          "title": "World Action Models: The Next Frontier in Embodied AI",
+          "abstract": "Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervention. A growing body of work addresses this limitation by integrating world models, predictive models of environment dynamics, into the action generation pipeline. We term this emerging paradigm World Action Models (WAMs): embodied foundation models that unify predictive state modeling with action generation, targeting a joint distribution over future states and actions rather than actions alone. However, the literature remains fragmented across architectures, learning objectives, and application scenarios, lacking a unified conceptual framework. We formally define WAMs and disambiguate them from related concepts, and trace the foundations and early integration of VLA and world model research that gave rise to this paradigm. We organize existing methods into a structured taxonomy of Cascaded and Joint WAMs, with further subdivision by generation modality, conditioning mechanism, and action decoding strategy. We systematically analyze the data ecosystem fueling WAMs development, spanning robot teleoperation, portable human demonstrations, simulation, and internet-scale egocentric video, and synthesize emerging evaluation protocols organized around visual fidelity, physical commonsense, and action plausibility. Overall, this survey provides the first systematic account of the WAMs landscape, clarifies key architectural paradigms and their trade-offs, and identifies open challenges and future opportunities for this rapidly evolving field.",
+          "likes": 3,
+          "arxiv_url": "https://arxiv.org/abs/2605.12090",
+          "pdf_url": "https://arxiv.org/pdf/2605.12090",
+          "hf_url": "https://huggingface.co/papers/2605.12090",
           "published": "2026-05-12T00:00:00.000Z"
         }
       ]
@@ -3274,6 +3331,16 @@
           "published": "2026-05-11T00:00:00.000Z"
         },
         {
+          "id": "2605.11354",
+          "title": "Lite3R: A Model-Agnostic Framework for Efficient Feed-Forward 3D Reconstruction",
+          "abstract": "Transformer-based 3D reconstruction has emerged as a powerful paradigm for recovering geometry and appearance from multi-view observations, offering strong performance across challenging visual conditions. As these models scale to larger backbones and higher-resolution inputs, improving their efficiency becomes increasingly important for practical deployment. However, modern 3D transformer pipelines face two coupled challenges: dense multi-view attention creates substantial token-mixing overhead, and low-precision execution can destabilize geometry-sensitive representations and degrade depth, pose, and 3D consistency. To address the first challenge, we propose Lite3R, a model-agnostic teacher-student framework that replaces dense attention with Sparse Linear Attention to preserve important geometric interactions while reducing attention cost. To address the second challenge, we introduce a parameter-efficient FP8-aware quantization-aware training (FP8-aware QAT) strategy with partial attention distillation, which freezes the vast majority of pretrained backbone parameters and trains only lightweight linear-branch projection layers, enabling stable low-precision deployment while retaining pretrained geometric priors. We further evaluate Lite3R on two representative backbones, VGGT and DA3-Large, over BlendedMVS and DTU64, showing that it substantially reduces latency (1.7-2.0x) and memory usage (1.9-2.4x) while preserving competitive reconstruction quality overall. These results demonstrate that Lite3R provides an effective algorithm-system co-design approach for practical transformer-based 3D reconstruction. Code: https://github.com/AIGeeksGroup/Lite3R. Website: https://aigeeksgroup.github.io/Lite3R.",
+          "likes": 1,
+          "arxiv_url": "https://arxiv.org/abs/2605.11354",
+          "pdf_url": "https://arxiv.org/pdf/2605.11354",
+          "hf_url": "https://huggingface.co/papers/2605.11354",
+          "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
           "id": "2605.10889",
           "title": "Unmasking On-Policy Distillation: Where It Helps, Where It Hurts, and Why",
           "abstract": "On-policy distillation offers dense, per-token supervision for training reasoning models; however, it remains unclear under which conditions this signal is beneficial and under which it is detrimental. Which teacher model should be used, and in the case of self-distillation, which specific context should serve as the supervisory signal? Does the optimal choice vary from one token to the next? At present, addressing these questions typically requires costly training runs whose aggregate performance metrics obscure the dynamics at the level of individual tokens. We introduce a training-free diagnostic framework that operates at the highest resolution: per token, per question, and per teacher. We derive an ideal per-node gradient defined as the parameter update that maximally increases the student's probability of success. We then develop a scalable targeted-rollout algorithm to estimate this gradient efficiently, even for long chains of intermediate thoughts. The gradient alignment score, defined as the cosine similarity between this ideal gradient and any given distillation gradient, quantifies the extent to which a particular configuration approximates the ideal signal. Across a range of self-distillation settings and external teacher models, we observe that distillation guidance exhibits substantially higher alignment with the ideal on incorrect rollouts than on correct ones, where the student already performs well and the teacher's signal tends to become noisy. Furthermore, we find that the optimal distillation context depends jointly on the student model's capacity and the target task, and that no single universally effective configuration emerges. These findings motivate the use of per-task, per-token diagnostic analyses for distillation.",
@@ -3292,66 +3359,19 @@
           "pdf_url": "https://arxiv.org/pdf/2605.10762",
           "hf_url": "https://huggingface.co/papers/2605.10762",
           "published": "2026-05-11T00:00:00.000Z"
-        },
-        {
-          "id": "2605.11354",
-          "title": "Lite3R: A Model-Agnostic Framework for Efficient Feed-Forward 3D Reconstruction",
-          "abstract": "Transformer-based 3D reconstruction has emerged as a powerful paradigm for recovering geometry and appearance from multi-view observations, offering strong performance across challenging visual conditions. As these models scale to larger backbones and higher-resolution inputs, improving their efficiency becomes increasingly important for practical deployment. However, modern 3D transformer pipelines face two coupled challenges: dense multi-view attention creates substantial token-mixing overhead, and low-precision execution can destabilize geometry-sensitive representations and degrade depth, pose, and 3D consistency. To address the first challenge, we propose Lite3R, a model-agnostic teacher-student framework that replaces dense attention with Sparse Linear Attention to preserve important geometric interactions while reducing attention cost. To address the second challenge, we introduce a parameter-efficient FP8-aware quantization-aware training (FP8-aware QAT) strategy with partial attention distillation, which freezes the vast majority of pretrained backbone parameters and trains only lightweight linear-branch projection layers, enabling stable low-precision deployment while retaining pretrained geometric priors. We further evaluate Lite3R on two representative backbones, VGGT and DA3-Large, over BlendedMVS and DTU64, showing that it substantially reduces latency (1.7-2.0x) and memory usage (1.9-2.4x) while preserving competitive reconstruction quality overall. These results demonstrate that Lite3R provides an effective algorithm-system co-design approach for practical transformer-based 3D reconstruction. Code: https://github.com/AIGeeksGroup/Lite3R. Website: https://aigeeksgroup.github.io/Lite3R.",
-          "likes": 0,
-          "arxiv_url": "https://arxiv.org/abs/2605.11354",
-          "pdf_url": "https://arxiv.org/pdf/2605.11354",
-          "hf_url": "https://huggingface.co/papers/2605.11354",
-          "published": "2026-05-12T00:00:00.000Z"
-        }
-      ]
-    },
-    {
-      "keyword": "world model",
-      "score": 15.8,
-      "paper_count": 3,
-      "papers": [
-        {
-          "id": "2605.12500",
-          "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
-          "abstract": "Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned representation spaces. We argue that this divide is not merely an engineering artifact, but a structural limitation that hinders the emergence of native multimodal intelligence. Hence, we introduce SenseNova-U1, a native unified multimodal paradigm built upon NEO-unify, in which understanding and generation evolve as synergistic views of a single underlying process. We launch two native unified variants, SenseNova-U1-8B-MoT and SenseNova-U1-A3B-MoT, built on dense (8B) and mixture-of-experts (30B-A3B) understanding baselines, respectively. Designed from first principles, they rival top-tier understanding-only VLMs across text understanding, vision-language perception, knowledge reasoning, agentic decision-making, and spatial intelligence. Meanwhile, they deliver strong semantic consistency and visual fidelity, excelling in conventional or knowledge-intensive any-to-image (X2I) synthesis, complex text-rich infographic generation, and interleaved vision-language generation, with or without think patterns. Beyond performance, we show detailed model design, data preprocessing, pre-/post-training, and inference strategies to support community research. Last but not least, preliminary evidence demonstrates that our models extend beyond perception and generation, performing strongly in vision-language-action (VLA) and world model (WM) scenarios. This points toward a broader roadmap where models do not translate between modalities, but think and act across them in a native manner. Multimodal AI is no longer about connecting separate systems, but about building a unified one and trusting the necessary capabilities to emerge from within.",
-          "likes": 49,
-          "arxiv_url": "https://arxiv.org/abs/2605.12500",
-          "pdf_url": "https://arxiv.org/pdf/2605.12500",
-          "hf_url": "https://huggingface.co/papers/2605.12500",
-          "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.09131",
-          "title": "MCP-Cosmos: World Model-Augmented Agents for Complex Task Execution in MCP Environments",
-          "abstract": "The Model Context Protocol (MCP) has unified the interface between Large Language Models (LLMs) and external tools, yet a fundamental gap remains in how agents conceptualize the environments within which they operate. Current paradigms are bifurcated: Task-level planning often ignores execution-time dynamics, while reactive execution lacks long-horizon foresight. We present MCP-Cosmos, a framework that infuses generative World Models (WM) into the MCP ecosystem to enable predictive task automation. By unifying three disparate technologies, namely MCP, World Model, and Agent, we demonstrate that a \"Bring Your Own World Model\" (BYOWM) strategy allows agents to simulate state transitions and refine plans in a latent space before execution. We conducted experiments using two strategies, namely ReAct and SPIRAL with 2 planning models and 3 representative world models over 20+ MCP-Bench tasks. We observed improvements in Agent's environment interaction KPI such as tool success rate and tool parameter accuracy. The framework also offers new metrics such as Execution Quality to generate new insights about the effectiveness of world models compared to baseline.",
-          "likes": 9,
-          "arxiv_url": "https://arxiv.org/abs/2605.09131",
-          "pdf_url": "https://arxiv.org/pdf/2605.09131",
-          "hf_url": "https://huggingface.co/papers/2605.09131",
-          "published": "2026-05-09T00:00:00.000Z"
-        },
-        {
-          "id": "2605.00080",
-          "title": "World Model for Robot Learning: A Comprehensive Survey",
-          "abstract": "World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanced rapidly with the rise of foundation models and large-scale video generation. However, the literature remains fragmented across architectures, functional roles, and embodied application domains. To address this gap, we present a comprehensive review of world models from a robot-learning perspective. We examine how world models are coupled with robot policies, how they serve as learned simulators for reinforcement learning and evaluation, and how robotic video world models have progressed from imagination-based generation to controllable, structured, and foundation-scale formulations. We further connect these ideas to navigation and autonomous driving, and summarize representative datasets, benchmarks, and evaluation protocols. Overall, this survey systematically reviews the rapidly growing literature on world models for robot learning, clarifies key paradigms and applications, and highlights major challenges and future directions for predictive modeling in embodied agents. To facilitate continued access to newly emerging works, benchmarks, and resources, we will maintain and regularly update the accompanying GitHub repository alongside this survey.",
-          "likes": 6,
-          "arxiv_url": "https://arxiv.org/abs/2605.00080",
-          "pdf_url": "https://arxiv.org/pdf/2605.00080",
-          "hf_url": "https://huggingface.co/papers/2605.00080",
-          "published": "2026-04-30T00:00:00.000Z"
         }
       ]
     },
     {
       "keyword": "alignment",
-      "score": 12.7,
+      "score": 12.8,
       "paper_count": 6,
       "papers": [
         {
           "id": "2605.10365",
           "title": "Agent-ValueBench: A Comprehensive Benchmark for Evaluating Agent Values",
           "abstract": "Autonomous agents have rapidly matured as task executors and seen widespread deployment via harnesses such as OpenClaw. Safety concerns have rightly drawn growing research attention, and beneath them lie the values silently steering agent behavior. Existing value benchmarks, however, remain confined to LLMs, leaving agent values largely uncharted. From intuitive, empirical, and theoretical vantage points, we show that an agent's values diverge from those of its underlying LLM, and the agentic modality further introduces dataset-, evaluation-, and system-level challenges absent from text-only protocols. We close this gap with Agent-ValueBench, the first benchmark dedicated to agent values. It features 394 executable environments across 16 domains, offering 4,335 value-conflict tasks that cover 28 value systems and 332 dimensions. Every instance is co-synthesized through our purpose-built end-to-end pipeline and curated per-instance by professional psychologists. Each task ships with two pole-aligned golden trajectories whose checkpoints anchor a trajectory-level rubric-based judge. Benchmarking 14 frontier proprietary and open-weights models across 4 mainstream harnesses, we uncover three concerted findings. Agent values first manifest as a Value Tide of cross-model homogeneity beneath interpretable counter-currents. This tide bends non-additively under harness pull, and yet more decisively under deliberate steering via embedded skills. Together these results signal that the agent-alignment lever is shifting from classical model alignment and prompt steering toward harness alignment and skill steering.",
-          "likes": 5,
+          "likes": 6,
           "arxiv_url": "https://arxiv.org/abs/2605.10365",
           "pdf_url": "https://arxiv.org/pdf/2605.10365",
           "hf_url": "https://huggingface.co/papers/2605.10365",
@@ -3411,18 +3431,28 @@
     },
     {
       "keyword": "diffusion",
-      "score": 11.4,
+      "score": 11.6,
       "paper_count": 6,
       "papers": [
         {
           "id": "2605.12013",
           "title": "L2P: Unlocking Latent Potential for Pixel Generation",
           "abstract": "Pixel diffusion models have recently regained attention for visual generation. However, training advanced pixel-space models from scratch demands prohibitive computational and data resources. To address this, we propose the Latent-to-Pixel (L2P) transfer paradigm, an efficient framework that directly harnesses the rich knowledge of pre-trained LDMs to build powerful pixel-space models. Specifically, L2P discards the VAE in favor of large-patch tokenization and freezes the source LDM's intermediate layers, exclusively training shallow layers to learn the latent-to-pixel transformation. By utilizing LDM-generated synthetic images as the sole training corpus, L2P fits an already smooth data manifold, enabling rapid convergence with zero real-data collection. This strategy allows L2P to seamlessly migrate massive latent priors to the pixel space using only 8 GPUs. Furthermore, eliminating the VAE memory bottleneck unlocks native 4K ultra-high resolution generation. Extensive experiments across mainstream LDM architectures show that L2P incurs negligible training overhead, yet performs on par with the source LDM on DPG-Bench and reaches 93% performance on GenEval.",
-          "likes": 5,
+          "likes": 7,
           "arxiv_url": "https://arxiv.org/abs/2605.12013",
           "pdf_url": "https://arxiv.org/pdf/2605.12013",
           "hf_url": "https://huggingface.co/papers/2605.12013",
           "published": "2026-05-12T00:00:00.000Z"
+        },
+        {
+          "id": "2605.10938",
+          "title": "ELF: Embedded Language Flows",
+          "abstract": "Diffusion and flow-based models have become the de facto approaches for generating continuous data, e.g., in domains such as images and videos. Their success has attracted growing interest in applying them to language modeling. Unlike their image-domain counterparts, today's leading diffusion language models (DLMs) primarily operate over discrete tokens. In this paper, we show that continuous DLMs can be made effective with minimal adaptation to the discrete domain. We propose Embedded Language Flows (ELF), a class of diffusion models in continuous embedding space based on continuous-time Flow Matching. Unlike existing DLMs, ELF predominantly stays within the continuous embedding space until the final time step, where it maps to discrete tokens using a shared-weight network. This formulation makes it straightforward to adapt established techniques from image-domain diffusion models, e.g., classifier-free guidance (CFG). Experiments show that ELF substantially outperforms leading discrete and continuous DLMs, achieving better generation quality with fewer sampling steps. These results suggest that ELF offers a promising path toward effective continuous DLMs.",
+          "likes": 6,
+          "arxiv_url": "https://arxiv.org/abs/2605.10938",
+          "pdf_url": "https://arxiv.org/pdf/2605.10938",
+          "hf_url": "https://huggingface.co/papers/2605.10938",
+          "published": "2026-05-11T00:00:00.000Z"
         },
         {
           "id": "2605.12495",
@@ -3433,16 +3463,6 @@
           "pdf_url": "https://arxiv.org/pdf/2605.12495",
           "hf_url": "https://huggingface.co/papers/2605.12495",
           "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.10938",
-          "title": "ELF: Embedded Language Flows",
-          "abstract": "Diffusion and flow-based models have become the de facto approaches for generating continuous data, e.g., in domains such as images and videos. Their success has attracted growing interest in applying them to language modeling. Unlike their image-domain counterparts, today's leading diffusion language models (DLMs) primarily operate over discrete tokens. In this paper, we show that continuous DLMs can be made effective with minimal adaptation to the discrete domain. We propose Embedded Language Flows (ELF), a class of diffusion models in continuous embedding space based on continuous-time Flow Matching. Unlike existing DLMs, ELF predominantly stays within the continuous embedding space until the final time step, where it maps to discrete tokens using a shared-weight network. This formulation makes it straightforward to adapt established techniques from image-domain diffusion models, e.g., classifier-free guidance (CFG). Experiments show that ELF substantially outperforms leading discrete and continuous DLMs, achieving better generation quality with fewer sampling steps. These results suggest that ELF offers a promising path toward effective continuous DLMs.",
-          "likes": 5,
-          "arxiv_url": "https://arxiv.org/abs/2605.10938",
-          "pdf_url": "https://arxiv.org/pdf/2605.10938",
-          "hf_url": "https://huggingface.co/papers/2605.10938",
-          "published": "2026-05-11T00:00:00.000Z"
         },
         {
           "id": "2605.08734",
@@ -3478,14 +3498,14 @@
     },
     {
       "keyword": "embedding",
-      "score": 10.4,
+      "score": 10.9,
       "paper_count": 4,
       "papers": [
         {
           "id": "2605.10938",
           "title": "ELF: Embedded Language Flows",
           "abstract": "Diffusion and flow-based models have become the de facto approaches for generating continuous data, e.g., in domains such as images and videos. Their success has attracted growing interest in applying them to language modeling. Unlike their image-domain counterparts, today's leading diffusion language models (DLMs) primarily operate over discrete tokens. In this paper, we show that continuous DLMs can be made effective with minimal adaptation to the discrete domain. We propose Embedded Language Flows (ELF), a class of diffusion models in continuous embedding space based on continuous-time Flow Matching. Unlike existing DLMs, ELF predominantly stays within the continuous embedding space until the final time step, where it maps to discrete tokens using a shared-weight network. This formulation makes it straightforward to adapt established techniques from image-domain diffusion models, e.g., classifier-free guidance (CFG). Experiments show that ELF substantially outperforms leading discrete and continuous DLMs, achieving better generation quality with fewer sampling steps. These results suggest that ELF offers a promising path toward effective continuous DLMs.",
-          "likes": 5,
+          "likes": 6,
           "arxiv_url": "https://arxiv.org/abs/2605.10938",
           "pdf_url": "https://arxiv.org/pdf/2605.10938",
           "hf_url": "https://huggingface.co/papers/2605.10938",
@@ -3495,7 +3515,7 @@
           "id": "2605.10977",
           "title": "PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks",
           "abstract": "Watermarking for large language models (LLMs) is a promising approach for detecting LLM-generated text and enabling responsible deployment. However, existing watermarking methods are often vulnerable to semantic-invariant attacks, such as paraphrasing. We propose PASA, a principled, robust, and distortion-free watermarking algorithm that embeds and detects a watermark at the semantic level. PASA operates on semantic clusters in a latent embedding space and constructs a distributional dependency between token and auxiliary sequences via shared randomness synchronized by a secret key and semantic history. This design is grounded in our theoretical framework that characterizes a jointly optimal embedding-detection pair, achieving the fundamental trade-offs among detection accuracy, robustness, and distortion. Evaluations across multiple LLMs and semantic-invariant attacks demonstrate that PASA remains robust even under strong paraphrasing attacks while preserving high text quality, outperforming standard vocabulary-space baselines. Ablation studies further validate the effectiveness of our hyperparameter choices. Webpage: https://ai-kunkun.github.io/PASA_page/.",
-          "likes": 4,
+          "likes": 5,
           "arxiv_url": "https://arxiv.org/abs/2605.10977",
           "pdf_url": "https://arxiv.org/pdf/2605.10977",
           "hf_url": "https://huggingface.co/papers/2605.10977",
@@ -3525,14 +3545,14 @@
     },
     {
       "keyword": "privacy",
-      "score": 10.4,
+      "score": 10.5,
       "paper_count": 1,
       "papers": [
         {
           "id": "2605.09530",
           "title": "MemPrivacy: Privacy-Preserving Personalized Memory Management for Edge-Cloud Agents",
           "abstract": "As LLM-powered agents are increasingly deployed in edge-cloud environments, personalized memory has become a key enabler of long-term adaptation and user-centric interaction. However, cloud-assisted memory management exposes sensitive user information, while existing privacy protection methods typically rely on aggressive masking that removes task-relevant semantics and consequently degrades memory utility and personalization quality. To address this challenge, We propose MemPrivacy, which identifies privacy-sensitive spans on edge devices, replaces them with semantically structured type-aware placeholders for cloud-side memory processing, and restores the original values locally when needed. By decoupling privacy protection from semantic destruction, MemPrivacy minimizes sensitive data exposure while retaining the information required for effective memory formation and retrieval. We also construct MemPrivacy-Bench for systematic evaluation, a dataset covering 200 users and over 52k privacy instances, and introduce a four-level privacy taxonomy for configurable protection policies. Experiments show that MemPrivacy achieves strong performance in privacy information extraction, substantially surpassing strong general-purpose models such as GPT-5.2 and Gemini-3.1-Pro, while also reducing inference latency. Across multiple widely used memory systems, MemPrivacy limits utility loss to within 1.6%, outperforming baseline masking strategies. Overall, MemPrivacy offers an effective balance between privacy protection and personalized memory utility for edge-cloud agents, enabling secure, practical, and user-transparent deployment.",
-          "likes": 40,
+          "likes": 41,
           "arxiv_url": "https://arxiv.org/abs/2605.09530",
           "pdf_url": "https://arxiv.org/pdf/2605.09530",
           "hf_url": "https://huggingface.co/papers/2605.09530",
@@ -3542,14 +3562,14 @@
     },
     {
       "keyword": "fine-tuning",
-      "score": 9.6,
+      "score": 10.0,
       "paper_count": 4,
       "papers": [
         {
           "id": "2605.12357",
           "title": "δ-mem: Efficient Online Memory for Large Language Models",
           "abstract": "Large language models increasingly need to accumulate and reuse historical information in long-term assistants and agent systems. Simply expanding the context window is costly and often fails to ensure effective context utilization. We propose δ-mem, a lightweight memory mechanism that augments a frozen full-attention backbone with a compact online state of associative memory. δ-mem compresses past information into a fixed-size state matrix updated by delta-rule learning, and uses its readout to generate low-rank corrections to the backbone's attention computation during generation. With only an 8times8 online memory state, δ-mem improves the average score to 1.10times that of the frozen backbone and 1.15times that of the strongest non-δ-mem memory baseline. It achieves larger gains on memory-heavy benchmarks, reaching 1.31times on MemoryAgentBench and 1.20times on LoCoMo, while largely preserving general capabilities. These results show that effective memory can be realized through a compact online state directly coupled with attention computation, without full fine-tuning, backbone replacement, or explicit context extension.",
-          "likes": 52,
+          "likes": 59,
           "arxiv_url": "https://arxiv.org/abs/2605.12357",
           "pdf_url": "https://arxiv.org/pdf/2605.12357",
           "hf_url": "https://huggingface.co/papers/2605.12357",
@@ -3559,10 +3579,20 @@
           "id": "2605.07237",
           "title": "Teaching Language Models to Think in Code",
           "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
-          "likes": 8,
+          "likes": 9,
           "arxiv_url": "https://arxiv.org/abs/2605.07237",
           "pdf_url": "https://arxiv.org/pdf/2605.07237",
           "hf_url": "https://huggingface.co/papers/2605.07237",
+          "published": "2026-05-11T00:00:00.000Z"
+        },
+        {
+          "id": "2605.10832",
+          "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
+          "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
+          "likes": 2,
+          "arxiv_url": "https://arxiv.org/abs/2605.10832",
+          "pdf_url": "https://arxiv.org/pdf/2605.10832",
+          "hf_url": "https://huggingface.co/papers/2605.10832",
           "published": "2026-05-11T00:00:00.000Z"
         },
         {
@@ -3574,22 +3604,12 @@
           "pdf_url": "https://arxiv.org/pdf/2605.09932",
           "hf_url": "https://huggingface.co/papers/2605.09932",
           "published": "2026-05-11T00:00:00.000Z"
-        },
-        {
-          "id": "2605.08423",
-          "title": "Queryable LoRA: Instruction-Regularized Routing Over Shared Low-Rank Update Atoms",
-          "abstract": "We present a data-adaptive method for parameter-efficient fine-tuning of large neural networks. Standard low-rank adaptation methods improve efficiency by restricting each layer update to a fixed low-rank form, but this static parameterization can be too rigid when the appropriate correction depends on the input and on the evolving depth-wise computation of the network. Our approach replaces a purely layer-local adapter with a shared queryable memory of low-rank update atoms. For each block of layers, the model forms a query from the current low-rank state and a running summary of previous blocks, uses this query to retrieve a content-dependent combination of shared update components via attention, and applies the resulting routed operator within the low-rank bottleneck. In this way, the method retains the efficiency and scalability of low-rank adaptation while allowing the effective update to vary across inputs and to share reusable structure across layers. The resulting architecture provides a principled middle ground between static LoRA-style updates and fully generated parameter updates: it remains compact and parameter-efficient while supporting dynamic, context-sensitive adaptation. Further, we incorporate instruction-regularization by augmenting routing logits with a language-induced prior over update atoms, thereby biasing the selection of low-rank transformations toward semantically relevant directions without generating unconstrained parameter updates. Experiments on noisy non-linear regression tasks and LLM fine-tuning suggest that this queryable update-memory formulation can improve final test performance and training stability compared to standard low-rank adaptation, while using a comparable number of trainable parameters.",
-          "likes": 1,
-          "arxiv_url": "https://arxiv.org/abs/2605.08423",
-          "pdf_url": "https://arxiv.org/pdf/2605.08423",
-          "hf_url": "https://huggingface.co/papers/2605.08423",
-          "published": "2026-05-08T00:00:00.000Z"
         }
       ]
     },
     {
       "keyword": "planning",
-      "score": 9.6,
+      "score": 9.9,
       "paper_count": 5,
       "papers": [
         {
@@ -3606,7 +3626,7 @@
           "id": "2605.09131",
           "title": "MCP-Cosmos: World Model-Augmented Agents for Complex Task Execution in MCP Environments",
           "abstract": "The Model Context Protocol (MCP) has unified the interface between Large Language Models (LLMs) and external tools, yet a fundamental gap remains in how agents conceptualize the environments within which they operate. Current paradigms are bifurcated: Task-level planning often ignores execution-time dynamics, while reactive execution lacks long-horizon foresight. We present MCP-Cosmos, a framework that infuses generative World Models (WM) into the MCP ecosystem to enable predictive task automation. By unifying three disparate technologies, namely MCP, World Model, and Agent, we demonstrate that a \"Bring Your Own World Model\" (BYOWM) strategy allows agents to simulate state transitions and refine plans in a latent space before execution. We conducted experiments using two strategies, namely ReAct and SPIRAL with 2 planning models and 3 representative world models over 20+ MCP-Bench tasks. We observed improvements in Agent's environment interaction KPI such as tool success rate and tool parameter accuracy. The framework also offers new metrics such as Execution Quality to generate new insights about the effectiveness of world models compared to baseline.",
-          "likes": 9,
+          "likes": 10,
           "arxiv_url": "https://arxiv.org/abs/2605.09131",
           "pdf_url": "https://arxiv.org/pdf/2605.09131",
           "hf_url": "https://huggingface.co/papers/2605.09131",
@@ -3616,7 +3636,7 @@
           "id": "2605.07237",
           "title": "Teaching Language Models to Think in Code",
           "abstract": "Tool-integrated reasoning (TIR) has emerged as a dominant paradigm for mathematical problem solving in language models, combining natural language (NL) reasoning with code execution. However, this interleaved setup has three key limitations: code often acts as a post-hoc verifier, intermediate NL computations are error-prone, and NL and code play overlapping rather than clearly distinct roles. We propose ThinC (Thinking in Code), a framework in which code itself serves as the reasoner rather than as a tool invoked by NL. A ThinC trajectory begins with a brief NL planning step, after which all reasoning unfolds through code blocks connected only by their execution outputs. We distill 12.2k code-centric trajectories from a teacher model and train ThinC-1.7B and ThinC-4B with supervised fine-tuning followed by reinforcement learning. ThinC-4B consistently outperforms every TIR baseline on five competition-level math benchmarks and even surpasses the much larger Qwen3-235B-A22B-Thinking. Further analysis shows that ThinC reasons through code: 99.2% of its final answers are grounded in interpreter output, and the model recovers reliably from code execution failures without intermediate NL reasoning. Our code and models will be released soon.",
-          "likes": 8,
+          "likes": 9,
           "arxiv_url": "https://arxiv.org/abs/2605.07237",
           "pdf_url": "https://arxiv.org/pdf/2605.07237",
           "hf_url": "https://huggingface.co/papers/2605.07237",
@@ -3626,7 +3646,7 @@
           "id": "2605.00080",
           "title": "World Model for Robot Learning: A Comprehensive Survey",
           "abstract": "World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanced rapidly with the rise of foundation models and large-scale video generation. However, the literature remains fragmented across architectures, functional roles, and embodied application domains. To address this gap, we present a comprehensive review of world models from a robot-learning perspective. We examine how world models are coupled with robot policies, how they serve as learned simulators for reinforcement learning and evaluation, and how robotic video world models have progressed from imagination-based generation to controllable, structured, and foundation-scale formulations. We further connect these ideas to navigation and autonomous driving, and summarize representative datasets, benchmarks, and evaluation protocols. Overall, this survey systematically reviews the rapidly growing literature on world models for robot learning, clarifies key paradigms and applications, and highlights major challenges and future directions for predictive modeling in embodied agents. To facilitate continued access to newly emerging works, benchmarks, and resources, we will maintain and regularly update the accompanying GitHub repository alongside this survey.",
-          "likes": 6,
+          "likes": 7,
           "arxiv_url": "https://arxiv.org/abs/2605.00080",
           "pdf_url": "https://arxiv.org/pdf/2605.00080",
           "hf_url": "https://huggingface.co/papers/2605.00080",
@@ -3636,7 +3656,7 @@
           "id": "2605.09998",
           "title": "Continual Harness: Online Adaptation for Self-Improving Foundation Agents",
           "abstract": "Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays Pokemon (GPP) experiments. With iterative human-in-the-loop harness refinement, GPP became the first AI system to complete Pokemon Blue, Yellow Legacy on hard mode, and Crystal without a lost battle. In the hardest stages, the agent itself began iterating on its strategy through long-context memory, surfacing emergent self-improvement signals alongside human-in-the-loop refinement. Continual Harness removes the human fully from this loop: a reset-free self-improving harness for embodied agents that formalizes and automates what we observed. Starting from only a minimal environment interface, the agent alternates between acting and refining its own prompt, sub-agents, skills, and memory, drawing on any past trajectory data. Prompt-optimization methods require episode resets; Continual Harness adapts online within a single run. On Pokemon Red and Emerald across frontier models, Continual Harness starting from scratch substantially reduces button-press cost relative to the minimalist baseline and recovers a majority of the gap to a hand-engineered expert harness, with capability-dependent gains, despite starting from the same raw interface with no curated knowledge, no hand-crafted tools, and no domain scaffolding. We then close the loop with the model itself: an online process-reward co-learning loop, in which an open-source agent's rollouts through the refining harness are relabeled by a frontier teacher and used to update the model, drives sustained in-game milestone progress on Pokemon Red without resetting the environment between training iterations.",
-          "likes": 4,
+          "likes": 5,
           "arxiv_url": "https://arxiv.org/abs/2605.09998",
           "pdf_url": "https://arxiv.org/pdf/2605.09998",
           "hf_url": "https://huggingface.co/papers/2605.09998",
@@ -3645,8 +3665,45 @@
       ]
     },
     {
+      "keyword": "embodied",
+      "score": 9.5,
+      "paper_count": 3,
+      "papers": [
+        {
+          "id": "2605.00080",
+          "title": "World Model for Robot Learning: A Comprehensive Survey",
+          "abstract": "World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanced rapidly with the rise of foundation models and large-scale video generation. However, the literature remains fragmented across architectures, functional roles, and embodied application domains. To address this gap, we present a comprehensive review of world models from a robot-learning perspective. We examine how world models are coupled with robot policies, how they serve as learned simulators for reinforcement learning and evaluation, and how robotic video world models have progressed from imagination-based generation to controllable, structured, and foundation-scale formulations. We further connect these ideas to navigation and autonomous driving, and summarize representative datasets, benchmarks, and evaluation protocols. Overall, this survey systematically reviews the rapidly growing literature on world models for robot learning, clarifies key paradigms and applications, and highlights major challenges and future directions for predictive modeling in embodied agents. To facilitate continued access to newly emerging works, benchmarks, and resources, we will maintain and regularly update the accompanying GitHub repository alongside this survey.",
+          "likes": 7,
+          "arxiv_url": "https://arxiv.org/abs/2605.00080",
+          "pdf_url": "https://arxiv.org/pdf/2605.00080",
+          "hf_url": "https://huggingface.co/papers/2605.00080",
+          "published": "2026-04-30T00:00:00.000Z"
+        },
+        {
+          "id": "2605.09998",
+          "title": "Continual Harness: Online Adaptation for Self-Improving Foundation Agents",
+          "abstract": "Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays Pokemon (GPP) experiments. With iterative human-in-the-loop harness refinement, GPP became the first AI system to complete Pokemon Blue, Yellow Legacy on hard mode, and Crystal without a lost battle. In the hardest stages, the agent itself began iterating on its strategy through long-context memory, surfacing emergent self-improvement signals alongside human-in-the-loop refinement. Continual Harness removes the human fully from this loop: a reset-free self-improving harness for embodied agents that formalizes and automates what we observed. Starting from only a minimal environment interface, the agent alternates between acting and refining its own prompt, sub-agents, skills, and memory, drawing on any past trajectory data. Prompt-optimization methods require episode resets; Continual Harness adapts online within a single run. On Pokemon Red and Emerald across frontier models, Continual Harness starting from scratch substantially reduces button-press cost relative to the minimalist baseline and recovers a majority of the gap to a hand-engineered expert harness, with capability-dependent gains, despite starting from the same raw interface with no curated knowledge, no hand-crafted tools, and no domain scaffolding. We then close the loop with the model itself: an online process-reward co-learning loop, in which an open-source agent's rollouts through the refining harness are relabeled by a frontier teacher and used to update the model, drives sustained in-game milestone progress on Pokemon Red without resetting the environment between training iterations.",
+          "likes": 5,
+          "arxiv_url": "https://arxiv.org/abs/2605.09998",
+          "pdf_url": "https://arxiv.org/pdf/2605.09998",
+          "hf_url": "https://huggingface.co/papers/2605.09998",
+          "published": "2026-05-11T00:00:00.000Z"
+        },
+        {
+          "id": "2605.12090",
+          "title": "World Action Models: The Next Frontier in Embodied AI",
+          "abstract": "Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervention. A growing body of work addresses this limitation by integrating world models, predictive models of environment dynamics, into the action generation pipeline. We term this emerging paradigm World Action Models (WAMs): embodied foundation models that unify predictive state modeling with action generation, targeting a joint distribution over future states and actions rather than actions alone. However, the literature remains fragmented across architectures, learning objectives, and application scenarios, lacking a unified conceptual framework. We formally define WAMs and disambiguate them from related concepts, and trace the foundations and early integration of VLA and world model research that gave rise to this paradigm. We organize existing methods into a structured taxonomy of Cascaded and Joint WAMs, with further subdivision by generation modality, conditioning mechanism, and action decoding strategy. We systematically analyze the data ecosystem fueling WAMs development, spanning robot teleoperation, portable human demonstrations, simulation, and internet-scale egocentric video, and synthesize emerging evaluation protocols organized around visual fidelity, physical commonsense, and action plausibility. Overall, this survey provides the first systematic account of the WAMs landscape, clarifies key architectural paradigms and their trade-offs, and identifies open challenges and future opportunities for this rapidly evolving field.",
+          "likes": 3,
+          "arxiv_url": "https://arxiv.org/abs/2605.12090",
+          "pdf_url": "https://arxiv.org/pdf/2605.12090",
+          "hf_url": "https://huggingface.co/papers/2605.12090",
+          "published": "2026-05-12T00:00:00.000Z"
+        }
+      ]
+    },
+    {
       "keyword": "long-context",
-      "score": 7.8,
+      "score": 7.9,
       "paper_count": 3,
       "papers": [
         {
@@ -3663,7 +3720,7 @@
           "id": "2605.09998",
           "title": "Continual Harness: Online Adaptation for Self-Improving Foundation Agents",
           "abstract": "Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays Pokemon (GPP) experiments. With iterative human-in-the-loop harness refinement, GPP became the first AI system to complete Pokemon Blue, Yellow Legacy on hard mode, and Crystal without a lost battle. In the hardest stages, the agent itself began iterating on its strategy through long-context memory, surfacing emergent self-improvement signals alongside human-in-the-loop refinement. Continual Harness removes the human fully from this loop: a reset-free self-improving harness for embodied agents that formalizes and automates what we observed. Starting from only a minimal environment interface, the agent alternates between acting and refining its own prompt, sub-agents, skills, and memory, drawing on any past trajectory data. Prompt-optimization methods require episode resets; Continual Harness adapts online within a single run. On Pokemon Red and Emerald across frontier models, Continual Harness starting from scratch substantially reduces button-press cost relative to the minimalist baseline and recovers a majority of the gap to a hand-engineered expert harness, with capability-dependent gains, despite starting from the same raw interface with no curated knowledge, no hand-crafted tools, and no domain scaffolding. We then close the loop with the model itself: an online process-reward co-learning loop, in which an open-source agent's rollouts through the refining harness are relabeled by a frontier teacher and used to update the model, drives sustained in-game milestone progress on Pokemon Red without resetting the environment between training iterations.",
-          "likes": 4,
+          "likes": 5,
           "arxiv_url": "https://arxiv.org/abs/2605.09998",
           "pdf_url": "https://arxiv.org/pdf/2605.09998",
           "hf_url": "https://huggingface.co/papers/2605.09998",
@@ -3682,29 +3739,39 @@
       ]
     },
     {
-      "keyword": "lora",
-      "score": 5.3,
-      "paper_count": 2,
+      "keyword": "tool use",
+      "score": 4.4,
+      "paper_count": 3,
       "papers": [
         {
-          "id": "2605.08734",
-          "title": "AdaPreLoRA: Adafactor Preconditioned Low-Rank Adaptation",
-          "abstract": "Low-Rank Adaptation (LoRA) reparameterizes a weight update as a product of two low-rank factors, but the Jacobian J_{G} of the generator mapping the factors to the weight matrix is rank-deficient, so the factor-space preconditioner J_{G}^* {F}_t J_{G} induced by any {W}-space preconditioner {F}_t is singular, and consequently the standard chain rule cannot be uniquely inverted to map a preconditioned {W}-space direction back to a factor-space update. We cast existing LoRA optimizers in a unified framework parameterized by two choices: (i) which invertible surrogate for J_{G}^* {F}_t J_{G} to use, and (ii) which {F}_t on {W} to use. Existing methods occupy four families along these axes: factor-space adaptive updates, block-diagonal surrogates for J_{G}^* J_{G}, Frobenius-residual pseudoinverse methods, and Riemannian manifold constraint. Within this design space, a gradient-statistics-aware {F}_t paired with a closed-form factor-space solve at {O}((m+n)r) memory remains underexplored. We propose AdaPreLoRA, which fills this gap by adopting the Adafactor diagonal Kronecker preconditioner {H}_t on {W} and selecting from the resulting factor-space solution family the element minimizing an {H}_t-weighted imbalance between the two factor contributions; by construction, the resulting factor update is the closest LoRA approximation to the preconditioned {W}-space direction under the {H}_t-weighted norm. Across GPT-2 (E2E), Mistral-7B and Qwen2-7B (GLUE, ARC, GSM8K), and diffusion-model personalization, AdaPreLoRA is competitive with or improves over a representative set of LoRA optimizers while keeping peak GPU memory at the LoRA optimizer level.",
-          "likes": 2,
-          "arxiv_url": "https://arxiv.org/abs/2605.08734",
-          "pdf_url": "https://arxiv.org/pdf/2605.08734",
-          "hf_url": "https://huggingface.co/papers/2605.08734",
-          "published": "2026-05-09T00:00:00.000Z"
+          "id": "2605.12481",
+          "title": "ToolCUA: Towards Optimal GUI-Tool Path Orchestration for Computer Use Agents",
+          "abstract": "Computer Use Agents (CUAs) can act through both atomic GUI actions, such as click and type, and high-level tool calls, such as API-based file operations, but this hybrid action space often leaves them uncertain about when to continue with GUI actions or switch to tools, leading to suboptimal execution paths. This difficulty stems from the scarcity of high-quality interleaved GUI-Tool trajectories, the cost and brittleness of collecting real tool trajectories, and the lack of trajectory-level supervision for GUI-Tool path selection. In this paper, we propose ToolCUA, an end-to-end agent designed to learn optimal GUI-Tool path selection through a staged training paradigm. We first introduce an Interleaved GUI-Tool Trajectory Scaling Pipeline that repurposes abundant static GUI trajectories and synthesizes a grounded tool library, enabling diverse GUI-Tool trajectories without manual engineering or real tool-trajectory collection. We then perform Tool-Bootstrapped GUI RFT, combining warmup SFT with single-turn RL to improve decisions at critical GUI-Tool switching points. Finally, we optimize ToolCUA with Online Agentic RL in a high-fidelity GUI-Tool environment, guided by a Tool-Efficient Path Reward that encourages appropriate tool use and shorter execution paths. Experiments on OSWorld-MCP show that ToolCUA achieves 46.85% accuracy, a relative improvement of approximately 66% over the baseline, establishing a new state of the art among models of comparable scale. It also improves by 3.9% over GUI-only settings, demonstrating effective GUI-Tool orchestration. The results further suggest that training in a hybrid action space is a promising paradigm for real-world digital agents. Open-sourced here: https://x-plug.github.io/ToolCUA/",
+          "likes": 13,
+          "arxiv_url": "https://arxiv.org/abs/2605.12481",
+          "pdf_url": "https://arxiv.org/pdf/2605.12481",
+          "hf_url": "https://huggingface.co/papers/2605.12481",
+          "published": "2026-05-12T00:00:00.000Z"
         },
         {
-          "id": "2605.08423",
-          "title": "Queryable LoRA: Instruction-Regularized Routing Over Shared Low-Rank Update Atoms",
-          "abstract": "We present a data-adaptive method for parameter-efficient fine-tuning of large neural networks. Standard low-rank adaptation methods improve efficiency by restricting each layer update to a fixed low-rank form, but this static parameterization can be too rigid when the appropriate correction depends on the input and on the evolving depth-wise computation of the network. Our approach replaces a purely layer-local adapter with a shared queryable memory of low-rank update atoms. For each block of layers, the model forms a query from the current low-rank state and a running summary of previous blocks, uses this query to retrieve a content-dependent combination of shared update components via attention, and applies the resulting routed operator within the low-rank bottleneck. In this way, the method retains the efficiency and scalability of low-rank adaptation while allowing the effective update to vary across inputs and to share reusable structure across layers. The resulting architecture provides a principled middle ground between static LoRA-style updates and fully generated parameter updates: it remains compact and parameter-efficient while supporting dynamic, context-sensitive adaptation. Further, we incorporate instruction-regularization by augmenting routing logits with a language-induced prior over update atoms, thereby biasing the selection of low-rank transformations toward semantically relevant directions without generating unconstrained parameter updates. Experiments on noisy non-linear regression tasks and LLM fine-tuning suggest that this queryable update-memory formulation can improve final test performance and training stability compared to standard low-rank adaptation, while using a comparable number of trainable parameters.",
+          "id": "2605.10832",
+          "title": "Towards On-Policy Data Evolution for Visual-Native Multimodal Deep Search Agents",
+          "abstract": "Multimodal deep search requires an agent to solve open-world problems by chaining search, tool use, and visual reasoning over evolving textual and visual context. Two bottlenecks limit current systems. First, existing tool-use harnesses treat images returned by search, browsing, or transformation as transient outputs, so intermediate visual evidence cannot be re-consumed by later tools. Second, training data is usually built by fixed curation recipes that cannot track the target agent's evolving capability. To address these challenges, we first introduce a visual-native agent harness centered on an image bank reference protocol, which registers every tool-returned image as an addressable reference and makes intermediate visual evidence reusable by later tools. On top of this harness, On-policy Data Evolution (ODE) runs a closed-loop data generator that refines itself across rounds from rollouts of the policy being trained. This per-round refinement makes each round's data target what the current policy still needs to learn. The same framework supports both diverse supervised fine-tuning data and policy-aware reinforcement learning data curation, covering the full training lifecycle of the target agent. Across 8 multimodal deep search benchmarks, ODE improves the Qwen3-VL-8B agent from 24.9% to 39.0% on average, surpassing Gemini-2.5 Pro in standard agent-workflow setting (37.9%). At 30B, ODE raises the average score from 30.6% to 41.5%. Further analyses validate the effectiveness of image-bank reuse, especially on complex tasks requiring iterative visual refinement, while rollout-feedback evolution yields more grounded SFT traces and better policy-matched RL tasks than static synthesis.",
+          "likes": 2,
+          "arxiv_url": "https://arxiv.org/abs/2605.10832",
+          "pdf_url": "https://arxiv.org/pdf/2605.10832",
+          "hf_url": "https://huggingface.co/papers/2605.10832",
+          "published": "2026-05-11T00:00:00.000Z"
+        },
+        {
+          "id": "2605.09932",
+          "title": "FocuSFT: Bilevel Optimization for Dilution-Aware Long-Context Fine-Tuning",
+          "abstract": "Large language models can now process increasingly long inputs, yet their ability to effectively use information spread across long contexts remains limited. We trace this gap to how attention budget is spent during supervised fine-tuning (SFT) on long sequences: positional biases and attention sinks cause the model to allocate most of its attention to positionally privileged tokens rather than semantically relevant content. This training-time attention dilution (the starvation of content tokens in the attention distribution) weakens the gradient signal, limiting the model's ability to learn robust long-context capabilities. We introduce FocuSFT, a bilevel optimization framework that addresses this problem at training time. An inner loop adapts lightweight fast-weight parameters on the training context to form a parametric memory that concentrates attention on relevant content, and the outer loop performs SFT conditioned on this sharpened representation. Both loops apply bidirectional attention over context tokens while preserving causal masking for responses, reducing the causal asymmetry that gives rise to attention sinks and aligning inner-outer behavior. On BABILong, FocuSFT improves accuracy by up to +14pp across 4K--32K context lengths; on RULER, it raises CWE aggregation from 72.9\\% to 81.1\\% at 16K; and on GPQA with agentic tool use, it yields a 24\\% relative gain in pass@1. Attention analysis shows that FocuSFT reduces attention sink mass by 529times and triples context engagement during training. Code: https://github.com/JarvisPei/FocuSFT",
           "likes": 1,
-          "arxiv_url": "https://arxiv.org/abs/2605.08423",
-          "pdf_url": "https://arxiv.org/pdf/2605.08423",
-          "hf_url": "https://huggingface.co/papers/2605.08423",
-          "published": "2026-05-08T00:00:00.000Z"
+          "arxiv_url": "https://arxiv.org/abs/2605.09932",
+          "pdf_url": "https://arxiv.org/pdf/2605.09932",
+          "hf_url": "https://huggingface.co/papers/2605.09932",
+          "published": "2026-05-11T00:00:00.000Z"
         }
       ]
     },
@@ -3764,7 +3831,7 @@
           "id": "2605.11354",
           "title": "Lite3R: A Model-Agnostic Framework for Efficient Feed-Forward 3D Reconstruction",
           "abstract": "Transformer-based 3D reconstruction has emerged as a powerful paradigm for recovering geometry and appearance from multi-view observations, offering strong performance across challenging visual conditions. As these models scale to larger backbones and higher-resolution inputs, improving their efficiency becomes increasingly important for practical deployment. However, modern 3D transformer pipelines face two coupled challenges: dense multi-view attention creates substantial token-mixing overhead, and low-precision execution can destabilize geometry-sensitive representations and degrade depth, pose, and 3D consistency. To address the first challenge, we propose Lite3R, a model-agnostic teacher-student framework that replaces dense attention with Sparse Linear Attention to preserve important geometric interactions while reducing attention cost. To address the second challenge, we introduce a parameter-efficient FP8-aware quantization-aware training (FP8-aware QAT) strategy with partial attention distillation, which freezes the vast majority of pretrained backbone parameters and trains only lightweight linear-branch projection layers, enabling stable low-precision deployment while retaining pretrained geometric priors. We further evaluate Lite3R on two representative backbones, VGGT and DA3-Large, over BlendedMVS and DTU64, showing that it substantially reduces latency (1.7-2.0x) and memory usage (1.9-2.4x) while preserving competitive reconstruction quality overall. These results demonstrate that Lite3R provides an effective algorithm-system co-design approach for practical transformer-based 3D reconstruction. Code: https://github.com/AIGeeksGroup/Lite3R. Website: https://aigeeksgroup.github.io/Lite3R.",
-          "likes": 0,
+          "likes": 1,
           "arxiv_url": "https://arxiv.org/abs/2605.11354",
           "pdf_url": "https://arxiv.org/pdf/2605.11354",
           "hf_url": "https://huggingface.co/papers/2605.11354",
@@ -3781,35 +3848,8 @@
           "published": "2026-05-12T00:00:00.000Z"
         }
       ]
-    },
-    {
-      "keyword": "video generation",
-      "score": 3.9,
-      "paper_count": 2,
-      "papers": [
-        {
-          "id": "2605.12496",
-          "title": "CausalCine: Real-Time Autoregressive Generation for Multi-Shot Video Narratives",
-          "abstract": "Autoregressive video generation aims at real-time, open-ended synthesis. Yet, cinematic storytelling is not merely the endless extension of a single scene; it requires progressing through evolving events, viewpoint shifts, and discrete shot boundaries. Existing autoregressive models often struggle in this setting. Trained primarily for short-horizon continuation, they treat long sequences as extended single shots, inevitably suffering from motion stagnation and semantic drift during long rollouts. To bridge this gap, we introduce CausalCine, an interactive autoregressive framework that transforms multi-shot video generation into an online directing process. CausalCine generates causally across shot changes, accepts dynamic prompts on the fly, and reuses context without regenerating previous shots. To achieve this, we first train a causal base model on native multi-shot sequences to learn complex shot transitions prior to acceleration. We then propose Content-Aware Memory Routing (CAMR), which dynamically retrieves historical KV entries according to attention-based relevance scores rather than temporal proximity, preserving cross-shot coherence under bounded active memory. Finally, we distill the causal base model into a few-step generator for real-time interactive generation. Extensive experiments demonstrate that CausalCine significantly outperforms autoregressive baselines and approaches the capability of bidirectional models while unlocking the streaming interactivity of causal generation. Demo available at https://yihao-meng.github.io/CausalCine/",
-          "likes": 12,
-          "arxiv_url": "https://arxiv.org/abs/2605.12496",
-          "pdf_url": "https://arxiv.org/pdf/2605.12496",
-          "hf_url": "https://huggingface.co/papers/2605.12496",
-          "published": "2026-05-12T00:00:00.000Z"
-        },
-        {
-          "id": "2605.00080",
-          "title": "World Model for Robot Learning: A Comprehensive Survey",
-          "abstract": "World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanced rapidly with the rise of foundation models and large-scale video generation. However, the literature remains fragmented across architectures, functional roles, and embodied application domains. To address this gap, we present a comprehensive review of world models from a robot-learning perspective. We examine how world models are coupled with robot policies, how they serve as learned simulators for reinforcement learning and evaluation, and how robotic video world models have progressed from imagination-based generation to controllable, structured, and foundation-scale formulations. We further connect these ideas to navigation and autonomous driving, and summarize representative datasets, benchmarks, and evaluation protocols. Overall, this survey systematically reviews the rapidly growing literature on world models for robot learning, clarifies key paradigms and applications, and highlights major challenges and future directions for predictive modeling in embodied agents. To facilitate continued access to newly emerging works, benchmarks, and resources, we will maintain and regularly update the accompanying GitHub repository alongside this survey.",
-          "likes": 6,
-          "arxiv_url": "https://arxiv.org/abs/2605.00080",
-          "pdf_url": "https://arxiv.org/pdf/2605.00080",
-          "hf_url": "https://huggingface.co/papers/2605.00080",
-          "published": "2026-04-30T00:00:00.000Z"
-        }
-      ]
     }
   ],
   "pwc": [],
-  "collected_at": "2026-05-13T04:58:46.135048"
+  "collected_at": "2026-05-13T05:39:15.619537"
 }
