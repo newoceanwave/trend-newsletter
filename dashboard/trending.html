@@ -521,7 +521,7 @@ body {
             <div class="trend-row-right">
               <span class="trend-source-mini">A 100</span><span class="trend-source-mini">H 67</span><span class="trend-source-mini">P 0</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 100%"></span></span>
-              <button class="kw-register" data-kw="llm" title="내 키워드에 추가">＋</button>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -620,7 +620,7 @@ body {
             <div class="trend-row-right">
               <span class="trend-source-mini">A 53</span><span class="trend-source-mini">H 100</span><span class="trend-source-mini">P 0</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 91%"></span></span>
-              <button class="kw-register" data-kw="agent" title="내 키워드에 추가">＋</button>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -700,7 +700,7 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.10899" target="_blank" class="trend-paper-title">RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 24</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 25</span>
           
           <p class="trend-paper-abs">Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their traj...</p>
           
@@ -776,14 +776,14 @@ body {
         <div class="trend-paper">
           <a href="http://arxiv.org/abs/2605.12421v1" target="_blank" class="trend-paper-title">Formalize, Don't Optimize: The Heuristic Trap in LLM-Generated Combinatorial Solvers</a>
           
-          
+          <div class="trend-paper-title-ko">형식화하라, 최적화하지 마라: LLM 생성 조합형 솔버에서의 휴리스틱 함정</div>
           <p class="trend-paper-abs">Large Language Models (LLMs) struggle to solve complex combinatorial problems through direct reasoning, so recent neuro-symbolic systems increasingly use them to synthesize executable solvers. A central design question is how the LLM should...</p>
-          
+          <p class="trend-paper-abs-ko">LLM(Large Language Models)은 직접적인 추론을 통해 복잡한 combinatorial 문제를 해결하는 데 어려움을 겪으므로, 최근의 neuro-symbolic 시스템들은 실행 가능한 솔버를 합성하기 위해 LLM을 점점 더 많이 사용하고 있습니다. 핵심 설계 질문은 LLM이 솔버를 어떻게 표현해야 하는지, 그리고 탐색(search)을 최적화하려고 시도해야 하는지 여부입니다. 우리는 100개의 combinatorial 문제(4,577개 인스턴스)로 구성된 벤치마크인 CP-SynC-XL을 소개하고, 세 가지 솔버 구축 패러다임을 평가합니다: 네이티브 알고리즘 탐색(Python), Python 솔버 API를 통한 제약 조건 모델링(Python + OR-Tools), 그리고 선언형 제약 조건 모델링(MiniZinc + OR-Tools). 우리는 일관된 표현적 divergence를 발견했습니다: Python + OR-Tools는 LLM 전반에 걸쳐 가장 높은 정확성을 달성한 반면, MiniZinc + OR-Tools는 동일한 OR-Tools back-end를 사용함에도 불구하고 더 낮은 절대 coverage를 보였습니다. 네이티브 Python은 검증에 실패하는 schema-valid 솔루션을 반환할 가능성이 가장 높으며, 반면 솔버 지원 경로는 더 높은 conditional fidelity를 유지합니다. 휴리스틱 축에서, 탐색 최적화를 위한 프롬프팅은 단지 작은 중앙값 speed-up (1.03-1.12배)과 강력한 이봉 효과(bimodal effect)를 산출합니다: 많은 인스턴스가 느려지고, 긴 꼬리 문제에 대한 정확성은 급격히 떨어집니다.</p>
         </div>
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12500" target="_blank" class="trend-paper-title">SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 54</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 56</span>
           
           <p class="trend-paper-abs">Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned re...</p>
           
@@ -890,7 +890,7 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12500" target="_blank" class="trend-paper-title">SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 54</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 56</span>
           
           <p class="trend-paper-abs">Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned re...</p>
           
@@ -915,9 +915,9 @@ body {
               <span class="trend-kw">evaluation</span>
             </div>
             <div class="trend-row-right">
-              <span class="trend-source-mini">A 42</span><span class="trend-source-mini">H 49</span><span class="trend-source-mini">P 0</span>
+              <span class="trend-source-mini">A 42</span><span class="trend-source-mini">H 50</span><span class="trend-source-mini">P 0</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 55%"></span></span>
-              <button class="kw-register" data-kw="evaluation" title="내 키워드에 추가">＋</button>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -1015,7 +1015,7 @@ body {
             </div>
             <div class="trend-row-right">
               <span class="trend-source-mini">A 40</span><span class="trend-source-mini">H 48</span><span class="trend-source-mini">P 0</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 53%"></span></span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 52%"></span></span>
               <button class="kw-register" data-kw="benchmark" title="내 키워드에 추가">＋</button>
               <span class="trend-toggle">▾</span>
             </div>
@@ -1041,9 +1041,9 @@ body {
         <div class="trend-paper">
           <a href="http://arxiv.org/abs/2605.12421v1" target="_blank" class="trend-paper-title">Formalize, Don't Optimize: The Heuristic Trap in LLM-Generated Combinatorial Solvers</a>
           
-          
+          <div class="trend-paper-title-ko">형식화하라, 최적화하지 마라: LLM 생성 조합형 솔버에서의 휴리스틱 함정</div>
           <p class="trend-paper-abs">Large Language Models (LLMs) struggle to solve complex combinatorial problems through direct reasoning, so recent neuro-symbolic systems increasingly use them to synthesize executable solvers. A central design question is how the LLM should...</p>
-          
+          <p class="trend-paper-abs-ko">LLM(Large Language Models)은 직접적인 추론을 통해 복잡한 combinatorial 문제를 해결하는 데 어려움을 겪으므로, 최근의 neuro-symbolic 시스템들은 실행 가능한 솔버를 합성하기 위해 LLM을 점점 더 많이 사용하고 있습니다. 핵심 설계 질문은 LLM이 솔버를 어떻게 표현해야 하는지, 그리고 탐색(search)을 최적화하려고 시도해야 하는지 여부입니다. 우리는 100개의 combinatorial 문제(4,577개 인스턴스)로 구성된 벤치마크인 CP-SynC-XL을 소개하고, 세 가지 솔버 구축 패러다임을 평가합니다: 네이티브 알고리즘 탐색(Python), Python 솔버 API를 통한 제약 조건 모델링(Python + OR-Tools), 그리고 선언형 제약 조건 모델링(MiniZinc + OR-Tools). 우리는 일관된 표현적 divergence를 발견했습니다: Python + OR-Tools는 LLM 전반에 걸쳐 가장 높은 정확성을 달성한 반면, MiniZinc + OR-Tools는 동일한 OR-Tools back-end를 사용함에도 불구하고 더 낮은 절대 coverage를 보였습니다. 네이티브 Python은 검증에 실패하는 schema-valid 솔루션을 반환할 가능성이 가장 높으며, 반면 솔버 지원 경로는 더 높은 conditional fidelity를 유지합니다. 휴리스틱 축에서, 탐색 최적화를 위한 프롬프팅은 단지 작은 중앙값 speed-up (1.03-1.12배)과 강력한 이봉 효과(bimodal effect)를 산출합니다: 많은 인스턴스가 느려지고, 긴 꼬리 문제에 대한 정확성은 급격히 떨어집니다.</p>
         </div>
         
         <div class="trend-paper">
@@ -1113,7 +1113,7 @@ body {
               <span class="trend-kw">reinforcement learning</span>
             </div>
             <div class="trend-row-right">
-              <span class="trend-source-mini">A 36</span><span class="trend-source-mini">H 46</span><span class="trend-source-mini">P 0</span>
+              <span class="trend-source-mini">A 36</span><span class="trend-source-mini">H 45</span><span class="trend-source-mini">P 0</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 49%"></span></span>
               <button class="kw-register" data-kw="reinforcement learning" title="내 키워드에 추가">＋</button>
               <span class="trend-toggle">▾</span>
@@ -1195,7 +1195,7 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.10899" target="_blank" class="trend-paper-title">RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 24</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 25</span>
           
           <p class="trend-paper-abs">Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their traj...</p>
           
@@ -1468,7 +1468,7 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12013" target="_blank" class="trend-paper-title">L2P: Unlocking Latent Potential for Pixel Generation</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 7</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 8</span>
           
           <p class="trend-paper-abs">Pixel diffusion models have recently regained attention for visual generation. However, training advanced pixel-space models from scratch demands prohibitive computational and data resources. To address this, we propose the Latent-to-Pixel ...</p>
           
@@ -1707,8 +1707,8 @@ body {
               <span class="trend-kw">world model</span>
             </div>
             <div class="trend-row-right">
-              <span class="trend-source-mini">A 0</span><span class="trend-source-mini">H 40</span><span class="trend-source-mini">P 0</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 24%"></span></span>
+              <span class="trend-source-mini">A 0</span><span class="trend-source-mini">H 42</span><span class="trend-source-mini">P 0</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 25%"></span></span>
               <button class="kw-register" data-kw="world model" title="내 키워드에 추가">＋</button>
               <span class="trend-toggle">▾</span>
             </div>
@@ -1717,9 +1717,17 @@ body {
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12500" target="_blank" class="trend-paper-title">SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 54</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 56</span>
           
           <p class="trend-paper-abs">Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned re...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 12</span>
+          
+          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
           
         </div>
         
@@ -1736,14 +1744,6 @@ body {
           <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 7</span>
           
           <p class="trend-paper-abs">World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanc...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 3</span>
-          
-          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
           
         </div>
         
@@ -1854,6 +1854,49 @@ body {
             <div class="trend-row-left">
               <span class="trend-rank">15</span>
               
+              <span class="trend-kw">embodied</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-source-mini">A 0</span><span class="trend-source-mini">H 27</span><span class="trend-source-mini">P 0</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 16%"></span></span>
+              <button class="kw-register" data-kw="embodied" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-agg-14">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 12</span>
+          
+          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.00080" target="_blank" class="trend-paper-title">World Model for Robot Learning: A Comprehensive Survey</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 7</span>
+          
+          <p class="trend-paper-abs">World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanc...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 6</span>
+          
+          <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
+          
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-agg-15">
+            <div class="trend-row-left">
+              <span class="trend-rank">16</span>
+              
               <span class="trend-kw">large language model</span>
             </div>
             <div class="trend-row-right">
@@ -1863,7 +1906,7 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-agg-14">
+          <div class="trend-papers" id="papers-agg-15">
             
         <div class="trend-paper">
           <a href="http://arxiv.org/abs/2605.12492v1" target="_blank" class="trend-paper-title">Pion: A Spectrum-Preserving Optimizer via Orthogonal Equivalence Transformation</a>
@@ -1949,9 +1992,9 @@ body {
         </div>
         
         <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-agg-15">
+          <div class="trend-row-head" data-target="papers-agg-16">
             <div class="trend-row-left">
-              <span class="trend-rank">16</span>
+              <span class="trend-rank">17</span>
               
               <span class="trend-kw">privacy</span>
             </div>
@@ -1962,7 +2005,7 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-agg-15">
+          <div class="trend-papers" id="papers-agg-16">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.09530" target="_blank" class="trend-paper-title">MemPrivacy: Privacy-Preserving Personalized Memory Management for Edge-Cloud Agents</a>
@@ -1976,9 +2019,9 @@ body {
         </div>
         
         <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-agg-16">
+          <div class="trend-row-head" data-target="papers-agg-17">
             <div class="trend-row-left">
-              <span class="trend-rank">17</span>
+              <span class="trend-rank">18</span>
               
               <span class="trend-kw">planning</span>
             </div>
@@ -1989,11 +2032,11 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-agg-16">
+          <div class="trend-papers" id="papers-agg-17">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.10899" target="_blank" class="trend-paper-title">RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 24</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 25</span>
           
           <p class="trend-paper-abs">Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their traj...</p>
           
@@ -2025,52 +2068,9 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 6</span>
           
           <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
-          
-        </div>
-        
-          </div>
-        </div>
-        
-        <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-agg-17">
-            <div class="trend-row-left">
-              <span class="trend-rank">18</span>
-              
-              <span class="trend-kw">embodied</span>
-            </div>
-            <div class="trend-row-right">
-              <span class="trend-source-mini">A 0</span><span class="trend-source-mini">H 21</span><span class="trend-source-mini">P 0</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 15%"></span></span>
-              <button class="kw-register" data-kw="embodied" title="내 키워드에 추가">＋</button>
-              <span class="trend-toggle">▾</span>
-            </div>
-          </div>
-          <div class="trend-papers" id="papers-agg-17">
-            
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.00080" target="_blank" class="trend-paper-title">World Model for Robot Learning: A Comprehensive Survey</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 7</span>
-          
-          <p class="trend-paper-abs">World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanc...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
-          
-          <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 3</span>
-          
-          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
           
         </div>
         
@@ -2103,7 +2103,7 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 6</span>
           
           <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
           
@@ -2229,7 +2229,7 @@ body {
             <div class="trend-row-right">
               <span class="trend-count">135편</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 100%"></span></span>
-              <button class="kw-register" data-kw="llm" title="내 키워드에 추가">＋</button>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -2409,9 +2409,9 @@ body {
         <div class="trend-paper">
           <a href="http://arxiv.org/abs/2605.12421v1" target="_blank" class="trend-paper-title">Formalize, Don't Optimize: The Heuristic Trap in LLM-Generated Combinatorial Solvers</a>
           
-          
+          <div class="trend-paper-title-ko">형식화하라, 최적화하지 마라: LLM 생성 조합형 솔버에서의 휴리스틱 함정</div>
           <p class="trend-paper-abs">Large Language Models (LLMs) struggle to solve complex combinatorial problems through direct reasoning, so recent neuro-symbolic systems increasingly use them to synthesize executable solvers. A central design question is how the LLM should...</p>
-          
+          <p class="trend-paper-abs-ko">LLM(Large Language Models)은 직접적인 추론을 통해 복잡한 combinatorial 문제를 해결하는 데 어려움을 겪으므로, 최근의 neuro-symbolic 시스템들은 실행 가능한 솔버를 합성하기 위해 LLM을 점점 더 많이 사용하고 있습니다. 핵심 설계 질문은 LLM이 솔버를 어떻게 표현해야 하는지, 그리고 탐색(search)을 최적화하려고 시도해야 하는지 여부입니다. 우리는 100개의 combinatorial 문제(4,577개 인스턴스)로 구성된 벤치마크인 CP-SynC-XL을 소개하고, 세 가지 솔버 구축 패러다임을 평가합니다: 네이티브 알고리즘 탐색(Python), Python 솔버 API를 통한 제약 조건 모델링(Python + OR-Tools), 그리고 선언형 제약 조건 모델링(MiniZinc + OR-Tools). 우리는 일관된 표현적 divergence를 발견했습니다: Python + OR-Tools는 LLM 전반에 걸쳐 가장 높은 정확성을 달성한 반면, MiniZinc + OR-Tools는 동일한 OR-Tools back-end를 사용함에도 불구하고 더 낮은 절대 coverage를 보였습니다. 네이티브 Python은 검증에 실패하는 schema-valid 솔루션을 반환할 가능성이 가장 높으며, 반면 솔버 지원 경로는 더 높은 conditional fidelity를 유지합니다. 휴리스틱 축에서, 탐색 최적화를 위한 프롬프팅은 단지 작은 중앙값 speed-up (1.03-1.12배)과 강력한 이봉 효과(bimodal effect)를 산출합니다: 많은 인스턴스가 느려지고, 긴 꼬리 문제에 대한 정확성은 급격히 떨어집니다.</p>
         </div>
         
           </div>
@@ -2427,7 +2427,7 @@ body {
             <div class="trend-row-right">
               <span class="trend-count">74편</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 53%"></span></span>
-              <button class="kw-register" data-kw="agent" title="내 키워드에 추가">＋</button>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -2526,7 +2526,7 @@ body {
             <div class="trend-row-right">
               <span class="trend-count">86편</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 42%"></span></span>
-              <button class="kw-register" data-kw="evaluation" title="내 키워드에 추가">＋</button>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -2658,9 +2658,9 @@ body {
         <div class="trend-paper">
           <a href="http://arxiv.org/abs/2605.12421v1" target="_blank" class="trend-paper-title">Formalize, Don't Optimize: The Heuristic Trap in LLM-Generated Combinatorial Solvers</a>
           
-          
+          <div class="trend-paper-title-ko">형식화하라, 최적화하지 마라: LLM 생성 조합형 솔버에서의 휴리스틱 함정</div>
           <p class="trend-paper-abs">Large Language Models (LLMs) struggle to solve complex combinatorial problems through direct reasoning, so recent neuro-symbolic systems increasingly use them to synthesize executable solvers. A central design question is how the LLM should...</p>
-          
+          <p class="trend-paper-abs-ko">LLM(Large Language Models)은 직접적인 추론을 통해 복잡한 combinatorial 문제를 해결하는 데 어려움을 겪으므로, 최근의 neuro-symbolic 시스템들은 실행 가능한 솔버를 합성하기 위해 LLM을 점점 더 많이 사용하고 있습니다. 핵심 설계 질문은 LLM이 솔버를 어떻게 표현해야 하는지, 그리고 탐색(search)을 최적화하려고 시도해야 하는지 여부입니다. 우리는 100개의 combinatorial 문제(4,577개 인스턴스)로 구성된 벤치마크인 CP-SynC-XL을 소개하고, 세 가지 솔버 구축 패러다임을 평가합니다: 네이티브 알고리즘 탐색(Python), Python 솔버 API를 통한 제약 조건 모델링(Python + OR-Tools), 그리고 선언형 제약 조건 모델링(MiniZinc + OR-Tools). 우리는 일관된 표현적 divergence를 발견했습니다: Python + OR-Tools는 LLM 전반에 걸쳐 가장 높은 정확성을 달성한 반면, MiniZinc + OR-Tools는 동일한 OR-Tools back-end를 사용함에도 불구하고 더 낮은 절대 coverage를 보였습니다. 네이티브 Python은 검증에 실패하는 schema-valid 솔루션을 반환할 가능성이 가장 높으며, 반면 솔버 지원 경로는 더 높은 conditional fidelity를 유지합니다. 휴리스틱 축에서, 탐색 최적화를 위한 프롬프팅은 단지 작은 중앙값 speed-up (1.03-1.12배)과 강력한 이봉 효과(bimodal effect)를 산출합니다: 많은 인스턴스가 느려지고, 긴 꼬리 문제에 대한 정확성은 급격히 떨어집니다.</p>
         </div>
         
         <div class="trend-paper">
@@ -4217,7 +4217,7 @@ body {
             <div class="trend-row-right">
               <span class="trend-count">14편</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 100%"></span></span>
-              <button class="kw-register" data-kw="agent" title="내 키워드에 추가">＋</button>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -4233,7 +4233,7 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.10899" target="_blank" class="trend-paper-title">RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 24</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 25</span>
           
           <p class="trend-paper-abs">Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their traj...</p>
           
@@ -4264,6 +4264,14 @@ body {
         </div>
         
         <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 6</span>
+          
+          <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.10365" target="_blank" class="trend-paper-title">Agent-ValueBench: A Comprehensive Benchmark for Evaluating Agent Values</a>
           <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 6</span>
           
@@ -4276,14 +4284,6 @@ body {
           <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
           
           <p class="trend-paper-abs">LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity updates, MEME defines six tasks spanning th...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
-          
-          <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
           
         </div>
         
@@ -4315,7 +4315,7 @@ body {
             </div>
             <div class="trend-row-right">
               <span class="trend-count">6편</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 83%"></span></span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 84%"></span></span>
               <button class="kw-register" data-kw="multimodal" title="내 키워드에 추가">＋</button>
               <span class="trend-toggle">▾</span>
             </div>
@@ -4324,7 +4324,7 @@ body {
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12500" target="_blank" class="trend-paper-title">SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 54</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 56</span>
           
           <p class="trend-paper-abs">Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned re...</p>
           
@@ -4391,7 +4391,7 @@ body {
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12500" target="_blank" class="trend-paper-title">SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 54</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 56</span>
           
           <p class="trend-paper-abs">Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned re...</p>
           
@@ -4482,7 +4482,7 @@ body {
             <div class="trend-row-right">
               <span class="trend-count">10편</span>
               <span class="trend-bar"><span class="trend-bar-fill" style="width: 67%"></span></span>
-              <button class="kw-register" data-kw="llm" title="내 키워드에 추가">＋</button>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -4580,8 +4580,8 @@ body {
             </div>
             <div class="trend-row-right">
               <span class="trend-count">11편</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 49%"></span></span>
-              <button class="kw-register" data-kw="evaluation" title="내 키워드에 추가">＋</button>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 50%"></span></span>
+              <span class="kw-registered" title="이미 등록됨">✓</span>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
@@ -4600,6 +4600,14 @@ body {
           <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 14</span>
           
           <p class="trend-paper-abs">World models enable agents to anticipate the effects of their actions by internalizing environment dynamics. In enterprise systems, however, these dynamics are often defined by tenant-specific business logic that varies across deployments a...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 12</span>
+          
+          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
           
         </div>
         
@@ -4632,14 +4640,6 @@ body {
           <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
           
           <p class="trend-paper-abs">LLM-based agents increasingly operate in persistent environments where they must store, update, and reason over information across many sessions. While prior benchmarks evaluate only single-entity updates, MEME defines six tasks spanning th...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 3</span>
-          
-          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
           
         </div>
         
@@ -4771,7 +4771,7 @@ body {
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.10899" target="_blank" class="trend-paper-title">RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 24</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 25</span>
           
           <p class="trend-paper-abs">Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their traj...</p>
           
@@ -4845,7 +4845,7 @@ body {
             </div>
             <div class="trend-row-right">
               <span class="trend-count">4편</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 40%"></span></span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 42%"></span></span>
               <button class="kw-register" data-kw="world model" title="내 키워드에 추가">＋</button>
               <span class="trend-toggle">▾</span>
             </div>
@@ -4854,9 +4854,17 @@ body {
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12500" target="_blank" class="trend-paper-title">SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 54</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 56</span>
           
           <p class="trend-paper-abs">Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned re...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 12</span>
+          
+          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
           
         </div>
         
@@ -4873,14 +4881,6 @@ body {
           <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 7</span>
           
           <p class="trend-paper-abs">World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanc...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 3</span>
-          
-          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
           
         </div>
         
@@ -5018,6 +5018,49 @@ body {
             <div class="trend-row-left">
               <span class="trend-rank">11</span>
               
+              <span class="trend-kw">embodied</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">3편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 27%"></span></span>
+              <button class="kw-register" data-kw="embodied" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-hf-10">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 12</span>
+          
+          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.00080" target="_blank" class="trend-paper-title">World Model for Robot Learning: A Comprehensive Survey</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 7</span>
+          
+          <p class="trend-paper-abs">World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanc...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 6</span>
+          
+          <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
+          
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-hf-11">
+            <div class="trend-row-left">
+              <span class="trend-rank">12</span>
+              
               <span class="trend-kw">diffusion</span>
             </div>
             <div class="trend-row-right">
@@ -5027,11 +5070,11 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-hf-10">
+          <div class="trend-papers" id="papers-hf-11">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12013" target="_blank" class="trend-paper-title">L2P: Unlocking Latent Potential for Pixel Generation</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 7</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 8</span>
           
           <p class="trend-paper-abs">Pixel diffusion models have recently regained attention for visual generation. However, training advanced pixel-space models from scratch demands prohibitive computational and data resources. To address this, we propose the Latent-to-Pixel ...</p>
           
@@ -5081,9 +5124,9 @@ body {
         </div>
         
         <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-hf-11">
+          <div class="trend-row-head" data-target="papers-hf-12">
             <div class="trend-row-left">
-              <span class="trend-rank">12</span>
+              <span class="trend-rank">13</span>
               
               <span class="trend-kw">embedding</span>
             </div>
@@ -5094,7 +5137,7 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-hf-11">
+          <div class="trend-papers" id="papers-hf-12">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.10938" target="_blank" class="trend-paper-title">ELF: Embedded Language Flows</a>
@@ -5132,20 +5175,20 @@ body {
         </div>
         
         <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-hf-12">
+          <div class="trend-row-head" data-target="papers-hf-13">
             <div class="trend-row-left">
-              <span class="trend-rank">13</span>
+              <span class="trend-rank">14</span>
               
               <span class="trend-kw">privacy</span>
             </div>
             <div class="trend-row-right">
               <span class="trend-count">1편</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 24%"></span></span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 23%"></span></span>
               <button class="kw-register" data-kw="privacy" title="내 키워드에 추가">＋</button>
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-hf-12">
+          <div class="trend-papers" id="papers-hf-13">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.09530" target="_blank" class="trend-paper-title">MemPrivacy: Privacy-Preserving Personalized Memory Management for Edge-Cloud Agents</a>
@@ -5159,9 +5202,9 @@ body {
         </div>
         
         <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-hf-13">
+          <div class="trend-row-head" data-target="papers-hf-14">
             <div class="trend-row-left">
-              <span class="trend-rank">14</span>
+              <span class="trend-rank">15</span>
               
               <span class="trend-kw">fine-tuning</span>
             </div>
@@ -5172,7 +5215,7 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-hf-13">
+          <div class="trend-papers" id="papers-hf-14">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12357" target="_blank" class="trend-paper-title">δ-mem: Efficient Online Memory for Large Language Models</a>
@@ -5210,9 +5253,9 @@ body {
         </div>
         
         <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-hf-14">
+          <div class="trend-row-head" data-target="papers-hf-15">
             <div class="trend-row-left">
-              <span class="trend-rank">15</span>
+              <span class="trend-rank">16</span>
               
               <span class="trend-kw">planning</span>
             </div>
@@ -5223,11 +5266,11 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-hf-14">
+          <div class="trend-papers" id="papers-hf-15">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.10899" target="_blank" class="trend-paper-title">RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 24</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 25</span>
           
           <p class="trend-paper-abs">Training deep research agents, namely systems that plan, search, evaluate evidence, and synthesize long-form reports, pushes reinforcement learning beyond the regime of verifiable rewards. Their outputs lack ground-truth answers, their traj...</p>
           
@@ -5259,52 +5302,9 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 6</span>
           
           <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
-          
-        </div>
-        
-          </div>
-        </div>
-        
-        <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-hf-15">
-            <div class="trend-row-left">
-              <span class="trend-rank">16</span>
-              
-              <span class="trend-kw">embodied</span>
-            </div>
-            <div class="trend-row-right">
-              <span class="trend-count">3편</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 21%"></span></span>
-              <button class="kw-register" data-kw="embodied" title="내 키워드에 추가">＋</button>
-              <span class="trend-toggle">▾</span>
-            </div>
-          </div>
-          <div class="trend-papers" id="papers-hf-15">
-            
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.00080" target="_blank" class="trend-paper-title">World Model for Robot Learning: A Comprehensive Survey</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 7</span>
-          
-          <p class="trend-paper-abs">World models, which are predictive representations of how environments evolve under actions, have become a central component of robot learning. They support policy learning, planning, simulation, evaluation, data generation, and have advanc...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
-          
-          <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 3</span>
-          
-          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
           
         </div>
         
@@ -5337,7 +5337,7 @@ body {
         
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.09998" target="_blank" class="trend-paper-title">Continual Harness: Online Adaptation for Self-Improving Foundation Agents</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 5</span>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 6</span>
           
           <p class="trend-paper-abs">Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays P...</p>
           
@@ -5359,6 +5359,41 @@ body {
             <div class="trend-row-left">
               <span class="trend-rank">18</span>
               
+              <span class="trend-kw">vision-language</span>
+            </div>
+            <div class="trend-row-right">
+              <span class="trend-count">2편</span>
+              <span class="trend-bar"><span class="trend-bar-fill" style="width: 15%"></span></span>
+              <button class="kw-register" data-kw="vision-language" title="내 키워드에 추가">＋</button>
+              <span class="trend-toggle">▾</span>
+            </div>
+          </div>
+          <div class="trend-papers" id="papers-hf-17">
+            
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.12500" target="_blank" class="trend-paper-title">SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 56</span>
+          
+          <p class="trend-paper-abs">Recent large vision-language models (VLMs) remain fundamentally constrained by a persistent dichotomy: understanding and generation are treated as distinct problems, leading to fragmented architectures, cascaded pipelines, and misaligned re...</p>
+          
+        </div>
+        
+        <div class="trend-paper">
+          <a href="https://arxiv.org/abs/2605.12090" target="_blank" class="trend-paper-title">World Action Models: The Next Frontier in Embodied AI</a>
+          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 12</span>
+          
+          <p class="trend-paper-abs">Vision-Language-Action (VLA) models have achieved strong semantic generalization for embodied policy learning, yet they learn reactive observation-to-action mappings without explicitly modeling how the physical world evolves under intervent...</p>
+          
+        </div>
+        
+          </div>
+        </div>
+        
+        <div class="trend-row">
+          <div class="trend-row-head" data-target="papers-hf-18">
+            <div class="trend-row-left">
+              <span class="trend-rank">19</span>
+              
               <span class="trend-kw">tool use</span>
             </div>
             <div class="trend-row-right">
@@ -5368,7 +5403,7 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-hf-17">
+          <div class="trend-papers" id="papers-hf-18">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.12481" target="_blank" class="trend-paper-title">ToolCUA: Towards Optimal GUI-Tool Path Orchestration for Computer Use Agents</a>
@@ -5398,9 +5433,9 @@ body {
         </div>
         
         <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-hf-18">
+          <div class="trend-row-head" data-target="papers-hf-19">
             <div class="trend-row-left">
-              <span class="trend-rank">19</span>
+              <span class="trend-rank">20</span>
               
               <span class="trend-kw">large language model</span>
             </div>
@@ -5411,7 +5446,7 @@ body {
               <span class="trend-toggle">▾</span>
             </div>
           </div>
-          <div class="trend-papers" id="papers-hf-18">
+          <div class="trend-papers" id="papers-hf-19">
             
         <div class="trend-paper">
           <a href="https://arxiv.org/abs/2605.06788" target="_blank" class="trend-paper-title">Conformal Agent Error Attribution</a>
@@ -5434,49 +5469,6 @@ body {
           <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 2</span>
           
           <p class="trend-paper-abs">Agent-compiled knowledge bases provide persistent external knowledge for large language model (LLM) agents in open-ended, knowledge-intensive downstream tasks. Yet their quality is systematically limited by incompleteness, incorrectness, an...</p>
-          
-        </div>
-        
-          </div>
-        </div>
-        
-        <div class="trend-row">
-          <div class="trend-row-head" data-target="papers-hf-19">
-            <div class="trend-row-left">
-              <span class="trend-rank">20</span>
-              
-              <span class="trend-kw">transformer</span>
-            </div>
-            <div class="trend-row-right">
-              <span class="trend-count">3편</span>
-              <span class="trend-bar"><span class="trend-bar-fill" style="width: 15%"></span></span>
-              <button class="kw-register" data-kw="transformer" title="내 키워드에 추가">＋</button>
-              <span class="trend-toggle">▾</span>
-            </div>
-          </div>
-          <div class="trend-papers" id="papers-hf-19">
-            
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.09877" target="_blank" class="trend-paper-title">Key-Value Means</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 17</span>
-          
-          <p class="trend-paper-abs">We present Key-Value Means ("KVM"), a novel block-recurrence for attention that can accommodate either fixed-size or growing state. Equipping a strong transformer baseline with fixed-size KVM attention layers yields a strong O(N) chunked RN...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.11354" target="_blank" class="trend-paper-title">Lite3R: A Model-Agnostic Framework for Efficient Feed-Forward 3D Reconstruction</a>
-          <span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 1</span>
-          
-          <p class="trend-paper-abs">Transformer-based 3D reconstruction has emerged as a powerful paradigm for recovering geometry and appearance from multi-view observations, offering strong performance across challenging visual conditions. As these models scale to larger ba...</p>
-          
-        </div>
-        
-        <div class="trend-paper">
-          <a href="https://arxiv.org/abs/2605.12426" target="_blank" class="trend-paper-title">Geometric Factual Recall in Transformers</a>
-          
-          
-          <p class="trend-paper-abs">How do transformer language models memorize factual associations? A common view casts internal weight matrices as associative memories over pairs of embeddings, requiring parameter counts that scale linearly with the number of facts. We dev...</p>
           
         </div>
         
@@ -5507,7 +5499,7 @@ body {
   <script>
     (function() {
       const STORAGE_KEY = 'trend_newsletter_keywords';
-      const INITIAL_KEYWORDS = ["graph neural network", "recommender system", "retrieval augmented generation", "RAG", "LLM agent", "knowledge graph", "time series", "anomaly detection"];
+      const INITIAL_KEYWORDS = ["data quality", "RAG", "graph neural network", "time series", "graphRAG", "evaluation", "GNN", "llm", "agent", "hello"];
 
       function loadKeywords() {
         try {
