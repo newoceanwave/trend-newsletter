@@ -131,11 +131,12 @@ def main():
     print("🌐 온라인 트렌딩 키워드 수집 중...")
     try:
         from trending import load_previous_trending, compute_rank_changes, compute_aggregate_ranking
+        from summarizer import translate_papers
 
         trending = collect_trending(categories)
         save_trending(trending, "trending.json", archive_dir="trending-archive")
 
-        # 시계열 변화 계산 (어제 데이터 있으면)
+        # 시계열 변화 계산
         previous = load_previous_trending(archive_dir="trending-archive", days_ago=1)
         rank_changes = compute_rank_changes(trending, previous) if previous else None
         if previous:
@@ -144,6 +145,50 @@ def main():
         # 통합 ranking
         aggregate = compute_aggregate_ranking(trending, top_n=20)
         print(f"  ✓ 종합 ranking 생성 ({len(aggregate)}개 키워드)")
+
+        # 트렌딩 펼침 논문 번역 (제목 + abstract)
+        print(f"  📝 트렌딩 논문 번역 중...")
+        all_trending_papers = []
+        seen_ids = set()
+        for src in ("arxiv", "hf", "pwc"):
+            for kw_data in trending.get(src, []):
+                for p in kw_data.get("papers", []):
+                    pid = p.get("id") or p.get("arxiv_url", "")
+                    if pid and pid not in seen_ids:
+                        seen_ids.add(pid)
+                        all_trending_papers.append(p)
+        # aggregate에도 추가
+        for kw_data in aggregate or []:
+            for p in kw_data.get("papers", []):
+                pid = p.get("id") or p.get("arxiv_url", "")
+                if pid and pid not in seen_ids:
+                    seen_ids.add(pid)
+                    all_trending_papers.append(p)
+
+        if all_trending_papers:
+            translated = translate_papers(all_trending_papers, model=llm_model, provider=llm_provider)
+            # 번역 결과를 원본 trending에 반영
+            id_to_translation = {}
+            for p in translated:
+                pid = p.get("id") or p.get("arxiv_url", "")
+                if pid:
+                    id_to_translation[pid] = {
+                        "title_ko": p.get("title_ko", ""),
+                        "abstract_ko": p.get("abstract_ko", ""),
+                    }
+            for src in ("arxiv", "hf", "pwc"):
+                for kw_data in trending.get(src, []):
+                    for p in kw_data.get("papers", []):
+                        pid = p.get("id") or p.get("arxiv_url", "")
+                        if pid in id_to_translation:
+                            p["title_ko"] = id_to_translation[pid]["title_ko"]
+                            p["abstract_ko"] = id_to_translation[pid]["abstract_ko"]
+            for kw_data in aggregate or []:
+                for p in kw_data.get("papers", []):
+                    pid = p.get("id") or p.get("arxiv_url", "")
+                    if pid in id_to_translation:
+                        p["title_ko"] = id_to_translation[pid]["title_ko"]
+                        p["abstract_ko"] = id_to_translation[pid]["abstract_ko"]
 
         save_trending_page(trending, today, output_dir,
                            rank_changes=rank_changes,

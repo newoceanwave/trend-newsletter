@@ -349,7 +349,7 @@ def _format_paper_card(paper: Dict, rank: int) -> str:
     for kw in matched[:3]:
         tags_html += f'<span class="tag matched">{kw}</span>'
     if likes > 0:
-        tags_html += f'<span class="tag trending">🔥 {likes} likes</span>'
+        tags_html += f'<span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수 — ML 연구자들의 큐레이션 신호">🔥 HF {likes}</span>'
     for cat in categories[:2]:
         tags_html += f'<span class="tag">{cat}</span>'
 
@@ -381,6 +381,8 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
   const INITIAL_KEYWORDS = {initial_json};
   const SUGGESTED_KEYWORDS = {suggested_json};
   const STORAGE_KEY = 'trend_newsletter_keywords';
+  const PAT_KEY = 'trend_newsletter_github_pat';
+  const REPO_KEY = 'trend_newsletter_repo';  // "username/reponame"
 
   function loadKeywords() {{
     try {{
@@ -401,6 +403,114 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
     const a = keywords.slice().sort().join('|');
     const b = INITIAL_KEYWORDS.slice().sort().join('|');
     return a !== b;
+  }}
+
+  async function commitToGitHub() {{
+    const pat = localStorage.getItem(PAT_KEY);
+    const repo = localStorage.getItem(REPO_KEY);
+
+    if (!pat || !repo) {{
+      const wantSetup = confirm('GitHub API 자동 commit을 설정하시겠어요?\\n\\nGitHub Personal Access Token을 한 번만 등록하면, 이후 키워드 추가/제거가 즉시 적용됩니다.\\n\\n계속하시려면 OK, 다운로드로 돌아가려면 Cancel.');
+      if (!wantSetup) {{
+        downloadKeywords();
+        return;
+      }}
+      const repoInput = prompt('GitHub repo 입력 (형식: 사용자명/repo명)\\n예: newoceanwave/trend-newsletter');
+      if (!repoInput) return;
+      const patInput = prompt('GitHub Personal Access Token (ghp_... 또는 github_pat_...)\\n\\n생성: https://github.com/settings/tokens?type=beta\\n권한: Contents - Read and write (해당 repo만)');
+      if (!patInput) return;
+      localStorage.setItem(REPO_KEY, repoInput);
+      localStorage.setItem(PAT_KEY, patInput);
+      alert('설정 완료! 다시 시도합니다.');
+      return commitToGitHub();
+    }}
+
+    const btn = document.getElementById('save-btn');
+    btn.disabled = true;
+    btn.textContent = '커밋 중...';
+
+    try {{
+      const newContent = JSON.stringify({{
+        keywords: keywords,
+        updated_at: new Date().toISOString().split('T')[0]
+      }}, null, 2);
+
+      // 1. 기존 파일 sha 가져오기 (있으면)
+      let sha = null;
+      try {{
+        const getResp = await fetch(`https://api.github.com/repos/${{repo}}/contents/keywords.json`, {{
+          headers: {{ 'Authorization': `Bearer ${{pat}}`, 'Accept': 'application/vnd.github+json' }}
+        }});
+        if (getResp.ok) {{
+          const data = await getResp.json();
+          sha = data.sha;
+        }}
+      }} catch (e) {{}}
+
+      // 2. PUT (생성 또는 업데이트)
+      const putBody = {{
+        message: `Update keywords (${{keywords.length}} keywords)`,
+        content: btoa(unescape(encodeURIComponent(newContent))),
+      }};
+      if (sha) putBody.sha = sha;
+
+      const putResp = await fetch(`https://api.github.com/repos/${{repo}}/contents/keywords.json`, {{
+        method: 'PUT',
+        headers: {{
+          'Authorization': `Bearer ${{pat}}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        }},
+        body: JSON.stringify(putBody)
+      }});
+
+      if (!putResp.ok) {{
+        const err = await putResp.json();
+        throw new Error(err.message || 'API 호출 실패');
+      }}
+
+      // 3. workflow_dispatch 트리거 (즉시 실행)
+      const triggerResp = await fetch(`https://api.github.com/repos/${{repo}}/actions/workflows/daily.yml/dispatches`, {{
+        method: 'POST',
+        headers: {{
+          'Authorization': `Bearer ${{pat}}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        }},
+        body: JSON.stringify({{ ref: 'main' }})
+      }});
+
+      if (triggerResp.ok) {{
+        alert('✅ 키워드 업데이트 완료!\\n\\nGitHub Actions가 자동 실행됩니다 (2-3분 후 새 데이터 반영). Actions 탭에서 진행 확인 가능.');
+      }} else {{
+        alert('✅ keywords.json 업데이트 완료!\\n\\n⚠️ 자동 실행 실패. Actions 탭에서 수동으로 "Run workflow" 클릭하세요.');
+      }}
+
+      // INITIAL_KEYWORDS 업데이트해서 dirty 상태 해제
+      INITIAL_KEYWORDS.length = 0;
+      INITIAL_KEYWORDS.push(...keywords);
+      render();
+    }} catch (e) {{
+      alert('❌ 실패: ' + e.message + '\\n\\n토큰 권한 확인하거나, 파일로 다운로드 후 수동 업로드해주세요.');
+      console.error(e);
+    }} finally {{
+      btn.disabled = false;
+      btn.textContent = '키워드 즉시 적용';
+    }}
+  }}
+
+  function downloadKeywords() {{
+    const data = {{
+      keywords: keywords,
+      updated_at: new Date().toISOString().split('T')[0]
+    }};
+    const blob = new Blob([JSON.stringify(data, null, 2)], {{ type: 'application/json' }});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'keywords.json';
+    a.click();
+    URL.revokeObjectURL(url);
   }}
 
   function render() {{
@@ -463,7 +573,7 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
 
     if (isDirty()) {{
       saveBar.classList.add('dirty');
-      dirtyMsg.textContent = '변경됨 — 다운로드해서 repo에 업로드하세요';
+      dirtyMsg.textContent = '변경됨 — 즉시 적용 또는 다운로드';
       saveBtn.disabled = false;
     }} else {{
       saveBar.classList.remove('dirty');
@@ -513,20 +623,6 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
     input.focus();
   }}
 
-  function downloadKeywords() {{
-    const data = {{
-      keywords: keywords,
-      updated_at: new Date().toISOString().split('T')[0]
-    }};
-    const blob = new Blob([JSON.stringify(data, null, 2)], {{ type: 'application/json' }});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'keywords.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  }}
-
   function clearFilters() {{
     activeFilters.clear();
     render();
@@ -538,7 +634,8 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str]) -
     document.getElementById('kw-input').addEventListener('keydown', (e) => {{
       if (e.key === 'Enter') addKeyword();
     }});
-    document.getElementById('save-btn').addEventListener('click', downloadKeywords);
+    document.getElementById('save-btn').addEventListener('click', commitToGitHub);
+    document.getElementById('save-btn-download').addEventListener('click', downloadKeywords);
     document.getElementById('filter-clear').addEventListener('click', clearFilters);
     render();
   }});
@@ -599,10 +696,13 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
 
       <div class="save-bar" id="save-bar">
         <span id="dirty-msg">변경 없음</span>
-        <button class="save-btn" id="save-btn" disabled>keywords.json 다운로드</button>
+        <div style="display:flex;gap:6px">
+          <button class="save-btn" id="save-btn-download" title="파일로 다운로드 (수동 업로드)">📥 파일</button>
+          <button class="save-btn" id="save-btn" disabled style="background:#3182f6;color:#fff;border-color:#3182f6">키워드 즉시 적용</button>
+        </div>
       </div>
       <div class="save-help">
-        다운로드한 <code>keywords.json</code>을 GitHub repo 루트에 업로드(또는 덮어쓰기)하면 다음 실행부터 적용됩니다.
+        <strong>즉시 적용</strong>: GitHub API로 자동 commit + workflow 실행 (PAT 1회 등록). <strong>파일</strong>: 수동 업로드용 다운로드.
       </div>
     </div>
 
@@ -700,17 +800,26 @@ def generate_trending_html(trending: Dict, date_str: str,
 
     def format_paper(p):
         title = p.get("title", "").replace("<", "&lt;").replace(">", "&gt;")
+        title_ko = p.get("title_ko", "").replace("<", "&lt;").replace(">", "&gt;")
         abs_text = p.get("abstract", "")[:240].replace("<", "&lt;").replace(">", "&gt;")
         if len(p.get("abstract", "")) > 240:
             abs_text += "..."
+        abstract_ko = p.get("abstract_ko", "").replace("<", "&lt;").replace(">", "&gt;")
         arxiv_url = p.get("arxiv_url", "#")
         likes = p.get("likes", 0)
-        likes_badge = f'<span class="paper-likes">🔥 {likes}</span>' if likes > 0 else ""
+        likes_badge = f'<span class="paper-likes" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF {likes}</span>' if likes > 0 else ""
+
+        # 한국어 번역이 있으면 함께 표시
+        title_ko_html = f'<div class="trend-paper-title-ko">{title_ko}</div>' if title_ko else ""
+        abstract_ko_html = f'<p class="trend-paper-abs-ko">{abstract_ko}</p>' if abstract_ko else ""
+
         return f"""
         <div class="trend-paper">
           <a href="{arxiv_url}" target="_blank" class="trend-paper-title">{title}</a>
           {likes_badge}
+          {title_ko_html}
           <p class="trend-paper-abs">{abs_text}</p>
+          {abstract_ko_html}
         </div>
         """
 
@@ -872,8 +981,24 @@ def generate_trending_html(trending: Dict, date_str: str,
     .trend-paper { padding: 12px 20px 14px; border-top: 1px solid #f2f4f6; }
     .trend-paper-title { font-size: 14px; font-weight: 600; color: #191f28; text-decoration: none; display: inline-block; margin-bottom: 6px; }
     .trend-paper-title:hover { color: #3182f6; }
+    .trend-paper-title-ko {
+      font-size: 13px;
+      color: #3182f6;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
     .paper-likes { display: inline-block; background: #fff5e0; color: #c08401; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 500; margin-left: 8px; vertical-align: middle; }
     .trend-paper-abs { font-size: 13px; color: #4e5968; line-height: 1.6; margin: 0; }
+    .trend-paper-abs-ko {
+      font-size: 13px;
+      color: #6b7684;
+      line-height: 1.6;
+      margin: 6px 0 0 0;
+      padding: 8px 12px;
+      background: #f2f4f6;
+      border-radius: 8px;
+    }
     .change-up { color: #f04452; font-size: 11px; font-weight: 600; }
     .change-down { color: #3182f6; font-size: 11px; font-weight: 600; }
     .change-flat { color: #d1d6db; font-size: 11px; font-weight: 600; }
