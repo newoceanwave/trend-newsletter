@@ -160,3 +160,92 @@ const SHARED_HEADER_CSS = `
   .topbar-username { display: none; }
 }
 `;
+
+// ============================================
+// 연구 분야 목록 (settings.html에서 사용)
+// Phase 6에서 확장 예정 — 지금은 8개
+// ============================================
+const RESEARCH_FIELDS = [
+  { id: 'data-mining', label: '데이터 마이닝 / Knowledge Discovery', desc: 'KDD, CIKM, WSDM, SIGIR, ICDM, WWW' },
+  { id: 'ml-general', label: 'Machine Learning (일반)', desc: 'NeurIPS, ICML, ICLR' },
+  { id: 'nlp', label: '자연어처리 (NLP)', desc: 'ACL, EMNLP, NAACL' },
+  { id: 'cv', label: '컴퓨터 비전 (Computer Vision)', desc: 'CVPR, ICCV, ECCV' },
+  { id: 'speech', label: '음성 / 오디오', desc: 'INTERSPEECH, ICASSP' },
+  { id: 'robotics', label: '로보틱스 / 강화학습', desc: 'RSS, CoRL, ICRA, IROS' },
+  { id: 'database', label: '데이터베이스 / 시스템', desc: 'SIGMOD, VLDB, ICDE' },
+  { id: 'security', label: 'AI 보안 / 프라이버시', desc: 'S&P, USENIX Security, CCS' },
+];
+
+// ============================================
+// Supabase 데이터 헬퍼 — 키워드
+// ============================================
+
+// 내 키워드 전체 가져오기
+async function fetchMyKeywords() {
+  const { data, error } = await supabaseClient
+    .from('user_keywords')
+    .select('id, keyword')
+    .order('created_at', { ascending: true });
+  if (error) { console.error('키워드 조회 실패:', error); return []; }
+  return data || [];
+}
+
+// 키워드 추가
+async function addKeyword(userId, keyword) {
+  const { data, error } = await supabaseClient
+    .from('user_keywords')
+    .insert({ user_id: userId, keyword: keyword })
+    .select()
+    .single();
+  if (error) {
+    if (error.code === '23505') throw new Error('이미 등록된 키워드예요.');
+    throw new Error(error.message);
+  }
+  return data;
+}
+
+// 키워드 삭제
+async function deleteKeyword(keywordId) {
+  const { error } = await supabaseClient
+    .from('user_keywords')
+    .delete()
+    .eq('id', keywordId);
+  if (error) throw new Error(error.message);
+}
+
+// ============================================
+// Supabase 데이터 헬퍼 — 연구 분야
+// ============================================
+
+// 내 분야 전체 가져오기
+async function fetchMyFields() {
+  const { data, error } = await supabaseClient
+    .from('user_fields')
+    .select('id, field_id')
+    .order('created_at', { ascending: true });
+  if (error) { console.error('분야 조회 실패:', error); return []; }
+  return data || [];
+}
+
+// 분야 추가
+async function addField(userId, fieldId) {
+  const { data, error } = await supabaseClient
+    .from('user_fields')
+    .insert({ user_id: userId, field_id: fieldId })
+    .select()
+    .single();
+  if (error) {
+    if (error.code === '23505') return null; // 이미 있음 — 조용히 무시
+    throw new Error(error.message);
+  }
+  return data;
+}
+
+// 분야 삭제
+async function deleteField(fieldRowId) {
+  const { error } = await supabaseClient
+    .from('user_fields')
+    .delete()
+    .eq('id', fieldRowId);
+  if (error) throw new Error(error.message);
+}

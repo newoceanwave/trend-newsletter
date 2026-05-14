@@ -16,6 +16,7 @@ body {
 .container { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; }
 .page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
 .page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 32px; }
+
 .card {
   background: #fff;
   border: 1px solid #f2f4f6;
@@ -23,15 +24,127 @@ body {
   padding: 24px;
   margin-bottom: 16px;
 }
-.card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
-.card-text { font-size: 14px; color: #6b7684; line-height: 1.6; }
-.phase-badge {
-  display: inline-block;
-  font-size: 11px; font-weight: 600;
-  color: #8b95a1; background: #f2f4f6;
-  padding: 3px 10px; border-radius: 8px;
-  margin-bottom: 12px;
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
+.card-title { font-size: 16px; font-weight: 600; }
+.card-hint { font-size: 12px; color: #8b95a1; }
+
+/* 키워드 */
+.kw-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  min-height: 20px;
+}
+.kw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e8f3ff;
+  color: #3182f6;
+  padding: 6px 6px 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.kw-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.06);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+.kw-chip-remove:hover { background: rgba(0,0,0,0.15); }
+.kw-empty { font-size: 13px; color: #8b95a1; }
+
+.kw-add-row { display: flex; gap: 8px; }
+.kw-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+.kw-input:focus { border-color: #3182f6; }
+.btn-primary {
+  height: 40px;
+  padding: 0 18px;
+  background: #3182f6;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary:hover { background: #2872dc; }
+.btn-primary:disabled { background: #d1d6db; cursor: not-allowed; }
+
+/* 연구 분야 */
+.field-list { display: flex; flex-direction: column; gap: 8px; }
+.field-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #e5e8eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.field-item:hover { border-color: #c4dcff; background: #fafcff; }
+.field-item.selected {
+  border-color: #3182f6;
+  background: #e8f3ff;
+}
+.field-check {
+  width: 20px; height: 20px;
+  border: 2px solid #d1d6db;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #fff;
+}
+.field-item.selected .field-check {
+  background: #3182f6;
+  border-color: #3182f6;
+}
+.field-text-label { font-size: 14px; font-weight: 600; }
+.field-text-desc { font-size: 12px; color: #8b95a1; margin-top: 2px; }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #191f28;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 200;
+}
+.toast.show { opacity: 1; }
+.toast.error { background: #c0392b; }
+
 .loading { padding: 40px; text-align: center; color: #8b95a1; }
 </style>
 </head>
@@ -40,27 +153,38 @@ body {
 
   <div class="container" id="main" style="display:none">
     <h1 class="page-title">설정</h1>
-    <p class="page-subtitle">키워드와 연구 분야를 관리하세요</p>
+    <p class="page-subtitle">키워드와 연구 분야를 등록하면 매일 맞춤 논문을 받습니다</p>
 
+    <!-- 키워드 -->
     <div class="card">
-      <div class="phase-badge">Phase 3에서 구현 예정</div>
-      <div class="card-title">키워드 관리</div>
-      <div class="card-text">
-        여기서 관심 키워드를 추가/삭제하면, 매일 그 키워드에 맞는 논문이 추천됩니다.
-        Phase 3에서 Supabase와 연결됩니다.
+      <div class="card-header">
+        <div class="card-title">내 키워드</div>
+        <div class="card-hint">관심 주제를 자유롭게 추가하세요</div>
+      </div>
+      <div class="kw-list" id="kw-list">
+        <span class="kw-empty">불러오는 중...</span>
+      </div>
+      <div class="kw-add-row">
+        <input type="text" class="kw-input" id="kw-input"
+               placeholder="예: graph neural network, retrieval augmented generation" />
+        <button class="btn-primary" id="kw-add-btn">추가</button>
       </div>
     </div>
 
+    <!-- 연구 분야 -->
     <div class="card">
-      <div class="phase-badge">Phase 3에서 구현 예정</div>
-      <div class="card-title">연구 분야</div>
-      <div class="card-text">
-        데이터 마이닝, NLP, 컴퓨터 비전 등 분야를 선택하면 분야별 트렌드 논문을 받습니다.
+      <div class="card-header">
+        <div class="card-title">연구 분야</div>
+        <div class="card-hint">여러 개 선택 가능 · 클릭으로 토글</div>
+      </div>
+      <div class="field-list" id="field-list">
+        <div class="kw-empty">불러오는 중...</div>
       </div>
     </div>
   </div>
 
   <div class="loading" id="loading">로그인 확인 중...</div>
+  <div class="toast" id="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="shared.js"></script>
@@ -70,6 +194,125 @@ body {
     const session = await requireAuth();
     if (!session) return;
     await renderHeader('header', 'settings');
+
+    const userId = session.user.id;
+    const toastEl = document.getElementById('toast');
+
+    function toast(msg, isError) {
+      toastEl.textContent = msg;
+      toastEl.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => { toastEl.className = 'toast'; }, 2500);
+    }
+
+    // ---------- 키워드 ----------
+    const kwListEl = document.getElementById('kw-list');
+    const kwInput = document.getElementById('kw-input');
+    const kwAddBtn = document.getElementById('kw-add-btn');
+    let myKeywords = [];
+
+    function renderKeywords() {
+      kwListEl.innerHTML = '';
+      if (myKeywords.length === 0) {
+        kwListEl.innerHTML = '<span class="kw-empty">아직 등록된 키워드가 없어요. 아래에서 추가하세요.</span>';
+        return;
+      }
+      myKeywords.forEach(kw => {
+        const chip = document.createElement('span');
+        chip.className = 'kw-chip';
+        chip.innerHTML = escapeHtml(kw.keyword) +
+          '<span class="kw-chip-remove" title="삭제">&times;</span>';
+        chip.querySelector('.kw-chip-remove').addEventListener('click', async () => {
+          try {
+            await deleteKeyword(kw.id);
+            myKeywords = myKeywords.filter(k => k.id !== kw.id);
+            renderKeywords();
+            toast('키워드 삭제됨');
+          } catch (e) {
+            toast('삭제 실패: ' + e.message, true);
+          }
+        });
+        kwListEl.appendChild(chip);
+      });
+    }
+
+    async function handleAddKeyword() {
+      const value = kwInput.value.trim();
+      if (!value) return;
+      kwAddBtn.disabled = true;
+      try {
+        const newKw = await addKeyword(userId, value);
+        myKeywords.push(newKw);
+        renderKeywords();
+        kwInput.value = '';
+        kwInput.focus();
+        toast('키워드 추가됨');
+      } catch (e) {
+        toast(e.message, true);
+      } finally {
+        kwAddBtn.disabled = false;
+      }
+    }
+
+    kwAddBtn.addEventListener('click', handleAddKeyword);
+    kwInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleAddKeyword();
+    });
+
+    // ---------- 연구 분야 ----------
+    const fieldListEl = document.getElementById('field-list');
+    let myFields = []; // [{id, field_id}]
+
+    function renderFields() {
+      fieldListEl.innerHTML = '';
+      const selectedIds = new Set(myFields.map(f => f.field_id));
+
+      RESEARCH_FIELDS.forEach(field => {
+        const selected = selectedIds.has(field.id);
+        const item = document.createElement('div');
+        item.className = 'field-item' + (selected ? ' selected' : '');
+        item.innerHTML =
+          '<div class="field-check">' + (selected ? '✓' : '') + '</div>' +
+          '<div>' +
+            '<div class="field-text-label">' + escapeHtml(field.label) + '</div>' +
+            '<div class="field-text-desc">' + escapeHtml(field.desc) + '</div>' +
+          '</div>';
+
+        item.addEventListener('click', async () => {
+          if (selectedIds.has(field.id)) {
+            const row = myFields.find(f => f.field_id === field.id);
+            try {
+              await deleteField(row.id);
+              myFields = myFields.filter(f => f.field_id !== field.id);
+              renderFields();
+              toast('분야 해제됨');
+            } catch (e) {
+              toast('실패: ' + e.message, true);
+            }
+          } else {
+            try {
+              const newRow = await addField(userId, field.id);
+              if (newRow) myFields.push(newRow);
+              renderFields();
+              toast('분야 추가됨');
+            } catch (e) {
+              toast('실패: ' + e.message, true);
+            }
+          }
+        });
+        fieldListEl.appendChild(item);
+      });
+    }
+
+    // ---------- 초기 로드 ----------
+    try {
+      myKeywords = await fetchMyKeywords();
+      myFields = await fetchMyFields();
+    } catch (e) {
+      toast('데이터 로드 실패: ' + e.message, true);
+    }
+    renderKeywords();
+    renderFields();
+
     document.getElementById('loading').style.display = 'none';
     document.getElementById('main').style.display = 'block';
   })();
