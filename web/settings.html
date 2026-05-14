@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>설정 — AI 트렌드 뉴스레터</title>
+  <style id="shared-css"></style>
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', sans-serif;
+  background: #f9fafb;
+  color: #191f28;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; }
+.page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 32px; }
+.card {
+  background: #fff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.card-text { font-size: 14px; color: #6b7684; line-height: 1.6; }
+.phase-badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  color: #8b95a1; background: #f2f4f6;
+  padding: 3px 10px; border-radius: 8px;
+  margin-bottom: 12px;
+}
+.loading { padding: 40px; text-align: center; color: #8b95a1; }
+</style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <div class="container" id="main" style="display:none">
+    <h1 class="page-title">설정</h1>
+    <p class="page-subtitle">키워드와 연구 분야를 관리하세요</p>
+
+    <div class="card">
+      <div class="phase-badge">Phase 3에서 구현 예정</div>
+      <div class="card-title">키워드 관리</div>
+      <div class="card-text">
+        여기서 관심 키워드를 추가/삭제하면, 매일 그 키워드에 맞는 논문이 추천됩니다.
+        Phase 3에서 Supabase와 연결됩니다.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="phase-badge">Phase 3에서 구현 예정</div>
+      <div class="card-title">연구 분야</div>
+      <div class="card-text">
+        데이터 마이닝, NLP, 컴퓨터 비전 등 분야를 선택하면 분야별 트렌드 논문을 받습니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" id="loading">로그인 확인 중...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="shared.js"></script>
+  <script>
+  (async function() {
+    document.getElementById('shared-css').textContent = SHARED_HEADER_CSS;
+    const session = await requireAuth();
+    if (!session) return;
+    await renderHeader('header', 'settings');
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>논문 검색 — AI 트렌드 뉴스레터</title>
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', 'Segoe UI', sans-serif;
+  background: #f9fafb;
+  color: #191f28;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+.header { margin-bottom: 28px; }
+.header-top-row {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
+}
+.header-date { font-size: 13px; color: #8b95a1; font-weight: 500; }
+.nav-link {
+  font-size: 13px; color: #3182f6; text-decoration: none; font-weight: 500;
+  padding: 6px 12px; border-radius: 8px; transition: background 0.15s ease;
+}
+.nav-link:hover { background: #e8f3ff; }
+.header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
+.header-subtitle { font-size: 15px; color: #4e5968; }
+
+.search-box {
+  background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
+  padding: 20px 24px; margin-bottom: 24px;
+}
+.search-row { display: flex; gap: 8px; margin-bottom: 14px; }
+.search-input {
+  flex: 1; height: 44px; padding: 0 16px; border: 1px solid #e5e8eb;
+  border-radius: 10px; font-size: 15px; font-family: inherit; color: #191f28;
+  outline: none; transition: border-color 0.15s ease;
+}
+.search-input:focus { border-color: #3182f6; }
+.search-btn {
+  height: 44px; padding: 0 24px; background: #3182f6; color: #fff; border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
+  transition: background 0.15s ease;
+}
+.search-btn:hover { background: #2872dc; }
+.search-btn:disabled { background: #d1d6db; cursor: not-allowed; }
+
+.source-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.source-label { font-size: 12px; color: #8b95a1; font-weight: 500; }
+.source-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; background: #f2f4f6; color: #4e5968;
+  border-radius: 16px; font-size: 12px; font-weight: 500; cursor: pointer;
+  border: 1px solid transparent; user-select: none; transition: all 0.15s ease;
+}
+.source-chip.active { background: #e8f3ff; color: #3182f6; border-color: #c4dcff; }
+.source-chip:hover { border-color: #c4dcff; }
+
+.status-bar {
+  font-size: 13px; color: #8b95a1; margin-bottom: 16px; padding: 0 4px;
+  min-height: 20px;
+}
+
+.result-group { margin-bottom: 32px; }
+.result-group-title {
+  font-size: 14px; font-weight: 600; color: #4e5968; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.result-group-title .count {
+  background: #f2f4f6; color: #6b7684; padding: 2px 8px;
+  border-radius: 10px; font-size: 12px; font-weight: 500;
+}
+.source-badge {
+  font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600;
+}
+.source-badge.arxiv { background: #fef3e6; color: #c2691a; }
+.source-badge.s2 { background: #e8f0fe; color: #1a56c2; }
+.source-badge.openalex { background: #eef6ec; color: #2a7d2e; }
+
+.paper-card {
+  background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
+  padding: 18px 22px; margin-bottom: 12px; transition: border-color 0.15s ease;
+}
+.paper-card:hover { border-color: #d1d6db; }
+.paper-title {
+  font-size: 16px; font-weight: 600; color: #191f28; margin-bottom: 6px;
+  letter-spacing: -0.01em; line-height: 1.4;
+}
+.paper-title a { color: inherit; text-decoration: none; }
+.paper-title a:hover { color: #3182f6; }
+.paper-meta-line { font-size: 12px; color: #8b95a1; margin-bottom: 8px; }
+.paper-abstract {
+  font-size: 13px; color: #4e5968; line-height: 1.6; margin-bottom: 10px;
+}
+.paper-foot { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.paper-foot a { color: #6b7684; text-decoration: none; font-size: 12px; font-weight: 500; }
+.paper-foot a:hover { color: #3182f6; }
+.cite-count {
+  font-size: 11px; color: #8b95a1; background: #f9fafb;
+  padding: 2px 8px; border-radius: 6px; border: 1px solid #f2f4f6;
+}
+
+.empty, .loading {
+  background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
+  padding: 40px 24px; text-align: center; color: #8b95a1; font-size: 14px;
+}
+.spinner {
+  display: inline-block; width: 16px; height: 16px; border: 2px solid #e5e8eb;
+  border-top-color: #3182f6; border-radius: 50%; animation: spin 0.7s linear infinite;
+  vertical-align: middle; margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.footer {
+  margin-top: 50px; padding-top: 24px; border-top: 1px solid #f2f4f6;
+  font-size: 12px; color: #8b95a1; text-align: center; line-height: 1.6;
+}
+.tip {
+  font-size: 12px; color: #8b95a1; background: #f9fafb; border: 1px solid #f2f4f6;
+  border-radius: 10px; padding: 10px 14px; margin-bottom: 16px;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-top-row">
+        <div class="header-date">논문 검색</div>
+        <a href="index.html" class="nav-link">← 대시보드</a>
+      </div>
+      <h1 class="header-title">논문 검색</h1>
+      <p class="header-subtitle">arXiv · Semantic Scholar · OpenAlex에서 키워드로 논문 검색</p>
+    </div>
+
+    <div class="search-box">
+      <div class="search-row">
+        <input type="text" class="search-input" id="search-input"
+               placeholder="키워드 입력 (예: graph neural network)" />
+        <button class="search-btn" id="search-btn">검색</button>
+      </div>
+      <div class="source-row">
+        <span class="source-label">검색 소스:</span>
+        <span class="source-chip active" data-source="arxiv">arXiv</span>
+        <span class="source-chip active" data-source="s2">Semantic Scholar</span>
+        <span class="source-chip active" data-source="openalex">OpenAlex</span>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 영어 abstract는 크롬에서 우클릭 → "한국어로 번역"으로 빠르게 볼 수 있어요.
+    </div>
+
+    <div class="status-bar" id="status-bar"></div>
+    <div id="results"></div>
+
+    <div class="footer">
+      arXiv · Semantic Scholar · OpenAlex 공개 API 사용<br>
+      Semantic Scholar는 Google Scholar 대안으로 인용수까지 제공합니다
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    let activeSources = new Set(['arxiv', 's2', 'openalex']);
+
+    document.querySelectorAll('.source-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const src = chip.dataset.source;
+        if (activeSources.has(src)) {
+          if (activeSources.size > 1) {
+            activeSources.delete(src);
+            chip.classList.remove('active');
+          }
+        } else {
+          activeSources.add(src);
+          chip.classList.add('active');
+        }
+      });
+    });
+
+    async function doSearch() {
+      const query = document.getElementById('search-input').value.trim();
+      if (!query) return;
+
+      const btn = document.getElementById('search-btn');
+      const statusBar = document.getElementById('status-bar');
+      const resultsEl = document.getElementById('results');
+
+      btn.disabled = true;
+      btn.textContent = '검색 중...';
+      resultsEl.innerHTML = '';
+      statusBar.innerHTML = '<span class="spinner"></span>' + activeSources.size + '개 소스에서 검색 중...';
+
+      const tasks = [];
+      if (activeSources.has('arxiv')) tasks.push(searchArxiv(query));
+      if (activeSources.has('s2')) tasks.push(searchS2(query));
+      if (activeSources.has('openalex')) tasks.push(searchOpenAlex(query));
+
+      const results = await Promise.allSettled(tasks);
+
+      let html = '';
+      let totalCount = 0;
+      results.forEach(r => {
+        if (r.status === 'fulfilled' && r.value) {
+          html += renderGroup(r.value.source, r.value.label, r.value.papers);
+          totalCount += r.value.papers.length;
+        } else if (r.status === 'rejected') {
+          console.error('Search failed:', r.reason);
+        }
+      });
+
+      resultsEl.innerHTML = html || '<div class="empty">검색 결과가 없어요. 다른 키워드를 시도해보세요.</div>';
+      statusBar.textContent = '총 ' + totalCount + '편 검색됨';
+
+      btn.disabled = false;
+      btn.textContent = '검색';
+    }
+
+    async function searchArxiv(query) {
+      const url = 'https://export.arxiv.org/api/query?search_query=all:'
+        + encodeURIComponent(query) + '&start=0&max_results=10&sortBy=relevance';
+      const resp = await fetch(url);
+      const text = await resp.text();
+      const xml = new DOMParser().parseFromString(text, 'text/xml');
+      const entries = xml.querySelectorAll('entry');
+      const papers = [];
+      entries.forEach(e => {
+        const title = (e.querySelector('title')?.textContent || '').trim();
+        const abstract = (e.querySelector('summary')?.textContent || '').trim();
+        const link = e.querySelector('id')?.textContent || '#';
+        const published = (e.querySelector('published')?.textContent || '').slice(0, 10);
+        const authors = Array.from(e.querySelectorAll('author name'))
+          .slice(0, 3).map(a => a.textContent).join(', ');
+        papers.push({ title, abstract, link, published, authors, citations: null });
+      });
+      return { source: 'arxiv', label: 'arXiv', papers };
+    }
+
+    async function searchS2(query) {
+      const url = 'https://api.semanticscholar.org/graph/v1/paper/search?query='
+        + encodeURIComponent(query)
+        + '&limit=10&fields=title,abstract,url,year,authors,citationCount';
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error('S2 ' + resp.status);
+      const data = await resp.json();
+      const papers = (data.data || []).map(p => ({
+        title: p.title || '',
+        abstract: p.abstract || '(abstract 없음)',
+        link: p.url || '#',
+        published: p.year ? String(p.year) : '',
+        authors: (p.authors || []).slice(0, 3).map(a => a.name).join(', '),
+        citations: p.citationCount,
+      }));
+      return { source: 's2', label: 'Semantic Scholar', papers };
+    }
+
+    async function searchOpenAlex(query) {
+      const url = 'https://api.openalex.org/works?search='
+        + encodeURIComponent(query) + '&per-page=10';
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error('OpenAlex ' + resp.status);
+      const data = await resp.json();
+      const papers = (data.results || []).map(p => {
+        let abstract = '(abstract 없음)';
+        if (p.abstract_inverted_index) {
+          const positions = [];
+          for (const [word, idxs] of Object.entries(p.abstract_inverted_index)) {
+            idxs.forEach(i => positions.push([i, word]));
+          }
+          positions.sort((a, b) => a[0] - b[0]);
+          abstract = positions.map(x => x[1]).join(' ');
+        }
+        return {
+          title: p.title || '',
+          abstract: abstract,
+          link: p.doi ? ('https://doi.org/' + p.doi.replace('https://doi.org/', '')) : (p.id || '#'),
+          published: p.publication_year ? String(p.publication_year) : '',
+          authors: (p.authorships || []).slice(0, 3).map(a => a.author?.display_name).filter(Boolean).join(', '),
+          citations: p.cited_by_count,
+        };
+      });
+      return { source: 'openalex', label: 'OpenAlex', papers };
+    }
+
+    function renderGroup(source, label, papers) {
+      if (!papers.length) {
+        return '<div class="result-group"><div class="result-group-title">'
+          + '<span class="source-badge ' + source + '">' + label + '</span>'
+          + '<span class="count">0</span></div>'
+          + '<div class="empty">결과 없음</div></div>';
+      }
+      let cards = '';
+      papers.forEach(p => {
+        const safeTitle = escapeHtml(p.title);
+        const safeAbstract = escapeHtml(p.abstract);
+        const citeStr = (p.citations != null)
+          ? '<span class="cite-count">인용 ' + p.citations + '</span>' : '';
+        const metaLine = [p.authors, p.published].filter(Boolean).join(' · ');
+        cards += '<div class="paper-card">'
+          + '<div class="paper-title"><a href="' + p.link + '" target="_blank">' + safeTitle + '</a></div>'
+          + (metaLine ? '<div class="paper-meta-line">' + escapeHtml(metaLine) + '</div>' : '')
+          + '<div class="paper-abstract">' + safeAbstract + '</div>'
+          + '<div class="paper-foot">'
+          + '<a href="' + p.link + '" target="_blank">원문 보기</a>'
+          + citeStr
+          + '</div>'
+          + '</div>';
+      });
+      return '<div class="result-group"><div class="result-group-title">'
+        + '<span class="source-badge ' + source + '">' + label + '</span>'
+        + '<span class="count">' + papers.length + '</span></div>'
+        + cards + '</div>';
+    }
+
+    function escapeHtml(s) {
+      return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    document.getElementById('search-btn').addEventListener('click', doSearch);
+    document.getElementById('search-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') doSearch();
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = params.get('q');
+    if (initialQuery) {
+      document.getElementById('search-input').value = initialQuery;
+      doSearch();
+    }
+  })();
+  </script>
+</body>
+</html>
