@@ -62,6 +62,7 @@ async function renderHeader(containerId, active) {
   const navItems = [
     { id: 'dashboard', label: '대시보드', href: 'dashboard.html' },
     { id: 'trending', label: '온라인 트렌딩', href: 'trending.html' },
+    { id: 'conferences', label: '학회', href: 'conferences.html' },
     { id: 'search', label: '논문 검색', href: 'search.html' },
     { id: 'bookmarks', label: '북마크', href: 'bookmarks.html' },
     { id: 'settings', label: '설정', href: 'settings.html' },
@@ -75,12 +76,14 @@ async function renderHeader(containerId, active) {
   container.innerHTML =
     '<div class="topbar">' +
       '<div class="topbar-inner">' +
-        '<a href="dashboard.html" class="topbar-brand">AI 트렌드 뉴스레터</a>' +
-        '<nav class="topbar-nav">' + navHtml + '</nav>' +
-        '<div class="topbar-user">' +
-          '<span class="topbar-username">' + escapeHtml(userName) + '</span>' +
-          '<button class="topbar-logout" id="__logout_btn">로그아웃</button>' +
+        '<div class="topbar-row1">' +
+          '<a href="dashboard.html" class="topbar-brand">AI 트렌드 뉴스레터</a>' +
+          '<div class="topbar-user">' +
+            '<span class="topbar-username">' + escapeHtml(userName) + '</span>' +
+            '<button class="topbar-logout" id="__logout_btn">로그아웃</button>' +
+          '</div>' +
         '</div>' +
+        '<nav class="topbar-nav">' + navHtml + '</nav>' +
       '</div>' +
     '</div>';
 
@@ -108,7 +111,7 @@ const SHARED_HEADER_CSS = `
   height: 56px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 .topbar-brand {
   font-size: 15px;
@@ -117,13 +120,18 @@ const SHARED_HEADER_CSS = `
   white-space: nowrap;
   text-decoration: none;
   transition: color 0.15s ease;
+  flex-shrink: 0;
 }
 .topbar-brand:hover { color: #3182f6; }
 .topbar-nav {
   display: flex;
   gap: 4px;
   flex: 1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.topbar-nav::-webkit-scrollbar { display: none; }
 .nav-item {
   font-size: 14px;
   color: #6b7684;
@@ -132,6 +140,7 @@ const SHARED_HEADER_CSS = `
   border-radius: 8px;
   font-weight: 500;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 .nav-item:hover { background: #f2f4f6; color: #191f28; }
 .nav-item.active { color: #3182f6; font-weight: 600; }
@@ -139,6 +148,7 @@ const SHARED_HEADER_CSS = `
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 .topbar-username {
   font-size: 13px;
@@ -157,10 +167,35 @@ const SHARED_HEADER_CSS = `
   white-space: nowrap;
 }
 .topbar-logout:hover { background: #e5e8eb; }
+
+/* 모바일: 헤더를 2층으로 — 위(로고+로그아웃) / 아래(메뉴 가로스크롤) */
 @media (max-width: 640px) {
-  .topbar-inner { gap: 12px; }
-  .topbar-nav { overflow-x: auto; }
+  .topbar-inner {
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+  }
+  .topbar-row1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+  }
+  .topbar-nav {
+    border-top: 1px solid #f2f4f6;
+    padding: 6px 12px;
+    gap: 2px;
+  }
   .topbar-username { display: none; }
+  .nav-item { font-size: 13px; padding: 8px 10px; }
+}
+/* 데스크탑에선 row1 래퍼가 그냥 투명하게 펼쳐짐 */
+@media (min-width: 641px) {
+  .topbar-row1 {
+    display: contents;
+  }
 }
 `;
 
@@ -421,4 +456,103 @@ async function fetchTrending(runDate) {
     }
   });
   return result;
+}
+
+// ============================================
+// 분야별 OpenReview venue 매핑 (conferences.html에서 사용)
+// OpenReview의 content.venue 값과 정확히 일치해야 함
+// OpenReview 안 쓰는 학회(KDD, SIGIR 등)는 포함 불가 — 한계
+// venue 문자열은 OpenReview 정책에 따라 조정 필요할 수 있음
+// ============================================
+const FIELD_VENUES = {
+  'ml-general': [
+    'ICLR 2026', 'ICLR 2025', 'ICLR 2024',
+    'NeurIPS 2025', 'NeurIPS 2024',
+    'ICML 2025', 'ICML 2024',
+  ],
+  'nlp': [
+    'COLM 2025', 'COLM 2024',
+    'ICLR 2026', 'ICLR 2025',
+    'NeurIPS 2025', 'NeurIPS 2024',
+  ],
+  'cv': [
+    'ICLR 2026', 'ICLR 2025',
+    'NeurIPS 2025', 'NeurIPS 2024',
+    'ICML 2025',
+  ],
+  'data-mining': [
+    'ICLR 2026', 'ICLR 2025',
+    'NeurIPS 2025', 'NeurIPS 2024',
+  ],
+  'robotics': [
+    'CoRL 2024', 'CoRL 2025',
+    'ICLR 2025', 'NeurIPS 2024',
+  ],
+  'graph-ml': [
+    'LoG 2024', 'LoG 2025',
+    'ICLR 2025', 'NeurIPS 2024',
+  ],
+  'theory': [
+    'ICLR 2025', 'NeurIPS 2024', 'ICML 2025',
+  ],
+  'multimodal': [
+    'ICLR 2026', 'ICLR 2025', 'NeurIPS 2025',
+  ],
+  'ml-general-rl': [
+    'RLC 2024', 'RLC 2025',
+  ],
+  // OpenReview를 거의 안 쓰는 분야들 (결과 빈약할 수 있음)
+  'speech': ['ICLR 2025', 'NeurIPS 2024'],
+  'database': ['ICLR 2025', 'NeurIPS 2024'],
+  'security': ['ICLR 2025', 'NeurIPS 2024'],
+  'hci': ['ICLR 2025'],
+  'software': ['ICLR 2025', 'NeurIPS 2024'],
+  'bioinformatics': ['ICLR 2025', 'NeurIPS 2024'],
+  'graphics': ['ICLR 2025', 'NeurIPS 2024'],
+};
+
+// 내 분야들에 매핑된 venue 목록 (중복 제거)
+function getVenuesForFields(fieldIds) {
+  const venueSet = new Set();
+  (fieldIds || []).forEach(fid => {
+    // custom: 분야는 OpenReview venue 없음 — 스킵
+    if (fid.startsWith('custom:')) return;
+    const venues = FIELD_VENUES[fid] || [];
+    venues.forEach(v => venueSet.add(v));
+  });
+  return Array.from(venueSet);
+}
+
+// ============================================
+// OpenReview API — 특정 venue의 논문 가져오기
+// ============================================
+async function fetchVenueePapers(venue, limit) {
+  const url = 'https://api2.openreview.net/notes?content.venue='
+    + encodeURIComponent(venue) + '&limit=' + (limit || 100);
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) {
+      console.warn('OpenReview ' + venue + ': ' + resp.status);
+      return [];
+    }
+    const data = await resp.json();
+    const notes = data.notes || [];
+    return notes.map(n => {
+      const c = n.content || {};
+      const title = (c.title && c.title.value) || '';
+      const authors = (c.authors && c.authors.value) || [];
+      const authorNames = authors.map(a => a.fullname || a).filter(Boolean);
+      const forumId = n.forum || n.id || '';
+      return {
+        paper_id: 'openreview:' + forumId,
+        title: title,
+        authors: authorNames.slice(0, 4).join(', '),
+        venue: (c.venue && c.venue.value) || venue,
+        url: 'https://openreview.net/forum?id=' + forumId,
+      };
+    });
+  } catch (e) {
+    console.warn('OpenReview ' + venue + ' 실패:', e);
+    return [];
+  }
 }
