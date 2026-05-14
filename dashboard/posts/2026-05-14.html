@@ -18,26 +18,270 @@ body {
   margin: 0 auto;
   padding: 32px 20px 80px;
 }
-.header {
-  margin-bottom: 40px;
+.header { margin-bottom: 32px; }
+.header-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
-.header-date {
+.header-date { font-size: 13px; color: #8b95a1; font-weight: 500; }
+.nav-link {
   font-size: 13px;
-  color: #8b95a1;
+  color: #3182f6;
+  text-decoration: none;
   font-weight: 500;
-  margin-bottom: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
 }
-.header-title {
-  font-size: 28px;
-  font-weight: 700;
+.nav-link:hover { background: #e8f3ff; }
+.header-title { font-size: 28px; font-weight: 700; color: #191f28; margin-bottom: 8px; letter-spacing: -0.02em; }
+.header-subtitle { font-size: 15px; color: #4e5968; }
+
+.search-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.search-bar-input {
+  flex: 1;
+  height: 46px;
+  padding: 0 18px;
+  border: 1px solid #e5e8eb;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
   color: #191f28;
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease;
 }
-.header-subtitle {
-  font-size: 15px;
+.search-bar-input:focus { border-color: #3182f6; }
+.search-bar-btn {
+  height: 46px;
+  padding: 0 22px;
+  background: #191f28;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.search-bar-btn:hover { background: #333d4b; }
+
+.kw-panel {
+  background: #ffffff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.kw-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kw-panel-title { font-size: 15px; font-weight: 600; color: #191f28; }
+.kw-panel-hint { font-size: 12px; color: #8b95a1; }
+
+.kw-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+  min-height: 32px;
+}
+.kw-empty { font-size: 13px; color: #8b95a1; padding: 6px 0; }
+
+.profile-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.profile-chip {
+  padding: 8px 14px;
+  background: #f9fafb;
   color: #4e5968;
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
 }
+.profile-chip:hover { background: #f2f4f6; border-color: #d1d6db; }
+.profile-chip.active {
+  background: #3182f6;
+  color: #ffffff;
+  border-color: #3182f6;
+}
+.profile-chip.active:hover { background: #2872dc; }
+
+.kw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e8f3ff;
+  color: #3182f6;
+  padding: 6px 6px 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.kw-chip:hover { background: #d3e7ff; }
+.kw-chip.active {
+  background: #3182f6;
+  color: #ffffff;
+}
+.kw-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.06);
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+.kw-chip.active .kw-chip-remove { background: rgba(255,255,255,0.25); }
+.kw-chip-remove:hover { background: rgba(0,0,0,0.12); }
+
+.kw-add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.kw-input {
+  flex: 1;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #191f28;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.kw-input:focus { border-color: #3182f6; }
+.kw-add-btn {
+  height: 38px;
+  padding: 0 16px;
+  background: #191f28;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.kw-add-btn:hover { background: #333d4b; }
+.kw-add-btn:disabled { background: #d1d6db; cursor: not-allowed; }
+
+.kw-suggested-section {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px dashed #e5e8eb;
+}
+.kw-suggested-label {
+  font-size: 12px;
+  color: #6b7684;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.kw-suggested {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.kw-suggest-chip {
+  background: #f2f4f6;
+  color: #4e5968;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.kw-suggest-chip:hover { background: #e5e8eb; color: #191f28; }
+.kw-suggest-chip:before { content: "+ "; color: #8b95a1; }
+
+.save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px dashed #e5e8eb;
+  font-size: 12px;
+  color: #8b95a1;
+}
+.save-bar.dirty { color: #c08401; }
+.save-btn {
+  padding: 8px 14px;
+  background: #ffffff;
+  color: #191f28;
+  border: 1px solid #d1d6db;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.save-btn:hover { background: #f9fafb; }
+.save-btn:disabled { color: #b0b8c1; cursor: not-allowed; background: #f9fafb; }
+.save-help {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #8b95a1;
+  line-height: 1.5;
+}
+.save-help code {
+  background: #f2f4f6;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: 10px;
+}
+
+.filter-status {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  background: #fff5e0;
+  color: #c08401;
+  border-radius: 10px;
+  font-size: 13px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+.filter-status.show { display: flex; }
+.filter-clear {
+  background: transparent;
+  color: #c08401;
+  border: 1px solid #c08401;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.filter-clear:hover { background: rgba(192, 132, 1, 0.1); }
+
 .section-title {
   font-size: 14px;
   font-weight: 600;
@@ -55,6 +299,53 @@ body {
   font-size: 12px;
   font-weight: 500;
 }
+
+.section-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 32px 0 4px;
+  border-bottom: 1px solid #f2f4f6;
+}
+.section-tab {
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: #8b95a1;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s ease;
+}
+.section-tab:hover { color: #4e5968; }
+.section-tab.active { color: #191f28; border-bottom-color: #191f28; }
+.section-tab-count {
+  background: #f2f4f6;
+  color: #6b7684;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.section-tab.active .section-tab-count { background: #191f28; color: #fff; }
+.section-tab-help {
+  font-size: 12px;
+  color: #8b95a1;
+  margin-bottom: 16px;
+  padding: 6px 0;
+}
+.section-content { display: none; }
+.section-content.active { display: block; }
+.tag.new-badge {
+  background: #fff2e6;
+  color: #f97316;
+  font-weight: 700;
+}
+
 .paper-card {
   background: #ffffff;
   border: 1px solid #f2f4f6;
@@ -63,9 +354,8 @@ body {
   margin-bottom: 12px;
   transition: border-color 0.15s ease;
 }
-.paper-card:hover {
-  border-color: #d1d6db;
-}
+.paper-card:hover { border-color: #d1d6db; }
+.paper-card.hidden { display: none; }
 .paper-rank {
   display: inline-block;
   width: 24px;
@@ -87,13 +377,8 @@ body {
   letter-spacing: -0.01em;
   line-height: 1.4;
 }
-.paper-title a {
-  color: inherit;
-  text-decoration: none;
-}
-.paper-title a:hover {
-  color: #3182f6;
-}
+.paper-title a { color: inherit; text-decoration: none; }
+.paper-title a:hover { color: #3182f6; }
 .paper-summary {
   font-size: 14px;
   color: #4e5968;
@@ -114,28 +399,11 @@ body {
   border-radius: 6px;
   font-weight: 500;
 }
-.tag.matched {
-  background: #e8f3ff;
-  color: #3182f6;
-}
-.tag.trending {
-  background: #fff5e0;
-  color: #c08401;
-}
-.paper-links {
-  margin-left: auto;
-  display: flex;
-  gap: 12px;
-}
-.paper-links a {
-  color: #6b7684;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-}
-.paper-links a:hover {
-  color: #3182f6;
-}
+.tag.matched { background: #e8f3ff; color: #3182f6; }
+.tag.trending { background: #fff5e0; color: #c08401; }
+.paper-links { margin-left: auto; display: flex; gap: 12px; }
+.paper-links a { color: #6b7684; text-decoration: none; font-size: 12px; font-weight: 500; }
+.paper-links a:hover { color: #3182f6; }
 .empty {
   background: #ffffff;
   border: 1px solid #f2f4f6;
@@ -144,37 +412,6 @@ body {
   text-align: center;
   color: #8b95a1;
   font-size: 14px;
-}
-.suggested-keywords {
-  background: #ffffff;
-  border: 1px solid #f2f4f6;
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 24px;
-}
-.suggested-keywords h3 {
-  font-size: 15px;
-  font-weight: 600;
-  color: #191f28;
-  margin-bottom: 4px;
-}
-.suggested-keywords p {
-  font-size: 13px;
-  color: #6b7684;
-  margin-bottom: 16px;
-}
-.keyword-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.keyword-chip {
-  background: #f2f4f6;
-  color: #4e5968;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
 }
 .footer {
   margin-top: 60px;
@@ -190,63 +427,797 @@ body {
 <body>
   <div class="container">
     <div class="header">
-      <div class="header-date">2026-05-14</div>
+      <div class="header-top-row">
+        <div class="header-date">2026-05-14</div>
+        <a href="trending.html" class="nav-link">온라인 트렌딩 →</a>
+      </div>
       <h1 class="header-title">AI 트렌드 뉴스레터</h1>
       <p class="header-subtitle">arXiv + Hugging Face Daily Papers에서 어제자 큐레이션</p>
     </div>
 
-    
-        <div class="suggested-keywords">
-          <h3>💡 추천 키워드</h3>
-          <p>키워드를 아직 설정하지 않으셨네요. 오늘 논문에서 자주 등장한 키워드들이에요. config.yaml에 추가하면 더 정확한 큐레이션을 받을 수 있어요.</p>
-          <div class="keyword-chips"><span class="keyword-chip">large language model</span><span class="keyword-chip">diffusion</span><span class="keyword-chip">mixture of experts</span><span class="keyword-chip">scaling law</span><span class="keyword-chip">rag</span><span class="keyword-chip">agent</span><span class="keyword-chip">fine-tuning</span><span class="keyword-chip">evaluation</span></div>
+    <div class="search-bar">
+      <input type="text" class="search-bar-input" id="paper-search-input"
+             placeholder="🔍 키워드로 논문 검색 (arXiv · Semantic Scholar · OpenAlex)" />
+      <button class="search-bar-btn" id="paper-search-btn">검색</button>
+    </div>
+
+    <div class="kw-panel" id="profile-panel">
+      <div class="kw-panel-header">
+        <div class="kw-panel-title">내 연구 분야</div>
+        <div class="kw-panel-hint">여러 개 선택 가능</div>
+      </div>
+      <div class="profile-list" id="profile-list"></div>
+      <div class="save-bar" id="profile-save-bar" style="margin-top:14px">
+        <span id="profile-dirty-msg">변경 없음</span>
+        <button class="save-btn" id="profile-save-btn" disabled style="background:#3182f6;color:#fff;border-color:#3182f6">분야 즉시 적용</button>
+      </div>
+    </div>
+
+    <div class="kw-panel">
+      <div class="kw-panel-header">
+        <div class="kw-panel-title">내 키워드</div>
+        <div class="kw-panel-hint">클릭해서 필터 · ×로 제거</div>
+      </div>
+
+      <div class="kw-list" id="kw-list"></div>
+
+      <div class="kw-add-row">
+        <input type="text" class="kw-input" id="kw-input" placeholder="키워드 추가 (예: diffusion model)" />
+        <button class="kw-add-btn" id="kw-add-btn">추가</button>
+      </div>
+
+      <div class="kw-suggested-section" id="kw-suggested-section">
+        <div class="kw-suggested-label">추천 키워드 (오늘 자주 등장)</div>
+        <div class="kw-suggested" id="kw-suggested"></div>
+      </div>
+
+      <div class="save-bar" id="save-bar">
+        <span id="dirty-msg">변경 없음</span>
+        <div style="display:flex;gap:6px">
+          <button class="save-btn" id="save-btn-download" title="파일로 다운로드 (수동 업로드)">📥 파일</button>
+          <button class="save-btn" id="save-btn" disabled style="background:#3182f6;color:#fff;border-color:#3182f6">키워드 즉시 적용</button>
         </div>
-        
+      </div>
+      <div class="save-help">
+        <strong>즉시 적용</strong>: GitHub API로 자동 commit + workflow 실행 (PAT 1회 등록). <strong>파일</strong>: 수동 업로드용 다운로드.
+      </div>
+    </div>
+
+    <div class="filter-status" id="filter-status">
+      <span id="filter-label"></span>
+      <button class="filter-clear" id="filter-clear">필터 해제</button>
+    </div>
+
     
-        <div class="section-title">
-          오늘의 트렌딩
-          <span class="count">3</span>
-        </div>
-        
-    <div class="paper-card">
+    <div class="section-tabs">
+      <button class="section-tab active" data-section-tab="picks">이번 추천 <span class="section-tab-count">10</span></button>
+      <button class="section-tab" data-section-tab="new">새로 읽을 것 <span class="section-tab-count">10</span></button>
+    </div>
+    <div class="section-tab-help" id="section-tab-help">키워드/HF likes 기반 종합 추천. 같은 핫이슈는 며칠간 1위 가능.</div>
+    <div class="section-content active" data-tab-content="picks">
+    <div class="paper-card" data-matched='["agent", "llm"]'>
       <div class="paper-rank">1</div>
-      <h3 class="paper-title"><a href="https://arxiv.org/abs/2505.99001" target="_blank">Scaling Laws for Mixture-of-Experts Models</a></h3>
-      <p class="paper-summary">MoE 모델의 새로운 scaling law를 제안하여 동일 compute에서 dense 대비 30% 효율을 보임.</p>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13496v1" target="_blank">MARLIN: Multi-Agent Game-Theoretic Reinforcement Learning for Sustainable LLM Inference in Cloud Datacenters</a></h3>
+      <p class="paper-summary">MARLIN은 클라우드 데이터센터에서 LLM 추론의 지속 가능성을 개선하기 위해 multi-agent game-theoretic reinforcement learning을 활용하여 TTFT, 탄소 배출, 수자원 사용, 에너지 비용을 동시에 최적화하는 프레임워크입니다. 기존 방식 대비 TTFT 18%, 탄소 배출 33%, 수자원 사용 43%, 에너지 비용 11%를 각각 감소시키는 성과를 달성했습니다.</p>
       <div class="paper-meta">
-        <span class="tag trending">🔥 423 likes</span><span class="tag">cs.LG</span>
-        <div class="paper-links"><a href="https://arxiv.org/abs/2505.99001" target="_blank">arXiv</a><a href="#" target="_blank">PDF</a><a href="https://huggingface.co/papers/2505.99001" target="_blank">HF</a></div>
+        <span class="tag matched">agent</span><span class="tag matched">llm</span><span class="tag">cs.DC</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13496v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13496v1" target="_blank">PDF</a></div>
       </div>
     </div>
     
 
-    <div class="paper-card">
+    <div class="paper-card" data-matched='["time series", "evaluation", "llm"]'>
       <div class="paper-rank">2</div>
-      <h3 class="paper-title"><a href="https://arxiv.org/abs/2505.99002" target="_blank">DiffuSeq-v2: Faster Diffusion for Text Generation</a></h3>
-      <p class="paper-summary">Text generation에 적용되는 diffusion model의 inference를 4배 가속하는 새 sampler.</p>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13711v1" target="_blank">MILM: Large Language Models for Multimodal Irregular Time Series with Informative Sampling</a></h3>
+      <p class="paper-summary"># 요약
+
+본 논문은 불규칙적으로 샘플링된 다중모달 시계열 데이터(MITS)를 XML 형식의 시간순 triplet으로 표현하고, LLM을 two-stage 전략으로 fine-tuning하여 샘플링 패턴과 관측값을 동시에 모델링하는 MILM을 제안한다. 제안된 MILM-2S는 EHR 데이터셋에서 샘플링 패턴이 예측 신호를 포함함을 확인하고 value pending 평가에서 우수한 성능을 달성한다.</p>
       <div class="paper-meta">
-        <span class="tag trending">🔥 187 likes</span><span class="tag">cs.CL</span>
-        <div class="paper-links"><a href="https://arxiv.org/abs/2505.99002" target="_blank">arXiv</a><a href="#" target="_blank">PDF</a></div>
+        <span class="tag matched">time series</span><span class="tag matched">evaluation</span><span class="tag matched">llm</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13711v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13711v1" target="_blank">PDF</a></div>
       </div>
     </div>
     
 
-    <div class="paper-card">
+    <div class="paper-card" data-matched='["agent", "large language model", "llm"]'>
       <div class="paper-rank">3</div>
-      <h3 class="paper-title"><a href="https://arxiv.org/abs/2505.99003" target="_blank">Causal Inference Meets LLMs: A Survey</a></h3>
-      <p class="paper-summary">LLM 시대의 causal inference 연구 동향을 정리한 서베이.</p>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13725v1" target="_blank">ScioMind: Cognitively Grounded Multi-Agent Social Simulation with Anchoring-Based Belief Dynamics and Dynamic Profiles</a></h3>
+      <p class="paper-summary">본 논문은 LLM 기반 다중 에이전트 사회 시뮬레이션에서 인지적 근거를 갖춘 의견 역학을 구현하기 위해, anchoring 기반의 신념 업데이트 규칙, 계층적 메모리 아키텍처, 동적 에이전트 프로필을 통합한 ScioMind 프레임워크를 제안하며, 실제 정책 토론 시나리오에서 편극화, 다양성, 극단화 지표 등에서 행동 현실성의 향상을 입증했다.</p>
       <div class="paper-meta">
-        <span class="tag trending">🔥 92 likes</span><span class="tag">cs.LG</span>
-        <div class="paper-links"><a href="https://arxiv.org/abs/2505.99003" target="_blank">arXiv</a><a href="#" target="_blank">PDF</a></div>
+        <span class="tag matched">agent</span><span class="tag matched">large language model</span><span class="tag matched">llm</span><span class="tag">cs.AI</span><span class="tag">cs.SI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13725v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13725v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["evaluation"]'>
+      <div class="paper-rank">4</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13779v1" target="_blank">MinT: Managed Infrastructure for Training and Serving Millions of LLMs</a></h3>
+      <p class="paper-summary">MinT는 LoRA 어댑터 기반의 정책 학습과 서빙을 위한 관리형 인프라 시스템으로, base 모델을 고정하고 LoRA 어댑터만 이동시켜 수백만 개 규모의 정책을 효율적으로 관리한다. Scale Up/Down/Out 세 가지 확장 축을 통해 frontier 규모 모델부터 경량 어댑터까지 지원하며, 메모리 사용과 처리 시간을 대폭 감소시키면서 대규모 정책 카탈로그 운영을 가능하게 한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">evaluation</span><span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 60</span><span class="tag">cs.LG</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13779v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13779v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.13779" target="_blank">HF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["agent", "rag"]'>
+      <div class="paper-rank">5</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13618v1" target="_blank">OpenAaaS: An Open Agent-as-a-Service Framework for Distributed Materials-Informatics Research</a></h3>
+      <p class="paper-summary"># 요약
+
+OpenAaaS는 LLM 기반 autonomous agents를 활용하여 기관 간 경계를 넘어 materials informatics 역량을 안전하게 조합할 수 있는 오픈소스 분산 Agent-as-a-Service 프레임워크이며, "code flows, data stays still" 원칙 하에 Master Agent가 복잡한 재료 설계 작업을 계획하면 Sub-agents가 로컬 데이터와 계산 자원에 대한 주권을 유지하며 실행하는 구조를 제시한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">agent</span><span class="tag matched">RAG</span><span class="tag">cond-mat.mtrl-sci</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13618v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13618v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["agent", "evaluation"]'>
+      <div class="paper-rank">6</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13311v1" target="_blank">IdeaForge: A Knowledge Graph-Grounded Multi-Agent Framework for Cross-Methodology Innovation Analysis and Patent Claim Generation</a></h3>
+      <p class="paper-summary">IdeaForge는 TRIZ, Design Thinking, SCAMPER 등 다양한 혁신 방법론을 specialist agent들이 FalkorDB knowledge graph 위에서 통합 운영하며, 여러 방법론에서 독립적으로 지지받는 claim들을 CONVERGENT 관계로 연결하는 cross-methodology convergence mechanism을 통해 신뢰도 높은 혁신 후보를 식별하고 patent claim 생성을 체계화한 프레임워크다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">agent</span><span class="tag matched">evaluation</span><span class="tag">cs.AI</span><span class="tag">cs.IR</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13311v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13311v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='[]'>
+      <div class="paper-rank">7</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13724v1" target="_blank">AnyFlow: Any-Step Video Diffusion Model with On-Policy Flow Map Distillation</a></h3>
+      <p class="paper-summary">AnyFlow는 consistency distillation의 한계를 극복하기 위해 endpoint consistency mapping 대신 flow-map transition learning을 distillation 목표로 삼아, 임의의 샘플링 스텝에서 성능이 저하되지 않는 첫 번째 any-step video diffusion distillation 프레임워크를 제안합니다. Flow Map Backward Simulation을 통해 효율적인 on-policy distillation을 가능하게 하여 few-step 샘플링에서의 discretization error와 causal generation에서의 exposure bias를 동시에 감소시킵니다.</p>
+      <div class="paper-meta">
+        <span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 53</span><span class="tag">cs.CV</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13724v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13724v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.13724" target="_blank">HF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["evaluation"]'>
+      <div class="paper-rank">8</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13801v1" target="_blank">Improving Reproducibility in Evaluation through Multi-Level Annotator Modeling</a></h3>
+      <p class="paper-summary">본 논문은 LLM 평가에서 인간 annotator의 편향과 주관성으로 인한 재현성 문제를 해결하기 위해 multi-level bootstrapping 접근법을 제안하며, 통계적 유의성 달성을 위한 항목 수(N)와 응답 수(K) 간의 trade-off를 분석합니다. 이를 통해 신뢰할 수 있는 generative AI 모델 평가를 위한 annotator pool 확대의 효과를 실증적으로 규명합니다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">evaluation</span><span class="tag">cs.LG</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13801v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13801v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["time series"]'>
+      <div class="paper-rank">9</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13678v1" target="_blank">Three-Stage Learning Unlocks Strong Performance in Simple Models for Long-Term Time Series Forecasting</a></h3>
+      <p class="paper-summary">본 논문은 STAIR라는 3단계 학습 패러다임을 제안하여 장기 시계열 예측에서 단순한 temporal mapping 모델의 성능을 unlock하는데, 공유 temporal mapping으로 공통 동역학을 학습한 후 channel-wise fine-tuning으로 변수별 패턴을 적응시키고 마지막으로 residual learning으로 변수 간 정보를 보완하는 방식으로 복잡한 아키텍처 모듈 없이 강력한 성능을 달성합니다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">time series</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13678v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13678v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["graph neural network", "gnn", "large language model"]'>
+      <div class="paper-rank">10</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13623v1" target="_blank">Multimodal Graph-based Classification of Esophageal Motility Disorders</a></h3>
+      <p class="paper-summary">본 논문은 고해상도 임피던스 식도 조영술(HRIM) 데이터를 spatio-temporal graph로 표현하고 graph neural network(GNN)으로 처리한 후 환자 정보 임베딩과 융합하여 식도 운동 장애를 분류하는 multimodal ML 접근법을 제시합니다. 환자 특성과 graph 기반 모델링이 HRIM 기반 특성만 사용하는 모델과 vision 기반 baseline보다 우수한 분류 성능을 달성함을 보여줍니다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">graph neural network</span><span class="tag matched">GNN</span><span class="tag matched">large language model</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13623v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13623v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    </div>
+    <div class="section-content" data-tab-content="new">
+    <div class="paper-card" data-matched='["agent", "llm"]'>
+      <div class="paper-rank">1</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13496v1" target="_blank">MARLIN: Multi-Agent Game-Theoretic Reinforcement Learning for Sustainable LLM Inference in Cloud Datacenters</a></h3>
+      <p class="paper-summary">MARLIN은 클라우드 데이터센터에서 LLM 추론의 지속 가능성을 개선하기 위해 multi-agent game-theoretic reinforcement learning을 활용하여 TTFT, 탄소 배출, 수자원 사용, 에너지 비용을 동시에 최적화하는 프레임워크입니다. 기존 방식 대비 TTFT 18%, 탄소 배출 33%, 수자원 사용 43%, 에너지 비용 11%를 각각 감소시키는 성과를 달성했습니다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">agent</span><span class="tag matched">llm</span><span class="tag">cs.DC</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13496v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13496v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["time series", "evaluation", "llm"]'>
+      <div class="paper-rank">2</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13711v1" target="_blank">MILM: Large Language Models for Multimodal Irregular Time Series with Informative Sampling</a></h3>
+      <p class="paper-summary"># 요약
+
+본 논문은 불규칙적으로 샘플링된 다중모달 시계열 데이터(MITS)를 XML 형식의 시간순 triplet으로 표현하고, LLM을 two-stage 전략으로 fine-tuning하여 샘플링 패턴과 관측값을 동시에 모델링하는 MILM을 제안한다. 제안된 MILM-2S는 EHR 데이터셋에서 샘플링 패턴이 예측 신호를 포함함을 확인하고 value pending 평가에서 우수한 성능을 달성한다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">time series</span><span class="tag matched">evaluation</span><span class="tag matched">llm</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13711v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13711v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["agent", "large language model", "llm"]'>
+      <div class="paper-rank">3</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13725v1" target="_blank">ScioMind: Cognitively Grounded Multi-Agent Social Simulation with Anchoring-Based Belief Dynamics and Dynamic Profiles</a></h3>
+      <p class="paper-summary">본 논문은 LLM 기반 다중 에이전트 사회 시뮬레이션에서 인지적 근거를 갖춘 의견 역학을 구현하기 위해, anchoring 기반의 신념 업데이트 규칙, 계층적 메모리 아키텍처, 동적 에이전트 프로필을 통합한 ScioMind 프레임워크를 제안하며, 실제 정책 토론 시나리오에서 편극화, 다양성, 극단화 지표 등에서 행동 현실성의 향상을 입증했다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">agent</span><span class="tag matched">large language model</span><span class="tag matched">llm</span><span class="tag">cs.AI</span><span class="tag">cs.SI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13725v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13725v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["evaluation"]'>
+      <div class="paper-rank">4</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13779v1" target="_blank">MinT: Managed Infrastructure for Training and Serving Millions of LLMs</a></h3>
+      <p class="paper-summary">MinT는 LoRA 어댑터 기반의 정책 학습과 서빙을 위한 관리형 인프라 시스템으로, base 모델을 고정하고 LoRA 어댑터만 이동시켜 수백만 개 규모의 정책을 효율적으로 관리한다. Scale Up/Down/Out 세 가지 확장 축을 통해 frontier 규모 모델부터 경량 어댑터까지 지원하며, 메모리 사용과 처리 시간을 대폭 감소시키면서 대규모 정책 카탈로그 운영을 가능하게 한다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">evaluation</span><span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 60</span><span class="tag">cs.LG</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13779v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13779v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.13779" target="_blank">HF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["agent", "rag"]'>
+      <div class="paper-rank">5</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13618v1" target="_blank">OpenAaaS: An Open Agent-as-a-Service Framework for Distributed Materials-Informatics Research</a></h3>
+      <p class="paper-summary"># 요약
+
+OpenAaaS는 LLM 기반 autonomous agents를 활용하여 기관 간 경계를 넘어 materials informatics 역량을 안전하게 조합할 수 있는 오픈소스 분산 Agent-as-a-Service 프레임워크이며, "code flows, data stays still" 원칙 하에 Master Agent가 복잡한 재료 설계 작업을 계획하면 Sub-agents가 로컬 데이터와 계산 자원에 대한 주권을 유지하며 실행하는 구조를 제시한다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">agent</span><span class="tag matched">RAG</span><span class="tag">cond-mat.mtrl-sci</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13618v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13618v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["agent", "evaluation"]'>
+      <div class="paper-rank">6</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13311v1" target="_blank">IdeaForge: A Knowledge Graph-Grounded Multi-Agent Framework for Cross-Methodology Innovation Analysis and Patent Claim Generation</a></h3>
+      <p class="paper-summary">IdeaForge는 TRIZ, Design Thinking, SCAMPER 등 다양한 혁신 방법론을 specialist agent들이 FalkorDB knowledge graph 위에서 통합 운영하며, 여러 방법론에서 독립적으로 지지받는 claim들을 CONVERGENT 관계로 연결하는 cross-methodology convergence mechanism을 통해 신뢰도 높은 혁신 후보를 식별하고 patent claim 생성을 체계화한 프레임워크다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">agent</span><span class="tag matched">evaluation</span><span class="tag">cs.AI</span><span class="tag">cs.IR</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13311v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13311v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='[]'>
+      <div class="paper-rank">7</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13724v1" target="_blank">AnyFlow: Any-Step Video Diffusion Model with On-Policy Flow Map Distillation</a></h3>
+      <p class="paper-summary">AnyFlow는 consistency distillation의 한계를 극복하기 위해 endpoint consistency mapping 대신 flow-map transition learning을 distillation 목표로 삼아, 임의의 샘플링 스텝에서 성능이 저하되지 않는 첫 번째 any-step video diffusion distillation 프레임워크를 제안합니다. Flow Map Backward Simulation을 통해 효율적인 on-policy distillation을 가능하게 하여 few-step 샘플링에서의 discretization error와 causal generation에서의 exposure bias를 동시에 감소시킵니다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF 53</span><span class="tag">cs.CV</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13724v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13724v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.13724" target="_blank">HF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["evaluation"]'>
+      <div class="paper-rank">8</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13801v1" target="_blank">Improving Reproducibility in Evaluation through Multi-Level Annotator Modeling</a></h3>
+      <p class="paper-summary">본 논문은 LLM 평가에서 인간 annotator의 편향과 주관성으로 인한 재현성 문제를 해결하기 위해 multi-level bootstrapping 접근법을 제안하며, 통계적 유의성 달성을 위한 항목 수(N)와 응답 수(K) 간의 trade-off를 분석합니다. 이를 통해 신뢰할 수 있는 generative AI 모델 평가를 위한 annotator pool 확대의 효과를 실증적으로 규명합니다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">evaluation</span><span class="tag">cs.LG</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13801v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13801v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["time series"]'>
+      <div class="paper-rank">9</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13678v1" target="_blank">Three-Stage Learning Unlocks Strong Performance in Simple Models for Long-Term Time Series Forecasting</a></h3>
+      <p class="paper-summary">본 논문은 STAIR라는 3단계 학습 패러다임을 제안하여 장기 시계열 예측에서 단순한 temporal mapping 모델의 성능을 unlock하는데, 공유 temporal mapping으로 공통 동역학을 학습한 후 channel-wise fine-tuning으로 변수별 패턴을 적응시키고 마지막으로 residual learning으로 변수 간 정보를 보완하는 방식으로 복잡한 아키텍처 모듈 없이 강력한 성능을 달성합니다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">time series</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13678v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13678v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["graph neural network", "gnn", "large language model"]'>
+      <div class="paper-rank">10</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13623v1" target="_blank">Multimodal Graph-based Classification of Esophageal Motility Disorders</a></h3>
+      <p class="paper-summary">본 논문은 고해상도 임피던스 식도 조영술(HRIM) 데이터를 spatio-temporal graph로 표현하고 graph neural network(GNN)으로 처리한 후 환자 정보 임베딩과 융합하여 식도 운동 장애를 분류하는 multimodal ML 접근법을 제시합니다. 환자 특성과 graph 기반 모델링이 HRIM 기반 특성만 사용하는 모델과 vision 기반 baseline보다 우수한 분류 성능을 달성함을 보여줍니다.</p>
+      <div class="paper-meta">
+        <span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span><span class="tag matched">graph neural network</span><span class="tag matched">GNN</span><span class="tag matched">large language model</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13623v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13623v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    </div>
+    
+
+    
+        <div class="section-title" style="margin-top:40px">
+          내 분야 소식
+          <span class="count">10</span>
+          <span style="margin-left:8px;font-size:12px;color:#8b95a1;font-weight:400">데이터 마이닝 / Knowledge Discovery</span>
+        </div>
+        <p style="font-size:13px;color:#8b95a1;margin-bottom:16px">키워드 무관 · 내 분야 전반 트렌드</p>
+        
+    <div class="paper-card" data-matched='["knowledge graph"]'>
+      <div class="paper-rank">1</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13310v1" target="_blank">SemRepo: A Knowledge Graph for Research Software and Its Scholarly Ecosystem</a></h3>
+      <p class="paper-summary">SemRepo는 약 81백만 개의 RDF triple로 구성된 knowledge graph로서 GitHub의 과학 연구 관련 저장소 약 200,000개에 대한 메타데이터를 capture하고 SemOpenAlex, LPWC, MLSea-KG 등의 외부 scholarly knowledge graph와 연계하여, 기존에 분산된 플랫폼들 간의 publication과 research artifact 간의 통합 질의와 reproducibility 및 software sustainability 분석을 가능하게 한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">knowledge graph</span><span class="tag">cs.DL</span><span class="tag">cs.DB</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13310v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13310v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["anomaly detection"]'>
+      <div class="paper-rank">2</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13816v1" target="_blank">Uncertainty-Driven Anomaly Detection for Psychotic Relapse Using Smartwatches: Forecasting and Multi-Task Learning Fusion</a></h3>
+      <p class="paper-summary">본 논문은 스마트워치 기반 두 가지 프레임워크(cardiac dynamics 예측 기반 anomaly detection과 sleep, motion, cardiac 신호를 융합하는 multi-task learning)를 제안하며, 두 프레임워크의 complementary한 특성을 활용한 late-fusion 전략으로 정신병적 재발(psychotic relapse)을 탐지합니다. Transformer encoder와 ensemble MLP 기반 predictive uncertainty를 통해 실제 wearable 데이터의 변동성에 robust한 방식을 보여주며, 다양한 digital phenotype의 통합이 psychotic relapse 탐지에 필수적임을</p>
+      <div class="paper-meta">
+        <span class="tag matched">anomaly detection</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13816v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13816v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["anomaly detection"]'>
+      <div class="paper-rank">3</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13642v1" target="_blank">Conformal Anomaly Detection in Python: Moving Beyond Heuristic Thresholds with 'nonconform'</a></h3>
+      <p class="paper-summary">본 논문은 anomaly detection 점수를 exchangeability 가정 하에서 calibrated p-value로 변환하는 conformal anomaly detection을 구현한 Python 패키지 'nonconform'을 제시하며, scikit-learn 등과 통합되어 split-conformal calibration부터 shift-aware extensions까지 다양한 conformalization 전략을 지원함으로써 통계적으로 원리 있는 anomaly detection을 실현한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">anomaly detection</span><span class="tag">stat.ML</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13642v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13642v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["time series"]'>
+      <div class="paper-rank">4</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13150v1" target="_blank">Generative Modeling of Approximately Periodic Time Series by a Posterior-Weighted Gaussian Process</a></h3>
+      <p class="paper-summary">본 논문은 산업 및 사이버-물리 시스템의 반복적 구조를 가진 근사 주기 시계열을 모델링하기 위해, 새로운 커널로 posterior를 조절하는 Gaussian Process 기반의 생성 모델을 제안하며, 반복 내 구조와 반복 간 변동성을 분리하여 반복 간 평활한 변동을 허용하면서도 강한 구조적 규칙성을 포착한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">time series</span><span class="tag">stat.ML</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13150v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13150v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["time series"]'>
+      <div class="paper-rank">5</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13128v1" target="_blank">Amortized Neural Clustering of Time Series based on Statistical Features</a></h3>
+      <p class="paper-summary">본 논문은 통계적 특징(autocorrelation, quantile autocorrelation 등)을 기반으로 신경망을 통해 최적의 시계열 clustering 규칙을 학습하는 amortized neural inference 접근법을 제안하며, 이는 기존의 K-means나 hierarchical clustering과 같은 알고리즘의 선택과 calibration 필요성을 줄이고 자동으로 클러스터 개수를 결정할 수 있다. 실험을 통해 제안 방법이 기존 방법들보다 경쟁력 있거나 우수한 clustering 정확도를 달성함을 보여주</p>
+      <div class="paper-meta">
+        <span class="tag matched">time series</span><span class="tag">stat.ML</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13128v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13128v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["anomaly detection"]'>
+      <div class="paper-rank">6</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13746v1" target="_blank">Weakly-Supervised Spatiotemporal Anomaly Detection</a></h3>
+      <p class="paper-summary">본 논문은 비디오 수준의 약한 레이블만을 사용하여 spatiotemporal anomaly detection을 수행하는 weakly supervised 방법을 제안하며, multiple instance learning (MIL) 기반의 ranking loss를 통해 정상 및 이상 비디오 클립을 positive/negative bag으로 표현하여 spatial과 temporal 영역에서의 anomaly score를 결정합니다. UCF Crime2Local Dataset에서의 실험을 통해 약한 감독 신호만으로도 효과적인 spatiotemporal anomaly detection이 가능함을 보여줍니다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">anomaly detection</span><span class="tag">cs.CV</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13746v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13746v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["knowledge graph"]'>
+      <div class="paper-rank">7</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13153v1" target="_blank">Strikingness-Aware Evaluation for Temporal Knowledge Graph Reasoning</a></h3>
+      <p class="paper-summary">본 논문은 Temporal Knowledge Graph Reasoning의 평가에서 모든 사건을 동등하게 취급하는 문제를 지적하고, rule-based strikingness measuring framework (RSMF)를 통해 사건의 희귀성과 추론 난이도를 정량화하여 가중 평가 지표(weighted MRR, Hits@k)에 반영하는 strikingness-aware 평가 프레임워크를 제안한다. 이를 통해 기존 모델들이 희귀한 사건 예측에서 더욱 취약함을 보이고 더 엄격한 평가 체계를 제시한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">knowledge graph</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13153v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13153v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='[]'>
+      <div class="paper-rank">8</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13511v1" target="_blank">Many-Shot CoT-ICL: Making In-Context Learning Truly Learn</a></h3>
+      <p class="paper-summary">본 논문은 많은 수의 chain-of-thought 예제를 사용하는 many-shot ICL에서 추론 작업의 성능이 비추론 작업과 다른 스케일링 패턴을 보이며, 이를 패턴 매칭이 아닌 test-time learning으로 해석하고 Curvilinear Demonstration Selection 방법을 제안하여 성능을 향상시킨다.</p>
+      <div class="paper-meta">
+        <span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수 — ML 연구자들의 큐레이션 신호">🔥 HF 17</span><span class="tag">cs.CL</span><span class="tag">cs.AI</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13511v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13511v1" target="_blank">PDF</a><a href="https://huggingface.co/papers/2605.13511" target="_blank">HF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["rag", "anomaly detection"]'>
+      <div class="paper-rank">9</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13764v1" target="_blank">VectorSmuggle: Steganographic Exfiltration in Embedding Stores and a Cryptographic Provenance Defense</a></h3>
+      <p class="paper-summary">본 논문은 vector database의 embedding에 post-embedding perturbation 기법을 적용하여 정상적인 retrieval 동작을 유지하면서 payload data를 은닉하는 steganographic exfiltration attack을 제시하고, 특히 small-angle orthogonal rotation이 distribution-based anomaly detection을 우회할 수 있음을 보여줍니다. 이에 대응하기 위해 cryptographic provenance attestation과 embedding integrity 제어를 통한 방어 메커니즘을 제안합니다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">rag</span><span class="tag matched">anomaly detection</span><span class="tag">cs.CR</span><span class="tag">cs.IR</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13764v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13764v1" target="_blank">PDF</a></div>
+      </div>
+    </div>
+    
+
+    <div class="paper-card" data-matched='["graph neural network", "data mining"]'>
+      <div class="paper-rank">10</div>
+      <h3 class="paper-title"><a href="http://arxiv.org/abs/2605.13673v1" target="_blank">Graph Neural Networks with Triangle-Based Messages for the Multicut Problem</a></h3>
+      <p class="paper-summary">본 논문은 multicut 문제를 위해 edge feature와 triangle 기반 message passing을 활용하는 적응형 graph neural network 아키텍처를 제안하며, 최신 휴리스틱 솔버를 능가하는 해의 품질과 실행 시간을 달성한다.</p>
+      <div class="paper-meta">
+        <span class="tag matched">graph neural network</span><span class="tag matched">data mining</span><span class="tag">cs.LG</span>
+        <div class="paper-links"><a href="http://arxiv.org/abs/2605.13673v1" target="_blank">arXiv</a><a href="https://arxiv.org/pdf/2605.13673v1" target="_blank">PDF</a></div>
       </div>
     </div>
     
         
 
     <div class="footer">
-      <strong>키워드:</strong> (설정 안 됨)<br>
       <strong>출처:</strong> arXiv (cs.LG, cs.IR, cs.DB, cs.CL, cs.AI) · Hugging Face Daily Papers<br>
       Generated by trend-newsletter
     </div>
   </div>
+  <script>
+(function() {
+  const INITIAL_KEYWORDS = ["data quality", "RAG", "graph neural network", "time series", "graphRAG", "evaluation", "GNN", "llm", "agent", "hello", "large language model"];
+  const SUGGESTED_KEYWORDS = [];
+  const INITIAL_PROFILES_FROM_SERVER = ["data-mining"];
+  const ALL_PROFILES = [{"id": "data-mining", "label": "\ub370\uc774\ud130 \ub9c8\uc774\ub2dd / Knowledge Discovery"}, {"id": "ml-general", "label": "Machine Learning (\uc77c\ubc18)"}, {"id": "nlp", "label": "\uc790\uc5f0\uc5b4\ucc98\ub9ac (NLP)"}, {"id": "cv", "label": "\ucef4\ud4e8\ud130 \ube44\uc804 (Computer Vision)"}, {"id": "speech", "label": "\uc74c\uc131 / \uc624\ub514\uc624"}, {"id": "robotics", "label": "\ub85c\ubcf4\ud2f1\uc2a4 / \uac15\ud654\ud559\uc2b5"}, {"id": "database", "label": "\ub370\uc774\ud130\ubca0\uc774\uc2a4 / \uc2dc\uc2a4\ud15c"}, {"id": "security", "label": "AI \ubcf4\uc548 / \ud504\ub77c\uc774\ubc84\uc2dc"}];
+  const STORAGE_KEY = 'trend_newsletter_keywords';
+  const PROFILE_STORAGE_KEY = 'trend_newsletter_profiles';
+  const PAT_KEY = 'trend_newsletter_github_pat';
+  const REPO_KEY = 'trend_newsletter_repo';
+
+  function loadKeywords() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
+    return INITIAL_KEYWORDS.slice();
+  }
+
+  function saveKeywords(keywords) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(keywords));
+  }
+
+  // 분야 — 서버에서 받은 초기값 + localStorage 임시변경분
+  let INITIAL_PROFILES = INITIAL_PROFILES_FROM_SERVER.slice();
+  function loadProfiles() {
+    try {
+      const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
+    return INITIAL_PROFILES.slice();
+  }
+  function saveProfiles(profiles) {
+    localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profiles));
+  }
+
+  let keywords = loadKeywords();
+  let profiles = loadProfiles();
+  let activeFilters = new Set();
+
+  function isDirty() {
+    return keywords.slice().sort().join('|') !== INITIAL_KEYWORDS.slice().sort().join('|');
+  }
+  function isProfileDirty() {
+    return profiles.slice().sort().join('|') !== INITIAL_PROFILES.slice().sort().join('|');
+  }
+
+  async function ensurePATandRepo() {
+    let pat = localStorage.getItem(PAT_KEY);
+    let repo = localStorage.getItem(REPO_KEY);
+    if (pat && repo) return { pat, repo };
+
+    const wantSetup = confirm('GitHub API 자동 commit을 설정하시겠어요?\n\nPersonal Access Token을 한 번만 등록하면 이후 즉시 적용됩니다.');
+    if (!wantSetup) return null;
+    const repoInput = prompt('GitHub repo (예: newoceanwave/trend-newsletter)');
+    if (!repoInput) return null;
+    const patInput = prompt('GitHub Personal Access Token\n\n생성: https://github.com/settings/tokens?type=beta\n권한: Contents - Read and write + Actions - Read and write');
+    if (!patInput) return null;
+    localStorage.setItem(REPO_KEY, repoInput);
+    localStorage.setItem(PAT_KEY, patInput);
+    return { pat: patInput, repo: repoInput };
+  }
+
+  async function commitToGitHub(filename, contentObj, btnId, btnText) {
+    const auth = await ensurePATandRepo();
+    if (!auth) return false;
+    const { pat, repo } = auth;
+    const btn = document.getElementById(btnId);
+    if (btn) { btn.disabled = true; btn.textContent = '커밋 중...'; }
+
+    try {
+      const newContent = JSON.stringify(contentObj, null, 2);
+      let sha = null;
+      try {
+        const getResp = await fetch(`https://api.github.com/repos/${repo}/contents/${filename}`, {
+          headers: { 'Authorization': `Bearer ${pat}`, 'Accept': 'application/vnd.github+json' }
+        });
+        if (getResp.ok) {
+          const data = await getResp.json();
+          sha = data.sha;
+        }
+      } catch (e) {}
+
+      const putBody = {
+        message: `Update ${filename}`,
+        content: btoa(unescape(encodeURIComponent(newContent))),
+      };
+      if (sha) putBody.sha = sha;
+
+      const putResp = await fetch(`https://api.github.com/repos/${repo}/contents/${filename}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${pat}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(putBody)
+      });
+
+      if (!putResp.ok) {
+        const err = await putResp.json();
+        throw new Error(err.message || 'API 호출 실패');
+      }
+
+      // workflow trigger
+      const triggerResp = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/daily.yml/dispatches`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${pat}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ref: 'main' })
+      });
+
+      if (triggerResp.ok) {
+        alert('✅ 업데이트 완료!\n\nGitHub Actions가 자동 실행됩니다 (3-5분 후 새 데이터 반영).');
+      } else {
+        alert('✅ 파일 업데이트 완료!\n\n⚠️ 자동 실행 실패. Actions 탭에서 수동으로 "Run workflow" 클릭.');
+      }
+      return true;
+    } catch (e) {
+      alert('❌ 실패: ' + e.message);
+      console.error(e);
+      return false;
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = btnText; }
+    }
+  }
+
+  async function commitKeywords() {
+    const ok = await commitToGitHub('keywords.json', {
+      keywords: keywords,
+      updated_at: new Date().toISOString().split('T')[0]
+    }, 'save-btn', '키워드 즉시 적용');
+    if (ok) {
+      INITIAL_KEYWORDS.length = 0;
+      INITIAL_KEYWORDS.push(...keywords);
+      render();
+    }
+  }
+
+  async function commitProfiles() {
+    const ok = await commitToGitHub('profiles.json', {
+      profiles: profiles,
+      updated_at: new Date().toISOString().split('T')[0]
+    }, 'profile-save-btn', '분야 즉시 적용');
+    if (ok) {
+      INITIAL_PROFILES.length = 0;
+      INITIAL_PROFILES.push(...profiles);
+      renderProfiles();
+    }
+  }
+
+  function downloadKeywords() {
+    const data = {
+      keywords: keywords,
+      updated_at: new Date().toISOString().split('T')[0]
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'keywords.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function renderProfiles() {
+    const list = document.getElementById('profile-list');
+    if (!list) return;
+    list.innerHTML = '';
+
+    ALL_PROFILES.forEach(p => {
+      const chip = document.createElement('span');
+      const selected = profiles.includes(p.id);
+      chip.className = 'profile-chip' + (selected ? ' active' : '');
+      chip.textContent = p.label;
+      chip.addEventListener('click', () => {
+        if (profiles.includes(p.id)) {
+          profiles = profiles.filter(x => x !== p.id);
+        } else {
+          profiles.push(p.id);
+        }
+        saveProfiles(profiles);
+        renderProfiles();
+      });
+      list.appendChild(chip);
+    });
+
+    const saveBar = document.getElementById('profile-save-bar');
+    const msg = document.getElementById('profile-dirty-msg');
+    const btn = document.getElementById('profile-save-btn');
+    if (isProfileDirty()) {
+      saveBar.classList.add('dirty');
+      msg.textContent = '변경됨 — 적용하려면 클릭';
+      btn.disabled = false;
+    } else {
+      saveBar.classList.remove('dirty');
+      msg.textContent = profiles.length > 0 ? `선택: ${profiles.length}개 분야` : '선택된 분야 없음';
+      btn.disabled = true;
+    }
+  }
+
+  function render() {
+    const list = document.getElementById('kw-list');
+    const suggBox = document.getElementById('kw-suggested');
+    const saveBar = document.getElementById('save-bar');
+    const dirtyMsg = document.getElementById('dirty-msg');
+    const saveBtn = document.getElementById('save-btn');
+
+    list.innerHTML = '';
+    if (keywords.length === 0) {
+      list.innerHTML = '<div class="kw-empty">아직 등록된 키워드가 없어요. 아래에서 추가해보세요.</div>';
+    } else {
+      keywords.forEach(kw => {
+        const chip = document.createElement('span');
+        chip.className = 'kw-chip' + (activeFilters.has(kw.toLowerCase()) ? ' active' : '');
+        chip.innerHTML = kw + '<span class="kw-chip-remove" title="제거">&times;</span>';
+
+        chip.addEventListener('click', (e) => {
+          if (e.target.classList.contains('kw-chip-remove')) {
+            keywords = keywords.filter(k => k !== kw);
+            activeFilters.delete(kw.toLowerCase());
+            saveKeywords(keywords);
+            render();
+            applyFilter();
+          } else {
+            const lo = kw.toLowerCase();
+            if (activeFilters.has(lo)) activeFilters.delete(lo);
+            else activeFilters.add(lo);
+            render();
+            applyFilter();
+          }
+        });
+        list.appendChild(chip);
+      });
+    }
+
+    suggBox.innerHTML = '';
+    const notRegistered = SUGGESTED_KEYWORDS.filter(
+      kw => !keywords.map(k => k.toLowerCase()).includes(kw.toLowerCase())
+    );
+    if (notRegistered.length === 0) {
+      document.getElementById('kw-suggested-section').style.display = 'none';
+    } else {
+      document.getElementById('kw-suggested-section').style.display = 'block';
+      notRegistered.forEach(kw => {
+        const chip = document.createElement('span');
+        chip.className = 'kw-suggest-chip';
+        chip.textContent = kw;
+        chip.addEventListener('click', () => {
+          if (!keywords.map(k => k.toLowerCase()).includes(kw.toLowerCase())) {
+            keywords.push(kw);
+            saveKeywords(keywords);
+            render();
+          }
+        });
+        suggBox.appendChild(chip);
+      });
+    }
+
+    if (isDirty()) {
+      saveBar.classList.add('dirty');
+      dirtyMsg.textContent = '변경됨 — 즉시 적용 또는 다운로드';
+      saveBtn.disabled = false;
+    } else {
+      saveBar.classList.remove('dirty');
+      dirtyMsg.textContent = '변경 없음';
+      saveBtn.disabled = true;
+    }
+  }
+
+  function applyFilter() {
+    const filterStatus = document.getElementById('filter-status');
+    const filterLabel = document.getElementById('filter-label');
+    const cards = document.querySelectorAll('.paper-card');
+    let visibleCount = 0;
+
+    if (activeFilters.size === 0) {
+      cards.forEach(c => c.classList.remove('hidden'));
+      filterStatus.classList.remove('show');
+      return;
+    }
+
+    cards.forEach(card => {
+      const matched = JSON.parse(card.dataset.matched || '[]');
+      const hasOverlap = matched.some(m => activeFilters.has(m.toLowerCase()));
+      if (hasOverlap) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    const filterArr = Array.from(activeFilters);
+    filterLabel.textContent = filterArr.join(', ') + ' 필터 적용 중 — ' + visibleCount + '편 표시';
+    filterStatus.classList.add('show');
+  }
+
+  function addKeyword() {
+    const input = document.getElementById('kw-input');
+    const value = input.value.trim();
+    if (!value) return;
+    if (!keywords.map(k => k.toLowerCase()).includes(value.toLowerCase())) {
+      keywords.push(value);
+      saveKeywords(keywords);
+      render();
+    }
+    input.value = '';
+    input.focus();
+  }
+
+  function clearFilters() {
+    activeFilters.clear();
+    render();
+    applyFilter();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('kw-add-btn').addEventListener('click', addKeyword);
+    document.getElementById('kw-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') addKeyword();
+    });
+    document.getElementById('save-btn').addEventListener('click', commitKeywords);
+    document.getElementById('save-btn-download').addEventListener('click', downloadKeywords);
+    document.getElementById('filter-clear').addEventListener('click', clearFilters);
+    document.getElementById('profile-save-btn').addEventListener('click', commitProfiles);
+    render();
+    renderProfiles();
+  });
+})();
+</script>
+  <script>
+    (function() {
+      const HELP_TEXTS = {
+        picks: '키워드/HF likes 기반 종합 추천. 같은 핫이슈는 며칠간 1위 가능.',
+        new: '24시간 이내 새 논문 우선. 비어있으면 지난 14일 추천 안 된 논문에서 발굴.'
+      };
+      document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.section-tab');
+        const contents = document.querySelectorAll('.section-content');
+        const helpEl = document.getElementById('section-tab-help');
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const target = tab.dataset.sectionTab;
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            contents.forEach(c => {
+              c.classList.toggle('active', c.dataset.tabContent === target);
+            });
+            if (helpEl && HELP_TEXTS[target]) helpEl.textContent = HELP_TEXTS[target];
+          });
+        });
+
+        // 논문 검색창 — 검색 누르면 search.html 새 창으로
+        const searchInput = document.getElementById('paper-search-input');
+        const searchBtn = document.getElementById('paper-search-btn');
+        function goSearch() {
+          const q = searchInput.value.trim();
+          if (!q) return;
+          window.open('search.html?q=' + encodeURIComponent(q), '_blank');
+        }
+        if (searchBtn) searchBtn.addEventListener('click', goSearch);
+        if (searchInput) searchInput.addEventListener('keydown', e => {
+          if (e.key === 'Enter') goSearch();
+        });
+      });
+    })();
+    </script>
 </body>
 </html>
