@@ -75,7 +75,7 @@ async function renderHeader(containerId, active) {
   container.innerHTML =
     '<div class="topbar">' +
       '<div class="topbar-inner">' +
-        '<div class="topbar-brand">AI 트렌드 뉴스레터</div>' +
+        '<a href="dashboard.html" class="topbar-brand">AI 트렌드 뉴스레터</a>' +
         '<nav class="topbar-nav">' + navHtml + '</nav>' +
         '<div class="topbar-user">' +
           '<span class="topbar-username">' + escapeHtml(userName) + '</span>' +
@@ -115,7 +115,10 @@ const SHARED_HEADER_CSS = `
   font-weight: 700;
   color: #191f28;
   white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
+.topbar-brand:hover { color: #3182f6; }
 .topbar-nav {
   display: flex;
   gap: 4px;
