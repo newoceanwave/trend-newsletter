@@ -322,3 +322,55 @@ async function updateBookmarkNote(rowId, note) {
     .eq('id', rowId);
   if (error) throw new Error(error.message);
 }
+
+// ============================================
+// Supabase 데이터 헬퍼 — 대시보드 추천 결과
+// ============================================
+
+// 가장 최근 배치 실행 날짜 가져오기
+async function fetchLatestRunDate() {
+  const { data, error } = await supabaseClient
+    .from('daily_papers')
+    .select('run_date')
+    .order('run_date', { ascending: false })
+    .limit(1);
+  if (error || !data || data.length === 0) return null;
+  return data[0].run_date;
+}
+
+// 특정 날짜의 내 추천 결과 + 논문 정보를 합쳐서 가져오기
+// 반환: { picks: [...], new: [...], field: [...] }
+async function fetchMyRecommendations(runDate) {
+  // 1) 내 추천 매핑 (rec_type, paper_id, rank, matched_keywords)
+  const { data: recs, error: recErr } = await supabaseClient
+    .from('user_recommendations')
+    .select('rec_type, paper_id, rank, matched_keywords')
+    .eq('run_date', runDate)
+    .order('rank', { ascending: true });
+  if (recErr) { console.error('추천 조회 실패:', recErr); return { picks: [], new: [], field: [] }; }
+  if (!recs || recs.length === 0) return { picks: [], new: [], field: [] };
+
+  // 2) 그 날짜의 논문 풀 전체 (paper_id로 매칭)
+  const { data: papers, error: paperErr } = await supabaseClient
+    .from('daily_papers')
+    .select('*')
+    .eq('run_date', runDate);
+  if (paperErr) { console.error('논문 조회 실패:', paperErr); return { picks: [], new: [], field: [] }; }
+
+  // paper_id → 논문 정보 맵
+  const paperMap = {};
+  (papers || []).forEach(p => { paperMap[p.paper_id] = p; });
+
+  // 3) rec_type별로 묶기 + 논문 정보 합치기
+  const result = { picks: [], new: [], field: [] };
+  recs.forEach(rec => {
+    const paper = paperMap[rec.paper_id];
+    if (!paper) return;
+    const merged = Object.assign({}, paper, {
+      rank: rec.rank,
+      matched_keywords: rec.matched_keywords || [],
+    });
+    if (result[rec.rec_type]) result[rec.rec_type].push(merged);
+  });
+  return result;
+}

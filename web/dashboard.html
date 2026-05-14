@@ -14,51 +14,96 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 .container { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; }
-.page-title {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
+.page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 8px; }
+.run-date { font-size: 13px; color: #8b95a1; margin-bottom: 28px; }
+
+/* 탭 */
+.section-tabs {
+  display: flex; gap: 4px; margin: 24px 0 4px;
+  border-bottom: 1px solid #f2f4f6;
 }
-.page-subtitle {
-  font-size: 15px;
-  color: #4e5968;
-  margin-bottom: 32px;
+.section-tab {
+  padding: 10px 14px; background: transparent; border: none;
+  color: #8b95a1; font-size: 14px; font-weight: 600; cursor: pointer;
+  border-bottom: 2px solid transparent; font-family: inherit;
+  display: flex; align-items: center; gap: 6px;
 }
-.card {
-  background: #fff;
-  border: 1px solid #f2f4f6;
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 16px;
+.section-tab:hover { color: #4e5968; }
+.section-tab.active { color: #191f28; border-bottom-color: #191f28; }
+.section-tab-count {
+  background: #f2f4f6; color: #6b7684; padding: 2px 8px;
+  border-radius: 10px; font-size: 11px; font-weight: 500;
 }
-.card-title {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 8px;
+.section-tab.active .section-tab-count { background: #191f28; color: #fff; }
+.section-tab-help { font-size: 12px; color: #8b95a1; margin-bottom: 16px; padding: 6px 0; }
+.section-content { display: none; }
+.section-content.active { display: block; }
+
+.section-title {
+  font-size: 14px; font-weight: 600; color: #4e5968;
+  margin: 40px 0 8px; display: flex; align-items: center; gap: 8px;
 }
-.card-text {
-  font-size: 14px;
-  color: #6b7684;
-  line-height: 1.6;
+.section-title .count {
+  background: #f2f4f6; color: #6b7684; padding: 2px 8px;
+  border-radius: 10px; font-size: 12px; font-weight: 500;
 }
-.phase-badge {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  color: #c08401;
-  background: #fff5e0;
-  padding: 3px 10px;
-  border-radius: 8px;
-  margin-bottom: 12px;
+.section-desc { font-size: 13px; color: #8b95a1; margin-bottom: 16px; }
+
+/* 논문 카드 */
+.paper-card {
+  background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
+  padding: 20px 24px; margin-bottom: 12px; transition: border-color 0.15s ease;
 }
-.next-link {
-  color: #3182f6;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
+.paper-card:hover { border-color: #d1d6db; }
+.paper-rank {
+  display: inline-block; width: 24px; height: 24px;
+  background: #f2f4f6; color: #4e5968; font-size: 12px; font-weight: 600;
+  border-radius: 8px; text-align: center; line-height: 24px; margin-bottom: 12px;
 }
-.next-link:hover { text-decoration: underline; }
+.paper-title {
+  font-size: 17px; font-weight: 600; color: #191f28; margin-bottom: 8px;
+  letter-spacing: -0.01em; line-height: 1.4;
+}
+.paper-title a { color: inherit; text-decoration: none; }
+.paper-title a:hover { color: #3182f6; }
+.paper-summary { font-size: 14px; color: #4e5968; line-height: 1.6; margin-bottom: 12px; }
+.paper-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px; }
+.tag {
+  background: #f2f4f6; color: #6b7684; padding: 4px 10px;
+  border-radius: 6px; font-weight: 500;
+}
+.tag.matched { background: #e8f3ff; color: #3182f6; }
+.tag.trending { background: #fff5e0; color: #c08401; }
+.tag.new-badge { background: #fff2e6; color: #f97316; font-weight: 700; }
+.paper-links { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+.paper-links a { color: #6b7684; text-decoration: none; font-size: 12px; font-weight: 500; }
+.paper-links a:hover { color: #3182f6; }
+.bookmark-btn {
+  font-size: 12px; padding: 5px 12px; border-radius: 8px;
+  border: 1px solid #d1d6db; background: #fff; color: #4e5968;
+  cursor: pointer; font-weight: 500; font-family: inherit;
+}
+.bookmark-btn:hover { background: #f9fafb; }
+.bookmark-btn.marked { background: #e8f3ff; color: #3182f6; border-color: #c4dcff; }
+.bookmark-btn:disabled { opacity: 0.5; cursor: wait; }
+
+.empty {
+  background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
+  padding: 40px 24px; text-align: center; color: #8b95a1;
+  font-size: 14px; line-height: 1.7;
+}
+.empty a { color: #3182f6; text-decoration: none; font-weight: 600; }
+
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: #191f28; color: #fff; padding: 12px 20px; border-radius: 10px;
+  font-size: 13px; opacity: 0; transition: opacity 0.2s ease;
+  pointer-events: none; z-index: 200;
+}
+.toast.show { opacity: 1; }
+.toast.error { background: #c0392b; }
+
 .loading { padding: 40px; text-align: center; color: #8b95a1; }
 </style>
 </head>
@@ -67,56 +112,208 @@ body {
 
   <div class="container" id="main" style="display:none">
     <h1 class="page-title">대시보드</h1>
-    <p class="page-subtitle">매일 아침, 내 키워드에 맞는 논문을 여기서 확인하세요</p>
+    <p class="page-subtitle">내 키워드에 맞는 오늘의 논문</p>
+    <div class="run-date" id="run-date"></div>
 
-    <div class="card">
-      <div class="phase-badge">Phase 2 완료</div>
-      <div class="card-title">멀티유저 로그인이 작동합니다 ✅</div>
-      <div class="card-text">
-        구글 로그인이 연결되었고, 이 페이지는 로그인한 사용자만 볼 수 있어요.
-        상단 메뉴로 다른 페이지도 이동할 수 있습니다.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">다음 단계</div>
-      <div class="card-text">
-        Phase 3에서 <strong>설정 페이지</strong>에 키워드와 연구 분야를 등록하면,
-        여기 대시보드에 매일 맞춤 논문이 표시됩니다.<br><br>
-        <a href="settings.html" class="next-link">설정 페이지로 이동 →</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">내 계정 정보</div>
-      <div class="card-text" id="account-info">불러오는 중...</div>
-    </div>
+    <div id="content"></div>
   </div>
 
   <div class="loading" id="loading">로그인 확인 중...</div>
+  <div class="toast" id="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="shared.js"></script>
   <script>
   (async function() {
-    // 공통 헤더 CSS 주입
     document.getElementById('shared-css').textContent = SHARED_HEADER_CSS;
-
-    // 로그인 필수 — 안 됐으면 index로 튕김
     const session = await requireAuth();
     if (!session) return;
-
-    // 헤더 렌더링
     await renderHeader('header', 'dashboard');
 
-    // 계정 정보 표시
-    const user = session.user;
-    document.getElementById('account-info').innerHTML =
-      '<strong>이메일:</strong> ' + escapeHtml(user.email || '(없음)') + '<br>' +
-      '<strong>이름:</strong> ' + escapeHtml(user.user_metadata.full_name || '(없음)') + '<br>' +
-      '<strong>유저 ID:</strong> ' + escapeHtml(user.id);
+    const userId = session.user.id;
+    const toastEl = document.getElementById('toast');
+    function toast(msg, isError) {
+      toastEl.textContent = msg;
+      toastEl.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => { toastEl.className = 'toast'; }, 2500);
+    }
 
-    // 화면 표시
+    const contentEl = document.getElementById('content');
+    const runDateEl = document.getElementById('run-date');
+
+    // 내 북마크 ID 목록
+    let bookmarkedIds = await fetchMyBookmarkIds();
+
+    // 최근 배치 날짜
+    const runDate = await fetchLatestRunDate();
+    if (!runDate) {
+      runDateEl.textContent = '';
+      contentEl.innerHTML =
+        '<div class="empty">' +
+          '아직 추천 데이터가 없어요.<br>' +
+          '<a href="settings.html">설정</a>에서 키워드를 등록하면 ' +
+          '다음 날 아침부터 추천이 표시됩니다.' +
+        '</div>';
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+      return;
+    }
+    runDateEl.textContent = runDate + ' 기준';
+
+    // 내 추천 결과
+    const recs = await fetchMyRecommendations(runDate);
+    const picks = recs.picks || [];
+    const newPapers = recs.new || [];
+    const fieldPapers = recs.field || [];
+
+    // 추천이 아예 없으면
+    if (picks.length === 0 && newPapers.length === 0 && fieldPapers.length === 0) {
+      contentEl.innerHTML =
+        '<div class="empty">' +
+          '오늘은 추천할 논문이 없어요.<br>' +
+          '<a href="settings.html">설정</a>에서 키워드를 추가하거나 ' +
+          '연구 분야를 선택해보세요.' +
+        '</div>';
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+      return;
+    }
+
+    // ---- 논문 카드 HTML ----
+    function paperCard(p, rank, isNewTab) {
+      let tags = '';
+      if (isNewTab && p.is_recent_24h) {
+        tags += '<span class="tag new-badge">✨ NEW</span>';
+      }
+      (p.matched_keywords || []).slice(0, 3).forEach(kw => {
+        tags += '<span class="tag matched">' + escapeHtml(kw) + '</span>';
+      });
+      if (p.hf_likes > 0) {
+        tags += '<span class="tag trending">🔥 HF ' + p.hf_likes + '</span>';
+      }
+      (p.categories || []).slice(0, 2).forEach(cat => {
+        tags += '<span class="tag">' + escapeHtml(cat) + '</span>';
+      });
+
+      const isMarked = bookmarkedIds.has(p.paper_id);
+      const summary = p.summary_ko || (p.abstract || '').slice(0, 200);
+
+      let links = '';
+      if (p.arxiv_url) links += '<a href="' + p.arxiv_url + '" target="_blank">arXiv</a>';
+      if (p.pdf_url) links += '<a href="' + p.pdf_url + '" target="_blank">PDF</a>';
+      if (p.hf_url) links += '<a href="' + p.hf_url + '" target="_blank">HF</a>';
+
+      const card = document.createElement('div');
+      card.className = 'paper-card';
+      card.innerHTML =
+        '<div class="paper-rank">' + rank + '</div>' +
+        '<h3 class="paper-title"><a href="' + (p.arxiv_url || '#') + '" target="_blank">' +
+          escapeHtml(p.title) + '</a></h3>' +
+        '<p class="paper-summary">' + escapeHtml(summary) + '</p>' +
+        '<div class="paper-meta">' +
+          tags +
+          '<div class="paper-links">' + links +
+            '<button class="bookmark-btn' + (isMarked ? ' marked' : '') + '">' +
+              (isMarked ? '★ 북마크됨' : '☆ 북마크') +
+            '</button>' +
+          '</div>' +
+        '</div>';
+
+      // 북마크 버튼
+      const bmBtn = card.querySelector('.bookmark-btn');
+      bmBtn.addEventListener('click', async () => {
+        bmBtn.disabled = true;
+        const marked = bookmarkedIds.has(p.paper_id);
+        try {
+          if (marked) {
+            await deleteBookmarkByPaperId(userId, p.paper_id);
+            bookmarkedIds.delete(p.paper_id);
+            bmBtn.className = 'bookmark-btn';
+            bmBtn.textContent = '☆ 북마크';
+            toast('북마크 해제됨');
+          } else {
+            await addBookmark(userId, {
+              paper_id: p.paper_id,
+              title: p.title,
+              abstract: p.abstract,
+              arxiv_url: p.arxiv_url,
+              summary_ko: p.summary_ko,
+            });
+            bookmarkedIds.add(p.paper_id);
+            bmBtn.className = 'bookmark-btn marked';
+            bmBtn.textContent = '★ 북마크됨';
+            toast('북마크에 저장됨');
+          }
+        } catch (e) {
+          toast(e.message, true);
+        } finally {
+          bmBtn.disabled = false;
+        }
+      });
+
+      return card;
+    }
+
+    // ---- 화면 구성 ----
+    // 탭 (이번 추천 / 새로 읽을 것)
+    const tabsWrap = document.createElement('div');
+    tabsWrap.innerHTML =
+      '<div class="section-tabs">' +
+        '<button class="section-tab active" data-tab="picks">이번 추천 ' +
+          '<span class="section-tab-count">' + picks.length + '</span></button>' +
+        '<button class="section-tab" data-tab="new">새로 읽을 것 ' +
+          '<span class="section-tab-count">' + newPapers.length + '</span></button>' +
+      '</div>' +
+      '<div class="section-tab-help" id="tab-help">키워드 매칭 + 인기도 기반 추천</div>' +
+      '<div class="section-content active" data-content="picks" id="content-picks"></div>' +
+      '<div class="section-content" data-content="new" id="content-new"></div>';
+    contentEl.appendChild(tabsWrap);
+
+    const picksEl = document.getElementById('content-picks');
+    const newEl = document.getElementById('content-new');
+
+    if (picks.length === 0) {
+      picksEl.innerHTML = '<div class="empty">키워드에 매칭되는 논문이 없어요. 설정에서 키워드를 추가해보세요.</div>';
+    } else {
+      picks.forEach((p, i) => picksEl.appendChild(paperCard(p, i + 1, false)));
+    }
+
+    if (newPapers.length === 0) {
+      newEl.innerHTML = '<div class="empty">오늘 새로 올라온 매칭 논문이 없어요. 주말/공휴일엔 적을 수 있어요.</div>';
+    } else {
+      newPapers.forEach((p, i) => newEl.appendChild(paperCard(p, i + 1, true)));
+    }
+
+    // 탭 전환
+    const HELP = {
+      picks: '키워드 매칭 + 인기도 기반 추천',
+      new: '24시간 이내 새 논문 우선'
+    };
+    tabsWrap.querySelectorAll('.section-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabsWrap.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        tabsWrap.querySelectorAll('.section-content').forEach(c => {
+          c.classList.toggle('active', c.dataset.content === target);
+        });
+        document.getElementById('tab-help').textContent = HELP[target];
+      });
+    });
+
+    // 내 분야 소식
+    if (fieldPapers.length > 0) {
+      const fieldWrap = document.createElement('div');
+      fieldWrap.innerHTML =
+        '<div class="section-title">내 분야 소식 ' +
+          '<span class="count">' + fieldPapers.length + '</span></div>' +
+        '<div class="section-desc">키워드 무관 · 내 연구 분야 전반 트렌드</div>' +
+        '<div id="content-field"></div>';
+      contentEl.appendChild(fieldWrap);
+      const fieldEl = document.getElementById('content-field');
+      fieldPapers.forEach((p, i) => fieldEl.appendChild(paperCard(p, i + 1, false)));
+    }
+
     document.getElementById('loading').style.display = 'none';
     document.getElementById('main').style.display = 'block';
   })();
