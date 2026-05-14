@@ -25,6 +25,7 @@ from fetcher import fetch_all
 from filter import filter_and_rank, compute_score
 from summarizer import summarize_papers
 from profile import get_combined_profile
+from trending import collect_trending, compute_aggregate_ranking
 
 
 # ============================================
@@ -108,9 +109,11 @@ def sb_delete(table: str, query: str):
 # ============================================
 def collect_and_summarize():
     """모든 분야 카테고리 합쳐서 한 번에 수집 + 요약."""
-    # 8개 분야의 모든 arxiv 카테고리 union
+    # 15개 분야의 모든 arxiv 카테고리 union
     all_field_ids = ["data-mining", "ml-general", "nlp", "cv",
-                     "speech", "robotics", "database", "security"]
+                     "speech", "robotics", "database", "security",
+                     "multimodal", "graph-ml", "theory", "hci",
+                     "software", "bioinformatics", "graphics"]
     combined = get_combined_profile(all_field_ids)
     categories = combined["arxiv_categories"]
     print(f"📡 논문 수집 — 카테고리: {categories}")
@@ -339,6 +342,42 @@ def send_all_emails(user_results: dict, run_date: str):
 
 
 # ============================================
+# 트렌딩 수집 + 저장 (전체 공통)
+# ============================================
+def collect_and_save_trending(run_date: str):
+    """트렌딩 키워드 수집 → daily_trending 테이블에 저장."""
+    print(f"🌐 트렌딩 수집")
+    try:
+        trending = collect_trending()
+    except Exception as e:
+        print(f"   ⚠ 트렌딩 수집 실패: {e}")
+        return
+
+    # 같은 날짜 기존 데이터 삭제
+    sb_delete("daily_trending", f"?run_date=eq.{run_date}")
+
+    rows = []
+    # arxiv / hf / active(구 pwc) 3개 소스
+    for source in ["arxiv", "hf", "pwc"]:
+        # 죽은 pwc는 라벨을 active로 저장 (데이터는 HF fallback)
+        label = "active" if source == "pwc" else source
+        for rank, item in enumerate(trending.get(source, []), 1):
+            rows.append({
+                "run_date": run_date,
+                "source": label,
+                "keyword": item.get("keyword", ""),
+                "count": item.get("count", 0),
+                "rank": rank,
+            })
+
+    if rows:
+        sb_insert("daily_trending", rows, upsert=True)
+        print(f"   → 트렌딩 {len(rows)}건 저장")
+    else:
+        print(f"   ⚠ 저장할 트렌딩 데이터 없음")
+
+
+# ============================================
 # 메인
 # ============================================
 def main():
@@ -374,6 +413,10 @@ def main():
 
     # 6. 이메일 발송
     send_all_emails(user_results, run_date)
+    print()
+
+    # 7. 트렌딩 수집 + 저장 (전체 공통)
+    collect_and_save_trending(run_date)
     print()
 
     print("=" * 50)

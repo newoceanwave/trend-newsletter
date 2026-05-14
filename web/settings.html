@@ -126,6 +126,20 @@ body {
 }
 .field-text-label { font-size: 14px; font-weight: 600; }
 .field-text-desc { font-size: 12px; color: #8b95a1; margin-top: 2px; }
+.custom-field-row { display: flex; gap: 8px; margin-top: 12px; }
+.custom-field-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.custom-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #f2e8ff; color: #7c3aed;
+  padding: 6px 6px 6px 12px; border-radius: 20px;
+  font-size: 13px; font-weight: 500;
+}
+.custom-chip-remove {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(0,0,0,0.06); font-size: 14px; line-height: 1; cursor: pointer;
+}
+.custom-chip-remove:hover { background: rgba(0,0,0,0.15); }
 
 .toast {
   position: fixed;
@@ -180,6 +194,12 @@ body {
       <div class="field-list" id="field-list">
         <div class="kw-empty">불러오는 중...</div>
       </div>
+      <div class="custom-field-row">
+        <input type="text" class="kw-input" id="custom-field-input"
+               placeholder="목록에 없는 분야? arXiv 카테고리 직접 입력 (예: cs.NE, eess.IV)" />
+        <button class="btn-primary" id="custom-field-btn">추가</button>
+      </div>
+      <div class="custom-field-list" id="custom-field-list"></div>
     </div>
   </div>
 
@@ -303,6 +323,67 @@ body {
       });
     }
 
+    // ---------- 직접 입력 분야 ----------
+    // custom 분야는 field_id가 "custom:cs.XX" 형태로 저장됨
+    const customInput = document.getElementById('custom-field-input');
+    const customBtn = document.getElementById('custom-field-btn');
+    const customListEl = document.getElementById('custom-field-list');
+
+    function renderCustomFields() {
+      customListEl.innerHTML = '';
+      const customs = myFields.filter(f => f.field_id.startsWith('custom:'));
+      customs.forEach(f => {
+        const cat = f.field_id.replace('custom:', '');
+        const chip = document.createElement('span');
+        chip.className = 'custom-chip';
+        chip.innerHTML = escapeHtml(cat) +
+          '<span class="custom-chip-remove" title="삭제">&times;</span>';
+        chip.querySelector('.custom-chip-remove').addEventListener('click', async () => {
+          try {
+            await deleteField(f.id);
+            myFields = myFields.filter(x => x.id !== f.id);
+            renderCustomFields();
+            toast('분야 삭제됨');
+          } catch (e) {
+            toast('실패: ' + e.message, true);
+          }
+        });
+        customListEl.appendChild(chip);
+      });
+    }
+
+    async function handleAddCustomField() {
+      let value = customInput.value.trim();
+      if (!value) return;
+      // 간단한 형식 검증: cs.LG 같은 형태
+      if (!/^[a-z\-]+\.[A-Za-z\-]+$/.test(value)) {
+        toast('arXiv 카테고리 형식으로 입력하세요 (예: cs.LG)', true);
+        return;
+      }
+      const fieldId = 'custom:' + value;
+      customBtn.disabled = true;
+      try {
+        const newRow = await addField(userId, fieldId);
+        if (newRow) {
+          myFields.push(newRow);
+          renderCustomFields();
+          toast('분야 추가됨');
+        } else {
+          toast('이미 추가된 분야예요');
+        }
+        customInput.value = '';
+      } catch (e) {
+        toast('실패: ' + e.message, true);
+      } finally {
+        customBtn.disabled = false;
+      }
+    }
+
+    customBtn.addEventListener('click', handleAddCustomField);
+    customInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleAddCustomField();
+    });
+
     // ---------- 초기 로드 ----------
     try {
       myKeywords = await fetchMyKeywords();
@@ -312,6 +393,7 @@ body {
     }
     renderKeywords();
     renderFields();
+    renderCustomFields();
 
     document.getElementById('loading').style.display = 'none';
     document.getElementById('main').style.display = 'block';

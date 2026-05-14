@@ -166,15 +166,22 @@ const SHARED_HEADER_CSS = `
 // Phase 6에서 확장 예정 — 지금은 8개
 // ============================================
 const RESEARCH_FIELDS = [
-  { id: 'data-mining', label: '데이터 마이닝 / Knowledge Discovery', desc: 'KDD, CIKM, WSDM, SIGIR, ICDM, WWW' },
-  { id: 'ml-general', label: 'Machine Learning (일반)', desc: 'NeurIPS, ICML, ICLR' },
-  { id: 'nlp', label: '자연어처리 (NLP)', desc: 'ACL, EMNLP, NAACL' },
-  { id: 'cv', label: '컴퓨터 비전 (Computer Vision)', desc: 'CVPR, ICCV, ECCV' },
-  { id: 'speech', label: '음성 / 오디오', desc: 'INTERSPEECH, ICASSP' },
-  { id: 'robotics', label: '로보틱스 / 강화학습', desc: 'RSS, CoRL, ICRA, IROS' },
-  { id: 'database', label: '데이터베이스 / 시스템', desc: 'SIGMOD, VLDB, ICDE' },
-  { id: 'security', label: 'AI 보안 / 프라이버시', desc: 'S&P, USENIX Security, CCS' },
-];
+  { id: 'data-mining', label: '데이터 마이닝 / Knowledge Discovery', desc: 'KDD, CIKM, WSDM, SIGIR, ICDM, WWW', cats: ['cs.IR','cs.DB','cs.LG','cs.AI'] },
+  { id: 'ml-general', label: 'Machine Learning (일반)', desc: 'NeurIPS, ICML, ICLR', cats: ['cs.LG','stat.ML','cs.AI'] },
+  { id: 'nlp', label: '자연어처리 (NLP)', desc: 'ACL, EMNLP, NAACL', cats: ['cs.CL','cs.LG','cs.AI'] },
+  { id: 'cv', label: '컴퓨터 비전 (Computer Vision)', desc: 'CVPR, ICCV, ECCV', cats: ['cs.CV','cs.LG','cs.AI'] },
+  { id: 'speech', label: '음성 / 오디오', desc: 'INTERSPEECH, ICASSP', cats: ['cs.SD','eess.AS','cs.CL','cs.LG'] },
+  { id: 'robotics', label: '로보틱스 / 강화학습', desc: 'RSS, CoRL, ICRA, IROS', cats: ['cs.RO','cs.LG','cs.AI'] },
+  { id: 'database', label: '데이터베이스 / 시스템', desc: 'SIGMOD, VLDB, ICDE', cats: ['cs.DB','cs.LG','cs.DC'] },
+  { id: 'security', label: 'AI 보안 / 프라이버시', desc: 'S&P, USENIX Security, CCS', cats: ['cs.CR','cs.LG','cs.AI'] },
+  { id: 'multimodal', label: '멀티모달 / Vision-Language', desc: 'CVPR, ICCV, NeurIPS', cats: ['cs.CV','cs.CL','cs.LG'] },
+  { id: 'graph-ml', label: '그래프 머신러닝', desc: 'LoG, NeurIPS, ICLR', cats: ['cs.LG','cs.SI','cs.AI'] },
+  { id: 'theory', label: '머신러닝 이론 / 최적화', desc: 'COLT, NeurIPS theory', cats: ['cs.LG','stat.ML','math.OC','cs.DS'] },
+  { id: 'hci', label: 'HCI / AI 인터랙션', desc: 'CHI, UIST, CSCW', cats: ['cs.HC','cs.AI'] },
+  { id: 'software', label: '소프트웨어 공학 / AI4Code', desc: 'ICSE, FSE, ASE', cats: ['cs.SE','cs.PL','cs.LG'] },
+  { id: 'bioinformatics', label: '바이오인포매틱스 / AI4Science', desc: 'ISMB, RECOMB', cats: ['q-bio.QM','cs.LG','cs.AI'] },
+  { id: 'graphics', label: '컴퓨터 그래픽스 / 생성모델', desc: 'SIGGRAPH, Eurographics', cats: ['cs.GR','cs.CV','cs.LG'] },
+]
 
 // ============================================
 // Supabase 데이터 헬퍼 — 키워드
@@ -371,6 +378,44 @@ async function fetchMyRecommendations(runDate) {
       matched_keywords: rec.matched_keywords || [],
     });
     if (result[rec.rec_type]) result[rec.rec_type].push(merged);
+  });
+  return result;
+}
+
+// ============================================
+// Supabase 데이터 헬퍼 — 트렌딩
+// ============================================
+
+// 가장 최근 트렌딩 날짜
+async function fetchLatestTrendingDate() {
+  const { data, error } = await supabaseClient
+    .from('daily_trending')
+    .select('run_date')
+    .order('run_date', { ascending: false })
+    .limit(1);
+  if (error || !data || data.length === 0) return null;
+  return data[0].run_date;
+}
+
+// 특정 날짜의 트렌딩 데이터를 소스별로 묶어서 반환
+// 반환: { arxiv: [{keyword, count, rank}], hf: [...], active: [...] }
+async function fetchTrending(runDate) {
+  const { data, error } = await supabaseClient
+    .from('daily_trending')
+    .select('source, keyword, count, rank')
+    .eq('run_date', runDate)
+    .order('rank', { ascending: true });
+  if (error) { console.error('트렌딩 조회 실패:', error); return { arxiv: [], hf: [], active: [] }; }
+
+  const result = { arxiv: [], hf: [], active: [] };
+  (data || []).forEach(row => {
+    if (result[row.source]) {
+      result[row.source].push({
+        keyword: row.keyword,
+        count: row.count,
+        rank: row.rank,
+      });
+    }
   });
   return result;
 }

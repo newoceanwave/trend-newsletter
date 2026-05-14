@@ -86,6 +86,69 @@ PROFILES = {
             "membership inference",
         ],
     },
+    "multimodal": {
+        "label": "멀티모달 / Vision-Language",
+        "description": "CVPR, ICCV, NeurIPS",
+        "arxiv_categories": ["cs.CV", "cs.CL", "cs.LG"],
+        "seed_keywords": [
+            "multimodal", "vision-language", "vlm", "image-text",
+            "video understanding", "cross-modal",
+        ],
+    },
+    "graph-ml": {
+        "label": "그래프 머신러닝",
+        "description": "LoG, NeurIPS, ICLR",
+        "arxiv_categories": ["cs.LG", "cs.SI", "cs.AI"],
+        "seed_keywords": [
+            "graph neural network", "gnn", "graph representation",
+            "graph transformer", "message passing", "node classification",
+        ],
+    },
+    "theory": {
+        "label": "머신러닝 이론 / 최적화",
+        "description": "COLT, NeurIPS theory",
+        "arxiv_categories": ["cs.LG", "stat.ML", "math.OC", "cs.DS"],
+        "seed_keywords": [
+            "generalization", "optimization", "convergence",
+            "sample complexity", "pac learning", "regret bound",
+        ],
+    },
+    "hci": {
+        "label": "HCI / AI 인터랙션",
+        "description": "CHI, UIST, CSCW",
+        "arxiv_categories": ["cs.HC", "cs.AI"],
+        "seed_keywords": [
+            "human-ai interaction", "user study", "interface",
+            "human-computer interaction", "usability", "explainability",
+        ],
+    },
+    "software": {
+        "label": "소프트웨어 공학 / AI4Code",
+        "description": "ICSE, FSE, ASE",
+        "arxiv_categories": ["cs.SE", "cs.PL", "cs.LG"],
+        "seed_keywords": [
+            "code generation", "program synthesis", "software testing",
+            "bug detection", "code llm", "static analysis",
+        ],
+    },
+    "bioinformatics": {
+        "label": "바이오인포매틱스 / AI4Science",
+        "description": "ISMB, RECOMB",
+        "arxiv_categories": ["q-bio.QM", "cs.LG", "cs.AI"],
+        "seed_keywords": [
+            "protein", "molecular", "drug discovery", "genomics",
+            "biological sequence", "scientific machine learning",
+        ],
+    },
+    "graphics": {
+        "label": "컴퓨터 그래픽스 / 생성모델",
+        "description": "SIGGRAPH, Eurographics",
+        "arxiv_categories": ["cs.GR", "cs.CV", "cs.LG"],
+        "seed_keywords": [
+            "rendering", "3d generation", "neural radiance field", "nerf",
+            "gaussian splatting", "texture synthesis", "diffusion",
+        ],
+    },
 }
 
 
