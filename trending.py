@@ -187,14 +187,13 @@ def fetch_pwc_trending(top_n: int = 30) -> List[Dict]:
     """
     Papers with Code trending — 코드 공개된 최근 인기 논문.
     공식 API: https://paperswithcode.com/api/v1/papers/?ordering=-trending
-    실패하면 alphaxiv API로 fallback.
+    실패하면 alphaxiv → 그것도 실패하면 HF + arxiv 결합으로 fallback.
     """
     print(f"  📥 Papers with Code trending")
     url = "https://paperswithcode.com/api/v1/papers/"
     params = {"ordering": "-trending"}
     headers = {"Accept": "application/json", "User-Agent": "Mozilla/5.0 (trend-newsletter)"}
 
-    # 재시도 로직
     data = None
     for attempt in range(3):
         try:
@@ -203,15 +202,18 @@ def fetch_pwc_trending(top_n: int = 30) -> List[Dict]:
             data = resp.json()
             break
         except Exception as e:
-            print(f"    ⚠ 시도 {attempt + 1}/3 실패: {e}")
+            print(f"    ⚠ 시도 {attempt + 1}/3 실패: {str(e)[:80]}")
             if attempt < 2:
                 import time
                 time.sleep(2)
 
-    # Papers with Code 실패 시 alphaxiv fallback
     if data is None:
-        print(f"    → Papers with Code 모두 실패, alphaxiv로 fallback")
-        return _fetch_alphaxiv_trending(top_n)
+        print(f"    → Papers with Code 실패, alphaxiv 시도")
+        result = _fetch_alphaxiv_trending(top_n)
+        if result:
+            return result
+        print(f"    → alphaxiv도 실패, HF Daily Papers의 코드 공개 논문 fallback 사용")
+        return _fetch_pwc_fallback_via_hf(top_n)
 
     results = data.get("results", [])
     papers = []
@@ -228,57 +230,94 @@ def fetch_pwc_trending(top_n: int = 30) -> List[Dict]:
         })
     print(f"    → {len(papers)}편 수집")
 
-    titles = [p["title"] for p in papers]
-    title_counter = _count_keywords(titles, [3.0] * len(titles))
-    abstracts = [p["abstract"] for p in papers]
-    abs_counter = _count_keywords(abstracts, [1.0] * len(abstracts))
-    total = title_counter + abs_counter
-
-    keywords = []
-    for kw, count in total.most_common(top_n):
-        related = [p for p in papers if re.search(r"\b" + re.escape(kw) + r"\b", (p["title"] + " " + p["abstract"]).lower())]
-        keywords.append({
-            "keyword": kw,
-            "score": round(count, 1),
-            "paper_count": len(related),
-            "papers": related[:10],
-        })
-
-    return keywords
+    return _aggregate_keywords(papers, top_n)
 
 
 def _fetch_alphaxiv_trending(top_n: int = 30) -> List[Dict]:
-    """alphaxiv: arXiv 위에 ML 커뮤니티 큐레이션. Papers with Code fallback."""
-    url = "https://api.alphaxiv.org/v2/papers/list/popular"
-    params = {"limit": 100}
+    """alphaxiv: arXiv 위에 ML 커뮤니티 큐레이션."""
+    # alphaxiv API endpoint 후보 (변경될 수 있음)
+    urls = [
+        "https://api.alphaxiv.org/v2/papers/list/popular",
+        "https://www.alphaxiv.org/api/papers/trending",
+    ]
+    headers = {"User-Agent": "Mozilla/5.0", "Accept": "application/json"}
+
+    for url in urls:
+        try:
+            resp = requests.get(url, params={"limit": 100}, headers=headers, timeout=15)
+            if resp.status_code != 200:
+                continue
+            data = resp.json()
+            items = data.get("papers", data) if isinstance(data, dict) else data
+            if not items:
+                continue
+
+            papers = []
+            for item in items[:100]:
+                arxiv_id = (item.get("paper_id") or item.get("arxiv_id") or "").strip()
+                if not arxiv_id:
+                    continue
+                papers.append({
+                    "id": arxiv_id,
+                    "title": (item.get("title") or "").replace("\n", " ").strip(),
+                    "abstract": (item.get("abstract") or "").replace("\n", " ").strip(),
+                    "arxiv_url": f"https://arxiv.org/abs/{arxiv_id}",
+                    "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
+                    "published": item.get("publishedAt", ""),
+                })
+
+            if papers:
+                print(f"    → alphaxiv {len(papers)}편 수집")
+                return _aggregate_keywords(papers, top_n)
+        except Exception as e:
+            continue
+
+    return []
+
+
+def _fetch_pwc_fallback_via_hf(top_n: int = 30) -> List[Dict]:
+    """
+    PwC도 alphaxiv도 죽었을 때 마지막 fallback.
+    HF Daily Papers의 최근 7일치를 다시 가져와서 PwC 대체.
+    HF Daily는 큐레이터가 직접 픽한 + 코드 있는 것 위주라 PwC와 시그널 유사.
+    """
+    url = "https://huggingface.co/api/daily_papers"
+    headers = {"User-Agent": "Mozilla/5.0"}
 
     try:
-        resp = requests.get(url, params=params, timeout=15)
+        resp = requests.get(url, params={"limit": 100}, headers=headers, timeout=15)
         resp.raise_for_status()
         data = resp.json()
     except Exception as e:
-        print(f"    ⚠ alphaxiv도 실패: {e}")
+        print(f"    ⚠ HF fallback도 실패: {e}")
         return []
 
-    items = data.get("papers", []) if isinstance(data, dict) else data
     papers = []
-    for item in items[:100]:
-        arxiv_id = (item.get("paper_id") or item.get("arxiv_id") or "").strip()
+    for item in data[:100]:
+        paper_info = item.get("paper", {})
+        arxiv_id = paper_info.get("id", "")
         if not arxiv_id:
             continue
         papers.append({
             "id": arxiv_id,
-            "title": (item.get("title") or "").replace("\n", " ").strip(),
-            "abstract": (item.get("abstract") or "").replace("\n", " ").strip(),
+            "title": paper_info.get("title", "").replace("\n", " ").strip(),
+            "abstract": paper_info.get("summary", "").replace("\n", " ").strip(),
+            "likes": paper_info.get("upvotes", 0),
             "arxiv_url": f"https://arxiv.org/abs/{arxiv_id}",
             "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
-            "published": item.get("publishedAt", ""),
+            "hf_url": f"https://huggingface.co/papers/{arxiv_id}",
         })
 
-    if not papers:
-        return []
-    print(f"    → alphaxiv {len(papers)}편 수집")
+    print(f"    → HF fallback {len(papers)}편 수집 (likes 임계 + Daily curation)")
+    # likes 8 이상만 = 큐레이션 통과 + 어느 정도 인기 신호 (PwC trending 신호와 비슷)
+    papers = [p for p in papers if p.get("likes", 0) >= 8]
+    print(f"      → likes ≥ 8 필터 후 {len(papers)}편")
 
+    return _aggregate_keywords(papers, top_n)
+
+
+def _aggregate_keywords(papers: List[Dict], top_n: int = 30) -> List[Dict]:
+    """공통: 논문 리스트에서 키워드 빈도 집계."""
     titles = [p["title"] for p in papers]
     title_counter = _count_keywords(titles, [3.0] * len(titles))
     abstracts = [p["abstract"] for p in papers]
@@ -294,7 +333,6 @@ def _fetch_alphaxiv_trending(top_n: int = 30) -> List[Dict]:
             "paper_count": len(related),
             "papers": related[:10],
         })
-
     return keywords
 
 
