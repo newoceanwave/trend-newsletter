@@ -13,7 +13,7 @@ import sys
 import os
 import json
 import yaml
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from fetcher import fetch_all
 from filter import filter_and_rank, suggest_keywords, compute_score
@@ -42,6 +42,84 @@ def load_profiles_file(path: str = "profiles.json") -> list:
     except Exception as e:
         print(f"  ⚠ {path} 로드 실패: {e}")
         return None
+
+
+RECOMMENDED_HISTORY_PATH = "recommended-history.json"
+RECOMMENDED_HISTORY_DAYS = 14  # 최근 14일치 유지
+
+
+def _load_recommended_ids() -> set:
+    """이전에 추천된 paper id 모음 (최근 14일치)."""
+    if not os.path.exists(RECOMMENDED_HISTORY_PATH):
+        return set()
+    try:
+        with open(RECOMMENDED_HISTORY_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        cutoff = (datetime.now() - timedelta(days=RECOMMENDED_HISTORY_DAYS)).strftime("%Y-%m-%d")
+        all_ids = set()
+        for date_str, ids in data.get("by_date", {}).items():
+            if date_str >= cutoff:
+                all_ids.update(ids)
+        return all_ids
+    except Exception as e:
+        print(f"  ⚠ {RECOMMENDED_HISTORY_PATH} 로드 실패: {e}")
+        return set()
+
+
+def _save_recommended_ids(papers: list):
+    """오늘 추천한 paper id를 기록에 추가."""
+    today = datetime.now().strftime("%Y-%m-%d")
+    cutoff = (datetime.now() - timedelta(days=RECOMMENDED_HISTORY_DAYS)).strftime("%Y-%m-%d")
+
+    try:
+        if os.path.exists(RECOMMENDED_HISTORY_PATH):
+            with open(RECOMMENDED_HISTORY_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        else:
+            data = {"by_date": {}}
+    except Exception:
+        data = {"by_date": {}}
+
+    new_ids = list({p.get("id") for p in papers if p.get("id")})
+    existing = set(data["by_date"].get(today, []))
+    existing.update(new_ids)
+    data["by_date"][today] = sorted(existing)
+
+    # 오래된 기록 정리
+    data["by_date"] = {k: v for k, v in data["by_date"].items() if k >= cutoff}
+
+    with open(RECOMMENDED_HISTORY_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def _select_new_papers(papers: list, keywords: list, top_n: int = 10) -> list:
+    """
+    '오늘 새로 읽을 것' 선정.
+
+    1차: 24시간 이내 새 논문 + 키워드 매칭
+    1차 결과 < 3편이면 → 2차: 지난 14일 추천 기록 제외 + 키워드 매칭
+    """
+    # 1차: 24h 이내
+    recent_papers = [p for p in papers if p.get("is_recent_24h", False)]
+    print(f"🆕 오늘 새로 읽을 것 — 24시간 이내 {len(recent_papers)}편 검토")
+    primary = filter_and_rank(recent_papers, keywords, top_n=top_n)
+
+    if len(primary) >= 3:
+        print(f"   → 1차 (24h 이내): {len(primary)}편 선정")
+        return primary
+
+    # 1차 빈약 → 2차: 추천 기록 제외
+    print(f"   → 1차 결과 적음 ({len(primary)}편). 2차 fallback (지난 {RECOMMENDED_HISTORY_DAYS}일 추천 제외)")
+    seen_ids = _load_recommended_ids()
+    fresh_papers = [p for p in papers if p.get("id") not in seen_ids]
+    print(f"      기록 제외 후 {len(fresh_papers)}편")
+    secondary = filter_and_rank(fresh_papers, keywords, top_n=top_n)
+
+    # 1차 + 2차 머지 (1차 우선, 중복 제거)
+    primary_ids = {p.get("id") for p in primary}
+    merged = primary + [p for p in secondary if p.get("id") not in primary_ids]
+    print(f"   → 최종 {len(merged[:top_n])}편 (1차 {len(primary)} + 2차 {len(merged) - len(primary)})")
+    return merged[:top_n]
 
 
 def load_keywords_file(path: str = "keywords.json") -> list:
@@ -146,14 +224,19 @@ def main():
     top_papers = filter_and_rank(papers, user_keywords, top_n=top_n)
     print()
 
+    # 3-1) 오늘 새로 읽을 것 (탭 2)
+    # 우선순위: 24시간 이내 새 논문 → 비어있으면 "지난 추천 제외" 방식
+    new_papers = _select_new_papers(papers, user_keywords, top_n=top_n)
+    print()
+
     # 3-2) 내 분야 소식 — seed 키워드 기반 별도 추천 (user_keywords와 별개)
     field_papers = []
     seed_keywords = profile.get("seed_keywords", [])
     if seed_keywords:
         print(f"🎓 내 분야 소식 — '{profile['label']}' seed 키워드로 별도 추천...")
-        # 이미 top_papers에 포함된 건 제외 (중복 방지)
-        top_ids = {p.get("id") for p in top_papers}
-        remaining = [p for p in papers if p.get("id") not in top_ids]
+        # 이미 top_papers/new_papers에 포함된 건 제외 (중복 방지)
+        used_ids = {p.get("id") for p in top_papers} | {p.get("id") for p in new_papers}
+        remaining = [p for p in papers if p.get("id") not in used_ids]
         field_papers = filter_and_rank(remaining, seed_keywords, top_n=10)
         print()
 
@@ -163,16 +246,26 @@ def main():
         top_papers = summarize_papers(top_papers, model=llm_model, provider=llm_provider)
         print()
 
+    if new_papers:
+        # new_papers 중 top_papers와 겹치는 건 캐시에서 요약 가져옴
+        print(f"📝 오늘 새로 읽을 것 {len(new_papers)}편 요약 생성 중...")
+        new_papers = summarize_papers(new_papers, model=llm_model, provider=llm_provider)
+        print()
+
     if field_papers:
         print(f"📝 내 분야 소식 {len(field_papers)}편 요약 생성 중...")
         field_papers = summarize_papers(field_papers, model=llm_model, provider=llm_provider)
         print()
 
+    # 추천 기록 저장 (어떤 id를 보여줬는지)
+    _save_recommended_ids(top_papers + new_papers)
+
     # 5) HTML 저장 + 이메일 발송
     print("📤 출력 생성 중...")
     save_dashboard(top_papers, today, user_keywords, suggested, output_dir,
                    field_papers=field_papers, profile_label=profile["label"],
-                   profile_ids=profile["ids"])
+                   profile_ids=profile["ids"],
+                   new_papers=new_papers)
 
     email_config = config.get("email", {})
     if email_config.get("enabled"):

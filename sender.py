@@ -281,6 +281,52 @@ body {
   font-weight: 500;
 }
 
+.section-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 32px 0 4px;
+  border-bottom: 1px solid #f2f4f6;
+}
+.section-tab {
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: #8b95a1;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s ease;
+}
+.section-tab:hover { color: #4e5968; }
+.section-tab.active { color: #191f28; border-bottom-color: #191f28; }
+.section-tab-count {
+  background: #f2f4f6;
+  color: #6b7684;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.section-tab.active .section-tab-count { background: #191f28; color: #fff; }
+.section-tab-help {
+  font-size: 12px;
+  color: #8b95a1;
+  margin-bottom: 16px;
+  padding: 6px 0;
+}
+.section-content { display: none; }
+.section-content.active { display: block; }
+.tag.new-badge {
+  background: #fff2e6;
+  color: #f97316;
+  font-weight: 700;
+}
+
 .paper-card {
   background: #ffffff;
   border: 1px solid #f2f4f6;
@@ -383,6 +429,48 @@ def _format_paper_card(paper: Dict, rank: int) -> str:
         links += f'<a href="{hf_url}" target="_blank">HF</a>'
 
     matched_data = json.dumps([k.lower() for k in matched])
+
+    return f"""
+    <div class="paper-card" data-matched='{matched_data}'>
+      <div class="paper-rank">{rank}</div>
+      <h3 class="paper-title"><a href="{arxiv_url}" target="_blank">{title}</a></h3>
+      <p class="paper-summary">{summary}</p>
+      <div class="paper-meta">
+        {tags_html}
+        <div class="paper-links">{links}</div>
+      </div>
+    </div>
+    """
+
+
+def _format_paper_card_tabbed(paper: Dict, rank: int, tab: str = "picks") -> str:
+    """탭별 카드. tab='new'이면 NEW 배지 추가."""
+    title = paper.get("title", "").replace("<", "&lt;").replace(">", "&gt;")
+    summary = paper.get("summary_ko", "").replace("<", "&lt;").replace(">", "&gt;")
+    arxiv_url = paper.get("arxiv_url", "#")
+    pdf_url = paper.get("pdf_url", "#")
+    hf_url = paper.get("hf_url", "")
+    likes = paper.get("hf_likes", 0)
+    matched = paper.get("matched_keywords", [])
+    categories = paper.get("categories", [])
+    is_recent = paper.get("is_recent_24h", False)
+
+    tags_html = ""
+    if tab == "new" and is_recent:
+        tags_html += '<span class="tag new-badge" title="arXiv에 24시간 이내 올라온 논문">✨ NEW</span>'
+    for kw in matched[:3]:
+        tags_html += f'<span class="tag matched">{kw}</span>'
+    if likes > 0:
+        tags_html += f'<span class="tag trending" title="Hugging Face Daily Papers에서 받은 좋아요 수">🔥 HF {likes}</span>'
+    for cat in categories[:2]:
+        tags_html += f'<span class="tag">{cat}</span>'
+
+    links = f'<a href="{arxiv_url}" target="_blank">arXiv</a><a href="{pdf_url}" target="_blank">PDF</a>'
+    if hf_url:
+        links += f'<a href="{hf_url}" target="_blank">HF</a>'
+
+    matched_data = json.dumps([k.lower() for k in matched])
+    active_cls = "active" if tab == "picks" else ""
 
     return f"""
     <div class="paper-card" data-matched='{matched_data}'>
@@ -751,19 +839,39 @@ def _build_kw_management_js(initial_keywords: List[str], suggested: List[str],
 
 
 def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=None,
-                              field_papers=None, profile_label="", profile_ids=None):
+                              field_papers=None, profile_label="", profile_ids=None, new_papers=None):
     suggested_keywords = suggested_keywords or []
     field_papers = field_papers or []
     profile_ids = profile_ids or []
+    new_papers = new_papers or []
     has_papers = bool(papers)
+    has_new = bool(new_papers)
 
+    # 탭 UI — "이번 추천" / "새로 읽을 것"
+    # 카드에 data-tab 속성 부여해서 필터링
     if has_papers:
-        cards_html = "\n".join(
-            _format_paper_card(p, i + 1) for i, p in enumerate(papers)
+        cards_a = "\n".join(
+            _format_paper_card_tabbed(p, i + 1, tab="picks") for i, p in enumerate(papers)
         )
-        papers_html = f'<div class="section-title">오늘의 추천 <span class="count">{len(papers)}</span></div>{cards_html}'
     else:
-        papers_html = '<div class="empty">오늘은 키워드에 매칭되는 논문이 없어요.<br>키워드를 더 추가하거나 범위를 넓혀보세요.</div>'
+        cards_a = '<div class="empty" data-tab-content="picks">오늘은 키워드에 매칭되는 논문이 없어요.</div>'
+
+    if has_new:
+        cards_b = "\n".join(
+            _format_paper_card_tabbed(p, i + 1, tab="new") for i, p in enumerate(new_papers)
+        )
+    else:
+        cards_b = '<div class="empty" data-tab-content="new">오늘 새로 올라온 키워드 매칭 논문이 없어요. 주말이나 공휴일엔 적을 수 있어요.</div>'
+
+    papers_html = f"""
+    <div class="section-tabs">
+      <button class="section-tab active" data-section-tab="picks">이번 추천 <span class="section-tab-count">{len(papers)}</span></button>
+      <button class="section-tab" data-section-tab="new">새로 읽을 것 <span class="section-tab-count">{len(new_papers)}</span></button>
+    </div>
+    <div class="section-tab-help" id="section-tab-help">키워드/HF likes 기반 종합 추천. 같은 핫이슈는 며칠간 1위 가능.</div>
+    <div class="section-content active" data-tab-content="picks">{cards_a}</div>
+    <div class="section-content" data-tab-content="new">{cards_b}</div>
+    """
 
     # 내 분야 소식
     field_html = ""
@@ -782,6 +890,32 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
         """
 
     js_code = _build_kw_management_js(user_keywords, suggested_keywords, initial_profiles=profile_ids)
+
+    # 탭 전환 + 도움말 텍스트 JS
+    tab_js = """
+    (function() {
+      const HELP_TEXTS = {
+        picks: '키워드/HF likes 기반 종합 추천. 같은 핫이슈는 며칠간 1위 가능.',
+        new: '24시간 이내 새 논문 우선. 비어있으면 지난 14일 추천 안 된 논문에서 발굴.'
+      };
+      document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.section-tab');
+        const contents = document.querySelectorAll('.section-content');
+        const helpEl = document.getElementById('section-tab-help');
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const target = tab.dataset.sectionTab;
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            contents.forEach(c => {
+              c.classList.toggle('active', c.dataset.tabContent === target);
+            });
+            if (helpEl && HELP_TEXTS[target]) helpEl.textContent = HELP_TEXTS[target];
+          });
+        });
+      });
+    })();
+    """
 
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -859,16 +993,17 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
     </div>
   </div>
   <script>{js_code}</script>
+  <script>{tab_js}</script>
 </body>
 </html>
 """
 
 
 def save_dashboard(papers, date_str, user_keywords, suggested_keywords, output_dir,
-                    field_papers=None, profile_label="", profile_ids=None):
+                    field_papers=None, profile_label="", profile_ids=None, new_papers=None):
     html = generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords,
                                     field_papers=field_papers, profile_label=profile_label,
-                                    profile_ids=profile_ids)
+                                    profile_ids=profile_ids, new_papers=new_papers)
 
     posts_dir = os.path.join(output_dir, "posts")
     os.makedirs(posts_dir, exist_ok=True)
@@ -880,11 +1015,11 @@ def save_dashboard(papers, date_str, user_keywords, suggested_keywords, output_d
 
     update_index(output_dir, date_str, papers, user_keywords, suggested_keywords,
                   field_papers=field_papers, profile_label=profile_label,
-                  profile_ids=profile_ids)
+                  profile_ids=profile_ids, new_papers=new_papers)
 
 
 def update_index(output_dir, latest_date, papers, user_keywords, suggested_keywords,
-                  field_papers=None, profile_label="", profile_ids=None):
+                  field_papers=None, profile_label="", profile_ids=None, new_papers=None):
     posts_dir = os.path.join(output_dir, "posts")
     files = sorted(
         [f for f in os.listdir(posts_dir) if f.endswith(".html")],
@@ -898,7 +1033,7 @@ def update_index(output_dir, latest_date, papers, user_keywords, suggested_keywo
 
     latest_html = generate_dashboard_html(papers, latest_date, user_keywords, suggested_keywords,
                                            field_papers=field_papers, profile_label=profile_label,
-                                           profile_ids=profile_ids)
+                                           profile_ids=profile_ids, new_papers=new_papers)
 
     archive_section = f"""
     <div class="section-title" style="margin-top:48px">아카이브</div>

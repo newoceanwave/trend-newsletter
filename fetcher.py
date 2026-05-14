@@ -21,9 +21,11 @@ def fetch_arxiv_papers(categories: List[str], max_results: int = 200, days_back:
 
     Returns:
         논문 dict 리스트. 각 dict는 다음 키를 가짐:
-        - id, title, abstract, authors, categories, published, pdf_url, arxiv_url
+        - id, title, abstract, authors, categories, published, pdf_url, arxiv_url, is_recent_24h
     """
-    cutoff = datetime.now(timezone.utc) - timedelta(days=days_back)
+    now = datetime.now(timezone.utc)
+    cutoff = now - timedelta(days=days_back)
+    cutoff_24h = now - timedelta(hours=24)  # 진짜 24시간 이내 표시용
     papers = []
     seen_ids = set()
 
@@ -40,7 +42,7 @@ def fetch_arxiv_papers(categories: List[str], max_results: int = 200, days_back:
 
         try:
             for result in client.results(search):
-                # 어제 이전 논문이면 중단 (최신순 정렬이므로)
+                # cutoff 이전 논문이면 중단 (최신순 정렬이므로)
                 if result.published.replace(tzinfo=timezone.utc) < cutoff:
                     break
 
@@ -49,17 +51,19 @@ def fetch_arxiv_papers(categories: List[str], max_results: int = 200, days_back:
                     continue
                 seen_ids.add(arxiv_id)
 
+                published_utc = result.published.replace(tzinfo=timezone.utc)
                 papers.append({
                     "id": arxiv_id,
                     "title": result.title.replace("\n", " ").strip(),
                     "abstract": result.summary.replace("\n", " ").strip(),
                     "authors": [a.name for a in result.authors],
                     "categories": result.categories,
-                    "published": result.published.isoformat(),
+                    "published": published_utc.isoformat(),
                     "pdf_url": result.pdf_url,
                     "arxiv_url": result.entry_id,
-                    "hf_likes": 0,  # 나중에 HF에서 채움
+                    "hf_likes": 0,
                     "source": "arxiv",
+                    "is_recent_24h": published_utc >= cutoff_24h,
                 })
         except Exception as e:
             print(f"  ⚠ arXiv {cat} fetch 실패: {e}")
