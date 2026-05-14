@@ -249,3 +249,76 @@ async function deleteField(fieldRowId) {
     .eq('id', fieldRowId);
   if (error) throw new Error(error.message);
 }
+
+// ============================================
+// Supabase 데이터 헬퍼 — 북마크
+// ============================================
+
+// 내 북마크 전체 가져오기 (최신순)
+async function fetchMyBookmarks() {
+  const { data, error } = await supabaseClient
+    .from('bookmarks')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) { console.error('북마크 조회 실패:', error); return []; }
+  return data || [];
+}
+
+// 내가 북마크한 paper_id 집합 (빠른 확인용)
+async function fetchMyBookmarkIds() {
+  const { data, error } = await supabaseClient
+    .from('bookmarks')
+    .select('paper_id');
+  if (error) { console.error('북마크 ID 조회 실패:', error); return new Set(); }
+  return new Set((data || []).map(b => b.paper_id));
+}
+
+// 북마크 추가
+// paper: { paper_id, title, abstract, arxiv_url, summary_ko }
+async function addBookmark(userId, paper) {
+  const { data, error } = await supabaseClient
+    .from('bookmarks')
+    .insert({
+      user_id: userId,
+      paper_id: paper.paper_id,
+      title: paper.title || '',
+      abstract: paper.abstract || '',
+      arxiv_url: paper.arxiv_url || '',
+      summary_ko: paper.summary_ko || '',
+    })
+    .select()
+    .single();
+  if (error) {
+    if (error.code === '23505') throw new Error('이미 북마크한 논문이에요.');
+    throw new Error(error.message);
+  }
+  return data;
+}
+
+// 북마크 삭제 (paper_id로)
+async function deleteBookmarkByPaperId(userId, paperId) {
+  const { error } = await supabaseClient
+    .from('bookmarks')
+    .delete()
+    .eq('user_id', userId)
+    .eq('paper_id', paperId);
+  if (error) throw new Error(error.message);
+}
+
+// 북마크 삭제 (행 id로)
+async function deleteBookmarkById(rowId) {
+  const { error } = await supabaseClient
+    .from('bookmarks')
+    .delete()
+    .eq('id', rowId);
+  if (error) throw new Error(error.message);
+}
+
+// 북마크 메모 수정
+async function updateBookmarkNote(rowId, note) {
+  const { error } = await supabaseClient
+    .from('bookmarks')
+    .update({ note: note })
+    .eq('id', rowId);
+  if (error) throw new Error(error.message);
+}

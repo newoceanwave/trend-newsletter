@@ -4,32 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>논문 검색 — AI 트렌드 뉴스레터</title>
+  <style id="shared-css"></style>
   <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', 'Segoe UI', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', sans-serif;
   background: #f9fafb;
   color: #191f28;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
-.header { margin-bottom: 28px; }
-.header-top-row {
-  display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
-}
-.header-date { font-size: 13px; color: #8b95a1; font-weight: 500; }
-.nav-link {
-  font-size: 13px; color: #3182f6; text-decoration: none; font-weight: 500;
-  padding: 6px 12px; border-radius: 8px; transition: background 0.15s ease;
-}
-.nav-link:hover { background: #e8f3ff; }
-.header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
-.header-subtitle { font-size: 15px; color: #4e5968; }
+.page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 28px; }
 
 .search-box {
   background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
-  padding: 20px 24px; margin-bottom: 24px;
+  padding: 20px 24px; margin-bottom: 20px;
 }
 .search-row { display: flex; gap: 8px; margin-bottom: 14px; }
 .search-input {
@@ -41,7 +31,6 @@ body {
 .search-btn {
   height: 44px; padding: 0 24px; background: #3182f6; color: #fff; border: none;
   border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
-  transition: background 0.15s ease;
 }
 .search-btn:hover { background: #2872dc; }
 .search-btn:disabled { background: #d1d6db; cursor: not-allowed; }
@@ -49,7 +38,6 @@ body {
 .source-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .source-label { font-size: 12px; color: #8b95a1; font-weight: 500; }
 .source-chip {
-  display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 12px; background: #f2f4f6; color: #4e5968;
   border-radius: 16px; font-size: 12px; font-weight: 500; cursor: pointer;
   border: 1px solid transparent; user-select: none; transition: all 0.15s ease;
@@ -57,10 +45,11 @@ body {
 .source-chip.active { background: #e8f3ff; color: #3182f6; border-color: #c4dcff; }
 .source-chip:hover { border-color: #c4dcff; }
 
-.status-bar {
-  font-size: 13px; color: #8b95a1; margin-bottom: 16px; padding: 0 4px;
-  min-height: 20px;
+.tip {
+  font-size: 12px; color: #8b95a1; background: #f9fafb; border: 1px solid #f2f4f6;
+  border-radius: 10px; padding: 10px 14px; margin-bottom: 16px;
 }
+.status-bar { font-size: 13px; color: #8b95a1; margin-bottom: 16px; padding: 0 4px; min-height: 20px; }
 
 .result-group { margin-bottom: 32px; }
 .result-group-title {
@@ -71,9 +60,7 @@ body {
   background: #f2f4f6; color: #6b7684; padding: 2px 8px;
   border-radius: 10px; font-size: 12px; font-weight: 500;
 }
-.source-badge {
-  font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600;
-}
+.source-badge { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
 .source-badge.arxiv { background: #fef3e6; color: #c2691a; }
 .source-badge.s2 { background: #e8f0fe; color: #1a56c2; }
 .source-badge.openalex { background: #eef6ec; color: #2a7d2e; }
@@ -90,16 +77,25 @@ body {
 .paper-title a { color: inherit; text-decoration: none; }
 .paper-title a:hover { color: #3182f6; }
 .paper-meta-line { font-size: 12px; color: #8b95a1; margin-bottom: 8px; }
-.paper-abstract {
-  font-size: 13px; color: #4e5968; line-height: 1.6; margin-bottom: 10px;
-}
-.paper-foot { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.paper-abstract { font-size: 13px; color: #4e5968; line-height: 1.6; margin-bottom: 10px; }
+.paper-foot { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .paper-foot a { color: #6b7684; text-decoration: none; font-size: 12px; font-weight: 500; }
 .paper-foot a:hover { color: #3182f6; }
 .cite-count {
   font-size: 11px; color: #8b95a1; background: #f9fafb;
   padding: 2px 8px; border-radius: 6px; border: 1px solid #f2f4f6;
 }
+.bookmark-btn {
+  font-size: 12px; padding: 5px 12px; border-radius: 8px;
+  border: 1px solid #d1d6db; background: #fff; color: #4e5968;
+  cursor: pointer; font-weight: 500; font-family: inherit;
+  margin-left: auto;
+}
+.bookmark-btn:hover { background: #f9fafb; }
+.bookmark-btn.marked {
+  background: #e8f3ff; color: #3182f6; border-color: #c4dcff;
+}
+.bookmark-btn:disabled { opacity: 0.5; cursor: wait; }
 
 .empty, .loading {
   background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
@@ -112,26 +108,24 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.footer {
-  margin-top: 50px; padding-top: 24px; border-top: 1px solid #f2f4f6;
-  font-size: 12px; color: #8b95a1; text-align: center; line-height: 1.6;
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: #191f28; color: #fff; padding: 12px 20px; border-radius: 10px;
+  font-size: 13px; opacity: 0; transition: opacity 0.2s ease;
+  pointer-events: none; z-index: 200;
 }
-.tip {
-  font-size: 12px; color: #8b95a1; background: #f9fafb; border: 1px solid #f2f4f6;
-  border-radius: 10px; padding: 10px 14px; margin-bottom: 16px;
-}
-  </style>
+.toast.show { opacity: 1; }
+.toast.error { background: #c0392b; }
+
+.page-loading { padding: 40px; text-align: center; color: #8b95a1; }
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="header-top-row">
-        <div class="header-date">논문 검색</div>
-        <a href="index.html" class="nav-link">← 대시보드</a>
-      </div>
-      <h1 class="header-title">논문 검색</h1>
-      <p class="header-subtitle">arXiv · Semantic Scholar · OpenAlex에서 키워드로 논문 검색</p>
-    </div>
+  <div id="header"></div>
+
+  <div class="container" id="main" style="display:none">
+    <h1 class="page-title">논문 검색</h1>
+    <p class="page-subtitle">arXiv · Semantic Scholar · OpenAlex에서 키워드로 논문 검색</p>
 
     <div class="search-box">
       <div class="search-row">
@@ -148,20 +142,36 @@ body {
     </div>
 
     <div class="tip">
-      💡 영어 abstract는 크롬에서 우클릭 → "한국어로 번역"으로 빠르게 볼 수 있어요.
+      💡 영어 abstract는 크롬에서 우클릭 → "한국어로 번역"으로 빠르게 볼 수 있어요. 논문을 북마크하면 마이페이지에 저장됩니다.
     </div>
 
     <div class="status-bar" id="status-bar"></div>
     <div id="results"></div>
-
-    <div class="footer">
-      arXiv · Semantic Scholar · OpenAlex 공개 API 사용<br>
-      Semantic Scholar는 Google Scholar 대안으로 인용수까지 제공합니다
-    </div>
   </div>
 
+  <div class="page-loading" id="loading">로그인 확인 중...</div>
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="shared.js"></script>
   <script>
-  (function() {
+  (async function() {
+    document.getElementById('shared-css').textContent = SHARED_HEADER_CSS;
+    const session = await requireAuth();
+    if (!session) return;
+    await renderHeader('header', 'search');
+
+    const userId = session.user.id;
+    const toastEl = document.getElementById('toast');
+    function toast(msg, isError) {
+      toastEl.textContent = msg;
+      toastEl.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => { toastEl.className = 'toast'; }, 2500);
+    }
+
+    // 내 북마크 ID 목록 (검색 결과에서 이미 북마크된 거 표시용)
+    let bookmarkedIds = await fetchMyBookmarkIds();
+
     let activeSources = new Set(['arxiv', 's2', 'openalex']);
 
     document.querySelectorAll('.source-chip').forEach(chip => {
@@ -199,18 +209,20 @@ body {
 
       const results = await Promise.allSettled(tasks);
 
-      let html = '';
       let totalCount = 0;
+      resultsEl.innerHTML = '';
       results.forEach(r => {
         if (r.status === 'fulfilled' && r.value) {
-          html += renderGroup(r.value.source, r.value.label, r.value.papers);
+          renderGroup(resultsEl, r.value.source, r.value.label, r.value.papers);
           totalCount += r.value.papers.length;
         } else if (r.status === 'rejected') {
           console.error('Search failed:', r.reason);
         }
       });
 
-      resultsEl.innerHTML = html || '<div class="empty">검색 결과가 없어요. 다른 키워드를 시도해보세요.</div>';
+      if (totalCount === 0) {
+        resultsEl.innerHTML = '<div class="empty">검색 결과가 없어요. 다른 키워드를 시도해보세요.</div>';
+      }
       statusBar.textContent = '총 ' + totalCount + '편 검색됨';
 
       btn.disabled = false;
@@ -232,7 +244,10 @@ body {
         const published = (e.querySelector('published')?.textContent || '').slice(0, 10);
         const authors = Array.from(e.querySelectorAll('author name'))
           .slice(0, 3).map(a => a.textContent).join(', ');
-        papers.push({ title, abstract, link, published, authors, citations: null });
+        papers.push({
+          paper_id: 'arxiv:' + link.split('/').pop(),
+          title, abstract, link, published, authors, citations: null
+        });
       });
       return { source: 'arxiv', label: 'arXiv', papers };
     }
@@ -240,11 +255,12 @@ body {
     async function searchS2(query) {
       const url = 'https://api.semanticscholar.org/graph/v1/paper/search?query='
         + encodeURIComponent(query)
-        + '&limit=10&fields=title,abstract,url,year,authors,citationCount';
+        + '&limit=10&fields=title,abstract,url,year,authors,citationCount,paperId';
       const resp = await fetch(url);
       if (!resp.ok) throw new Error('S2 ' + resp.status);
       const data = await resp.json();
       const papers = (data.data || []).map(p => ({
+        paper_id: 's2:' + (p.paperId || p.url),
         title: p.title || '',
         abstract: p.abstract || '(abstract 없음)',
         link: p.url || '#',
@@ -272,6 +288,7 @@ body {
           abstract = positions.map(x => x[1]).join(' ');
         }
         return {
+          paper_id: 'openalex:' + (p.id || '').split('/').pop(),
           title: p.title || '',
           abstract: abstract,
           link: p.doi ? ('https://doi.org/' + p.doi.replace('https://doi.org/', '')) : (p.id || '#'),
@@ -283,38 +300,79 @@ body {
       return { source: 'openalex', label: 'OpenAlex', papers };
     }
 
-    function renderGroup(source, label, papers) {
+    function renderGroup(container, source, label, papers) {
+      const group = document.createElement('div');
+      group.className = 'result-group';
+
       if (!papers.length) {
-        return '<div class="result-group"><div class="result-group-title">'
-          + '<span class="source-badge ' + source + '">' + label + '</span>'
-          + '<span class="count">0</span></div>'
-          + '<div class="empty">결과 없음</div></div>';
+        group.innerHTML = '<div class="result-group-title">' +
+          '<span class="source-badge ' + source + '">' + label + '</span>' +
+          '<span class="count">0</span></div>' +
+          '<div class="empty">결과 없음</div>';
+        container.appendChild(group);
+        return;
       }
-      let cards = '';
+
+      group.innerHTML = '<div class="result-group-title">' +
+        '<span class="source-badge ' + source + '">' + label + '</span>' +
+        '<span class="count">' + papers.length + '</span></div>';
+
       papers.forEach(p => {
-        const safeTitle = escapeHtml(p.title);
-        const safeAbstract = escapeHtml(p.abstract);
+        const card = document.createElement('div');
+        card.className = 'paper-card';
         const citeStr = (p.citations != null)
           ? '<span class="cite-count">인용 ' + p.citations + '</span>' : '';
         const metaLine = [p.authors, p.published].filter(Boolean).join(' · ');
-        cards += '<div class="paper-card">'
-          + '<div class="paper-title"><a href="' + p.link + '" target="_blank">' + safeTitle + '</a></div>'
-          + (metaLine ? '<div class="paper-meta-line">' + escapeHtml(metaLine) + '</div>' : '')
-          + '<div class="paper-abstract">' + safeAbstract + '</div>'
-          + '<div class="paper-foot">'
-          + '<a href="' + p.link + '" target="_blank">원문 보기</a>'
-          + citeStr
-          + '</div>'
-          + '</div>';
-      });
-      return '<div class="result-group"><div class="result-group-title">'
-        + '<span class="source-badge ' + source + '">' + label + '</span>'
-        + '<span class="count">' + papers.length + '</span></div>'
-        + cards + '</div>';
-    }
+        const isMarked = bookmarkedIds.has(p.paper_id);
 
-    function escapeHtml(s) {
-      return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        card.innerHTML =
+          '<div class="paper-title"><a href="' + p.link + '" target="_blank">' +
+            escapeHtml(p.title) + '</a></div>' +
+          (metaLine ? '<div class="paper-meta-line">' + escapeHtml(metaLine) + '</div>' : '') +
+          '<div class="paper-abstract">' + escapeHtml(p.abstract) + '</div>' +
+          '<div class="paper-foot">' +
+            '<a href="' + p.link + '" target="_blank">원문 보기</a>' +
+            citeStr +
+            '<button class="bookmark-btn' + (isMarked ? ' marked' : '') + '">' +
+              (isMarked ? '★ 북마크됨' : '☆ 북마크') +
+            '</button>' +
+          '</div>';
+
+        const bmBtn = card.querySelector('.bookmark-btn');
+        bmBtn.addEventListener('click', async () => {
+          bmBtn.disabled = true;
+          const currentlyMarked = bookmarkedIds.has(p.paper_id);
+          try {
+            if (currentlyMarked) {
+              await deleteBookmarkByPaperId(userId, p.paper_id);
+              bookmarkedIds.delete(p.paper_id);
+              bmBtn.className = 'bookmark-btn';
+              bmBtn.textContent = '☆ 북마크';
+              toast('북마크 해제됨');
+            } else {
+              await addBookmark(userId, {
+                paper_id: p.paper_id,
+                title: p.title,
+                abstract: p.abstract,
+                arxiv_url: p.link,
+                summary_ko: '',
+              });
+              bookmarkedIds.add(p.paper_id);
+              bmBtn.className = 'bookmark-btn marked';
+              bmBtn.textContent = '★ 북마크됨';
+              toast('북마크에 저장됨');
+            }
+          } catch (e) {
+            toast(e.message, true);
+          } finally {
+            bmBtn.disabled = false;
+          }
+        });
+
+        group.appendChild(card);
+      });
+
+      container.appendChild(group);
     }
 
     document.getElementById('search-btn').addEventListener('click', doSearch);
@@ -322,12 +380,17 @@ body {
       if (e.key === 'Enter') doSearch();
     });
 
+    // ?q= 파라미터 자동 검색
     const params = new URLSearchParams(window.location.search);
     const initialQuery = params.get('q');
     if (initialQuery) {
       document.getElementById('search-input').value = initialQuery;
-      doSearch();
     }
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+
+    if (initialQuery) doSearch();
   })();
   </script>
 </body>

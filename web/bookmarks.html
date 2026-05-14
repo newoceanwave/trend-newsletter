@@ -15,23 +15,108 @@ body {
 }
 .container { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; }
 .page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
-.page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 32px; }
-.card {
+.page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 28px; }
+.count-badge {
+  font-size: 13px; color: #6b7684; font-weight: 500;
+  background: #f2f4f6; padding: 3px 10px; border-radius: 10px;
+  margin-left: 8px;
+}
+
+.bm-card {
   background: #fff;
   border: 1px solid #f2f4f6;
   border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 16px;
-}
-.card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
-.card-text { font-size: 14px; color: #6b7684; line-height: 1.6; }
-.phase-badge {
-  display: inline-block;
-  font-size: 11px; font-weight: 600;
-  color: #8b95a1; background: #f2f4f6;
-  padding: 3px 10px; border-radius: 8px;
+  padding: 20px 22px;
   margin-bottom: 12px;
 }
+.bm-title {
+  font-size: 16px; font-weight: 600; line-height: 1.4;
+  margin-bottom: 6px;
+}
+.bm-title a { color: inherit; text-decoration: none; }
+.bm-title a:hover { color: #3182f6; }
+.bm-date { font-size: 12px; color: #b0b8c1; margin-bottom: 10px; }
+.bm-summary {
+  font-size: 13px; color: #4e5968; line-height: 1.6;
+  margin-bottom: 10px;
+}
+.bm-abstract {
+  font-size: 12px; color: #8b95a1; line-height: 1.6;
+  margin-bottom: 12px;
+  max-height: 60px; overflow: hidden;
+  position: relative;
+}
+.bm-note-area {
+  margin-bottom: 12px;
+}
+.bm-note-input {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #191f28;
+  resize: vertical;
+  outline: none;
+}
+.bm-note-input:focus { border-color: #3182f6; }
+.bm-note-input::placeholder { color: #b0b8c1; }
+.bm-foot {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.bm-foot a {
+  font-size: 12px; color: #6b7684;
+  text-decoration: none; font-weight: 500;
+}
+.bm-foot a:hover { color: #3182f6; }
+.bm-btn {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d6db;
+  background: #fff;
+  color: #4e5968;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+}
+.bm-btn:hover { background: #f9fafb; }
+.bm-btn.save { border-color: #3182f6; color: #3182f6; }
+.bm-btn.save:hover { background: #e8f3ff; }
+.bm-btn.delete { color: #c0392b; border-color: #f0c4c0; }
+.bm-btn.delete:hover { background: #fdecec; }
+.bm-btn:disabled { opacity: 0.5; cursor: wait; }
+.bm-spacer { margin-left: auto; }
+
+.empty {
+  background: #fff;
+  border: 1px solid #f2f4f6;
+  border-radius: 16px;
+  padding: 48px 24px;
+  text-align: center;
+  color: #8b95a1;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.empty a { color: #3182f6; text-decoration: none; font-weight: 600; }
+
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  background: #191f28; color: #fff;
+  padding: 12px 20px; border-radius: 10px;
+  font-size: 13px;
+  opacity: 0; transition: opacity 0.2s ease;
+  pointer-events: none; z-index: 200;
+}
+.toast.show { opacity: 1; }
+.toast.error { background: #c0392b; }
+
 .loading { padding: 40px; text-align: center; color: #8b95a1; }
 </style>
 </head>
@@ -39,20 +124,14 @@ body {
   <div id="header"></div>
 
   <div class="container" id="main" style="display:none">
-    <h1 class="page-title">북마크</h1>
-    <p class="page-subtitle">관심 있는 논문을 모아두는 마이페이지</p>
+    <h1 class="page-title">북마크<span class="count-badge" id="count-badge">0</span></h1>
+    <p class="page-subtitle">관심 있는 논문을 모아두고 메모를 남기세요</p>
 
-    <div class="card">
-      <div class="phase-badge">Phase 4에서 구현 예정</div>
-      <div class="card-title">저장한 논문</div>
-      <div class="card-text">
-        대시보드나 검색 페이지에서 논문을 북마크하면 여기 모입니다.
-        메모도 남길 수 있어요. Phase 4에서 Supabase와 연결됩니다.
-      </div>
-    </div>
+    <div id="bookmark-list"></div>
   </div>
 
   <div class="loading" id="loading">로그인 확인 중...</div>
+  <div class="toast" id="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="shared.js"></script>
@@ -62,6 +141,119 @@ body {
     const session = await requireAuth();
     if (!session) return;
     await renderHeader('header', 'bookmarks');
+
+    const toastEl = document.getElementById('toast');
+    function toast(msg, isError) {
+      toastEl.textContent = msg;
+      toastEl.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => { toastEl.className = 'toast'; }, 2500);
+    }
+
+    const listEl = document.getElementById('bookmark-list');
+    const countBadge = document.getElementById('count-badge');
+    let bookmarks = [];
+
+    function fmtDate(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      return d.getFullYear() + '.' +
+        String(d.getMonth() + 1).padStart(2, '0') + '.' +
+        String(d.getDate()).padStart(2, '0');
+    }
+
+    function render() {
+      countBadge.textContent = bookmarks.length;
+
+      if (bookmarks.length === 0) {
+        listEl.innerHTML =
+          '<div class="empty">' +
+            '아직 북마크한 논문이 없어요.<br>' +
+            '<a href="dashboard.html">대시보드</a>나 ' +
+            '<a href="search.html">논문 검색</a>에서 ' +
+            '논문을 북마크해보세요.' +
+          '</div>';
+        return;
+      }
+
+      listEl.innerHTML = '';
+      bookmarks.forEach(bm => {
+        const card = document.createElement('div');
+        card.className = 'bm-card';
+
+        const summaryHtml = bm.summary_ko
+          ? '<div class="bm-summary">' + escapeHtml(bm.summary_ko) + '</div>'
+          : '';
+        const abstractHtml = (!bm.summary_ko && bm.abstract)
+          ? '<div class="bm-abstract">' + escapeHtml(bm.abstract) + '</div>'
+          : '';
+
+        card.innerHTML =
+          '<div class="bm-title">' +
+            (bm.arxiv_url
+              ? '<a href="' + bm.arxiv_url + '" target="_blank">' + escapeHtml(bm.title) + '</a>'
+              : escapeHtml(bm.title)) +
+          '</div>' +
+          '<div class="bm-date">' + fmtDate(bm.created_at) + ' 저장' +
+            (bm.note ? ' · 메모 있음' : '') + '</div>' +
+          summaryHtml +
+          abstractHtml +
+          '<div class="bm-note-area">' +
+            '<textarea class="bm-note-input" placeholder="메모를 남겨보세요 (선택)">' +
+              escapeHtml(bm.note || '') +
+            '</textarea>' +
+          '</div>' +
+          '<div class="bm-foot">' +
+            (bm.arxiv_url
+              ? '<a href="' + bm.arxiv_url + '" target="_blank">원문 보기</a>' : '') +
+            '<button class="bm-btn save">메모 저장</button>' +
+            '<button class="bm-btn delete bm-spacer">북마크 삭제</button>' +
+          '</div>';
+
+        const noteInput = card.querySelector('.bm-note-input');
+        const saveBtn = card.querySelector('.bm-btn.save');
+        const deleteBtn = card.querySelector('.bm-btn.delete');
+
+        // 메모 저장
+        saveBtn.addEventListener('click', async () => {
+          saveBtn.disabled = true;
+          try {
+            await updateBookmarkNote(bm.id, noteInput.value.trim());
+            bm.note = noteInput.value.trim();
+            toast('메모 저장됨');
+          } catch (e) {
+            toast('저장 실패: ' + e.message, true);
+          } finally {
+            saveBtn.disabled = false;
+          }
+        });
+
+        // 북마크 삭제
+        deleteBtn.addEventListener('click', async () => {
+          if (!confirm('이 북마크를 삭제할까요?')) return;
+          deleteBtn.disabled = true;
+          try {
+            await deleteBookmarkById(bm.id);
+            bookmarks = bookmarks.filter(b => b.id !== bm.id);
+            render();
+            toast('북마크 삭제됨');
+          } catch (e) {
+            toast('삭제 실패: ' + e.message, true);
+            deleteBtn.disabled = false;
+          }
+        });
+
+        listEl.appendChild(card);
+      });
+    }
+
+    // 초기 로드
+    try {
+      bookmarks = await fetchMyBookmarks();
+    } catch (e) {
+      toast('북마크 로드 실패: ' + e.message, true);
+    }
+    render();
+
     document.getElementById('loading').style.display = 'none';
     document.getElementById('main').style.display = 'block';
   })();
