@@ -53,6 +53,39 @@ body {
 .header-title { font-size: 28px; font-weight: 700; color: #191f28; margin-bottom: 8px; letter-spacing: -0.02em; }
 .header-subtitle { font-size: 15px; color: #4e5968; }
 
+.search-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.search-bar-input {
+  flex: 1;
+  height: 46px;
+  padding: 0 18px;
+  border: 1px solid #e5e8eb;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #191f28;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.search-bar-input:focus { border-color: #3182f6; }
+.search-bar-btn {
+  height: 46px;
+  padding: 0 22px;
+  background: #191f28;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.search-bar-btn:hover { background: #333d4b; }
+
 .kw-panel {
   background: #ffffff;
   border: 1px solid #f2f4f6;
@@ -891,7 +924,7 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
 
     js_code = _build_kw_management_js(user_keywords, suggested_keywords, initial_profiles=profile_ids)
 
-    # 탭 전환 + 도움말 텍스트 JS
+    # 탭 전환 + 도움말 + 검색창 JS
     tab_js = """
     (function() {
       const HELP_TEXTS = {
@@ -912,6 +945,19 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
             });
             if (helpEl && HELP_TEXTS[target]) helpEl.textContent = HELP_TEXTS[target];
           });
+        });
+
+        // 논문 검색창 — 검색 누르면 search.html 새 창으로
+        const searchInput = document.getElementById('paper-search-input');
+        const searchBtn = document.getElementById('paper-search-btn');
+        function goSearch() {
+          const q = searchInput.value.trim();
+          if (!q) return;
+          window.open('search.html?q=' + encodeURIComponent(q), '_blank');
+        }
+        if (searchBtn) searchBtn.addEventListener('click', goSearch);
+        if (searchInput) searchInput.addEventListener('keydown', e => {
+          if (e.key === 'Enter') goSearch();
         });
       });
     })();
@@ -934,6 +980,12 @@ def generate_dashboard_html(papers, date_str, user_keywords, suggested_keywords=
       </div>
       <h1 class="header-title">AI 트렌드 뉴스레터</h1>
       <p class="header-subtitle">arXiv + Hugging Face Daily Papers에서 어제자 큐레이션</p>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" class="search-bar-input" id="paper-search-input"
+             placeholder="🔍 키워드로 논문 검색 (arXiv · Semantic Scholar · OpenAlex)" />
+      <button class="search-bar-btn" id="paper-search-btn">검색</button>
     </div>
 
     <div class="kw-panel" id="profile-panel">
