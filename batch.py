@@ -362,11 +362,13 @@ def collect_and_save_trending(run_date: str):
         # 죽은 pwc는 라벨을 active로 저장 (데이터는 HF fallback)
         label = "active" if source == "pwc" else source
         for rank, item in enumerate(trending.get(source, []), 1):
+            # trending.py는 키워드 빈도를 "score" 키로 반환함
+            cnt = item.get("score", item.get("count", 0))
             rows.append({
                 "run_date": run_date,
                 "source": label,
                 "keyword": item.get("keyword", ""),
-                "count": item.get("count", 0),
+                "count": int(round(cnt)),
                 "rank": rank,
             })
 
