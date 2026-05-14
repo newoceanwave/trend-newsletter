@@ -311,5 +311,465 @@
   "2605.09877": {
     "title_ko": "Key-Value Means",
     "abstract_ko": "본 논문에서는 고정 크기 또는 증가하는 상태를 모두 수용할 수 있는 새로운 block-recurrence attention인 Key-Value Means(\"KVM\")를 제시합니다. 강력한 transformer baseline에 고정 크기 KVM attention 레이어를 추가하면 무시할 수 있는 수준의 새로운 파라미터만으로 강력한 O(N) chunked RNN을 얻을 수 있습니다. 확장 가능한 KVM cache를 갖춘 transformer를 학습하고, 이것이 subquadratic prefill 시간과 sublinear 상태 증가만으로 long-context 테스트에서 경쟁력 있는 성능을 보임을 보입니다. KVM은 표준 연산으로 구현 가능하며 custom kernel이 필요 없고, chunk-wise 병렬화 가능한 학습과 prefill을 지원합니다. 이는 전통적인 transformer(확장 가능한 context memory, chunk-wise 병렬화 가능한 학습과 prefill)와 linear RNN의 많은 이점을 단일 통합 패키지로 제공합니다. 모든 레이어에서 사용 가능하여 KV-cache 메모리를 절약하고, prefill 시간 복잡도를 O(N)과 O(N²) 사이에서 연속적으로 선택할 수 있습니다. 또한 전통적인 attention을 대체하여 LRNN 레이어와 함께 하이브리드 솔루션으로 구현 가능하며, LRNN을 개선된 sublinear 메모리 증가 context 길이 사용 및 long context decoding으로 보완할 수 있습니다."
+  },
+  "2605.13496v1": {
+    "summary_ko": "MARLIN은 클라우드 데이터센터에서 LLM 추론의 지속 가능성을 개선하기 위해 multi-agent game-theoretic reinforcement learning을 활용하여 TTFT, 탄소 배출, 수자원 사용, 에너지 비용을 동시에 최적화하는 프레임워크입니다. 기존 방식 대비 TTFT 18%, 탄소 배출 33%, 수자원 사용 43%, 에너지 비용 11%를 각각 감소시키는 성과를 달성했습니다.",
+    "title_ko": "MARLIN: 클라우드 데이터센터에서 지속 가능한 LLM 추론을 위한 다중 에이전트 게임 이론 강화학습",
+    "abstract_ko": "클라우드 기반 플랫폼에서 LLM 추론 요청은 LLM 라이프사이클 에너지 사용의 최대 90%를 차지하며, 환경 영향을 증가시키고 있다. 본 논문은 MARLIN이라는 다중 에이전트 게임 이론 강화학습 프레임워크를 제안하여 LLM 추론의 time-to-first token, 탄소 배출량, 수 사용량, 에너지 비용을 함께 최적화한다. MARLIN은 기존 최고 성능 LLM 추론 관리 프레임워크 대비 TTFT 18%, 탄소 배출량 33%, 수 사용량 43%, 에너지 비용 11% 이상 감소를 달성한다."
+  },
+  "2605.13711v1": {
+    "summary_ko": "# 요약\n\n본 논문은 불규칙적으로 샘플링된 다중모달 시계열 데이터(MITS)를 XML 형식의 시간순 triplet으로 표현하고, LLM을 two-stage 전략으로 fine-tuning하여 샘플링 패턴과 관측값을 동시에 모델링하는 MILM을 제안한다. 제안된 MILM-2S는 EHR 데이터셋에서 샘플링 패턴이 예측 신호를 포함함을 확인하고 value pending 평가에서 우수한 성능을 달성한다.",
+    "title_ko": "MILM: 정보 제공 샘플링을 통한 다중모달 불규칙 시계열 대규모 언어 모델",
+    "abstract_ko": "다중모달 불규칙 시계열(MITS)은 이질적인 수치 및 텍스트 채널에서 비동기적으로 불규칙하게 샘플링된 관측값들로 구성된다. 예를 들어 의료 분야에서 환자의 전자건강기록(EHR)은 불규칙한 검사 측정값과 임상 노트를 포함한다. 본 논문에서는 MITS를 XML 형식의 시간순 삼중항으로 표현하고 이단계 fine-tuning 전략으로 LLM을 학습시키는 MILM(Multimodal Irregular time series Language Model)을 제안한다. 첫 번째 단계는 값이 제거된 MITS로 샘플링 패턴만으로부터 예측하도록 학습하고, 두 번째 단계는 완전한 MITS로 샘플링 패턴과 관측값을 함께 모델링하도록 학습한다. 본 모델은 여러 EHR 데이터셋에서 최고 성능을 달성한다."
+  },
+  "2605.13725v1": {
+    "summary_ko": "본 논문은 LLM 기반 다중 에이전트 사회 시뮬레이션에서 인지적 근거를 갖춘 의견 역학을 구현하기 위해, anchoring 기반의 신념 업데이트 규칙, 계층적 메모리 아키텍처, 동적 에이전트 프로필을 통합한 ScioMind 프레임워크를 제안하며, 실제 정책 토론 시나리오에서 편극화, 다양성, 극단화 지표 등에서 행동 현실성의 향상을 입증했다.",
+    "title_ko": "ScioMind: 앵커링 기반 신념 역학과 동적 프로필을 활용한 인지적으로 근거한 다중 에이전트 사회 시뮬레이션",
+    "abstract_ko": "Large Language Model 기반 다중 에이전트 시뮬레이션은 사회적 여론 역학 연구를 위한 강력한 검증 플랫폼을 제공한다. 그러나 기존 방법들은 제한된 인지적 근거를 가진 고정된 업데이트 규칙 또는 제약 없는 LLM 상호작용에 크게 의존하는 두 가지 대조적인 접근 방식을 채택한다. 구조화된 여론 역학과 LLM 기반 에이전트 추론을 결합하여 이러한 패러다임의 간극을 메우는 인지적으로 근거한 시뮬레이션 프레임워크인 ScioMind를 제안한다. 메모리 앵커된 신념 업데이트 규칙, 지속적인 경험 기반 신념 형성을 지원하는 계층적 메모리 아키텍처, 그리고 이질적인 성격과 진화하는 내부 상태를 가능하게 하는 동적 에이전트 프로필의 세 가지 핵심 구성 요소를 통합한다. 실제 정책 논쟁 시나리오에서 다중 사례 연구를 통해 평가하며, 양극화, 다양성, 극단화, 궤적 안정성 등 여러 지표에서 제안된 구성 요소들이 행동 현실성에서 지속적인 개선을 보인다."
+  },
+  "2605.13779v1": {
+    "summary_ko": "MinT는 LoRA 어댑터 기반의 정책 학습과 서빙을 위한 관리형 인프라 시스템으로, base 모델을 고정하고 LoRA 어댑터만 이동시켜 수백만 개 규모의 정책을 효율적으로 관리한다. Scale Up/Down/Out 세 가지 확장 축을 통해 frontier 규모 모델부터 경량 어댑터까지 지원하며, 메모리 사용과 처리 시간을 대폭 감소시키면서 대규모 정책 카탈로그 운영을 가능하게 한다.",
+    "title_ko": "MinT: 수백만 개의 LLM 학습 및 서빙을 위한 관리형 인프라",
+    "abstract_ko": "본 논문은 Low-Rank Adaptation (LoRA) 사후학습 및 온라인 서빙을 위한 관리형 인프라 시스템인 MindLab Toolkit (MinT)을 제시한다. MinT는 적은 수의 비용이 높은 기본 모델 배포로부터 많은 학습된 정책들을 생성하는 환경을 목표로 하며, 각 정책을 병합된 전체 체크포인트로 구현하지 않고 기본 모델을 상주시킨 채 LoRA adapter 리비전을 롤아웃, 업데이트, 내보내기, 평가, 서빙, 롤백 과정을 거쳐 이동시킨다. MinT는 분산 학습, 서빙, 스케줄링 및 데이터 이동을 서비스 인터페이스 뒤에 숨기며, 세 축을 따라 확장성을 제공한다: Scale Up은 LoRA RL을 1T 총 매개변수를 초과하여 검증되는 frontier 규모의 밀집 및 MoE 아키텍처로 확장하고, Scale Down은 exported LoRA adapter만 이동하여 어댑터 전용 전달에서 4B 밀집 모델에서 18.3배, 30B MoE에서 2.85배의 단계 감소를 달성하며, Scale Out은 지속 가능한 정책 주소 지정을 CPU/GPU 작업 집합으로부터 분리한다."
+  },
+  "2605.13618v1": {
+    "summary_ko": "# 요약\n\nOpenAaaS는 LLM 기반 autonomous agents를 활용하여 기관 간 경계를 넘어 materials informatics 역량을 안전하게 조합할 수 있는 오픈소스 분산 Agent-as-a-Service 프레임워크이며, \"code flows, data stays still\" 원칙 하에 Master Agent가 복잡한 재료 설계 작업을 계획하면 Sub-agents가 로컬 데이터와 계산 자원에 대한 주권을 유지하며 실행하는 구조를 제시한다.",
+    "title_ko": "OpenAaaS: 분산 재료정보학 연구를 위한 개방형 Agent-as-a-Service 프레임워크",
+    "abstract_ko": "Materials Genome Initiative는 재료 발견을 가속화하기 위해 계산 및 실험 자원을 집계하는 중앙화된 플랫폼들(SaaS, PaaS, IaaS)의 확산을 촉발했다. 동시에 대형 언어 모델(LLMs)과 자율 에이전트의 혁신은 과학 연구를 위한 강력한 추론 능력을 제공하고 있으나, 기관 간 경계를 넘어 이러한 능력을 안전하게 조합할 수 있는 조직 인프라가 부족하다는 중요한 문제가 남아있다. 본 논문은 지능형 재료 설계를 위한 조직화된 다중 에이전트 협업을 가능하게 하는 개방형 계층적 분산 Agent-as-a-Service 프레임워크인 OpenAaaS를 제안한다."
+  },
+  "2605.13311v1": {
+    "summary_ko": "IdeaForge는 TRIZ, Design Thinking, SCAMPER 등 다양한 혁신 방법론을 specialist agent들이 FalkorDB knowledge graph 위에서 통합 운영하며, 여러 방법론에서 독립적으로 지지받는 claim들을 CONVERGENT 관계로 연결하는 cross-methodology convergence mechanism을 통해 신뢰도 높은 혁신 후보를 식별하고 patent claim 생성을 체계화한 프레임워크다.",
+    "title_ko": "IdeaForge: 교차-방법론 혁신 분석 및 특허 청구항 생성을 위한 지식 그래프 기반 멀티-에이전트 프레임워크",
+    "abstract_ko": "기존의 AI 기반 혁신 시스템은 TRIZ나 Design Thinking과 같은 단일 방법론을 순차적 프롬프트 기반 워크플로우로 적용하여 중간 추론 구조를 보존하지 못함으로써 방법론 간 인사이트가 단편화되고 추적성과 새로움의 체계적 평가가 제한된다. 우리는 혁신 분석 및 특허 청구항 생성을 위한 knowledge graph 기반 멀티-에이전트 프레임워크인 IdeaForge를 제시한다. IdeaForge는 FalkorDB knowledge graph 위에서 작동하는 specialist agent들을 통해 TRIZ, Design Thinking, SCAMPER 등 다양한 혁신 방법론을 통합하며, 각 에이전트는 모순, 발명 원리, 사용자 요구, 변환, 유사성 및 후보 청구항을 나타내는 구조화된 엔티티와 관계를 기여한다. IdeaForge의 핵심 기여는 graph 기반 청구항 연결을 통해 구현된 교차-방법론 수렴 메커니즘으로, 여러 방법론에 의해 독립적으로 지지되는 청구항들을 CONVERGENT 관계로 연결하여 graph traversal을 통한 고신뢰도 혁신 후보 식별을 가능하게 한다."
+  },
+  "2605.13724v1": {
+    "summary_ko": "AnyFlow는 consistency distillation의 한계를 극복하기 위해 endpoint consistency mapping 대신 flow-map transition learning을 distillation 목표로 삼아, 임의의 샘플링 스텝에서 성능이 저하되지 않는 첫 번째 any-step video diffusion distillation 프레임워크를 제안합니다. Flow Map Backward Simulation을 통해 효율적인 on-policy distillation을 가능하게 하여 few-step 샘플링에서의 discretization error와 causal generation에서의 exposure bias를 동시에 감소시킵니다.",
+    "title_ko": "AnyFlow: 온-폴리시 Flow Map 증류를 통한 임의 스텝 비디오 Diffusion 모델",
+    "abstract_ko": "일관성 증류(consistency distillation)는 적은 스텝의 비디오 생성을 크게 발전시켰으나, 테스트 시 더 많은 샘플링 스텝이 할당될수록 성능이 저하되어 임의 스텝 비디오 diffusion의 효과를 제한한다. 이는 일관성 증류가 원래의 probability-flow ODE 궤적을 consistency-sampling 궤적으로 대체하면서 ODE 샘플링의 바람직한 테스트 타임 스케일링 특성을 약화시키기 때문이다. AnyFlow는 flow map 기반의 첫 번째 임의 스텝 비디오 diffusion 증류 프레임워크로, 고정된 몇 개의 샘플링 스텝만을 위해 증류하는 대신 전체 ODE 샘플링 궤적을 최적화한다. 이를 위해 엔드포인트 일관성 매핑(z_t→z_0)에서 임의 시간 구간에 대한 flow-map 전이 학습(z_t→z_r)으로 증류 대상을 전환하고, Flow Map Backward Simulation을 제안하여 전체 Euler 롤아웃을 shortcut flow-map 전이로 분해함으로써 효율적인 온-폴리시 증류를 가능하게 한다."
+  },
+  "2605.13801v1": {
+    "summary_ko": "본 논문은 LLM 평가에서 인간 annotator의 편향과 주관성으로 인한 재현성 문제를 해결하기 위해 multi-level bootstrapping 접근법을 제안하며, 통계적 유의성 달성을 위한 항목 수(N)와 응답 수(K) 간의 trade-off를 분석합니다. 이를 통해 신뢰할 수 있는 generative AI 모델 평가를 위한 annotator pool 확대의 효과를 실증적으로 규명합니다.",
+    "title_ko": "Multi-Level Annotator Modeling을 통한 평가의 재현성 개선",
+    "abstract_ko": "LLM과 같은 생성형 AI 모델의 안전성과 신뢰성 평가는 매우 중요하지만, 현재 신뢰할 수 없는 평가와 반복 불가능한 실험 결과로 인한 재현성 위기에 직면해 있다. 인간 평가자의 주관적 편향과 의견 불일치는 주요 문제로, 특히 기존 평가 관행은 항목당 적은 수의 주석(3-5개)과 개별 평가자 분산을 모델링할 수 있는 지속적인 평가자 식별자 부재로 인해 한계가 있다. 본 논문에서는 multi-level bootstrapping 접근법을 도입하여 평가자 행동을 현실적으로 모델링하고, 통계적 유의성을 달성하기 위해 필요한 항목 수(N)와 항목당 응답 수(K) 간의 트레이드오프를 분석한다."
+  },
+  "2605.13678v1": {
+    "summary_ko": "본 논문은 STAIR라는 3단계 학습 패러다임을 제안하여 장기 시계열 예측에서 단순한 temporal mapping 모델의 성능을 unlock하는데, 공유 temporal mapping으로 공통 동역학을 학습한 후 channel-wise fine-tuning으로 변수별 패턴을 적응시키고 마지막으로 residual learning으로 변수 간 정보를 보완하는 방식으로 복잡한 아키텍처 모듈 없이 강력한 성능을 달성합니다."
+  },
+  "2605.13623v1": {
+    "summary_ko": "본 논문은 고해상도 임피던스 식도 조영술(HRIM) 데이터를 spatio-temporal graph로 표현하고 graph neural network(GNN)으로 처리한 후 환자 정보 임베딩과 융합하여 식도 운동 장애를 분류하는 multimodal ML 접근법을 제시합니다. 환자 특성과 graph 기반 모델링이 HRIM 기반 특성만 사용하는 모델과 vision 기반 baseline보다 우수한 분류 성능을 달성함을 보여줍니다.",
+    "title_ko": "식도 운동성 장애의 다중모달 그래프 기반 분류",
+    "abstract_ko": "고해상도 임피던스 식도 측정법(HRIM) 데이터의 복잡성과 임상적 해석의 변이성으로 인해 식도 운동성 장애의 진단은 상당한 어려움을 겪고 있다. 이 연구는 HRIM 기록과 환자 특정 정보를 결합하고 식도 생리의 그래프 기반 모델링을 통합하는 다중모달 머신러닝 기반 분류 접근법의 타당성을 탐색한다. 그래프 신경망(GNN)을 적용하여 생리학적으로 의미 있는 표현을 학습하고, 이를 환자 embedding과 융합하여 삼킴 사건의 다중 범주, 다중 클래스 분류를 수행한다."
+  },
+  "2605.13310v1": {
+    "summary_ko": "SemRepo는 약 81백만 개의 RDF triple로 구성된 knowledge graph로서 GitHub의 과학 연구 관련 저장소 약 200,000개에 대한 메타데이터를 capture하고 SemOpenAlex, LPWC, MLSea-KG 등의 외부 scholarly knowledge graph와 연계하여, 기존에 분산된 플랫폼들 간의 publication과 research artifact 간의 통합 질의와 reproducibility 및 software sustainability 분석을 가능하게 한다.",
+    "title_ko": "SemRepo: 연구 소프트웨어 및 그 학술 생태계를 위한 지식 그래프",
+    "abstract_ko": "본 논문에서는 과학 연구와 관련된 약 200,000개의 GitHub 저장소를 설명하는 8,100만 개 이상의 triple로 구성된 RDF knowledge graph인 SemRepo를 제시한다. SemRepo는 기여자, 이슈, 프로그래밍 언어 등 저장소 수준의 메타데이터를 캡처하고 이를 외부 학술 knowledge graph와 연결한다. 특히 저장소 저자는 SemOpenAlex 프로필에, 저장소는 LPWC의 학술 출판물에, 그리고 데이터셋과 실험 등의 연구 산출물은 MLSea-KG를 통해 연결된다. SemRepo는 일반적으로 여러 플랫폼에 분산된 출판물과 그 학술 산출물에 걸친 쿼리를 가능하게 하며, 저장소와 출판물 간의 계보 재구성, 연구 재현성 및 소프트웨어 지속성에 대한 위험 체계적 식별 등 기존 자원으로는 어려운 분석을 지원한다."
+  },
+  "2605.13816v1": {
+    "summary_ko": "본 논문은 스마트워치 기반 두 가지 프레임워크(cardiac dynamics 예측 기반 anomaly detection과 sleep, motion, cardiac 신호를 융합하는 multi-task learning)를 제안하며, 두 프레임워크의 complementary한 특성을 활용한 late-fusion 전략으로 정신병적 재발(psychotic relapse)을 탐지합니다. Transformer encoder와 ensemble MLP 기반 predictive uncertainty를 통해 실제 wearable 데이터의 변동성에 robust한 방식을 보여주며, 다양한 digital phenotype의 통합이 psychotic relapse 탐지에 필수적임을",
+    "title_ko": "불확실성 기반 정신병 재발 이상 탐지: Smartwatch를 이용한 예측 및 Multi-Task Learning 융합",
+    "abstract_ko": "Digital phenotyping은 행동과 생리 신호의 지속적인 수동 모니터링을 가능하게 하며, 정신병 재발의 조기 감지를 위한 유망한 패러다임을 제공한다. 본 연구에서는 smartwatch 기반의 두 가지 일일 재발 감지 프레임워크를 개발하고 체계적으로 연구한다. 첫 번째는 심장 역학을 예측하고 예측된 특성과 관측된 특성 간의 편차를 이상 지표로 표시한다. 두 번째는 수면, 운동, 심장 신호를 융합하는 multi-task 공식을 채택하여 시간-인식 embedding을 학습하고 측정 타이밍을 예측한다. 두 파이프라인 모두 Transformer encoder를 사용하며 ensemble multilayer perceptron을 통해 예측 불확실성을 추정하여 실제 착용식 기기의 변동성에 대한 강건성을 향상시킨 일일 이상 점수를 출력한다. 각 프레임워크가 독립적으로 강력한 예측력을 보이지만, 상보적인 생리 신호를 포착함을 보여준다. 따라서 두 아키텍처의 이상 신호를 통합 결정 점수로 시너지 있게 결합하는 late-fusion 전략을 제안한다."
+  },
+  "2605.13642v1": {
+    "summary_ko": "본 논문은 anomaly detection 점수를 exchangeability 가정 하에서 calibrated p-value로 변환하는 conformal anomaly detection을 구현한 Python 패키지 'nonconform'을 제시하며, scikit-learn 등과 통합되어 split-conformal calibration부터 shift-aware extensions까지 다양한 conformalization 전략을 지원함으로써 통계적으로 원리 있는 anomaly detection을 실현한다."
+  },
+  "2605.13150v1": {
+    "summary_ko": "본 논문은 산업 및 사이버-물리 시스템의 반복적 구조를 가진 근사 주기 시계열을 모델링하기 위해, 새로운 커널로 posterior를 조절하는 Gaussian Process 기반의 생성 모델을 제안하며, 반복 내 구조와 반복 간 변동성을 분리하여 반복 간 평활한 변동을 허용하면서도 강한 구조적 규칙성을 포착한다."
+  },
+  "2605.13128v1": {
+    "summary_ko": "본 논문은 통계적 특징(autocorrelation, quantile autocorrelation 등)을 기반으로 신경망을 통해 최적의 시계열 clustering 규칙을 학습하는 amortized neural inference 접근법을 제안하며, 이는 기존의 K-means나 hierarchical clustering과 같은 알고리즘의 선택과 calibration 필요성을 줄이고 자동으로 클러스터 개수를 결정할 수 있다. 실험을 통해 제안 방법이 기존 방법들보다 경쟁력 있거나 우수한 clustering 정확도를 달성함을 보여주"
+  },
+  "2605.13746v1": {
+    "summary_ko": "본 논문은 비디오 수준의 약한 레이블만을 사용하여 spatiotemporal anomaly detection을 수행하는 weakly supervised 방법을 제안하며, multiple instance learning (MIL) 기반의 ranking loss를 통해 정상 및 이상 비디오 클립을 positive/negative bag으로 표현하여 spatial과 temporal 영역에서의 anomaly score를 결정합니다. UCF Crime2Local Dataset에서의 실험을 통해 약한 감독 신호만으로도 효과적인 spatiotemporal anomaly detection이 가능함을 보여줍니다."
+  },
+  "2605.13153v1": {
+    "summary_ko": "본 논문은 Temporal Knowledge Graph Reasoning의 평가에서 모든 사건을 동등하게 취급하는 문제를 지적하고, rule-based strikingness measuring framework (RSMF)를 통해 사건의 희귀성과 추론 난이도를 정량화하여 가중 평가 지표(weighted MRR, Hits@k)에 반영하는 strikingness-aware 평가 프레임워크를 제안한다. 이를 통해 기존 모델들이 희귀한 사건 예측에서 더욱 취약함을 보이고 더 엄격한 평가 체계를 제시한다.",
+    "title_ko": "시간적 지식 그래프 추론을 위한 두드러짐-인식 평가",
+    "abstract_ko": "Temporal Knowledge Graph Reasoning (TKGR)은 과거 데이터로부터 누락된 (특히 미래) 이벤트를 추론하는 것을 목표로 한다. 현재 TKGR 평가는 모든 이벤트에 동일한 가중치를 부여하여 대부분의 자명한 반복을 무시하고 실제 추론 능력을 과대평가한다. 따라서 더 깊은 추론을 요구하는 희귀한 두드러진 이벤트를 구분하고 강조해야 한다. 이를 위해 우리는 temporal rule로부터 도출된 동료 이벤트와의 예상 발생 비교를 통해 이벤트 두드러짐을 정량화하는 규칙 기반 두드러짐 측정 프레임워크(RSMF)를 도입하여, 이를 weighted MRR과 Hits@k 같은 메트릭에 가중 인자로 통합하는 두드러짐-인식 평가 프레임워크를 제안한다. 네 개의 TKG 벤치마크 실험 결과, 대표적 모델들은 이벤트 두드러짐이 증가할수록 성능이 저하되며, path-based 방법은 낮은 두드러짐 이벤트에서, representation-based 방법은 높은 두드러짐 이벤트에서 우수함을 보인다."
+  },
+  "2605.13511v1": {
+    "summary_ko": "본 논문은 많은 수의 chain-of-thought 예제를 사용하는 many-shot ICL에서 추론 작업의 성능이 비추론 작업과 다른 스케일링 패턴을 보이며, 이를 패턴 매칭이 아닌 test-time learning으로 해석하고 Curvilinear Demonstration Selection 방법을 제안하여 성능을 향상시킨다."
+  },
+  "2605.13764v1": {
+    "summary_ko": "본 논문은 vector database의 embedding에 post-embedding perturbation 기법을 적용하여 정상적인 retrieval 동작을 유지하면서 payload data를 은닉하는 steganographic exfiltration attack을 제시하고, 특히 small-angle orthogonal rotation이 distribution-based anomaly detection을 우회할 수 있음을 보여줍니다. 이에 대응하기 위해 cryptographic provenance attestation과 embedding integrity 제어를 통한 방어 메커니즘을 제안합니다."
+  },
+  "2605.13673v1": {
+    "summary_ko": "본 논문은 multicut 문제를 위해 edge feature와 triangle 기반 message passing을 활용하는 적응형 graph neural network 아키텍처를 제안하며, 최신 휴리스틱 솔버를 능가하는 해의 품질과 실행 시간을 달성한다."
+  },
+  "2605.13841v1": {
+    "title_ko": "EVA-Bench: 음성 에이전트 평가를 위한 새로운 엔드-투-엔드 프레임워크",
+    "abstract_ko": "음성 에이전트는 음성 대화를 통해 작업을 완료하는 AI 시스템으로, 엔터프라이즈 애플리케이션에 점점 더 많이 배포되고 있다. 그러나 현존하는 벤치마크는 현실적인 시뮬레이션 대화 생성과 음성 특화 실패 모드 전반에 걸친 품질 측정이라는 두 가지 핵심 평가 과제를 동시에 다루지 못한다. 우리는 이 두 가지 문제를 해결하는 엔드-투-엔드 평가 프레임워크인 EVA-Bench를 제시한다. EVA-Bench는 동적 멀티턴 대화를 통해 봇-투-봇 오디오 대화를 조율하며, 자동 시뮬레이션 검증으로 사용자 시뮬레이터 오류를 감지하고 점수 매기기 전에 대화를 재생성한다. 측정 측면에서는 작업 완료, 충실도, 오디오 수준 음성 품질을 포괄하는 EVA-A (Accuracy)와 대화 진행, 음성 간결성, 턴-테이킹 타이밍을 포괄하는 EVA-X (Experience)라는 두 가지 composite metric을 도입한다."
+  },
+  "2605.13821v1": {
+    "title_ko": "Agentic Evolution 활용하기",
+    "abstract_ko": "Agentic evolution은 후보를 반복적으로 생성하고 평가하며 피드백으로 탐색을 유도하여 프로그램, 워크플로우, 과학적 솔루션을 개선하는 강력한 패러다임이다. 그러나 기존 방법들은 모듈화되지만 경직된 고정 절차이거나 유연하지만 장기 진화에서 편향되는 범용 agent로 나타난다. 우리는 agentic evolution을 상호작용 환경으로 재구성하여, 누적된 진화 맥락을 프로세스 레벨 상태로 활용한다. meta-agent가 다음 후보를 직접 제안하지 않고 진화를 제어하는 절차나 agent 맥락을 편집하는 AEvo 메타-편집 프레임워크를 제시한다. 이 통합 인터페이스는 절차 기반 및 agent 기반 진화를 모두 조종할 수 있게 하여, 장기 탐색에서 누적된 증거를 실행 가능하게 만든다."
+  },
+  "2605.13740v1": {
+    "title_ko": "언어 모델 사전 정보를 이용한 관측 기반 POMDP 세계 모델 학습",
+    "abstract_ko": "본 논문은 부분 관측 마르코프 결정 과정(POMDP)을 학습하기 위해 언어 모델 사전 정보를 활용할 수 있는지 탐구한다. Pinductor(POMDP-inductor)는 LLM이 소수의 관측-행동 �궤적으로부터 후보 POMDP 모델을 제안하고 belief 기반 우도 점수를 최적화하기 위해 반복적으로 정제한다. Pinductor는 더 적은 정보만 사용하면서도 숨겨진 상태에 대한 특권적 접근을 가정하는 LLM 기반 POMDP 학습 방법의 성능과 샘플 효율성을 달성하며, tabular POMDP 기준선을 크게 능가한다."
+  },
+  "2605.13773v1": {
+    "title_ko": "대규모 언어 모델이 High-Level Message Sequence Charts를 이해하는가?",
+    "abstract_ko": "대규모 언어 모델(LLM)은 소프트웨어 개발 생명주기의 다양한 작업을 자동화하는 데 널리 사용되고 있으나, 다루고 있는 산출물의 의미론과 일관되게 작업을 수행하는지는 명확하지 않다. 특히 아키텍처 설계 명세에 관해서는 연구가 부족하다. 본 논문에서는 형식적 의미론을 갖춘 시각 모델인 High-Level Message Sequence Charts(HMSC)에 대해 이 질문을 다룬다. 우리는 세 개의 LLM(Gemini-3, GPT-5.4, Qwen-3.6)이 129개의 의미 작업(기본 의미 구성 쿼리부터 의미 보존 추상화, 구성, trace 집합 및 trace 동치 labelled transition system 계산까지)에서 어떻게 수행되는지 검토하여 LLM이 HMSC의 형식적 의미론을 \"이해\"하는지 여부를 검증한다. 결과는 LLM이 HMSC의 형식적 의미론에 대해 약 52%의 전체 정확도로 겸손한 수준의 이해를 보이며, 의미론적 개념 간 큰 변동성을 나타낸다."
+  },
+  "2605.13772v1": {
+    "title_ko": "추론은 어디서 실패하는가? Hidden-State Transport Geometry를 통한 단계별 환각 탐지",
+    "abstract_ko": "대규모 언어 모델은 다단계 추론 중에 환각을 발생시키지만, 기존 탐지기는 추적 수준에서 작동하여 전체 출력에 단일 신뢰도 점수를 할당하고 첫 번째 오류를 지역화하지 못합니다. 본 논문은 환각을 단일 순방향 전달 중에 생성된 hidden-state 궤적의 속성으로 재구성합니다. 정확한 추론은 국소적으로 일관된 전이의 안정적인 manifold를 통해 이동하며, 첫 번째 오류는 transport 비용의 국소적 이탈로 나타납니다. Label-conditioned teacher와 배포 가능한 BiLSTM student를 포함한 기하학적 전이 특징으로 각 단계를 채점하며, contrastive PCA가 첫 번째 오류와 정확한 상태 간의 transport 분리 목표에 최적임을 증명합니다."
+  },
+  "2605.13846v1": {
+    "title_ko": "WARDEN: 6시간의 훈련 데이터로 위험에 처한 선주민 언어 전사 및 번역",
+    "abstract_ko": "본 논문은 위험에 처한 호주 선주민 언어인 Wardaman을 전사하고 영어로 번역할 수 있는 초기 언어 모델 시스템인 WARDEN을 소개한다. 우리가 직면한 주요 과제는 훈련 데이터의 부족으로, 단 6시간의 주석이 달린 오디오만 보유하고 있다. 이러한 저자원 문제를 해결하기 위해 WARDEN은 별도의 전사 및 번역 모델로 설계되었으며, Wardaman 오디오를 음운 전사로, 다시 영어 번역으로 변환한다. 전사를 위해 Wardaman과 유사한 음소를 공유하는 Sundanese에서 token을 초기화하여 미세 조정을 가속화하고, 번역을 위해 전문가 주석으로부터 Wardaman-영어 사전을 구축하여 대형 언어 모델(LLM)에 제공함으로써 성능을 향상시킨다."
+  },
+  "2605.13825v1": {
+    "title_ko": "History Anchors: 이전 행동이 LLM의 의사결정을 안전하지 않은 행동으로 유도하는 방식",
+    "abstract_ko": "최신 LLM들은 동일하거나 다른 모델이 생성한 긴 도구 호출 로그 이후 다음 행동을 선택하는 에이전트로 배포되고 있다. 이 연구는 이전 로그의 한 단계가 해로웠다면 모델이 그 해로운 과정을 계속할 것인지를 묻는다. HistoryAnchor-100 벤치마크(10개 고위험 도메인 전 100개 시나리오)를 통해 17개 프론티어 모델을 평가한 결과, 중립적 시스템 프롬프트 하에서는 강력히 정렬된 모델들이 안전하지 않은 선택을 거의 하지 않지만, \"이전 히스토리의 전략과 일관성을 유지하라\"는 단 한 문장을 추가하면 91-98%로 급상승하며, 뒤집힌 모델들은 종종 해로움을 더욱 악화시킨다. 이는 안전성과 역상관을 보이는 스케일링 패턴으로, 정렬된 frontier LLM들이 history anchoring에 취약함을 시사한다."
+  },
+  "2605.13817v1": {
+    "title_ko": "자연어 소프트웨어 요구사항의 신경기호적 감사",
+    "abstract_ko": "자연어 소프트웨어 요구사항은 종종 모호하고 불일치하며 불완전하며, 안전성이 중요한 도메인에서 이러한 결함은 잘못된 명세를 검증하는 형식 모델과 안전하지 않은 동작을 포함한 구현으로 전파된다. 우리는 SMT solver로 장착된 대규모 언어 모델이 이러한 요구사항을 감사할 수 있음을 보여준다: 형식 논리로 변환하고, 생성된 형식화에서의 확률적 변동을 통해 모호성을 탐지하며, solver 쿼리를 통해 결과 명세의 불일치, 공허성, 안전 위반을 노출한다. 의료 기기 소프트웨어 요구사항에 대해 이 아이디어를 구현하는 신경기호적 파이프라인 VERIMED를 제시하고, 두 가지 주요 발견을 보고한다. 첫째, 독립적인 형식화 간 확률적 변동은 모호성의 신호이며, 양방향 SMT equivalence 검사로 이 불일치를 solver 검증 가능한 테스트로 변환할 수 있다. 둘째, 기호적 피드백의 유용성은 그 세분성에 따라 달라진다."
+  },
+  "2605.13784v1": {
+    "title_ko": "한 번의 Attention이 전부입니다: Stateful Transformer를 이용한 효율적인 스트리밍 추론",
+    "abstract_ko": "기존 transformer 추론 엔진은 요청 기반이므로 매 쿼리마다 O(n)의 prefill 비용이 발생합니다. 데이터가 지속적으로 도착하고 쿼리가 계속 증가하는 context를 탐색하는 스트리밍 워크로드에서 이는 매우 비효율적입니다. 본 논문은 persistent KV cache가 새로운 데이터 도착에 따라 증분적으로 진행되는 stateful session 중심의 데이터 기반 계산 모델을 제안하여, prefill을 병렬 경로로 옮기고 쿼리 지연을 O(|q|)로 줄입니다. Flash Queries는 데이터 도착 사이의 유휴 GPU 사이클을 활용하여 등록된 질문을 미리 평가하고 답변을 캐싱합니다. 스트리밍 시장 데이터 벤치마크에서 기준 구현이 기존 추론 엔진 대비 최대 5.9배 속도 향상을 달성합니다."
+  },
+  "2605.13768v1": {
+    "title_ko": "고율 양자화 행렬 곱셈 II",
+    "abstract_ko": "양자화된 행렬 곱셈(MatMul)을 조사하는 작업의 두 번째 부분으로, 여기서는 두 번째 인수의 열의 공분산 행렬 Σ_X를 사용할 수 있는 설정을 다룬다. 이러한 설정은 LLM의 가중치 전용 양자화(weight-only post-training quantization)에서 발생한다. 가중치 전용 양자화는 weighted mean squared error (WMSE) source coding 문제와 관련되며, waterfilling 솔루션을 통해 실용적인 LLM 양자화 알고리즘(GPTQ)을 개선할 수 있음을 보인다. 스칼라 INT quantizer만 사용하는 최근 방식(WaterSIC)은 (a) 기저 무관의 특성을 가지며, (b) 정보이론적 왜곡 한계의 2πe/12배(또는 0.25 bit/entry) 이내의 고율 성능을 달성한다."
+  },
+  "2605.13826v1": {
+    "title_ko": "과학 기계학습에서 cross-sample 예측 변동성 감소",
+    "abstract_ko": "과학 기계학습은 예측 성능을 보고하지만 훈련 데이터의 다른 표본에서도 동일한 예측이 유지되는지는 보고하지 않는다. 9개의 화학 벤치마크에서, 동일한 훈련 세트의 독립적인 bootstrap으로 훈련된 두 분류기는 aggregate 정확도는 1.3-4.2 percentage point 내에서 일치하지만 테스트 분자의 8.0-21.8%에서 클래스 레이블이 일치하지 않는다. 우리는 이 간격을 cross-sample prediction churn이라 부른다. 표준 parameter-side 기법(deep ensembles, MC dropout, stochastic weight averaging)은 이 간격을 감소시키지 못하지만, 두 가지 data-side 방법은 감소시킨다. 첫 번째는 K-bootstrap bagging으로 정확도 손실 없이 모든 데이터셋에서 변동율을 40-54% 감소시키고, 두 번째는 우리의 제안인 twin-bootstrap으로 독립적인 bootstrap에서 jointly 훈련된 두 네트워크에 sym-KL consistency loss를 적용하여 matched 2×-ERM 계산 시간에 bagging-K=2 대비 median 45% 추가 감소를 달성한다."
+  },
+  "2605.13717v1": {
+    "title_ko": "엔트로피 최적정책 식별을 위한 타이트한 샘플 복잡도 경계",
+    "abstract_ko": "엔트로피 위험 측도 하에서 유한 지평 위험민감 강화학습의 최적정책 식별 문제를 연구한다. 기존 연구에서는 근사 최적정책을 식별하기 위해 필요한 샘플 수의 지수 지평 의존성에서 하한과 상한 사이에 상수 갭이 존재함을 보였다. 구체적으로, 알려진 하한은 $Ω(e^{|β| H})$로 스케일되는 반면, 최신 상한은 생성 모델을 사용하여 최대 $O(e^{2|β| H})$를 달성한다. 우리는 이 추가적인 지수 인수가 지수 효용함수에 대한 과도하게 느슨한 농도 제어에서 비롯됨을 보인다. 이 갭을 좁히기 위해 KL 기반 탐색 보너스를 기반으로 한 forward-model 알고리즘을 재검토하고 이를 엔트로피 기준에 맞게 적응시킨다. 주요 기술적 혁신은 지수 효용의 평활성을 활용하여 더 타이트한 농도 경계를 도출하고, 이를 활용하는 새로운 멈춤 규칙을 제안하여 하한과 일치하는 샘플 복잡도를 달성한다."
+  },
+  "2605.13641v1": {
+    "title_ko": "보상-상관관계 제거 정책 최적화를 통한 다중 목표 및 혼합 보상 강화 학습",
+    "abstract_ko": "복잡한 강화 학습 환경은 다중 작업 및 혼합 보상 공식을 자주 채택합니다. 이러한 설정에서 이질적인 보상 분포와 상관된 보상 차원은 스칼라 advantage 구성을 불안정하게 합니다. 이러한 문제들을 해결하기 위해, 우리는 두 가지 실패 양식을 명시적으로 대상으로 하는 보상 처리 방법인 Reward-Decorrelated Policy Optimization (RDPO)을 제안합니다. RDPO는 먼저 Magnitude-Aware Quantile normalization을 활용하여 이진, 분수형, 연속형 보상들에 걸친 프롬프트 수준의 advantage 할당을 안정화시키며, 이후 집계 전 각 활성 보상 부분공간 내에서 Mahalanobis whitening을 적용하여 상관관계 중복성을 완화합니다. LongCat-Flash의 사후 훈련 중 적용될 때, RDPO는 명령어 준수, 작문 품질, 그리고 어려운 프롬프트에 대한 견고성을 향상시키면서 추론 및 코딩 평가에서 광범위하게 경쟁력을 유지합니다."
+  },
+  "2605.13639v1": {
+    "title_ko": "최소 가정 하에서 단일-루프 Actor-Critic의 ε^{-2} 샘플 복잡도 달성",
+    "abstract_ko": "본 논문은 강화학습에서 off-policy actor-critic 방법의 last-iterate 수렴율을 확립한다. 특히, 단일-루프, 단일-타임스케일 구현과 approximate policy iteration 및 natural policy gradient 방법을 포함한 광범위한 정책 업데이트 클래스 하에서, 기약 Markov chain을 유도하는 정책의 존재성이라는 최소 가정 하에 ε-최적 정책을 찾기 위한 첫 번째 Õ(ε^{-2}) 샘플 복잡도 보장을 증명한다. 기존 문헌에서 Õ(ε^{-2}) 샘플 복잡도는 중첩-루프 업데이트 및/또는 균등 혼합과 균등 탐색 같은 강력한 알고리즘 의존적 가정 하에서만 달성되므로, 본 결과는 이와 대조된다. 기술적으로, 단일-루프 구현에서 야기되는 결합된 업데이트 방정식과 off-policy 학습으로 인한 잠재적 무한 반복의 도전을 다루기 위해, 분석은 결합된 Lyapunov drift framework에 기반한다."
+  },
+  "2605.13638v1": {
+    "title_ko": "CO-MAP: 큐빗 할당 문제에 대한 강화학습 접근법",
+    "abstract_ko": "양자 컴파일러는 추상적인 양자 회로를 물리적 양자 컴퓨터에서 실행할 수 있게 해주므로 양자 컴퓨팅 파이프라인의 핵심 요소이다. 양자 컴파일의 중요한 부분 문제 중 하나는 논리 큐빗을 물리 큐빗으로 매핑하는 것이며, 일반적으로 임의의 할당이나 휴리스틱 기반 방법으로 SWAP 게이트 오버헤드를 최소화하고 있다. 본 논문에서는 큐빗 매핑 문제를 조합 최적화(CO) 목적 함수로 형식화하고, reinforcement learning(RL) policy를 훈련하여 해를 찾는 방법을 제시한다. MQTBench와 Queko 회로 같은 실제 데이터셋에서 우리의 학습된 policy는 기존 양자 컴파일러 대비 SWAP 오버헤드를 65-85% 감소시킨다."
+  },
+  "2605.13554v1": {
+    "title_ko": "Contrastive Proximal Policy Optimisation을 통한 자기 지도 온-폴리시 강화학습",
+    "abstract_ko": "Contrastive reinforcement learning (CRL)은 상태-행동 및 목표 representation에 대한 contrastive objective를 통해 목표 조건부 Q-값을 학습하여 수작업으로 설계된 보상 함수의 필요성을 제거한다. CRL의 자기 지도 학습에서의 인상적인 성공에도 불구하고, 기존의 모든 CRL 알고리즘은 off-policy 최적화에 의존하며 주로 연속 행동 공간에만 제한되어 있다. 이를 해결하기 위해 우리는 온-폴리시 contrastive RL 알고리즘인 Contrastive Proximal Policy Optimisation (CPPO)을 제안한다. CPPO는 contrastive Q-값으로부터 정책 이점을 직접 도출하고 보상 함수나 replay buffer 없이 표준 PPO objective를 통해 이를 최적화한다. 연속 및 이산 환경에서 단일 에이전트 및 협력적 다중 에이전트 과제에 걸쳐 평가 결과, CPPO는 기존 방법들을 크게 능가한다."
+  },
+  "2605.13838v1": {
+    "title_ko": "R-DMesh: 비디오 가이드 기반 정렬 동적 메시 흐름을 통한 3D 애니메이션",
+    "abstract_ko": "비디오 가이드 3D 애니메이션은 동적 자산에 대한 직관적이고 정밀한 제어를 제공하여 콘텐츠 제작에 큰 잠재력을 지닙니다. 하지만 실제 배포에서는 간과되곤 하는 중대한 문제가 있습니다: 자세 불정렬 딜레마입니다. 사용자 제공 메시의 초기 자세가 참조 비디오의 시작 프레임과 거의 일치하지 않기 때문입니다. 불일치하는 궤적을 따르도록 강제하면 심각한 기하학적 왜곡이나 애니메이션 실패가 발생합니다. 이를 해결하기 위해 비디오 컨텍스트에 정렬되도록 '정렬된' 고충실도 4D 메시를 생성하는 통합 프레임워크인 Rectified Dynamic Mesh(R-DMesh)를 제시합니다. 표준 모션 전이 방식과 달리 우리의 방법은 입력을 조건부 베이스 메시, 상대 모션 궤적, 그리고 중요한 정렬 점프 오프셋으로 명시적으로 분리하는 새로운 VAE를 도입합니다. 이 오프셋은 애니메이션이 시작되기 전에 입력 메시의 임의의 자세를 비디오의 초기 상태와 일치하도록 자동으로 변환하도록 학습됩니다."
+  },
+  "2605.13790v1": {
+    "title_ko": "Di-BiLPS: 희소 관측치 하에서의 노이징 유도 양방향 잠재-PDE-Solver",
+    "abstract_ko": "편미분방정식(PDE)은 복잡한 자연 및 물리 현상을 모델링하기 위한 기본 도구이다. 그러나 실제 응용에서는 관측 데이터가 극도로 희소하여 고전적 수치해석법과 기존 신경망 방식의 적용성을 심각하게 제한한다. 본 논문에서는 극도로 희소한 관측치 하에서 forward 및 inverse PDE 문제를 효과적으로 처리하는 통합 신경망 프레임워크 Di-BiLPS를 제안한다. Di-BiLPS는 고차원 입력을 압축하는 variational autoencoder, 불확실성을 모델링하는 latent diffusion module, 표현을 정렬하는 contrastive learning을 결합하며, latent space에서 동작하여 효율적 추론을 달성한다. 추가적으로 variance-preserving diffusion process 기반의 PDE-informed denoising 알고리즘을 도입하여 추론 효율을 더욱 개선한다."
+  },
+  "2605.13729v1": {
+    "title_ko": "궤적 제어 인간 모션 생성을 위한 다중 조건 조율",
+    "abstract_ko": "궤적 제어 인간 모션 생성은 텍스트 설명과 공간 궤적 조건을 모두 고려하여 현실적인 인간 모션을 합성하는 것을 목표로 한다. 그러나 기존 방법들은 텍스트와 궤적 조건 간의 충돌로 인한 모션 품질 저하 및 부정확한 궤적 추종, 그리고 중복된 모션 표현으로 인한 모션 구성 요소 간 불일치라는 두 가지 중요한 한계를 가진다. 이를 해결하기 위해 분할-정복 전략을 통해 텍스트와 궤적 조건을 효과적으로 조율하는 decoupled framework인 CMC를 제안한다. CMC는 궤적 제어 단계와 모션 완성 단계로 구성된 두 개의 연쇄된 단계를 따르며, 첫 번째 단계에서는 diffusion model이 주어진 궤적을 기반으로 정확하고 안정적인 궤적 추종을 보장하면서 제어된 관절의 단순화된 표현을 생성하고, 두 번째 단계에서는 text-conditioned diffusion inpainting model이 첫 번째 단계의 단순화된 표현을 부분 조건으로 활용하여 전신 모션을 생성한다."
+  },
+  "2605.13743v1": {
+    "title_ko": "GHGbench: 탄소 배출 예측을 위한 통합 다중 엔티티, 다중 태스크 벤치마크",
+    "abstract_ko": "기업 및 건물 수준의 온실가스 배출 예측을 위한 오픈 데이터셋과 벤치마크인 GHGbench를 소개한다. 기업 트랙은 12,000개 이상의 기업으로부터 Scope 1+2 및 Scope 3 공시와 재무/산업 신호를 포함한 32,000개 이상의 기업-연도 레코드를 담고 있으며, 건물 트랙은 13개의 오픈 소스로부터 26개 도시 지역의 491,591개 건물-연도 레코드를 단일 스키마로 조화시키고 기후 공변량 및 멀티모달 원격 감지 embedding을 포함한다. 이 벤치마크는 지역 간 전이와 시계열 예측 태스크에 대해 gradient-boosted trees, tabular foundation model, MLP, FT-Transformer 및 멀티모달 fusion 등 다양한 baseline을 평가한다."
+  },
+  "2605.13737v1": {
+    "title_ko": "감각의 폐쇄: Omnimodal LLM의 표현-행동 간극",
+    "abstract_ko": "Omnimodal 대규모 언어 모델이 텍스트 전제가 시각 또는 청각 입력과 모순되는 질문을 받을 때, 실패가 인식인지 행동인지를 조사한다. 우리는 500개의 영화 클립으로 구성된 벤치마크 IMAVB를 도입하여 모달리티(시각, 음성)와 전제 조건(표준, 오도)을 교차시키며, 일반적인 멀티모달 이해와 분리하여 충돌 감지를 측정한다. 8개의 오픈소스 omnimodal LLM과 Gemini 3.1 Pro에서 우리는 Representation-Action Gap을 발견했다: hidden state는 전제-인식 불일치를 신뢰할 수 있게 인코딩하지만, 모델은 출력에서 거짓 주장을 거부하지 않는다. 행동적으로 모델은 두 가지 실패 양식을 보인다: 거짓 전제를 참인 것처럼 답하는 과소-거부와 표준 질문도 거부하는 과다-거부로, 일반적인 이해 정확도를 훼손한다."
+  },
+  "2605.13788v1": {
+    "title_ko": "확장성 있고 강건한 MLIP 능동 학습을 위한 Force-Aware Neural Tangent Kernels",
+    "abstract_ko": "기계학습 원자간 포텐셜(MLIP)의 능동 학습은 대규모 후보 풀로의 확장, 에너지-힘 감독 활용, 편향된 후보 풀에 대한 강건성 유지 등 여러 과제를 해결해야 한다. 본 논문에서는 이러한 과제들을 종합적으로 다룬다. 먼저 청크 특징공간 사후분산 shortlisting 기반의 선형 확장 획득 프레임워크를 제안하고, 혼합 parameter-coordinate derivative를 통해 Neural Tangent Kernel(NTK)을 force-aware 설정으로 확장하여 force NTK와 결합 에너지-힘 NTK를 도출한다. OC20 데이터셋에서 결합 에너지-힘 NTK의 효율성을 입증하며, T1x, PMechDB, RGD 벤치마크에서 모든 메트릭과 분포 분할에 걸쳐 최저의 에너지 및 힘 MAE와 RMSE를 달성한다."
+  },
+  "2605.13709v1": {
+    "title_ko": "제어 가능한 난이도와 안전성을 갖춘 컴팩트 LLM의 지도학습 미세조정을 통한 아동 영어 읽기 스토리 생성",
+    "abstract_ko": "LLM은 아동 스토리 생성 등 교육 현장에서 널리 적용되고 있으나, 생성된 스토리가 아이들에게 너무 어렵고 운영 비용이 많이 든다는 문제가 있다. 본 연구는 기존 전문가 설계 아동 읽기 교육 과정과 GPT-4o, Llama 3.3 70B에서 생성한 스토리를 활용하여 3개의 8B 파라미터 LLM을 미세조정하는 다양한 실험을 설계했다. 우리의 방법은 규모보다 제어 가능성을 우선시하여 교육자들이 컴팩트하고 경제적인 모델로 읽기 수준과 오류 패턴을 목표로 할 수 있다. 평가 결과, 적절한 미세조정 설계를 통해 8B LLM이 생성한 아동 영어 읽기 스토리는 zero-shot GPT-4o 및 Llama 3.3 70B 대비 난이도 관련 지표에서 더 우수한 성능을 보이며, 안전성 문제는 거의 없다."
+  },
+  "2605.13695v1": {
+    "title_ko": "RTLC -- 연구, 학습-을-위한-교육, 비판: Feynman 학습 기법에서 영감을 받은 3단계 prompting 패러다임으로 fine-tuning 없이 JudgeBench에서 LLM-as-judge 정확도 향상",
+    "abstract_ko": "LLM-as-a-judge는 이제 개방형 생성의 표준 측정 도구이지만, JudgeBench 벤치마크에서도 강력한 instruction-tuned judge들은 객관적 정확성 쌍별 비교 항목에서 무작위 수준을 겨우 넘는다. 본 논문에서는 RTLC라는 3단계 prompting 방식 -- 연구, 학습-을-위한-교육, 비판 -- 을 제시하며, 이는 fine-tuning, retrieval, 또는 외부 도구 없이 단일 블랙박스 LLM을 사고의 앙상블 판사로 승격시킨다. Stage 1은 Feynman 학습 기법(학습 → 교육 → 간격 찾기 → 단순화)을 LLM prompting으로 변환하는 고정된 교육학적 scaffold로 입력을 감싼다. Stage 2는 temperature 0.4에서 N=10개의 독립적 후보 판정을 도출한다. Stage 3는 자체 비평가 역할을 하며, 후보 집합을 원래 질문과 교차 비교하여 하나의 비평 판정을 temperature 0에서 내보낸다. JudgeBench-GPT(350개의 어려운 쌍별 항목)에서 Claude 3.7 Sonnet의 쌍별 정확도는 64.6%(단일 샷 vanilla prompt)에서 78.6%(RTLC critique-of-10)로 향상되어 절대 14.0 percentage point의 이득을 보인다."
+  },
+  "2605.13675v1": {
+    "title_ko": "비전 모델 전체에서의 보편적 객체 표현 특성화",
+    "abstract_ko": "다양한 architecture, 목적함수, 데이터셋으로 훈련된 심층 신경망들이 유사한 시각 표현으로 수렴한다고 알려져 있으나, 모델들이 실제로 어떤 시각적 성질에 수렴하고 어떤 요인이 이를 야기하는지는 알려지지 않았다. 본 연구는 162개의 다양한 비전 모델의 객체 유사성 구조를 음이 아닌 차원들의 작은 집합으로 분해하고, 각 차원이 모델 전체에서 재현되는 빈도를 통해 보편적 차원 대 모델-특정 차원을 구분한다. 보편적 차원은 모델-특정 차원에 비해 더 해석가능하며 개념적 이미지 성질에 의해 더 강하게 주도되며, 모델 전체의 보편성을 야기하는 암묵적 요인으로서 해석가능성과 의미적 내용의 관련성을 시사한다. 더 많은 보편적 차원을 가진 모델은 macaque IT 활동과 인간의 유사성 판단을 더 잘 예측하며, 이는 보편성이 생물학적 시각과 관련된 표현을 반영함을 시사한다."
+  },
+  "2605.13646v1": {
+    "title_ko": "Ego-중심 결합 장면 모델링을 통한 인과관계 인식 엔드-투-엔드 자율주행",
+    "abstract_ko": "센서 입력으로부터 직접 미래 궤적을 예측하는 엔드-투-엔드 자율주행은 기존 모듈식 파이프라인을 우회하며 최근 상당한 진전을 이루었다. 그러나 기존 방법들은 자아(ego) 차량 계획의 인과적 상호의존성을 간과하고, 자아 차량과 주변 에이전트 간의 상호 관계를 무시한다. 이러한 인과관계 간과는 상호작용 시나리오에서 신뢰할 수 없는 궤적 예측을 초래한다. 이를 해결하기 위해 우리는 공유된 잠재 장면 표현 내에서 이러한 의존성을 포착하는 인과관계 인식 엔드-투-엔드 자율주행 프레임워크 CaAD를 제안한다. 먼저 ego-중심 결합-인과 모델링 모듈을 제안하여 자아 차량과 상호작용 관련 에이전트 간의 인과 의존성을 학습한다. 둘째, joint-mode embedding으로 구현된 인과관계 인식 정책 정렬 단계를 통해 확률적 ego 정책을 주변 교통 및 맵 컨텍스트로부터 계산된 계획 지향적 폐쇄루프 피드백과 정렬한다."
+  },
+  "2605.13579v1": {
+    "title_ko": "입장문: 보조 에이전트는 접근성 정렬이 필요하다",
+    "abstract_ko": "시각장애인(BVI) 사용자를 위한 보조 에이전트는 접근성 정렬을 1차 설계 목표로 요구한다. 에이전트 AI의 빠른 발전에도 불구하고 대부분의 시스템은 비장애 사용자 상호작용, 낮은 검증 비용, 허용 가능한 시행착오 가정 하에 설계되어 모델 스케일링이나 사후 인터페이스 적응만으로는 해결할 수 없는 보조 시나리오의 체계적 실패를 야기한다. 778개의 보조 작업 인스턴스 분석을 통해 현재의 에이전트 AI는 비장애 사용자 설계 가정과 BVI 사용자가 직면한 검증, 위험, 상호작용 제약 간의 불일치로 인해 보조 시나리오에서 실패하기 쉬움을 보인다. 접근성을 주변적 사용성 관심사보다는 정렬 문제로 취급할 것을 주장하며, 사용자 조사, 시스템 설계, 배포 및 배포 후 반복을 아우르는 생애주기 지향 설계 파이프라인을 제안한다."
+  },
+  "2605.13322v1": {
+    "title_ko": "KamonBench: Vision-Language 모델에서 합성 요인 복원을 평가하기 위한 문법 기반 데이터셋",
+    "abstract_ko": "일본 문화의 중요한 부분인 가몬(가족 문장)은 합성 시각 인식의 자연스러운 테스트 사례로, 소수의 기호적 선택을 결합하여 희소한 설명 공간을 형성한다. 본 논문은 20,000개의 합성 가몬과 보조 구성 요소 예제를 포함하는 문법 기반 이미지-구조 벤치마크 KamonBench를 소개한다. 각 합성 가몬은 공식 가몬 설명 언어, 분절된 일본어 분석, 영어 번역, 비언어적 프로그램 코드와 쌍을 이루며, 알려진 요인(container, modifier, motif)으로부터 생성되어 캡션 수준의 정확도를 넘어선 평가를 지원한다. ViT encoder/Transformer decoder 및 학습된 위치 마스크를 포함한 VGG n-gram decoder의 기준 결과를 포함하며, 희소 합성 시각 인식 및 vision-language 모델의 요인 복원을 위한 제어된 테스트 환경을 제공한다."
+  },
+  "2605.13555v1": {
+    "title_ko": "방사선치료를 위한 합성 CT 생성: SynthRAD2025 챌린지 보고서",
+    "abstract_ko": "방사선치료는 정확한 선량 전달을 필요하며, CT는 전자 밀도 정보로 인해 치료 계획에 필수적이다. 반복적인 CT 촬영은 방사선 노출과 물류 부담을 초래하고, MRI는 전자 밀도 정보가 부족하며, cone-beam CT (CBCT)는 선량 계산을 위해 보정이 필요하다. Synthetic CT (sCT) 생성은 MRI 또는 CBCT를 정확한 Hounsfield Unit (HU) 값의 CT 등가 이미지로 변환하여 MRI 단독 방사선치료 및 CBCT 기반 적응형 워크플로우를 가능하게 한다. SynthRAD2023을 바탕으로, SynthRAD2025는 유럽 5개 센터의 2,362명 환자(두경부, 흉부, 복부)로부터 sCT 방법을 벤치마킹했다. 두 가지 과제(MRI-to-CT 890사례, CBCT-to-CT 1,472사례)에서 이미지 유사도(MAE, PSNR, MS-SSIM), segmentation (Dice, HD95), photon 및 proton 계획의 선량계 지표로 평가하였으며, Task 1에서 MAE 64.8±21.3 HU, Task 2에서 MAE 48.3±13.4 HU의 최고 성능을 달성했다."
+  },
+  "2605.13568v1": {
+    "title_ko": "ECG 기반 인공지능 모델을 통한 심근경색 후 심혈관질환 진행의 동적 예측 모델링",
+    "abstract_ko": "심근경색(MI)은 주요 사망 원인이며, 그 부작용을 예측하는 것이 긴급하다. 하지만 ECG 기반 예후 모델은 심부 학습이 의학에서 부족한 대규모 레이블 데이터셋을 필요로 하기 때문에 성능이 떨어진다. Foundation model은 self-supervision을 통해 레이블이 없는 ECG를 학습할 수 있지만, 의학적으로 관련된 훈련 전략은 아직 충분히 탐색되지 않았다. 본 연구는 contrastive learning과 supervised multitask heads를 사용하여 환자별 시간 정보를 결합한 pretrained 인공지능 모델을 제안하고, 이를 MI 후 결과 예측에 fine-tuning한다. 제안 모델은 처음부터 훈련한 모델보다 우수한 성능(0.794 vs 0.608 AUC)을 보여주며, 임상적으로 구조화된 ECG 모델링이 제한된 데이터 환경에서 분류 성능을 향상시킴을 입증한다."
+  },
+  "2605.13789v1": {
+    "title_ko": "ENSEMBITS: 단백질 conformational ensemble의 알파벳",
+    "abstract_ko": "Protein structure tokenizer (PST)는 단백질 언어 모델링, 기능 예측, 진화 분석의 핵심 도구이지만, 기존 PST는 정적 구조의 국소적 기하학만 포착하여 단백질 ensemble이 드러내는 상관 운동과 대체 conformational 상태를 놓친다. 본 연구는 단백질 conformational ensemble의 첫 번째 tokenizer인 Ensembits를 제시한다. Ensembits는 dynamics tokenization의 고유한 과제들(conformation 간의 정보성 높은 기하 설명자 도출, 가변 크기 ensemble의 순열-불변 부호화, dynamics 데이터의 희소성 극복)을 해결하며, 대규모 분자 동역학 코퍼스에서 frame distillation objective를 사용하는 Residual VQ-VAE로 학습된다. Ensembits는 RMSF 예측에서 모든 관련 방법을 능가하고, 잔기별 운동 진폭에 대한 token-conditioned ANOVA 테스트에서 가장 강력한 단독 구조 tokenizer이며, 훨씬 적은 pretraining 데이터를 사용함에도 불구하고 EC, GO, 결합 부위/친화도 예측 및 zero-shot mutation-effect 예측에서 정적 tokenizer와 동등하거나 우수한 성능을 보인다."
+  },
+  "2605.13501v1": {
+    "title_ko": "보상 가중치 기반 온-폴리시 증류와 개방형 속성-동치성 검증기를 이용한 NL-to-SVA 생성",
+    "abstract_ko": "LLM 기반 SystemVerilog Assertions(SVA) 생성은 포화 상태에 도달했다고 보고되고 있으나, 우리는 모델들이 제한된 지연 및 liveness 명세에서 몇 가지 implication 템플릿으로만 축소된다는 시간적 격차를 발견했다. 근본 원인은 NL/SVA 쌍에 대한 supervised fine-tuning이 토큰 수준의 모방을 최적화하면서 SVA 정확성을 정의하는 속성 동치성(property equivalence)을 간과한다는 것이다. 우리는 Reward-Weighted On-Policy Distillation(RWOPD)을 제안하는데, 이는 학생 rollout을 샘플링하고 개방형 SymbiYosys+Z3 Property-Equivalence Checker(PEC)로 스코어링한 후, 속성-동치성 동작을 기반으로 검증기-보상-가중치 forward-KL 그래디언트를 적용하는 온-폴리시 증류 방법이다. RWOPD는 CodeV-SVA-14B를 Qwen2.5-Coder-7B-Instruct 학생 모델로 증류하여 NL2SVA-Human 및 NL2SVA-Machine에서 pass@1, pass@5, pass@10 전반에 걸쳐 새로운 최첨단 성능을 달성한다."
+  },
+  "2605.13761v1": {
+    "title_ko": "도시 홍수를 위한 AI 기반 디지털 트윈을 향하여: 천수방정식의 조건부 잠재 동역학 네트워크 서로게이트",
+    "abstract_ko": "AI 기반 홍수 디지털 트윈은 앙상블 예측 및 관측 동화를 위한 빠른 수력동역학 서로게이트를 요구한다. 본 논문에서는 강우로 구동되는 저차원 잠재 neural ODE와 정적 지형(고도, 경사, Manning 조도)을 조건으로 하는 좌표 기반 decoder로 구성된 Conditional Latent Dynamics Network (CLDNet)을 제시한다. 이는 임의의 쿼리 포인트에서 수심과 유량을 재구성하며, 점 기반 디코딩은 메모리를 격자 크기로부터 분리하고 불규칙한 유역을 직접 처리하여 단일 계산 노드에서 도시 규모 학습 및 래스터 스내핑 없이 정확한 게이지 좌표에서의 직접 쿼리를 가능하게 한다."
+  },
+  "2605.13566v1": {
+    "title_ko": "Deep neural network을 이용한 도시 지표면 온도의 시공간적 다운스케일링 및 현재 예보",
+    "abstract_ko": "Land Surface Temperature (LST)는 도시 기후 및 생태 연구의 핵심 변수이나, 기존 위성 기반 LST 제품은 높은 공간 해상도 또는 높은 시간 해상도 중 하나만 제공한다. 본 연구는 정지궤도 위성과 극궤도 위성의 관측을 결합하여 1 km의 공간해상도와 15분 시간간격의 높은 시공간적 해상도의 LST 장을 제공한다. U-Net 모델을 통해 SEVIRI/MSG (3 km, 15분)에서 Terra/Aqua MODIS (1 km, 일 4회)로 LST를 매핑하도록 학습시켰으며, RMSE = 1.92°C와 MBE = 0.01°C의 성능을 달성했다. 추가로 ConvLSTM 기반의 LST nowcasting 모델을 15~75분 예보 시간으로 학습시켜 단기 예보 성능을 입증한다."
+  },
+  "2605.13538v1": {
+    "title_ko": "로케일 조건부 Few-Shot Prompting을 통한 소형 언어 모델의 On-Device PII 치환에서 Demonstration Regurgitation 완화",
+    "abstract_ko": "개인식별정보(PII) 편집은 일반적으로 감지된 엔티티를 [PERSON]과 같은 placeholder 토큰으로 대체하여 편집된 텍스트의 후속 유용성을 손상시킨다. 본 논문은 PII를 일관되고 타입 보존 가능한 가짜 값으로 치환하는 온디바이스 파이프라인을 제안한다: 1.5B mixture-of-experts token classifier가 스팬을 감지하고, 1-bit Bonsai-1.7B Small Language Model이 이름, 주소, 날짜에 대한 문맥적 대체물을 제안하며, 규칙 기반 생성기가 패턴화된 필드를 처리한다. 양자화 선택보다 더 중요한 prompting 발견을 보고한다: 고정된 3-shot demonstration으로는 1-bit SLM이 입력과 관계없이 demonstration 출력을 그대로 재생성하며, 로케일 조건부 회전 few-shot demonstration으로 이를 해결하여 모든 호출에서 성공하고 로케일 올바른 대체물을 생성한다."
+  },
+  "2605.13503v1": {
+    "title_ko": "개인화된 Differential Privacy 예산의 한계",
+    "abstract_ko": "Differential privacy의 핵심 기술적 어려움은 프라이버시 요구사항을 만족하면서 유틸리티를 최대화하는 프라이버시 예산을 선택하는 것이다. 이 논문은 개인화된 프라이버시 예산이 심각한 한계를 가지며, 평균 추정에서 완전한 개인화보다는 적절한 유효 프라이버시 예산 선택이 지배적 요소임을 보인다. 우리는 간단한 thresholding 연산자를 통해 이를 달성할 수 있으며, 이 baseline과 비교했을 때 완전히 개인화된 메커니즘의 개선 효과는 제한적임을 정량화한다."
+  },
+  "2605.13462v1": {
+    "title_ko": "자원 제약 장치에서의 효율적인 센서 융합을 이용한 제스처 인식",
+    "abstract_ko": "본 논문은 스마트 안경의 자연스러운 기기 무접촉 제어를 위해 저해상도 Time-of-Flight(ToF)와 Infrared(IR) 열 센서의 융합을 기반으로 하는 경량의 프라이버시 보호 제스처 인식 시스템을 제안한다. 8×8 multizone ToF 센서와 8×8 IR 어레이를 활용하여 보완적인 깊이 및 열 정보를 캡처하며, 특화된 grouped-convolution 아키텍처를 갖춘 compact CNN을 마이크로컨트롤러(MCU)에서 효율적으로 작동하도록 설계했다. 7가지 정적 제스처 데이터셋에 대한 k-fold cross-validation 실험 결과, 제안된 융합 전략이 단일 센서 기반선 대비 92.3%의 정확도와 0.93의 macro F1-score를 달성했으며, STM32 MCU 벤치마크에서 6,343개의 파라미터로만 자원 제약 웨어러블에 적합함을 입증했다."
+  },
+  "2605.12204v2": {
+    "title_ko": "그래프 기반 최적화: 지식 그래프 위의 Rao-Family 메타휴리스틱, 고전 OR, 그리고 SLM 기반 공식화",
+    "abstract_ko": "본 논문은 graph-grounded optimization 패러다임을 제안하며, 실제 최적화 문제의 결정변수, 제약조건, 목적함수 계수를 자유형식의 자연어 텍스트나 정적 테이블 대신 Cypher 쿼리를 통해 property knowledge graph에서 획득한다. 이 패러다임을 오픈소스 samyama-graph 데이터베이스에서 구현하고, 약물 재창출, 임상시험 선정지, 공급망 재배치, 보건형평 배분 등 7가지 실제 공개 도메인 KG 기반 문제에서 평가하였다. Rao-family 메타휴리스틱들(BMWR, Jaya, SAMP-Jaya, EHR-Jaya, Rao-1)과 Google OR-tools(CP-SAT, GLOP) 기준 해법을 비교 분석한다."
+  },
+  "2605.10540v1": {
+    "title_ko": "오류 추적 유지: ERA RINF Knowledge Graph의 RDF 데이터셋 검증을 위한 SHACL-DS 연구",
+    "abstract_ko": "SHACL-DS는 named graph의 선언적 타겟팅과 graph 조합을 도입하여 RDF 데이터셋 검증을 위해 SHACL을 확장했으나, 실제 대규모 Knowledge Graph에서는 아직 입증되지 않았다. 본 논문에서는 European Railway Infrastructure (ERA RINF) KG에 SHACL-DS를 적용하여 검증하였으며, 두 가지 전략으로 ERA-RINF shapes를 마이그레이션하고 성능을 평가했다. 결과적으로 SHACL-DS는 SHACL 기준선보다 빠르며 동일한 결과를 생성할 뿐만 아니라, SHACL과 동등 이상의 표현력을 제공하고 validation report에 graph별 주석을 추가하며 named shapes graph에서의 shape 조직화를 가능하게 한다."
+  },
+  "2605.13062": {
+    "title_ko": "Edit-Compass & EditReward-Compass: 이미지 편집 및 보상 모델링을 위한 통합 벤치마크",
+    "abstract_ko": "최근 이미지 편집 모델은 명령어 따르기, 멀티모달 이해, 복잡한 시각 편집에서 눈에 띄는 진전을 이뤘습니다. 그러나 기존 벤치마크는 제한된 작업 난이도와 낮은 수준의 평가 프로토콜로 인해 인간의 판단을 충분히 반영하지 못합니다. 동시에, reward model은 RL 기반 이미지 편집 최적화에서 점점 중요해지고 있으나, 기존 reward model 벤치마크는 여전히 실제 RL 시나리오와 맞지 않는 비현실적인 평가 설정에 의존합니다. 이러한 한계를 극복하기 위해, 우리는 이미지 편집과 보상 모델링을 위한 통합 평가 도구인 Edit-Compass와 EditReward-Compass를 제시합니다. Edit-Compass는 6개의 점진적으로 증가하는 난이도의 작업 범주에 걸친 2,388개의 주의 깊게 주석된 인스턴스를 포함하며, 세계 지식 추론, 시각 추론, 다중 이미지 편집 등의 능력을 다룹니다."
+  },
+  "2605.13511": {
+    "title_ko": "Many-Shot CoT-ICL: In-Context Learning을 진정한 학습으로 만들기",
+    "abstract_ko": "In-context learning(ICL)은 매개변수 업데이트 없이 프롬프트의 시연으로 조건화하여 대형 언어 모델(LLM)을 새로운 작업에 적응시킨다. 많은 수의 shot CoT-ICL에서 추론 작업에 대한 스케일링 동작을 연구하여, 표준 many-shot 규칙이 전이되지 않음을 보인다. 추론 기반 LLM과 비추론 작업 전반에서 CoT 시연 수 증가가 비추론 LLM에서는 불안정하고 추론 기반 LLM에만 이점을 제공하며, 의미 유사성 기반 retrieval은 비추론 작업에서는 도움이 되지만 추론에서는 실패함을 발견한다. 이러한 행동들을 many-shot CoT-ICL을 스케일된 패턴 매칭이 아닌 in-context test-time learning으로 해석하고 두 가지 원칙을 제안한다."
+  },
+  "2605.13831": {
+    "title_ko": "128K 문맥을 넘어선 일반화를 통한 장문맥 Vision-Language 모델의 효과적인 학습",
+    "abstract_ko": "본 논문은 장문맥 모델링을 위한 체계적인 연구로, 7B 규모의 vision-language 모델을 32K에서 128K 문맥으로 확장할 때 장문서 데이터 혼합 설계 방법을 제시한다. 주요 발견은: (i) 균형잡힌 시퀀스 길이 분포가 목표 길이 집중 데이터보다 효과적, (ii) retrieval이 주요 병목이며 retrieval 중심 혼합이 최적, (iii) 순수 장문서 VQA가 단문맥 능력을 잘 보존함을 보여준다."
+  },
+  "2605.12484": {
+    "title_ko": "빠르고 느린 학습: 지속적으로 적응하는 LLM을 향하여",
+    "abstract_ko": "대규모 언어 모델(LLM)은 매개변수 업데이트(예: RL)를 통해 downstream task에 적응하지만, 이는 catastrophic forgetting과 plasticity 손실을 초래할 수 있다. 본 논문은 고정된 LLM 매개변수의 in-context learning과 매개변수 업데이트 학습의 장점을 결합하기 위해, 모델 매개변수를 \"slow\" weight, 최적화된 context를 \"fast\" weight로 하는 fast-slow learning framework를 제안한다. Fast-Slow Training(FST)은 reasoning task에서 오직 slow learning만 사용하는 경우 대비 최대 3배 더 샘플 효율적이면서 더 높은 성능에 도달한다."
+  },
+  "2605.12975": {
+    "title_ko": "검색은 저렴하다, 코드를 보여줘: Retrieval-Augmented Generation을 위한 실행 가능한 다중 홉 추론",
+    "abstract_ko": "Retrieval-Augmented Generation (RAG)은 지식 집약적 질문 답변의 표준 접근법이 되었지만, 여러 검색 및 추론 단계를 연쇄적으로 수행해야 하는 다중 홉 질문에서는 취약성을 보인다. 본 논문에서는 다중 홉 질문 답변이 단계별 계산의 전형적인 형태이며, 이것이 code-specialized language model의 학습 방식과 일치함을 관찰한다. 이를 바탕으로, 다중 홉 RAG를 프로그램 합성 및 실행으로 재정의하는 PyRAG 프레임워크를 제안한다. PyRAG는 자유 형식의 추론 궤적 대신 검색 및 QA 도구에 대한 실행 가능한 Python 프로그램으로 추론 과정을 표현하여 중간 상태를 변수로 노출하고, 실행을 통해 결정적 피드백을 생성하며, 전체 추론 과정의 검사 가능한 추적을 제공한다."
+  },
+  "2605.13565": {
+    "title_ko": "Qwen-Image-VAE-2.0 기술 보고서",
+    "abstract_ko": "우리는 재구성 충실도와 diffusability에서 상당한 진전을 달성하는 고압축 Variational Autoencoders (VAE) 모음인 Qwen-Image-VAE-2.0을 제시합니다. Global Skip Connections (GSC)와 확장된 latent channels를 특징으로 하는 개선된 아키텍처를 채택하고 수십억 개의 이미지로 학습을 확대하며 텍스트가 풍부한 시나리오의 성능을 향상시키기 위해 합성 렌더링 엔진을 통합했습니다. 또한 향상된 의미 정렬 전략을 구현하여 latent space를 diffusion modeling에 적합하도록 만들고, 비대칭 attention-free encoder-decoder backbone을 활용하여 인코딩 오버헤드를 최소화했습니다. Qwen-Image-VAE-2.0은 공개 재구성 벤치마크에서 최첨단 성능을 달성하며, 텍스트가 풍부한 시나리오 평가를 위해 OCR 기반 평가 지표가 포함된 새로운 벤치마크 OmniDoc-TokenBench를 제안합니다."
+  },
+  "2605.12501": {
+    "title_ko": "컴퓨터 사용을 위한 인간 행동 공간 커버: 데이터 합성 및 벤치마크",
+    "abstract_ko": "컴퓨터 사용 에이전트(CUA)는 화면 작업을 자동화하지만, 복잡한 저빈도 상호작용에서의 신뢰성은 여전히 낮다. 고급 모델의 실패 사례 분석에서 GUI 작업의 롱테일 패턴을 발견했으며, 이는 복잡한 상호작용 데이터의 부족에서 비롯된다고 가정한다. 이를 해결하기 위해 GUI, 텍스트, 테이블, 캔버스, 자연 이미지 등 5개 모달리티에서 복잡한 상호작용 성능을 평가하는 벤치마크 CUActSpot과 renderer 기반 데이터 합성 파이프라인을 제안한다. 이를 통해 학습한 Phi-Ground-Any-4B는 32B 이하의 오픈소스 모델을 능가한다."
+  },
+  "2605.10616": {
+    "title_ko": "MulTaBench: 텍스트와 이미지를 포함한 멀티모달 테이블러 학습 벤치마킹",
+    "abstract_ko": "Tabular Foundation Models은 수치형 및 카테고리형 구조화 데이터의 일반화 가능한 표현을 학습하기 위해 사전학습을 활용하여 지도 학습에서 최고 성능을 달성했다. 그러나 텍스트와 이미지 같은 비정형 modality에 대한 기본 지원이 부족하며 고정된 사전학습 embedding에 의존한다. 우리는 기존 멀티모달 테이블러 학습 벤치마크에서 embedding을 작업에 맞게 튜닝하면 성능이 향상됨을 보인다. 기존 벤치마크는 modality의 단순 공존에 초점을 맞춰 데이터셋 간 높은 분산을 초래하고 작업 특화 튜닝의 이점을 가린다. 이를 해결하기 위해 우리는 40개 데이터셋으로 구성된 MulTaBench를 제시하며, 이미지-테이블러와 텍스트-테이블러 작업을 균등하게 분할한다. modality가 상호보완적 예측 신호를 제공하고 일반적 embedding이 중요 정보를 잃는 예측 작업에 초점을 맞추며, 작업과 정렬된 Target-Aware Representations의 필요성을 강조한다."
+  },
+  "2605.11363": {
+    "title_ko": "PresentAgent-2: 범용 멀티모달 프레젠테이션 에이전트를 향하여",
+    "abstract_ko": "프레젠테이션 생성이 정적 슬라이드 작성에서 연구 기반, 멀티모달 미디어, 상호작용적 전달을 포함한 종단 간 프레젠테이션 비디오 생성으로 발전하고 있다. 사용자 쿼리로부터 프레젠테이션 비디오를 생성하는 에이전트 프레임워크인 PresentAgent-2를 소개한다. 개방형 사용자 쿼리와 선택된 프레젠테이션 모드가 주어질 때, PresentAgent-2는 먼저 쿼리를 초점이 맞춰진 주제로 요약하고 프레젠테이션 친화적 소스에서 심층 연구를 수행하여 관련 텍스트, 이미지, GIF, 비디오 등의 멀티모달 자원을 수집한다. 그 후 프레젠테이션 슬라이드를 구성하고, 모드 특화 스크립트를 생성하며, 슬라이드, 오디오, 동적 미디어를 완전한 프레젠테이션 비디오로 합성한다. PresentAgent-2는 통합 프레임워크 내에서 Single Presentation, Discussion, Interaction 등 세 가지 독립적 프레젠테이션 모드를 지원한다."
+  },
+  "2605.12978": {
+    "title_ko": "유용한 기억이 LLM에 의해 지속적으로 업데이트될 때 결함이 되다",
+    "abstract_ko": "과거 경험으로부터의 학습은 episodic trace와 consolidated abstraction이라는 두 가지 상호 보완적인 기억 형태로부터 이득을 얻는다. 최근 agentic-memory 시스템들은 consolidated 형태를 추구하며, LLM이 과거 궤적을 텍스트 기억 뱅크로 재작성하고 새로운 상호작용으로 지속적으로 업데이트하여 매개변수 업데이트 없이 자가 개선 에이전트를 약속한다. 그러나 우리는 오늘날의 LLM에 의해 생성된 consolidated memory가 유용한 경험에서 파생되었더라도 결함이 있음을 발견했다. 통합이 진행됨에 따라 기억 유용성은 먼저 상승하다가 저하되며 no-memory baseline 아래로 떨어질 수 있다. 더욱 놀랍게도, ground-truth 솔루션에서 통합할 때에도 GPT-4는 기억 없이 이전에 해결한 ARC-AGI 문제 세트의 54%에서 실패한다."
+  },
+  "2605.12411": {
+    "title_ko": "제한된 상호작용으로부터 AI 에이전트의 의사결정 예측: Text-Tabular 모델링을 통한 접근",
+    "abstract_ko": "본 논문은 미지의 상대방과 자연어로 협상하는 AI 에이전트가 제한된 상호작용만으로 상대방의 다음 의사결정을 예측할 수 있는지 연구한다. 게임 상태, 제안 이력, 대화를 결합한 구조화된 텍스트-테이블 데이터로 target-adaptive 예측 문제를 공식화하고, tabular foundation model과 LLM 기반 text representation을 활용하며, LLM-as-Observer를 추가 representation으로 통합하여 의사결정 예측 성능을 향상시킨다."
+  },
+  "2605.09942": {
+    "title_ko": "HAGE: RL 기반 가중 그래프 진화를 통한 에이전트 메모리 활용",
+    "abstract_ko": "본 논문은 에이전트형 대규모 언어 모델(LLM) 시스템에서 고정된 벡터 검색이나 이진 관계 그래프의 한계를 극복하기 위해 HAGE를 제안한다. HAGE는 가중 다중 관계 메모리 프레임워크로, 쿼리에 조건화된 순차적 순회를 통해 적응형 메모리 검색을 수행한다. LLM 기반 분류기가 관계적 의도를 식별하고 라우팅 네트워크가 엣지 임베딩의 차원을 동적으로 조절하여 고유용성 관계 경로를 우선시한다. 강화학습을 통해 메모리 조직 및 순회 메커니즘을 최적화한다."
+  },
+  "2605.13724": {
+    "title_ko": "AnyFlow: On-Policy Flow Map Distillation을 통한 임의 단계 비디오 Diffusion 모델",
+    "abstract_ko": "Few-step 비디오 생성은 consistency distillation으로 큰 진전을 이루었으나, 테스트 시간에 더 많은 샘플링 단계가 할당될수록 성능이 저하되어 any-step 비디오 diffusion의 효과성을 제한한다. 이 문제를 해결하기 위해, 우리는 flow map 기반의 첫 번째 any-step 비디오 diffusion distillation 프레임워크인 AnyFlow를 제시한다. Distillation 목표를 endpoint consistency mapping에서 임의의 시간 구간에 대한 flow-map transition learning으로 전환하여 전체 ODE 샘플링 궤적을 최적화한다. Flow Map Backward Simulation을 통해 효율적인 on-policy distillation을 실현하여 few-step 샘플링의 discretization error를 감소시킨다."
+  },
+  "2605.12587": {
+    "title_ko": "TrackCraft3R: 비디오 Diffusion Transformer를 밀집 3D 추적에 재활용하기",
+    "abstract_ko": "본 논문은 비디오 diffusion transformer(video DiT)를 feed-forward 밀집 3D 추적기로 재목적화한 첫 번째 방법을 제시한다. TrackCraft3R은 인터넷 규모의 동영상에서 학습한 풍부한 시공간 사전지식을 활용하면서도, 프레임 기준 생성에서 참조 기준 추적으로의 근본적인 불일치를 해결한다. 단안 비디오와 프레임 기준 reconstruction pointmap이 주어지면, 첫 프레임의 모든 픽셀을 시간에 따라 추적하는 참조 기준 tracking pointmap을 예측하여 실제 동영상에서 학습한 강력한 모션 사전지식을 활용한 밀집 3D 추적을 가능하게 한다."
+  },
+  "2605.06658": {
+    "title_ko": "Relit-LiVE: 환경 비디오를 함께 학습하여 비디오 재조명",
+    "abstract_ko": "본 논문에서는 Relit-LiVE라는 새로운 비디오 재조명 프레임워크를 제안하며, 이는 intrinsic decomposition의 부정확성으로 인한 왜곡된 외형과 시간적 아티팩트를 제거하고 카메라 포즈 사전 정보 없이도 물리적으로 일관되고 시간적으로 안정적인 결과를 생성한다. 핵심 아이디어는 원본 참조 이미지를 렌더링 프로세스에 명시적으로 도입하여 intrinsic representation에서 손실되거나 손상된 중요한 장면 단서를 복구하는 것이다. 추가적으로, 단일 diffusion 프로세스에서 재조명된 비디오와 각 카메라 시점에 정렬된 프레임별 environment map을 동시에 생성하는 새로운 환경 비디오 예측 공식을 제안하며, 이는 강한 기하-조명 정렬을 보장하고 동적 장면을 자연스럽게 지원한다."
+  },
+  "2605.12964": {
+    "title_ko": "비대칭 Flow 모델",
+    "abstract_ko": "고차원 공간에서의 flow 기반 생성은 데이터가 강한 저차원 구조를 가지더라도 속도 예측이 고차원 노이즈를 모델링해야 하므로 어렵다. 우리는 노이즈 예측을 저차원 부분공간으로 제한하면서 데이터 예측은 전차원으로 유지하는 순위-비대칭 속도 파라미터화인 AsymFlow를 제시한다. 이 비대칭 예측으로부터 AsymFlow는 네트워크 아키텍처나 학습/샘플링 절차를 변경하지 않고 분석적으로 전차원 속도를 복원한다. ImageNet 256×256에서 AsymFlow는 1.57 FID의 최고 성능을 달성하여 기존 DiT/JiT 유형의 픽셀 diffusion 모델을 큰 폭으로 능가한다. AsymFlow는 또한 사전학습된 latent flow 모델을 픽셀 공간 모델로 fine-tuning하는 최초의 방법을 제공한다: 저차원 픽셀 부분공간을 latent 공간에 정렬하면 latent 모델의 고수준 의미론과 구조를 보존하는 매끄러운 초기화를 제공하므로, fine-tuning은 픽셀 생성을 재학습하기보다는 저수준 불일치를 주로 개선한다."
+  },
+  "2605.11136": {
+    "title_ko": "EVOCHAMBER: 개별, 팀, 그리고 모집단 규모에서 다중에이전트 시스템의 테스트-타임 공진화",
+    "abstract_ko": "다중에이전트 테스트-타임 진화는 단일에이전트 진화를 N번 복제한 것이 아니라는 점을 주장한다. 본 논문은 EVOCHAMBER를 제안하는데, 이는 공진화하는 에이전트 풀에서 세 가지 수준의 테스트-타임 진화를 구현하는 학습-무료 프레임워크이다. 핵심은 CODREAM(Collaborative Dreaming)으로, 팀 실패나 의견 불일치 시 작동하는 사후 작업 프로토콜이며, 에이전트들이 협력적으로 반성하고, 통찰을 증류하고, 실패한 틈새에서 약한 에이전트로 비대칭적으로 지식을 전달하여 전문화를 보존하면서 지식 격차를 메운다."
+  },
+  "2605.12913": {
+    "title_ko": "LLM-Agent 시대에 DAgger 재검토",
+    "abstract_ko": "장기 horizon LM agent는 다중 턴 상호작용으로부터 학습하는데, 초기의 단 하나의 실수도 이후 상태 분포를 변화시켜 전체 궤적을 왜곡할 수 있다. 기존 방법들은 상호 보완적인 방식으로 부족한데, supervised fine-tuning은 밀집된 teacher 감독을 제공하지만 off-policy teacher 궤적으로 훈련되어 covariate shift로 어려움을 겪고, 검증 가능한 reward를 가진 reinforcement learning은 on-policy rollout으로부터 학습하여 off-policy 불일치를 피하지만 sparse outcome feedback만 제공한다. 우리는 다중 턴 LM agent를 위해 Dataset Aggregation (DAgger)을 재검토하여 이 딜레마를 해결한다: 알고리즘은 학생과 teacher 정책의 턴 레벨 보간을 통해 궤적을 수집하고, 학생은 teacher가 제공한 supervised label을 사용하여 이 궤적으로부터 훈련된다. 환경과 직접 상호작용함으로써, 배포 중에 마주칠 현실적인 상태에 모델을 노출시켜 covariate shift를 효과적으로 완화한다."
+  },
+  "2605.08518": {
+    "title_ko": "CODS 2025 AssetOpsBench 챌린지의 결과 및 회고 분석",
+    "abstract_ko": "경쟁 회고는 리더보드가 무엇을 측정했는지, 숨겨진 평가가 결론을 어떻게 변경했는지, 그리고 어떤 설계 패턴이 보상받았는지 설명할 때 유용하다. 본 논문은 산업용 다중 에이전트 오케스트레이션에 관한 프라이버시 인식 Codabench 경쟁인 CODS 2025 챌린지를 재검토한다. 최종 순위표, 300개 제출 서버 로그, 149개 팀 등록, 최고 제출 export, 주최자 우승자 보고서, 관련 시스템 논문, 검증된 planning-track 소스 트리를 결합한 결과, 다섯 가지 주요 발견이 도출되었다: (1) 공개 planning 리더보드는 72.73%에서 포화되며 더 풍부한 prompt는 이를 개선하지 못한다, (2) 숨겨진 평가에서 공개 점수와 비공개 점수의 상관관계는 planning에서는 중간 정도(r=0.69)이나 execution에서는 음의 상관(r=-0.13)을 보인다, (3) 공식 종합 점수에서 특정 용어는 거의 영향을 미치지 못하며, (4) 경쟁은 운영적으로는 계정 기반이지만 실질적으로는 팀 기반이다."
+  },
+  "2605.11400": {
+    "title_ko": "UniPath: 통합 멀티모달 추론을 위한 이해와 생성의 적응적 조정",
+    "abstract_ko": "통합 멀티모달 모델(UMM)은 단일 아키텍처 내에서 이해와 생성 능력을 통합하는 것을 목표로 한다. 본 논문은 멀티모달 작업이 상당한 coordination-path 다양성을 보이며, 서로 다른 입력이 서로 다른 coordination path를 선호함을 보인다. UniPath는 이러한 다양성을 적응적으로 모델링하고 활용하기 위한 프레임워크로, 직접 답변부터 텍스트 추론, visual-thought 구성, 가설 기반 탐색에 이르는 경로의 선택과 실행을 통해 작업을 해결한다. Role-aligned trajectory를 구성하여 path-conditioned executor를 학습하고 lightweight planner 메커니즘을 도입하여 입력 종속적 경로 선택을 가능하게 한다."
+  },
+  "2605.13779": {
+    "title_ko": "MinT: 수백만 개 LLM의 학습 및 서빙을 위한 관리형 인프라",
+    "abstract_ko": "본 논문은 LoRA post-training 및 온라인 serving을 위한 관리형 인프라 시스템인 MindLab Toolkit (MinT)를 제시한다. MinT는 소수의 비용이 많이 드는 base-model 배포로부터 많은 수의 학습된 정책을 생성하는 설정을 목표로 하며, 각 정책을 병합된 전체 checkpoint로 구현하는 대신 base model을 상주시키고 exported LoRA adapter를 rollout, update, export, evaluation, serving, rollback을 거쳐 이동시킨다. MinT는 분산 학습, serving, scheduling, 데이터 이동을 서비스 인터페이스 뒤에 숨기면서 Scale Up (frontier-scale dense 및 MoE 아키텍처로 1T 이상의 파라미터까지 확장), Scale Down (exported LoRA adapter 이동으로 18.3배 단계 감소), Scale Out (tensor-parallel deployment 지원)의 세 축을 따라 확장성을 제공한다."
+  },
+  "2605.13775": {
+    "title_ko": "RoboEvolve: 제한된 데이터로 로봇 조작을 위한 플래너-시뮬레이터 공진화",
+    "abstract_ko": "로봇 조작의 확장성은 작업 정렬 물리 상호작용 데이터 부족으로 인해 근본적인 병목을 겪고 있다. 본 논문은 VLM 플래너와 VGM 시뮬레이터를 상호 강화하는 공진화 루프로 결합하는 RoboEvolve 프레임워크를 제안한다. 레이블 없는 시드 이미지에서 작동하며, 주간 탐색을 통한 물리 기반 행동 발견과 야간 통합을 통한 정책 최적화 안정화의 이중 메커니즘을 활용한다. 광범위한 실험을 통해 RoboEvolve가 기본 플래너를 30포인트 향상시키고 평균적으로 시뮬레이터 성공률을 48% 증대시킴을 보여준다."
+  },
+  "2605.10376": {
+    "title_ko": "SleepWalk: Instruction-Guided Vision-Language Navigation을 위한 3계층 벤치마크",
+    "abstract_ko": "Vision-Language Models(VLMs)는 멀티모달 인식과 언어 이해에서 급속히 발전했으나, 3D 디지털 환경에서 언어를 공간적으로 일관된 실행 가능한 행동으로 접지할 수 있는지는 여전히 불명확하다. 우리는 텍스트 장면 설명으로부터 생성되고 네비게이션 가능성으로 필터링된 단일 장면 3D 세계에서 instruction-grounded 궤적 예측을 평가하기 위한 벤치마크인 SleepWalk를 제시한다. 방 간 장거리 탐색에 중점을 두는 기존 네비게이션 벤치마크와 달리, SleepWalk는 지역화된 상호작용 중심의 embodied 추론을 목표로 한다: 렌더링된 시각적 관찰과 자연어 instruction이 주어졌을 때, 모델은 장면 기하학을 존중하고 충돌을 회피하며 행동 호환 위치에서 종료하는 궤적을 예측해야 한다. 벤치마크는 다양한 실내외 환경을 포함하며 작업을 3계층의 공간 및 시간적 난이도로 조직하여, 증가하는 compositional complexity 하에서 접지의 세밀한 분석을 가능하게 한다."
+  },
+  "2605.09936": {
+    "title_ko": "Urban-ImageNet: 도시 공간 인식을 위한 대규모 멀티모달 데이터셋 및 평가 프레임워크",
+    "abstract_ko": "본 논문은 사용자 생성 소셜 미디어 이미지로부터 도시 공간 인식을 위한 대규모 멀티모달 데이터셋과 평가 벤치마크인 Urban-ImageNet을 제시한다. 2019-2025년 중국 24개 도시의 61개 지역에서 Weibo로부터 수집한 200만 개 이상의 공개 소셜 미디어 이미지와 텍스트 게시물로 구성되며, HUSIC (Hierarchical Urban Space Image Classification) 프레임워크에 따라 도시 이론에 기반한 10개 분류 체계로 조직된다. 본 벤치마크는 도시 장면 시맨틱 분류, cross-modal 이미지-텍스트 검색, 인스턴스 분할 등 세 가지 작업을 지원하며, 머신 퍼셉션 모델이 도시 연구의 핵심인 공간적, 사회적, 기능적 구분을 포착할 수 있는지를 평가한다."
+  },
+  "2605.10268": {
+    "title_ko": "MemReread: 메모리 기반 재읽기를 통한 에이전트 장문맥 추론 강화",
+    "abstract_ko": "표준 attention 메커니즘의 이차 복잡성을 피하기 위해 agent memory 기반의 접근법이 등장했으나, 메모리 덮어쓰기 과정에서 잠재적 증거 손실이 발생한다. MemReread는 streaming reading에 기반하여 중간 retrieval을 우회하고, 최종 메모리가 불충분할 때 질문 분해와 재읽기를 통해 조기에 폐기된 간접적 사실들을 복구한다. 이는 문서 이해의 논리적 흐름을 보존하면서 비선형 추론을 지원한다. 또한 reinforcement learning 프레임워크를 도입하여 길이 외삽 능력을 강화하고 재읽기 횟수를 동적으로 결정한다."
+  },
+  "2605.08737": {
+    "title_ko": "On-Policy Distillation의 Near-Deterministic구조화된 출력에서의 Extrapolation Cliff",
+    "abstract_ko": "On-policy distillation (OPD)은 LLM post-training에 널리 사용된다. Reward-extrapolation 계수 lambda > 1로 진행할 때, 학생은 도메인 내에서 교사를 초과할 수 있지만 임계값 lambda*를 넘으면 같은 단계가 구조화된 출력 작업에서 출력 계약을 위반한다. 단일 위치 Bernoulli 축소에서 우리는 교사 modal 확률, warm-start mass, importance-sampling clip 강도로 결정되는 폐형 base-relative clip-safety 임계값 lambda*(p,b,c)를 유도한다. Lambda*를 초과하면 외삽된 고정점이 clip-safe 영역을 벗어나 학습을 format-preserving에서 format-collapsing으로 변환한다. 이 규칙을 단일 binding equivalence class가 출력 계약을 지배하고 SFT가 parse headroom을 유지하는 calibrated K-ary listwise JSON 작업으로 확장한다."
+  },
+  "2605.07153": {
+    "title_ko": "추론을 넘어서: 강화학습이 LLM의 Parametric 지식을 해제하다",
+    "abstract_ko": "강화학습(RL)은 LLM의 추론 능력 향상에서 뛰어난 성과를 보였으나, parametric 지식의 직접적인 회상 개선 가능성은 미해결 과제로 남아있다. 본 논문은 chain-of-thought 없이 이진 정확도 보상으로만 학습하는 zero-shot, one-hop, closed-book QA 설정에서 이를 체계적으로 검증한다. 세 가지 모델 계열과 여러 factual QA 벤치마크에 걸쳐 RL은 ~27%의 평균 상대 이득을 달성하였으며, 학습 및 추론 시간 기준선을 모두 초과한다. 기계적으로 RL은 새로운 사실 획득보다는 기존 지식에 대한 확률 분포를 재분배하여 올바른 답변을 저확률 영역에서 신뢰할 수 있는 greedy 생성으로 이동시킨다."
+  },
+  "2605.12004": {
+    "title_ko": "행동 지도로부터 에이전트 정책 학습",
+    "abstract_ko": "Large Language Models (LLMs)을 위한 에이전트 reinforcement learning은 기본 정책의 탐색 능력에 크게 의존하며, 학습 신호는 그 능력 부족 영역에서만 나타난다. 기본 정책이 보상 상태에 도달할 수 없는 작업에서는 효과적인 학습 신호를 복구하기 위해 추가 학습이나 외부 지도가 필요하다. 비용이 큰 반복적 supervised fine-tuning (SFT) 대신, 우리는 일상적 인간 상호작용에서 생성되는 풍부한 행동 데이터를 활용한다. 우리는 ActGuide-RL을 제안하는데, 이는 행동 데이터를 계획 스타일의 참고 지도로 주입하여 에이전트 정책이 보상 상태까지의 도달 가능성 장벽을 극복하도록 한다. 지도받은 롤아웃과 지도받지 않은 롤아웃은 mixed-policy training을 통해 공동으로 최적화되어 탐색 이득을 지도받지 않은 정책으로 내재화한다. Search-agent 벤치마크에서 ActGuide-RL은 zero RL 대비 상당한 개선을 보여준다 (+10.7 pp on GAIA, Qwen3-4B 기준 +19 pp on XBench)."
+  },
+  "2605.12684": {
+    "title_ko": "Visual Aesthetic Benchmark: Frontier 모델이 아름다움을 판단할 수 있는가?",
+    "abstract_ko": "Multimodal large language model(MLLM)은 시각적 이해, 생성, 큐레이션에 광범위하게 배포되고 있으며, 이러한 응용의 상당 부분은 명시적인 미적 판단을 요구한다. 본 논문은 단일 이미지에 대한 스칼라 점수 예측이 실제로 비교 선호도를 충실히 반영하는지 조사하고, 직접 비교가 더 높은 일관성을 보임을 발견했다. 이를 바탕으로 유사한 주제의 후보 집합 중 비교 선택으로 미적 평가를 정의하는 Visual Aesthetic Benchmark(VAB)를 제안한다. VAB는 미술, 사진, 일러스트레이션에 걸쳐 400개의 과제와 1,195개의 이미지를 포함하며, 각 과제마다 10명의 독립적인 전문가 판사의 합의로부터 도출된 레이블을 갖는다."
+  },
+  "2605.12419": {
+    "title_ko": "ORBIT: Origin-Regulated Merging을 통한 GenRetrieval에서의 기초 언어 능력 보존",
+    "abstract_ko": "대규모 언어 모델(LLM)을 특정 작업에 맞게 fine-tuning할 때 일반적인 언어 기반 추론 능력의 catastrophic forgetting이 발생한다. 본 연구는 Generative Retrieval(GenRetrieval) 작업 맥락에서 이 문제를 조사하고, fine-tuning 중 forgetting이 원본 모델과의 파라미터 거리와 연관되어 있음을 발견한다. 이를 바탕으로 fine-tuned 모델과 초기 모델 가중치 간의 거리를 추적하고, 이 거리가 최대 임계값을 초과할 때 weight averaging 전략을 통해 모델 드리프트를 제약하는 ORBIT을 제안한다. ORBIT은 continual learning baseline과 weight averaging을 활용하는 정규화 방법들을 능가하면서 텍스트 및 retrieval 성능을 유지한다."
+  },
+  "2605.11550": {
+    "title_ko": "World-Action Interactive Models의 시작 (DAWN)",
+    "abstract_ko": "장면의 진화는 수행되는 행동에 따라 달라지고, 좋은 행동은 장면이 어떻게 진화할지에 달려 있다. 기존의 World Action Models (WAMs)는 이러한 상호성을 간과하고 세계 예측과 행동 생성을 고립된 병렬 분기 또는 경직된 예측-계획 파이프라인으로 취급한다. 우리는 이를 World-Action Interactive Models (WAIMs)로 형식화하고 자율주행에서 DAWN (Denoising Actions and World iNteractive model)이라는 간단하면서도 강력한 latent generative baseline으로 구현한다. DAWN은 compact semantic latent space에서 작동하며 World Predictor와 World-Conditioned Action Denoiser를 결합하여 예측된 세계 가설이 행동 denoising을 조건화하고, denoised된 행동 가설이 다시 세계 예측을 업데이트하도록 함으로써 추론 중 두 요소가 반복적으로 개선된다. 실험 결과 DAWN은 강력한 계획 성능과 안전성 관련 이점을 달성한다."
+  },
+  "2605.13037": {
+    "title_ko": "MAP: 장기간 상호작용형 에이전트 추론을 위한 지도 작성-후 행동 패러다임",
+    "abstract_ko": "현재의 상호작용형 LLM 에이전트들은 목표 조건부 단계적 계획에 의존하여 환경 이해를 실행 중에 반응적으로 획득하는 문제를 겪고 있다. 이러한 시간적 역전은 지연된 환경 인식을 초래하여 에이전트들이 시행착오를 통해 환경 제약을 추론해야 하는 인식론적 병목에 갇히게 한다. 인간의 affordance 지각과 인지 지도 이론에 영감을 받아, 우리는 실행 전에 환경 이해로 전환하는 플러그 앤 플레이 프레임워크인 MAP(Map-then-Act Paradigm)을 제안한다. MAP은 (1) 환경 일반 사전 정보 획득, (2) 작업 특화 지도 구성, (3) 지도 기반 지식 강화 실행의 세 단계로 구성된다. 실험 결과는 여러 벤치마크와 LLM에 걸쳐 일관된 성능 향상을 보여주며, ARC-AGI-3에서 MAP은 25개 게임 환경 중 22개에서 기존 모델의 성능을 초과한다."
+  },
+  "2605.12466": {
+    "title_ko": "루프를 해결하기: 언어와 추론을 위한 Attractor 모델",
+    "abstract_ko": "루프형 Transformer는 latent representation을 반복적으로 정제하여 언어 모델링과 추론을 개선하는 promising한 대안을 제공하지만, recurrent 아키텍처는 학습 불안정성, 최적화 및 배포 비용, 고정된 깊이 제약이 있다. 우리는 Attractor Model을 제안한다. 이는 backbone 모듈이 먼저 output embedding을 제안하고, attractor 모듈이 implicit differentiation을 통해 고정점을 해결하여 이를 정제한다. 따라서 학습 메모리는 유효 깊이에서 일정하게 유지되고, 반복은 수렴에 의해 적응적으로 선택된다. 실험 결과, Attractor Model은 대규모 언어 모델 사전학습과 소형 모델 추론 두 체계에서 기존 모델을 능가하며, 언어 모델링에서는 표준 Transformer 대비 perplexity를 최대 46.6%, 다운스트림 정확도를 최대 19.7% 개선하면서 학습 비용을 감소시킨다."
+  },
+  "2605.13087": {
+    "title_ko": "Vividh-ASR: 인도 언어 음성 인식의 복잡도 계층화 벤치마크 및 최적화 동역학",
+    "abstract_ko": "저자원 언어를 위해 Whisper 같은 multilingual ASR 모델을 fine-tuning할 때 낭독 음성 성능은 향상되지만 자연스러운 음성 성능은 저하되는 현상(studio-bias)을 분석하기 위해, 우리는 힌디어와 말라얄람어에 대해 스튜디오, 방송, 자연스러운 음성, 합성 잡음의 4단계로 구성된 복잡도 계층화 벤치마크 Vividh-ASR을 소개한다. Learning rate 타이밍과 curriculum 순서에 대한 제어된 연구를 통해, 조기의 큰 파라미터 업데이트가 전체 WER을 12포인트 향상시키고 easy-to-hard curriculum이 자연스러운 음성에 추가 성능을 제공함을 발견한다. 이를 바탕으로 reverse multi-stage fine-tuning (R-MFT)을 제안하여 244M 파라미터 Whisper 모델이 769M 모델과 동등하거나 초과하는 성능을 달성하도록 한다."
+  },
+  "2605.10832": {
+    "title_ko": "시각-네이티브 멀티모달 심층 검색 에이전트를 위한 온-폴리시 데이터 진화",
+    "abstract_ko": "멀티모달 심층 검색은 진화하는 텍스트 및 시각 컨텍스트에 대해 검색, 도구 사용, 시각적 추론을 연계하여 개방형 문제를 해결하는 에이전트가 필요하다. 기존 시스템의 두 가지 병목은 (1) 검색/브라우징/변환으로 반환된 이미지를 임시 출력으로 취급하여 중간 시각 증거를 재사용할 수 없고, (2) 훈련 데이터가 에이전트의 진화하는 능력을 추적하지 못하는 고정 큐레이션으로 구성된다는 것이다. 이를 해결하기 위해 이미지 뱅크 참조 프로토콜 기반의 시각-네이티브 에이전트 harness를 제안하고, On-policy Data Evolution (ODE)을 통해 훈련 정책의 롤아웃으로부터 자체 개선되는 폐루프 데이터 생성기를 실행한다. 이는 다양한 supervised fine-tuning 데이터와 정책 인식 reinforcement learning 데이터 큐레이션을 지원하여 전체 훈련 생명주기를 커버한다."
+  },
+  "2605.09266": {
+    "title_ko": "SeePhys Pro: 물리 추론을 위한 멀티모달 RLVR에서의 모달리티 이전 및 블라인드 훈련 효과 진단",
+    "abstract_ko": "본 논문에서는 중요한 정보가 텍스트에서 이미지로 점진적으로 이전될 때 모델이 동일한 추론 능력을 유지하는지를 연구하는 세밀한 모달리티 이전 benchmark인 SeePhys Pro를 소개한다. 각 문제마다 시각적 요소가 점진적으로 증가하는 4개의 의미론적으로 정렬된 변형을 특징으로 하며, 평가 결과 현재의 최신 모델들은 표현 불변 추론자로부터 멀리 떨어져 있음을 보여준다. 추론 시점의 취약성에 동기부여되어, 멀티모달 RLVR을 위한 대규모 훈련 코퍼스를 개발하고 블라인드 훈련을 진단 제어로 사용하며, 모든 훈련 이미지가 마스킹된 RL도 마스킹되지 않은 검증 세트에서 성능을 개선할 수 있음을 발견했다. 텍스트 삭제, 이미지 마스크율, 포맷 포화도 제어를 통한 분석 결과, 이러한 이득은 유효한 시각적 증거보다는 텍스트 및 분포 단서에서 비롯될 수 있음을 제시한다."
+  },
+  "2605.12495": {
+    "title_ko": "AlphaGRPO: 분해 가능한 검증 가능 보상을 통한 UMM의 자기 성찰형 멀티모달 생성 해제",
+    "abstract_ko": "본 논문에서는 Group Relative Policy Optimization (GRPO)을 AR-Diffusion Unified Multimodal Models (UMM)에 적용하는 AlphaGRPO 프레임워크를 제안하며, 추가적인 cold-start 단계 없이 멀티모달 생성 능력을 강화한다. 이 접근 방식은 사용자의 암묵적 의도를 능동적으로 추론하는 추론 기반 Text-to-Image 생성과 생성된 출력의 불일치를 자율적으로 진단 및 수정하는 자기 성찰형 정제라는 고급 추론 작업을 수행할 수 있는 모델의 내재적 잠재력을 해제한다. 실제 멀티모달 생성에 대한 안정적인 감독 제공의 도전 과제를 해결하기 위해 Decompositional Verifiable Reward (DVReward)를 도입한다. DVReward는 전체적인 스칼라 보상과 달리 LLM을 활용하여 복잡한 사용자 요청을 원자적이고 검증 가능한 의미론적 및 품질 질문으로 분해한 후, 일반 MLLM으로 평가하여 신뢰할 수 있고 해석 가능한 피드백을 제공한다. 광범위한 실험을 통해 AlphaGRPO가 GenEval, TIIF-Bench, DPG-Bench, WISE를 포함한 멀티모달 생성 벤치마크에서 견고한 개선을 달성함을 보여준다."
+  },
+  "2605.10365": {
+    "title_ko": "Agent-ValueBench: 에이전트 값(Values) 평가를 위한 포괄적 벤치마크",
+    "abstract_ko": "자율 에이전트의 가치(values)는 기본 LLM의 가치와 상이하며, 에이전트 양식은 텍스트 전용 프로토콜에 없는 데이터셋, 평가, 시스템 차원의 문제를 야기한다. 본 논문은 에이전트 값 평가를 위한 첫 번째 전문 벤치마크인 Agent-ValueBench를 제안한다. 이는 16개 도메인에 걸쳐 394개의 실행 가능한 환경과 28개 가치 체계, 332개 차원을 포함하는 4,335개의 가치 갈등 과제를 제공하며, 모든 인스턴스는 전문 심리학자에 의해 엄선되었다. 14개의 최첨단 모델을 4개의 주요 에이전트 harness에서 벤치마킹하여 에이전트 값의 특성을 규명한다."
+  },
+  "2605.07579": {
+    "title_ko": "당신의 언어 모델은 그 자신의 비평가: Actor의 내부 상태로부터의 가치 추정을 이용한 강화학습",
+    "abstract_ko": "대규모 추론 모델을 위한 검증 가능한 보상을 가진 강화학습(RLVR)은 분산 감소를 위한 baseline 추정에 의존하지만, 기존 접근법은 높은 비용을 지불한다: PPO는 정책 모델 규모의 critic이 필요하고, GRPO는 경험적 그룹 평균의 안정성을 유지하기 위해 프롬프트당 여러 rollout이 필요하다. 우리는 Policy Optimization with Internal State Value Estimation(POISE)을 소개하며, 정책 forward pass 중에 이미 계산된 정책 모델의 내부 신호를 사용하여 무시할 수 있는 비용으로 baseline을 얻는다. 경량 probe는 프롬프트와 생성된 trajectory의 hidden state, 토큰 엔트로피 통계로부터 기대되는 검증 가능한 보상을 예측하고, 정책과 함께 온라인으로 학습된다. trajectory 조건부 특성 사용에도 불구하고 gradient 불편향성을 유지하기 위해 독립적인 rollout의 내부 상태로부터 각 rollout의 가치를 예측하는 cross-rollout 구성을 도입한다."
+  },
+  "2605.08299": {
+    "title_ko": "복사하지 마세요! 코드 검색을 위한 재작성 전략",
+    "abstract_ko": "Embedding 기반 코드 검색은 인코더가 표면적 구문에 과적합될 때 성능이 저하된다. 선행 연구는 LLM을 사용하여 쿼리와 코퍼스를 정규화된 스타일로 재표현하여 이를 완화하지만, 표현 변화의 효과와 쿼리당 LLM 호출의 정당성에 대한 의문을 남긴다. 본 연구는 세 가지 재작성 전략(문체 재표현, NL 풍부화 PseudoCode, 완전 자연언어 전사)을 6개의 CoIR 벤치마크, 5개의 인코더, 3개의 재작성기(Qwen, DeepSeek, Mistral)에서 쿼리-코퍼스 결합(QC, 온라인) 및 코퍼스 전용(C, 오프라인) 증강 하에서 계층적으로 평가한다. 완전 NL 재작성과 QC는 가장 큰 성능 향상을 달성하며(CT-Contest에서 MoSE-18의 NDCG@10에서 +0.51 절대값), Delta H(토큰 엔트로피)와 Delta s(embedding 코사인)라는 두 진단 지표를 도입하여 모든 재작성기 계열에서 QC 하의 검색 성능 향상을 예측할 수 있음을 보인다."
+  },
+  "2605.12460": {
+    "title_ko": "Multi-Stream LLMs: 병렬 사고, 입력, 출력 스트림으로 언어 모델 언블로킹",
+    "abstract_ko": "현재 언어 모델은 단일 메시지 스트림에 의존하는 순차적 구조로 인해 읽기 중 출력 생성, 쓰기 중 새로운 정보 반응, 사고 중 행동 실행 등을 동시에 수행할 수 없다. 본 논문은 instruction-tuning을 순차적 메시지 형식에서 여러 개의 병렬 계산 스트림으로 전환하여 이러한 병목을 해결하는 방법을 제시한다. 제안된 multi-stream 구조에서 언어 모델의 각 forward pass는 여러 입력 스트림에서 동시에 읽고 여러 출력 스트림에서 token을 생성하며, 모든 스트림은 이전 계산에 대한 인과적 의존성을 유지한다."
+  },
+  "2605.11882": {
+    "title_ko": "실패 궤적을 통한 온-정책 자기진화를 이용한 에이전트 안전 정렬",
+    "abstract_ko": "Tool을 사용하는 LLM 에이전트는 최종 응답뿐만 아니라 궤적을 통해 실패하며, 안전하지 않은 tool 호출 실행, 주입된 명령어 따르기, 해로운 요청 준수, 또는 과도한 거부 등을 포함할 수 있다. 기존 안전 정렬 신호는 주로 응답 수준 또는 오프-정책이며, 안전성-유용성 간 트레이드오프를 초래한다. 이를 해결하기 위해 우리는 FATE를 제안하며, 이는 검증자 점수의 실패를 전문가 시연 없이 수리 지도신호로 변환하는 온-정책 자기진화 프레임워크이다. 각 실패에 대해 동일한 정책이 수리 후보를 제안하고, 검증자에 의해 재점수화되며, 보안, 유용성, 과도한 거부 제어 및 궤적 유효성에 걸쳐 필터링된다. 이 조밀한 궤적 수준의 정보는 에이전트 자기진화의 지도신호로 사용되며, Pareto-Front Policy Optimization (PFPO)를 통해 안전성-유용성 트레이드오프를 보존한다."
+  },
+  "2605.12013": {
+    "title_ko": "L2P: 픽셀 생성을 위한 잠재 잠재력 해제",
+    "abstract_ko": "픽셀 diffusion 모델이 최근 시각 생성 분야에서 다시 주목받고 있다. 그러나 scratch부터 고급 픽셀-공간 모델을 학습하려면 막대한 계산 및 데이터 자원이 필요하다. 이를 해결하기 위해 우리는 사전 학습된 LDM의 풍부한 지식을 직접 활용하여 강력한 픽셀-공간 모델을 구축하는 효율적 프레임워크인 Latent-to-Pixel (L2P) transfer 패러다임을 제안한다. L2P는 VAE를 버리고 대신 large-patch tokenization을 사용하며 source LDM의 중간 층을 고정하고 shallow 층만 학습하여 latent-to-pixel 변환을 습득한다. LDM 생성 합성 이미지를 유일한 학습 데이터로 활용함으로써 L2P는 이미 부드러운 데이터 manifold에 적합하여 실제 데이터 수집 없이 빠른 수렴을 가능하게 한다. 이 전략으로 L2P는 단 8개의 GPU만으로 거대한 latent prior를 픽셀 공간으로 seamlessly 마이그레이션할 수 있으며, VAE 메모리 병목을 제거하여 4K 초고해상도 생성을 가능하게 한다."
+  },
+  "2605.00080": {
+    "title_ko": "로봇 학습을 위한 World Model: 종합 서베이",
+    "abstract_ko": "World model은 환경이 행동에 따라 어떻게 진화하는지를 예측적으로 나타내며, 로봇 학습의 핵심 요소가 되었다. Foundation model과 대규모 비디오 생성의 부상과 함께 정책 학습, 계획, 시뮬레이션, 평가, 데이터 생성을 지원하며 빠르게 발전해왔다. 본 논문은 로봇 학습 관점에서 world model의 포괄적인 리뷰를 제시하며, world model과 로봇 정책의 결합, reinforcement learning과 평가를 위한 학습 시뮬레이터로서의 역할, 그리고 imagination 기반 생성에서 제어 가능하고 구조화된 foundation 규모 formulation으로의 진화를 다룬다. 네비게이션과 자율 주행으로의 확장, 그리고 주요 dataset, benchmark, evaluation protocol을 정리하여 로봇 학습 분야에서 빠르게 성장하는 world model 연구를 체계적으로 정리한다."
+  },
+  "2605.12500": {
+    "title_ko": "SenseNova-U1: NEO-unify Architecture를 통한 멀티모달 이해와 생성의 통합",
+    "abstract_ko": "최근 대규모 vision-language model은 이해와 생성을 별개의 문제로 취급하여 단편화된 아키텍처와 표현 공간 불일치라는 근본적인 한계에 직면해 있다. 본 논문은 NEO-unify 기반의 SenseNova-U1을 제안하며, 이는 이해와 생성을 단일 프로세스의 상호보완적 관점으로 통합한 native unified multimodal paradigm이다. 8B dense 및 30B-A3B mixture-of-experts 모델을 기반으로 한 두 가지 variant를 구현하였으며, 텍스트 이해, vision-language perception, 지식 추론, agentic decision-making 등에서 최고 수준의 이해 전용 VLM과 경쟁하면서 동시에 의미적 일관성과 시각적 충실도가 뛰어난 X2I 합성 및 텍스트 리치 인포그래픽 생성을 달성한다."
+  },
+  "2605.12070": {
+    "title_ko": "비동기 에이전트 강화학습에서의 누락된 구 logits: 의미론적 불일치 및 off-policy 보정을 위한 복구 방법",
+    "abstract_ko": "비동기 강화학습은 샘플 생성과 정책 최적화를 분리하여 대규모 언어 모델 에이전트의 롤아웃 처리량을 개선하지만, PPO 스타일의 off-policy 보정에 대한 심각한 실패 모드를 야기한다. 이질적 훈련 시스템에서, 총 importance ratio는 학습-추론 불일치 항과 정책-낙후 항으로 의미론적으로 구분되어야 한다. 지연된 업데이트와 부분 롤아웃을 가진 실제 비동기 파이프라인은 종종 필요한 역사적 훈련 측 logits(구 logits)를 잃어버리는 문제가 발생하며, 이는 의도된 보정의 의미론을 손상시킨다. 본 논문은 이 문제를 해결하기 위해 정확한 및 근사적 보정 방법을 제시하고, 스냅샷 기반 버전 추적, 전용 구-logit 모델, 그리고 동기화를 통한 세 가지 정확한 구-logit 획득 전략을 제안한다."
+  },
+  "2605.09998": {
+    "title_ko": "Continual Harness: 자가 개선 Foundation Agents를 위한 온라인 적응",
+    "abstract_ko": "Claude Code나 OpenHands와 같은 coding harness는 foundation model을 tool, memory, planning으로 래핑하지만 embodied agent의 장기-지평선 부분 관찰성 의사결정을 위한 동등한 것은 존재하지 않는다. 우리는 Continual Harness를 제안하는데, 이는 최소한의 환경 인터페이스만으로 시작하여 에피소드 리셋 없이 단일 실행 내에서 온라인으로 적응하며, agent가 자신의 prompt, sub-agent, skill, 그리고 memory를 반복적으로 개선할 수 있도록 하는 리셋-프리 자가 개선 harness이다. Pokemon Red와 Emerald에서 여러 frontier model을 통해 Continual Harness는 처음부터 시작하여 버튼 입력을 실질적으로 감소시킨다."
+  },
+  "2605.09530": {
+    "title_ko": "MemPrivacy: Edge-Cloud 에이전트를 위한 개인화된 메모리 관리의 프라이버시 보호",
+    "abstract_ko": "LLM 기반 에이전트가 edge-cloud 환경에 점점 더 배포됨에 따라, 개인화된 메모리는 장기적 적응과 사용자 중심 상호작용의 핵심 요소가 되었다. 그러나 클라우드 기반 메모리 관리는 민감한 사용자 정보를 노출시키며, 기존 프라이버시 보호 방법은 작업 관련 의미를 제거하는 공격적인 마스킹에 의존하여 메모리 유틸리티와 개인화 품질을 저하시킨다. 이 문제를 해결하기 위해 우리는 MemPrivacy를 제안한다. 이는 edge 디바이스에서 프라이버시 민감 구간을 식별하고, 클라우드 메모리 처리를 위해 의미론적으로 구조화된 타입-인식 placeholder로 대체하며, 필요할 때 로컬에서 원본 값을 복원한다. MemPrivacy는 프라이버시 보호를 의미 파괴와 분리하여 민감 데이터 노출을 최소화하면서 효과적인 메모리 형성과 검색에 필요한 정보를 유지한다."
+  },
+  "2605.12496": {
+    "title_ko": "CausalCine: 멀티샷 비디오 내러티브를 위한 실시간 자기회귀 생성",
+    "abstract_ko": "자기회귀 비디오 생성은 실시간의 개방형 합성을 목표로 하지만, 영화적 스토리텔링은 단순한 장면 확장이 아니라 진화하는 사건, 시점 변화, 그리고 이산적인 샷 경계를 거쳐야 한다. 기존 자기회귀 모델은 이러한 설정에서 어려움을 겪으며, 단기 연속성 중심의 학습으로 인해 장기 생성 중 모션 정체와 의미 표류 문제가 발생한다. 이를 해결하기 위해 우리는 멀티샷 비디오 생성을 온라인 영화 연출 과정으로 변환하는 대화형 자기회귀 프레임워크 CausalCine을 제안한다. CausalCine은 샷 변화에 걸쳐 인과적으로 생성하고, 동적 프롬프트를 수용하며, 이전 샷을 재생성하지 않고 문맥을 재사용한다. 이를 위해 네이티브 멀티샷 시퀀스에서 복잡한 샷 전환을 학습한 후, 시간 근접성이 아닌 attention 기반 관련성 점수에 따라 과거 KV 항목을 동적으로 검색하는 Content-Aware Memory Routing (CAMR)을 제안하여 제한된 활성 메모리 하에서 샷 간 일관성을 보존한다."
+  },
+  "2605.13807v1": {
+    "title_ko": "확장 가능한 변분 몬테카를로를 위한 병렬 스캔 순환 신경망 양자 상태",
+    "abstract_ko": "신경망 양자 상태는 양자 다체 시스템을 위한 강력한 변분 프레임워크로 떠오르고 있으며, 최근의 진전은 transformer와 같은 대규모 병렬 아키텍처에 의해 주도되어 왔다. 그러나 순환 신경망 양자 상태는 본질적으로 순차적이고 따라서 확장성이 떨어지는 것으로 여겨진다. 본 연구에서는 현대적 순환 아키텍처가 빠르고 정확하며 계산적으로 접근 가능한 신경 양자 상태 시뮬레이션을 지원할 수 있음을 보여 이러한 관점을 재검토한다. 자기회귀 순환 파동 함수와 병렬화 가능한 순환의 최근 발전을 활용하여, 변분 몬테카를로 내에서 효율적으로 훈련될 수 있는 병렬 스캔 순환 신경망 양자 상태(PSR-NQS)라 불리는 변분 ansätze를 개발한다. 정확한 벤치마크 결과를 시연하고 반복적 재훈련을 통해 우리의 접근법이 $52\times52$만큼 큰 2차원 스핀 격자에 도달하면서도 양자 몬테카를로 데이터와 일치함을 보인다."
+  },
+  "2605.13686v1": {
+    "title_ko": "의료 영상의 생성 모델을 이용한 크로스 모달리티 이미지 변환",
+    "abstract_ko": "의료 이미지-투-이미지(I2I) 변환은 추가 촬영 없이 소스 영상 모달리티로부터 목표 모달리티를 합성하는 가상 스캔을 가능하게 한다. 본 연구의 주요 기여는 종양학 영상에서 3D I2I 변환 방법에 대한 표준화된 비교 평가 프레임워크를 제시하며, 전처리, 데이터 분할, 추론 및 다단계 평가를 통일하는 것이다. 이 프레임워크 내에서 7가지 생성 모델(3개의 GAN: Pix2Pix, CycleGAN, SRGAN과 4개의 latent 생성 모델: Latent Diffusion Model, Latent Diffusion Model+ControlNet, Brownian Bridge, Flow Matching)을 비교하였으며, 세 해부학적 영역(두경부, 폐, 골반)에 걸친 11개 데이터셋과 4가지 변환 방향(Cone-beam CT to CT, MRI to CT, CT to PET, MRI T2-weighted to T2-FLAIR)에서 총 77개 실험을 동일한 조건으로 수행하였다. 결과는 GAN이 latent 생성 모델을 능가함을 보여준다."
+  },
+  "2605.13769v1": {
+    "title_ko": "극소규모 사전학습에서의 Dense vs Sparse: Active-Parameter vs Total-Parameter 매칭",
+    "abstract_ko": "본 연구는 공유된 LLaMA 스타일 decoder 학습 레시피 하에서 극소규모 사전학습 체제에서 dense 및 mixture-of-experts(MoE) transformer를 비교한다. Sparse 모델은 Mixtral 스타일의 routed expert로 dense feed-forward 블록을 대체하며, dense baseline은 active 또는 total 파라미터 예산을 정확히 매칭하도록 조정된다. 결과적으로 MoE는 active-parameter 매칭 하에서 validation loss를 개선하지만, 동일한 total 저장 용량에서는 dense 학습을 능가하지 못한다."
+  },
+  "2605.13688v1": {
+    "title_ko": "MedCore: MedSAM을 위한 경계 보존 의료 핵심 가지치기",
+    "abstract_ko": "SAM과 MedSAM과 같은 의료 분할 foundation 모델은 강력한 prompt 기반 분할을 제공하지만, 이들의 image encoder는 많은 임상 환경에서 너무 큽니다. 의료 분야에서 압축은 모델이 높은 Dice를 유지하면서 경계 정확도를 잃을 수 있어 위험합니다. 우리는 MedSAM을 위한 structured pruning framework인 MedCore를 제안합니다. 핵심 아이디어는 SAM-to-MedSAM 적응 중에 중요해진 구조와 높은 경계 leverage를 가진 구조 두 가지를 보존하는 것입니다. 첫 번째 유형은 그룹을 0으로 설정하는 것과 원래 SAM 가중치로 재설정하는 것을 비교하는 dual-intervention score로 식별하며, 두 번째 유형은 boundary-aware Fisher estimation으로 식별합니다. Polyp 분할 벤치마크에서 MedCore는 파라미터를 60.0%, FLOPs를 58.4% 감소시키면서 Dice 0.9549, Boundary F1 0.6388, HD95 5.14를 달성합니다."
+  },
+  "2605.13255v1": {
+    "title_ko": "효율적인 LLM 추론을 위한 On-Policy Self-Distillation에서 자기 불확실성 존중",
+    "abstract_ko": "On-policy self-distillation은 reasoning model을 자신의 rollout으로 학습시키며, teacher는 privileged context로 조건화된 같은 모델이 dense token-level supervision을 제공한다. 기존 목적함수들은 chain-of-thought 시퀀스 전반에서 teacher의 예측 분포 엔트로피의 상당한 변동에도 불구하고 token-level 신호를 균일하게 가중치한다. 우리는 reward-grounded 방향, teacher-student likelihood-ratio 크기, 그리고 높은 엔트로피 token 위치는 down-weight하면서 모든 token 가중치에 영값 이상의 하한을 유지하는 제안된 teacher-entropy confidence gate의 세 신호를 통합하는 EGRSD (Entropy-Guided Reinforced Self-Distillation)를 제안한다. 추가로 지속적인 높은 엔트로피 구간을 일시적인 높은 엔트로피 위치와 구분하는 causal-lookahead 변형 CL-EGRSD를 소개한다. Qwen3-4B와 Qwen3-8B에서 thinking mode로 진행한 실험은 EGRSD와 CL-EGRSD가 비교된 학습 가능한 방법들 중 accuracy-length frontier를 발전시킴을 보여준다."
+  },
+  "2605.13345v1": {
+    "title_ko": "응급실의 Multi-Agent Systems: ED Digital Twin 검증 연구",
+    "abstract_ko": "응급실(ED)은 환자 치료 및 자원 관리에 있어 여러 도전에 직면하고 있다. 본 논문은 현실적이고 유연한 모델에서 최적화 전략을 탐색하고, Discrete Event Simulation(DES)과 Agent-Based Model(ABM)의 하이브리드 모델을 개발하여 고도로 구성 가능한 ED 환경을 시뮬레이션한다. 특히 모델링 접근 방식의 검증에 중점을 두며, 실제 연구로부터 ED 규모, 환자 부하, 인력 배치를 도출하고 주요 성과 지표를 문헌 값과 비교하여 모델 표현성을 검증한다. 실제 결과와 모델 결과 비교를 통해 DES-ABM 기반 시뮬레이션이 개입 상황에서 실제 응급실 역학을 효과적으로 재현할 수 있음을 입증한다. 마지막으로 ED 이벤트 기록의 temporal ledger를 기반으로 시뮬레이션된 응급실 환경 내에서 자원 할당 전략을 자율적으로 탐색할 수 있는 Proof-of-Concept multi-agent system(MAS)을 통합한다."
   }
 }
