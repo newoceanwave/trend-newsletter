@@ -38,7 +38,10 @@ body {
   display: flex; align-items: center; gap: 12px;
   background: #fff; border: 1px solid #f2f4f6; border-radius: 12px;
   padding: 14px 18px; margin-bottom: 8px;
+  cursor: pointer; transition: all 0.15s ease;
 }
+.kw-row:hover { border-color: #c4dcff; background: #fafcff; }
+.kw-arrow { color: #b0b8c1; font-size: 13px; flex-shrink: 0; }
 .kw-rank {
   font-size: 13px; font-weight: 700; color: #8b95a1;
   width: 28px; text-align: center; flex-shrink: 0;
@@ -158,7 +161,11 @@ body {
             '<span class="score-pill arxiv">arXiv ' + item.arxiv + '</span>' +
             '<span class="score-pill hf">HF ' + item.hf + '</span>' +
             '<span class="score-pill active">주목 ' + item.active + '</span>' +
-          '</div>';
+          '</div>' +
+          '<span class="kw-arrow">검색 →</span>';
+        row.addEventListener('click', () => {
+          window.open('search.html?q=' + encodeURIComponent(item.keyword), '_blank');
+        });
         aggEl.appendChild(row);
       });
     }
@@ -176,7 +183,11 @@ body {
         row.innerHTML =
           '<div class="kw-rank' + (i < 3 ? ' top' : '') + '">' + (i + 1) + '</div>' +
           '<div class="kw-name">' + escapeHtml(item.keyword) + '</div>' +
-          '<div class="kw-count">' + item.count + '회</div>';
+          '<div class="kw-count">' + item.count + '회</div>' +
+          '<span class="kw-arrow">검색 →</span>';
+        row.addEventListener('click', () => {
+          window.open('search.html?q=' + encodeURIComponent(item.keyword), '_blank');
+        });
         el.appendChild(row);
       });
     }
