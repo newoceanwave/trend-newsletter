@@ -13,26 +13,29 @@ from typing import List, Dict
 def fetch_arxiv_papers(categories: List[str], max_results: int = 200, days_back: int = 1) -> List[Dict]:
     """
     arXiv에서 지정한 카테고리의 최근 논문을 가져온다.
+    카테고리가 많으면 OR로 묶어 요청 수를 줄인다 (rate limit 회피).
 
     Args:
         categories: ["cs.LG", "cs.IR", ...]
-        max_results: 카테고리별 최대 결과 수
+        max_results: 그룹별 최대 결과 수
         days_back: 며칠 전까지 (기본 1 = 어제만)
-
-    Returns:
-        논문 dict 리스트. 각 dict는 다음 키를 가짐:
-        - id, title, abstract, authors, categories, published, pdf_url, arxiv_url, is_recent_24h
     """
+    import time
+
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(days=days_back)
-    cutoff_24h = now - timedelta(hours=24)  # 진짜 24시간 이내 표시용
+    cutoff_24h = now - timedelta(hours=24)
     papers = []
     seen_ids = set()
 
-    client = arxiv.Client(page_size=100, delay_seconds=3, num_retries=3)
+    client = arxiv.Client(page_size=100, delay_seconds=5, num_retries=5)
 
-    for cat in categories:
-        query = f"cat:{cat}"
+    # 카테고리를 5개씩 묶어 OR 쿼리로 — 20개 → 4번 요청
+    GROUP_SIZE = 5
+    groups = [categories[i:i + GROUP_SIZE] for i in range(0, len(categories), GROUP_SIZE)]
+
+    for gi, group in enumerate(groups):
+        query = " OR ".join(f"cat:{c}" for c in group)
         search = arxiv.Search(
             query=query,
             max_results=max_results,
@@ -40,35 +43,52 @@ def fetch_arxiv_papers(categories: List[str], max_results: int = 200, days_back:
             sort_order=arxiv.SortOrder.Descending,
         )
 
-        try:
-            for result in client.results(search):
-                # cutoff 이전 논문이면 중단 (최신순 정렬이므로)
-                if result.published.replace(tzinfo=timezone.utc) < cutoff:
+        # 429/503 대응: 최대 4회 재시도, 점점 더 오래 대기
+        success = False
+        for attempt in range(4):
+            try:
+                for result in client.results(search):
+                    if result.published.replace(tzinfo=timezone.utc) < cutoff:
+                        break
+
+                    arxiv_id = result.entry_id.split("/")[-1]
+                    if arxiv_id in seen_ids:
+                        continue
+                    seen_ids.add(arxiv_id)
+
+                    published_utc = result.published.replace(tzinfo=timezone.utc)
+                    papers.append({
+                        "id": arxiv_id,
+                        "title": result.title.replace("\n", " ").strip(),
+                        "abstract": result.summary.replace("\n", " ").strip(),
+                        "authors": [a.name for a in result.authors],
+                        "categories": result.categories,
+                        "published": published_utc.isoformat(),
+                        "pdf_url": result.pdf_url,
+                        "arxiv_url": result.entry_id,
+                        "hf_likes": 0,
+                        "source": "arxiv",
+                        "is_recent_24h": published_utc >= cutoff_24h,
+                    })
+                success = True
+                break
+            except Exception as e:
+                wait = 15 * (attempt + 1)  # 15s, 30s, 45s, 60s
+                msg = str(e)
+                if "429" in msg or "503" in msg:
+                    print(f"  ⚠ arXiv 그룹 {gi+1} rate limit (시도 {attempt+1}/4) — {wait}초 대기")
+                    time.sleep(wait)
+                else:
+                    print(f"  ⚠ arXiv 그룹 {gi+1} 실패: {e}")
                     break
+        if not success:
+            print(f"  ⚠ arXiv 그룹 {gi+1} 최종 실패 (카테고리: {group})")
 
-                arxiv_id = result.entry_id.split("/")[-1]
-                if arxiv_id in seen_ids:
-                    continue
-                seen_ids.add(arxiv_id)
+        # 그룹 사이 간격 (마지막 그룹 제외)
+        if gi < len(groups) - 1:
+            time.sleep(5)
 
-                published_utc = result.published.replace(tzinfo=timezone.utc)
-                papers.append({
-                    "id": arxiv_id,
-                    "title": result.title.replace("\n", " ").strip(),
-                    "abstract": result.summary.replace("\n", " ").strip(),
-                    "authors": [a.name for a in result.authors],
-                    "categories": result.categories,
-                    "published": published_utc.isoformat(),
-                    "pdf_url": result.pdf_url,
-                    "arxiv_url": result.entry_id,
-                    "hf_likes": 0,
-                    "source": "arxiv",
-                    "is_recent_24h": published_utc >= cutoff_24h,
-                })
-        except Exception as e:
-            print(f"  ⚠ arXiv {cat} fetch 실패: {e}")
-            continue
-
+    print(f"   → arXiv {len(papers)}편 수집")
     return papers
 
 
@@ -98,8 +118,16 @@ def fetch_hf_daily_papers() -> List[Dict]:
         papers.append({
             "id": arxiv_id,
             "title": paper.get("title", "").replace("\n", " ").strip(),
+            "abstract": paper.get("summary", "").replace("\n", " ").strip(),
+            "authors": [a.get("name", "") for a in paper.get("authors", [])][:5],
+            "categories": [],
+            "published": paper.get("publishedAt", ""),
+            "arxiv_url": f"https://arxiv.org/abs/{arxiv_id}",
+            "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
             "hf_likes": paper.get("upvotes", 0),
             "hf_url": f"https://huggingface.co/papers/{arxiv_id}",
+            "is_recent_24h": False,
+            "source": "hf",
         })
 
     return papers
@@ -108,18 +136,26 @@ def fetch_hf_daily_papers() -> List[Dict]:
 def merge_arxiv_and_hf(arxiv_papers: List[Dict], hf_papers: List[Dict]) -> List[Dict]:
     """
     arXiv 결과에 HF Daily Papers의 likes 정보 머지.
-    HF에만 있는 논문은 별도로 추가.
+    HF에만 있는 논문(arXiv 카테고리 밖)도 결과에 추가한다.
     """
     arxiv_by_id = {p["id"]: p for p in arxiv_papers}
     arxiv_ids_normalized = {p["id"].split("v")[0]: p for p in arxiv_papers}  # v1, v2 등 버전 제거
 
+    merged = list(arxiv_papers)  # arXiv 논문 먼저
+    seen_bases = set(arxiv_ids_normalized.keys())
+
     for hf in hf_papers:
         hf_id_base = hf["id"].split("v")[0]
         if hf_id_base in arxiv_ids_normalized:
+            # arXiv에 이미 있는 논문 → likes 정보만 붙임
             arxiv_ids_normalized[hf_id_base]["hf_likes"] = hf["hf_likes"]
             arxiv_ids_normalized[hf_id_base]["hf_url"] = hf.get("hf_url", "")
+        elif hf_id_base not in seen_bases:
+            # HF에만 있는 논문 → 결과에 추가
+            seen_bases.add(hf_id_base)
+            merged.append(hf)
 
-    return list(arxiv_by_id.values())
+    return merged
 
 
 def fetch_all(categories: List[str], max_papers: int = 200) -> List[Dict]:
