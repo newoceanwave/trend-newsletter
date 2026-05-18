@@ -1,236 +1,463 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>온라인 트렌딩 — AI 트렌드 뉴스레터</title>
-  <style id="shared-css"></style>
-  <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', sans-serif;
-  background: #f9fafb;
-  color: #191f28;
-  -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; }
-.page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
-.page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 8px; }
-.run-date { font-size: 13px; color: #8b95a1; margin-bottom: 24px; }
+"""
+온라인 트렌딩 키워드 수집.
 
-.tabs {
-  display: flex; gap: 4px; margin-bottom: 4px;
-  border-bottom: 1px solid #f2f4f6; flex-wrap: wrap;
-}
-.tab {
-  padding: 10px 14px; background: transparent; border: none;
-  color: #8b95a1; font-size: 14px; font-weight: 600; cursor: pointer;
-  border-bottom: 2px solid transparent; font-family: inherit;
-}
-.tab:hover { color: #4e5968; }
-.tab.active { color: #191f28; border-bottom-color: #191f28; }
-.tab-help { font-size: 12px; color: #8b95a1; margin: 12px 0 20px; line-height: 1.6; }
+3개 출처에서 신호를 모아 학계 트렌딩 키워드 ranking 생성:
+1. arXiv 최근 7일 (cs.LG, cs.IR, cs.DB, cs.CL, cs.AI) - 연구 활동 그 자체
+2. Hugging Face Daily Papers - 전문가 큐레이션 + likes
+3. Papers with Code trending - 코드 공개된 (재현 가능) 논문
 
-.tab-content { display: none; }
-.tab-content.active { display: block; }
+각 출처에서 키워드 빈도를 따로 계산해서 출처별로 표시.
+이렇게 하면 사용자가 "어느 신호가 강한지" 판단 가능.
+"""
 
-.kw-row {
-  display: flex; align-items: center; gap: 12px;
-  background: #fff; border: 1px solid #f2f4f6; border-radius: 12px;
-  padding: 14px 18px; margin-bottom: 8px;
-}
-.kw-rank {
-  font-size: 13px; font-weight: 700; color: #8b95a1;
-  width: 28px; text-align: center; flex-shrink: 0;
-}
-.kw-rank.top { color: #3182f6; }
-.kw-name { font-size: 15px; font-weight: 600; flex: 1; }
-.kw-count {
-  font-size: 12px; color: #6b7684; background: #f2f4f6;
-  padding: 3px 10px; border-radius: 10px;
-}
-.kw-scores { display: flex; gap: 6px; flex-wrap: wrap; }
-.score-pill {
-  font-size: 11px; padding: 3px 8px; border-radius: 6px; font-weight: 600;
-}
-.score-pill.arxiv { background: #fef3e6; color: #c2691a; }
-.score-pill.hf { background: #e8f0fe; color: #1a56c2; }
-.score-pill.active { background: #eef6ec; color: #2a7d2e; }
+import re
+import json
+import math
+from collections import Counter
+from datetime import datetime, timedelta, timezone
+from typing import Dict, List, Tuple
 
-.legend {
-  font-size: 12px; color: #8b95a1;
-  background: #f9fafb; border: 1px solid #f2f4f6;
-  border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;
-  line-height: 1.7;
-}
-.legend strong { color: #4e5968; }
+import requests
+import arxiv
 
-.empty {
-  background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
-  padding: 40px 24px; text-align: center; color: #8b95a1; font-size: 14px;
-}
-.loading { padding: 40px; text-align: center; color: #8b95a1; }
-</style>
-</head>
-<body>
-  <div id="header"></div>
 
-  <div class="container" id="main" style="display:none">
-    <h1 class="page-title">온라인 트렌딩</h1>
-    <p class="page-subtitle">전 세계 학계에서 지금 자주 언급되는 키워드</p>
-    <div class="run-date" id="run-date"></div>
+# 도메인 키워드 사전 (filter.py의 KEYWORD_VOCAB과 같음 — 향후 외부 파일로 분리 가능)
+KEYWORD_VOCAB = [
+    "large language model", "llm", "diffusion", "transformer",
+    "retrieval augmented generation", "rag", "agent", "multi-agent",
+    "graph neural network", "gnn", "knowledge graph",
+    "recommender system", "recommendation",
+    "time series", "forecasting",
+    "computer vision", "vision-language", "multimodal",
+    "reinforcement learning", "rlhf", "dpo", "alignment",
+    "fine-tuning", "instruction tuning", "lora", "peft",
+    "in-context learning", "few-shot", "zero-shot",
+    "data quality", "data augmentation", "data curation", "data selection",
+    "federated learning", "privacy", "differential privacy",
+    "interpretability", "explainability", "fairness",
+    "speech", "audio", "video generation",
+    "code generation", "code llm",
+    "robotics", "embodied",
+    "scaling law", "emergent",
+    "hallucination", "factuality", "evaluation", "benchmark",
+    "self-supervised", "contrastive",
+    "neural architecture search", "nas",
+    "anomaly detection", "outlier detection",
+    "causal inference", "causal discovery",
+    "world model", "planning", "reasoning",
+    "watermark", "adversarial",
+    "mixture of experts", "moe",
+    "state space model", "mamba",
+    "embedding", "representation learning",
+    "active learning",
+    "distillation", "quantization", "pruning",
+    "self-improvement", "self-reflection",
+    "synthetic data", "data generation",
+    "long context", "long-context",
+    "tool use", "function calling",
+]
 
-    <div id="content"></div>
-  </div>
 
-  <div class="loading" id="loading">로그인 확인 중...</div>
+def _count_keywords(texts: List[str], weights: List[float] = None) -> Counter:
+    """텍스트 리스트에서 KEYWORD_VOCAB의 키워드 빈도를 카운트. weight 옵션으로 가중."""
+    if weights is None:
+        weights = [1.0] * len(texts)
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="shared.js"></script>
-  <script>
-  (async function() {
-    document.getElementById('shared-css').textContent = SHARED_HEADER_CSS;
-    const session = await requireAuth();
-    if (!session) return;
-    await renderHeader('header', 'trending');
+    counter = Counter()
+    for text, w in zip(texts, weights):
+        text_lower = text.lower()
+        for kw in KEYWORD_VOCAB:
+            pattern = r"\b" + re.escape(kw) + r"\b"
+            if re.search(pattern, text_lower):
+                counter[kw] += w
+    return counter
 
-    const contentEl = document.getElementById('content');
-    const runDateEl = document.getElementById('run-date');
 
-    // 최근 배치 날짜
-    const runDate = await fetchLatestTrendingDate();
-    if (!runDate) {
-      contentEl.innerHTML =
-        '<div class="empty">아직 트렌딩 데이터가 없어요. 다음 배치 실행 후 표시됩니다.</div>';
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('main').style.display = 'block';
-      return;
+def fetch_arxiv_trending(categories: List[str], days_back: int = 7, max_per_cat: int = 200) -> List[Dict]:
+    """arXiv 최근 N일 논문에서 키워드 빈도 집계."""
+    print(f"  📥 arXiv 최근 {days_back}일 ({categories})")
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days_back)
+
+    all_papers = []
+    client = arxiv.Client(page_size=100, delay_seconds=3, num_retries=3)
+
+    for cat in categories:
+        search = arxiv.Search(
+            query=f"cat:{cat}",
+            max_results=max_per_cat,
+            sort_by=arxiv.SortCriterion.SubmittedDate,
+            sort_order=arxiv.SortOrder.Descending,
+        )
+        try:
+            for result in client.results(search):
+                if result.published.replace(tzinfo=timezone.utc) < cutoff:
+                    break
+                all_papers.append({
+                    "id": result.entry_id.split("/")[-1],
+                    "title": result.title.replace("\n", " ").strip(),
+                    "abstract": result.summary.replace("\n", " ").strip(),
+                    "arxiv_url": result.entry_id,
+                    "pdf_url": result.pdf_url,
+                    "categories": result.categories,
+                    "published": result.published.isoformat(),
+                })
+        except Exception as e:
+            print(f"    ⚠ {cat} 실패: {e}")
+
+    print(f"    → {len(all_papers)}편 수집")
+
+    # 제목 가중치 ↑ (제목에 등장하면 더 핵심 토픽)
+    titles = [p["title"] for p in all_papers]
+    abstracts = [p["abstract"] for p in all_papers]
+    title_counter = _count_keywords(titles, [3.0] * len(titles))
+    abs_counter = _count_keywords(abstracts, [1.0] * len(abstracts))
+    total = title_counter + abs_counter
+
+    keywords = []
+    for kw, count in total.most_common(30):
+        # 이 키워드 포함하는 논문들
+        related = [p for p in all_papers if re.search(r"\b" + re.escape(kw) + r"\b", (p["title"] + " " + p["abstract"]).lower())]
+        related.sort(key=lambda p: p["published"], reverse=True)
+        keywords.append({
+            "keyword": kw,
+            "score": round(count, 1),
+            "paper_count": len(related),
+            "papers": related[:10],
+        })
+
+    return keywords
+
+
+def fetch_hf_trending(top_n: int = 30) -> List[Dict]:
+    """Hugging Face Daily Papers — 큐레이션된 trending paper의 제목/abstract 키워드 빈도."""
+    print(f"  📥 Hugging Face Daily Papers")
+    url = "https://huggingface.co/api/daily_papers"
+    try:
+        resp = requests.get(url, timeout=10)
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as e:
+        print(f"    ⚠ 실패: {e}")
+        return []
+
+    papers = []
+    for item in data:
+        paper_info = item.get("paper", {})
+        arxiv_id = paper_info.get("id", "")
+        if not arxiv_id:
+            continue
+        papers.append({
+            "id": arxiv_id,
+            "title": paper_info.get("title", "").replace("\n", " ").strip(),
+            "abstract": paper_info.get("summary", "").replace("\n", " ").strip(),
+            "likes": paper_info.get("upvotes", 0),
+            "arxiv_url": f"https://arxiv.org/abs/{arxiv_id}",
+            "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
+            "hf_url": f"https://huggingface.co/papers/{arxiv_id}",
+            "published": paper_info.get("publishedAt", ""),
+        })
+    print(f"    → {len(papers)}편 수집")
+
+    # likes 기반 가중치 (log scale)
+    titles = [p["title"] for p in papers]
+    weights = [3.0 * (1 + math.log10(max(p["likes"], 1))) for p in papers]
+    title_counter = _count_keywords(titles, weights)
+
+    abstracts = [p["abstract"] for p in papers]
+    weights_abs = [1.0 * (1 + math.log10(max(p["likes"], 1))) for p in papers]
+    abs_counter = _count_keywords(abstracts, weights_abs)
+
+    total = title_counter + abs_counter
+
+    keywords = []
+    for kw, count in total.most_common(top_n):
+        related = [p for p in papers if re.search(r"\b" + re.escape(kw) + r"\b", (p["title"] + " " + p["abstract"]).lower())]
+        related.sort(key=lambda p: p["likes"], reverse=True)
+        keywords.append({
+            "keyword": kw,
+            "score": round(count, 1),
+            "paper_count": len(related),
+            "papers": related[:10],
+        })
+
+    return keywords
+
+
+def fetch_pwc_trending(top_n: int = 30) -> List[Dict]:
+    """
+    Papers with Code trending — 코드 공개된 최근 인기 논문.
+    공식 API: https://paperswithcode.com/api/v1/papers/?ordering=-trending
+    실패하면 alphaxiv → 그것도 실패하면 HF + arxiv 결합으로 fallback.
+    """
+    print(f"  📥 Papers with Code trending")
+    url = "https://paperswithcode.com/api/v1/papers/"
+    params = {"ordering": "-trending"}
+    headers = {"Accept": "application/json", "User-Agent": "Mozilla/5.0 (trend-newsletter)"}
+
+    data = None
+    for attempt in range(3):
+        try:
+            resp = requests.get(url, params=params, headers=headers, timeout=20)
+            resp.raise_for_status()
+            data = resp.json()
+            break
+        except Exception as e:
+            print(f"    ⚠ 시도 {attempt + 1}/3 실패: {str(e)[:80]}")
+            if attempt < 2:
+                import time
+                time.sleep(2)
+
+    if data is None:
+        print(f"    → Papers with Code 실패, alphaxiv 시도")
+        result = _fetch_alphaxiv_trending(top_n)
+        if result:
+            return result
+        print(f"    → alphaxiv도 실패, HF Daily Papers의 코드 공개 논문 fallback 사용")
+        return _fetch_pwc_fallback_via_hf(top_n)
+
+    results = data.get("results", [])
+    papers = []
+    for item in results[:100]:
+        arxiv_id = (item.get("arxiv_id") or "").strip()
+        papers.append({
+            "id": arxiv_id or item.get("id", ""),
+            "title": (item.get("title") or "").replace("\n", " ").strip(),
+            "abstract": (item.get("abstract") or "").replace("\n", " ").strip(),
+            "arxiv_url": f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id else item.get("url_abs", ""),
+            "pdf_url": item.get("url_pdf") or (f"https://arxiv.org/pdf/{arxiv_id}" if arxiv_id else ""),
+            "pwc_url": item.get("url_abs", ""),
+            "published": item.get("published", ""),
+        })
+    print(f"    → {len(papers)}편 수집")
+
+    return _aggregate_keywords(papers, top_n)
+
+
+def _fetch_alphaxiv_trending(top_n: int = 30) -> List[Dict]:
+    """alphaxiv: arXiv 위에 ML 커뮤니티 큐레이션."""
+    # alphaxiv API endpoint 후보 (변경될 수 있음)
+    urls = [
+        "https://api.alphaxiv.org/v2/papers/list/popular",
+        "https://www.alphaxiv.org/api/papers/trending",
+    ]
+    headers = {"User-Agent": "Mozilla/5.0", "Accept": "application/json"}
+
+    for url in urls:
+        try:
+            resp = requests.get(url, params={"limit": 100}, headers=headers, timeout=15)
+            if resp.status_code != 200:
+                continue
+            data = resp.json()
+            items = data.get("papers", data) if isinstance(data, dict) else data
+            if not items:
+                continue
+
+            papers = []
+            for item in items[:100]:
+                arxiv_id = (item.get("paper_id") or item.get("arxiv_id") or "").strip()
+                if not arxiv_id:
+                    continue
+                papers.append({
+                    "id": arxiv_id,
+                    "title": (item.get("title") or "").replace("\n", " ").strip(),
+                    "abstract": (item.get("abstract") or "").replace("\n", " ").strip(),
+                    "arxiv_url": f"https://arxiv.org/abs/{arxiv_id}",
+                    "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
+                    "published": item.get("publishedAt", ""),
+                })
+
+            if papers:
+                print(f"    → alphaxiv {len(papers)}편 수집")
+                return _aggregate_keywords(papers, top_n)
+        except Exception as e:
+            continue
+
+    return []
+
+
+def _fetch_pwc_fallback_via_hf(top_n: int = 30) -> List[Dict]:
+    """
+    PwC도 alphaxiv도 죽었을 때 마지막 fallback.
+    HF Daily Papers의 최근 7일치를 다시 가져와서 PwC 대체.
+    HF Daily는 큐레이터가 직접 픽한 + 코드 있는 것 위주라 PwC와 시그널 유사.
+    """
+    url = "https://huggingface.co/api/daily_papers"
+    headers = {"User-Agent": "Mozilla/5.0"}
+
+    try:
+        resp = requests.get(url, params={"limit": 100}, headers=headers, timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as e:
+        print(f"    ⚠ HF fallback도 실패: {e}")
+        return []
+
+    papers = []
+    for item in data[:100]:
+        paper_info = item.get("paper", {})
+        arxiv_id = paper_info.get("id", "")
+        if not arxiv_id:
+            continue
+        papers.append({
+            "id": arxiv_id,
+            "title": paper_info.get("title", "").replace("\n", " ").strip(),
+            "abstract": paper_info.get("summary", "").replace("\n", " ").strip(),
+            "likes": paper_info.get("upvotes", 0),
+            "arxiv_url": f"https://arxiv.org/abs/{arxiv_id}",
+            "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
+            "hf_url": f"https://huggingface.co/papers/{arxiv_id}",
+        })
+
+    print(f"    → HF fallback {len(papers)}편 수집 (likes 임계 + Daily curation)")
+    # likes 8 이상만 = 큐레이션 통과 + 어느 정도 인기 신호 (PwC trending 신호와 비슷)
+    papers = [p for p in papers if p.get("likes", 0) >= 8]
+    print(f"      → likes ≥ 8 필터 후 {len(papers)}편")
+
+    return _aggregate_keywords(papers, top_n)
+
+
+def _aggregate_keywords(papers: List[Dict], top_n: int = 30) -> List[Dict]:
+    """공통: 논문 리스트에서 키워드 빈도 집계."""
+    titles = [p["title"] for p in papers]
+    title_counter = _count_keywords(titles, [3.0] * len(titles))
+    abstracts = [p["abstract"] for p in papers]
+    abs_counter = _count_keywords(abstracts, [1.0] * len(abstracts))
+    total = title_counter + abs_counter
+
+    keywords = []
+    for kw, count in total.most_common(top_n):
+        related = [p for p in papers if re.search(r"\b" + re.escape(kw) + r"\b", (p["title"] + " " + p["abstract"]).lower())]
+        keywords.append({
+            "keyword": kw,
+            "score": round(count, 1),
+            "paper_count": len(related),
+            "papers": related[:10],
+        })
+    return keywords
+
+
+def collect_trending(categories: List[str] = None) -> Dict:
+    """3개 출처에서 trending keyword 집계해서 dict로 반환."""
+    if categories is None:
+        categories = ["cs.LG", "cs.IR", "cs.DB", "cs.CL", "cs.AI"]
+
+    print("🌐 트렌딩 키워드 수집")
+
+    arxiv_kw = fetch_arxiv_trending(categories, days_back=7)
+    hf_kw = fetch_hf_trending()
+    pwc_kw = fetch_pwc_trending()
+
+    return {
+        "arxiv": arxiv_kw[:20],  # top 20 표시
+        "hf": hf_kw[:20],
+        "pwc": pwc_kw[:20],
+        "collected_at": datetime.now().isoformat(),
     }
-    runDateEl.textContent = runDate + ' 기준';
 
-    // 트렌딩 데이터 로드
-    const trending = await fetchTrending(runDate);
-    // trending = { arxiv: [...], hf: [...], active: [...] }
 
-    // 종합 ranking 계산 (3개 소스 점수 합산, 0~100 정규화)
-    const aggregate = computeAggregate(trending);
+def save_trending(trending: Dict, path: str = "trending.json", archive_dir: str = "trending-archive"):
+    """수집 결과를 JSON으로 저장. 추가로 archive 폴더에 일자별 사본 저장 (시계열 비교용)."""
+    import os
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(trending, f, ensure_ascii=False, indent=2)
+    print(f"  ✓ {path}")
 
-    // ---- 탭 구성 ----
-    contentEl.innerHTML =
-      '<div class="tabs">' +
-        '<button class="tab active" data-tab="aggregate">종합</button>' +
-        '<button class="tab" data-tab="arxiv">arXiv</button>' +
-        '<button class="tab" data-tab="hf">Hugging Face</button>' +
-        '<button class="tab" data-tab="active">주목받는 논문</button>' +
-      '</div>' +
-      '<div class="tab-help" id="tab-help"></div>' +
-      '<div class="tab-content active" data-content="aggregate" id="c-aggregate"></div>' +
-      '<div class="tab-content" data-content="arxiv" id="c-arxiv"></div>' +
-      '<div class="tab-content" data-content="hf" id="c-hf"></div>' +
-      '<div class="tab-content" data-content="active" id="c-active"></div>';
+    # archive (날짜별)
+    os.makedirs(archive_dir, exist_ok=True)
+    today = datetime.now().strftime("%Y-%m-%d")
+    archive_path = os.path.join(archive_dir, f"{today}.json")
+    with open(archive_path, "w", encoding="utf-8") as f:
+        json.dump(trending, f, ensure_ascii=False, indent=2)
+    print(f"  ✓ {archive_path}")
 
-    const HELP = {
-      aggregate: 'arXiv · Hugging Face · 주목받는 논문 3개 소스의 점수를 합산한 종합 순위입니다. 각 점수는 0~100으로 정규화됩니다.',
-      arxiv: '최근 7일 arXiv 논문 제목/초록에서 자주 등장한 키워드입니다.',
-      hf: 'Hugging Face Daily Papers에서 좋아요를 많이 받은 논문의 키워드입니다.',
-      active: '코드가 공개되어 활발히 논의되는 논문의 키워드입니다. (과거 Papers with Code가 종료되어 Hugging Face Daily Papers 데이터로 대체합니다)',
-    };
 
-    // 종합 탭
-    const aggEl = document.getElementById('c-aggregate');
-    aggEl.innerHTML =
-      '<div class="legend">' +
-        '<strong>점수 표기:</strong> ' +
-        '<span class="score-pill arxiv">arXiv</span> arXiv 언급도 · ' +
-        '<span class="score-pill hf">HF</span> Hugging Face 인기도 · ' +
-        '<span class="score-pill active">주목</span> 주목받는 논문 점수' +
-      '</div>';
-    if (aggregate.length === 0) {
-      aggEl.innerHTML += '<div class="empty">종합 데이터가 없어요.</div>';
-    } else {
-      aggregate.forEach((item, i) => {
-        const row = document.createElement('div');
-        row.className = 'kw-row';
-        row.innerHTML =
-          '<div class="kw-rank' + (i < 3 ? ' top' : '') + '">' + (i + 1) + '</div>' +
-          '<div class="kw-name">' + escapeHtml(item.keyword) + '</div>' +
-          '<div class="kw-scores">' +
-            '<span class="score-pill arxiv">arXiv ' + item.arxiv + '</span>' +
-            '<span class="score-pill hf">HF ' + item.hf + '</span>' +
-            '<span class="score-pill active">주목 ' + item.active + '</span>' +
-          '</div>';
-        aggEl.appendChild(row);
-      });
-    }
+def load_previous_trending(archive_dir: str = "trending-archive", days_ago: int = 1) -> Dict:
+    """N일 전 trending 데이터 로드. 없으면 빈 dict."""
+    import os
+    target_date = (datetime.now() - timedelta(days=days_ago)).strftime("%Y-%m-%d")
+    path = os.path.join(archive_dir, f"{target_date}.json")
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
 
-    // 개별 소스 탭
-    function renderSourceTab(elId, items) {
-      const el = document.getElementById(elId);
-      if (!items || items.length === 0) {
-        el.innerHTML = '<div class="empty">데이터가 없어요.</div>';
-        return;
-      }
-      items.forEach((item, i) => {
-        const row = document.createElement('div');
-        row.className = 'kw-row';
-        row.innerHTML =
-          '<div class="kw-rank' + (i < 3 ? ' top' : '') + '">' + (i + 1) + '</div>' +
-          '<div class="kw-name">' + escapeHtml(item.keyword) + '</div>' +
-          '<div class="kw-count">' + item.count + '회</div>';
-        el.appendChild(row);
-      });
-    }
-    renderSourceTab('c-arxiv', trending.arxiv);
-    renderSourceTab('c-hf', trending.hf);
-    renderSourceTab('c-active', trending.active);
 
-    // 탭 전환
-    document.getElementById('tab-help').textContent = HELP.aggregate;
-    contentEl.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = tab.dataset.tab;
-        contentEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        contentEl.querySelectorAll('.tab-content').forEach(c => {
-          c.classList.toggle('active', c.dataset.content === target);
-        });
-        document.getElementById('tab-help').textContent = HELP[target];
-      });
-    });
+def compute_rank_changes(current: Dict, previous: Dict) -> Dict:
+    """
+    현재 vs 이전 trending에서 각 키워드의 순위 변화를 계산.
 
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('main').style.display = 'block';
+    Returns: {source: {keyword: change_int}} 형태
+    - change > 0: 순위 상승 (예: 5위 → 2위면 +3)
+    - change < 0: 순위 하락
+    - change == 0: 동일
+    - change == "new": 새로 진입
+    """
+    changes = {"arxiv": {}, "hf": {}, "pwc": {}}
 
-    // ---- 종합 점수 계산 ----
-    function computeAggregate(trending) {
-      // 각 소스에서 keyword → count 맵, max로 0~100 정규화
-      function normMap(items) {
-        const m = {};
-        if (!items || items.length === 0) return m;
-        const max = Math.max(...items.map(x => x.count || 0), 1);
-        items.forEach(x => { m[x.keyword] = Math.round((x.count || 0) / max * 100); });
-        return m;
-      }
-      const aMap = normMap(trending.arxiv);
-      const hMap = normMap(trending.hf);
-      const cMap = normMap(trending.active);
+    for src in ("arxiv", "hf", "pwc"):
+        cur_list = current.get(src, [])
+        prev_list = previous.get(src, [])
 
-      // 모든 키워드 합집합
-      const allKw = new Set([
-        ...Object.keys(aMap), ...Object.keys(hMap), ...Object.keys(cMap)
-      ]);
+        prev_rank = {k["keyword"]: i for i, k in enumerate(prev_list)}
 
-      const result = [];
-      allKw.forEach(kw => {
-        const arxiv = aMap[kw] || 0;
-        const hf = hMap[kw] || 0;
-        const active = cMap[kw] || 0;
-        result.push({ keyword: kw, arxiv, hf, active, total: arxiv + hf + active });
-      });
-      result.sort((a, b) => b.total - a.total);
-      return result.slice(0, 20);
-    }
-  })();
-  </script>
-</body>
-</html>
+        for i, k in enumerate(cur_list):
+            kw = k["keyword"]
+            if kw in prev_rank:
+                changes[src][kw] = prev_rank[kw] - i  # 이전 순위 - 현재 순위
+            else:
+                changes[src][kw] = "new"
+
+    return changes
+
+
+def compute_aggregate_ranking(trending: Dict, top_n: int = 20) -> List[Dict]:
+    """
+    3개 출처 점수를 normalize해서 통합 ranking 생성.
+    각 출처에서 max score = 100으로 스케일링 후 평균.
+    """
+    score_map = {}  # keyword -> {arxiv: x, hf: y, pwc: z}
+
+    for src in ("arxiv", "hf", "pwc"):
+        items = trending.get(src, [])
+        if not items:
+            continue
+        max_score = max((k["score"] for k in items), default=1.0)
+        for k in items:
+            kw = k["keyword"]
+            normalized = (k["score"] / max_score) * 100
+            if kw not in score_map:
+                score_map[kw] = {"arxiv": 0, "hf": 0, "pwc": 0, "papers": []}
+            score_map[kw][src] = round(normalized, 1)
+            # 관련 논문 합치기 (중복 제거)
+            for p in k.get("papers", []):
+                if p not in score_map[kw]["papers"]:
+                    score_map[kw]["papers"].append(p)
+
+    # 평균 점수 계산
+    results = []
+    for kw, scores in score_map.items():
+        avg = (scores["arxiv"] + scores["hf"] + scores["pwc"]) / 3
+        sources_present = sum(1 for s in ("arxiv", "hf", "pwc") if scores[s] > 0)
+        results.append({
+            "keyword": kw,
+            "aggregate_score": round(avg, 1),
+            "sources_present": sources_present,  # 3개 출처 중 몇 개에서 등장
+            "scores": {"arxiv": scores["arxiv"], "hf": scores["hf"], "pwc": scores["pwc"]},
+            "papers": scores["papers"][:10],
+        })
+
+    # 점수 + 출처 다양성 둘 다 고려 (3개 출처 모두 등장하면 가중 +)
+    results.sort(key=lambda r: (r["aggregate_score"] * (1 + 0.2 * (r["sources_present"] - 1))), reverse=True)
+    return results[:top_n]
+
+
+if __name__ == "__main__":
+    result = collect_trending()
+    save_trending(result)
+    for source, label in [("arxiv", "arXiv 7일"), ("hf", "HF Daily"), ("pwc", "Papers with Code")]:
+        print(f"\n=== {label} top 10 ===")
+        for kw in result[source][:10]:
+            print(f"  {kw['keyword']:35s} score={kw['score']:5.1f} papers={kw['paper_count']}")
