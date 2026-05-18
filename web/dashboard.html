@@ -17,6 +17,19 @@ body {
 .page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
 .page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 8px; }
 .run-date { font-size: 13px; color: #8b95a1; margin-bottom: 28px; }
+.dash-topline {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.dash-topline .run-date { margin-bottom: 0; }
+.refilter-btn {
+  font-size: 13px; padding: 8px 14px; border-radius: 10px;
+  border: 1px solid #c4dcff; background: #e8f3ff; color: #3182f6;
+  cursor: pointer; font-weight: 600; font-family: inherit;
+  white-space: nowrap;
+}
+.refilter-btn:hover { background: #d8ebff; }
+.refilter-btn:disabled { opacity: 0.6; cursor: wait; }
 
 /* 탭 */
 .section-tabs {
@@ -113,7 +126,12 @@ body {
   <div class="container" id="main" style="display:none">
     <h1 class="page-title">대시보드</h1>
     <p class="page-subtitle">내 키워드에 맞는 오늘의 논문</p>
-    <div class="run-date" id="run-date"></div>
+    <div class="dash-topline">
+      <span class="run-date" id="run-date"></span>
+      <button class="refilter-btn" id="refilter-btn" style="display:none">
+        🔄 내 설정으로 다시 필터
+      </button>
+    </div>
 
     <div id="content"></div>
   </div>
@@ -160,24 +178,32 @@ body {
     }
     runDateEl.textContent = runDate + ' 기준';
 
-    // 내 추천 결과
-    const recs = await fetchMyRecommendations(runDate);
-    const picks = recs.picks || [];
-    const newPapers = recs.new || [];
-    const fieldPapers = recs.field || [];
+    // 첫 로드: 배치가 미리 계산한 추천
+    let recs = await fetchMyRecommendations(runDate);
 
-    // 추천이 아예 없으면
-    if (picks.length === 0 && newPapers.length === 0 && fieldPapers.length === 0) {
-      contentEl.innerHTML =
-        '<div class="empty">' +
-          '오늘은 추천할 논문이 없어요.<br>' +
-          '<a href="settings.html">설정</a>에서 키워드를 추가하거나 ' +
-          '연구 분야를 선택해보세요.' +
-        '</div>';
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('main').style.display = 'block';
-      return;
-    }
+    // 논문 풀 캐시 (다시 필터 시 재사용)
+    let paperPoolCache = null;
+
+    // ===== 대시보드 렌더링 (recs를 받아 화면 그림) =====
+    function renderDashboard(recs) {
+      contentEl.innerHTML = '';
+      const picks = recs.picks || [];
+      const newPapers = recs.new || [];
+      const fieldPapers = recs.field || [];
+
+      // 추천이 아예 없으면
+      if (picks.length === 0 && newPapers.length === 0 && fieldPapers.length === 0) {
+        contentEl.innerHTML =
+          '<div class="empty">' +
+            '오늘은 추천할 논문이 없어요.<br>' +
+            '<a href="settings.html">설정</a>에서 키워드를 추가하거나 ' +
+            '연구 분야를 선택한 뒤, 위의 "다시 필터" 버튼을 눌러보세요.' +
+          '</div>';
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('main').style.display = 'block';
+        document.getElementById('refilter-btn').style.display = 'inline-block';
+        return;
+      }
 
     // ---- 논문 카드 HTML ----
     function paperCard(p, rank, isNewTab) {
@@ -314,8 +340,38 @@ body {
       fieldPapers.forEach((p, i) => fieldEl.appendChild(paperCard(p, i + 1, false)));
     }
 
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('main').style.display = 'block';
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+      document.getElementById('refilter-btn').style.display = 'inline-block';
+    } // ===== renderDashboard 끝 =====
+
+    // 첫 렌더링
+    renderDashboard(recs);
+
+    // "내 설정으로 다시 필터" 버튼
+    const refilterBtn = document.getElementById('refilter-btn');
+    refilterBtn.addEventListener('click', async () => {
+      refilterBtn.disabled = true;
+      refilterBtn.textContent = '⏳ 필터링 중...';
+      try {
+        // 논문 풀 (캐시 있으면 재사용)
+        if (!paperPoolCache) {
+          paperPoolCache = await fetchDailyPaperPool(runDate);
+        }
+        // 내 최신 키워드/분야
+        const kws = (await fetchMyKeywords()).map(k => k.keyword);
+        const flds = (await fetchMyFields()).map(f => f.field_id);
+        // 클라이언트 즉시 필터
+        const fresh = buildClientRecommendations(paperPoolCache, kws, flds, 10);
+        renderDashboard(fresh);
+        toast('내 최신 설정으로 다시 필터했어요');
+      } catch (e) {
+        toast('필터 실패: ' + e.message, true);
+      } finally {
+        refilterBtn.disabled = false;
+        refilterBtn.textContent = '🔄 내 설정으로 다시 필터';
+      }
+    });
   })();
   </script>
 </body>

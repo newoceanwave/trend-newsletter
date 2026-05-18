@@ -524,35 +524,122 @@ function getVenuesForFields(fieldIds) {
 }
 
 // ============================================
-// OpenReview API — 특정 venue의 논문 가져오기
+// 학회 논문 — Supabase에서 읽기 (batch.py가 OpenReview에서 미리 수집)
+// 브라우저가 OpenReview를 직접 호출하면 CORS로 막히므로 이 방식 사용
 // ============================================
+
+// 가장 최근 학회 데이터 날짜
+async function fetchLatestConferenceDate() {
+  const { data, error } = await supabaseClient
+    .from('daily_conferences')
+    .select('run_date')
+    .order('run_date', { ascending: false })
+    .limit(1);
+  if (error || !data || data.length === 0) return null;
+  return data[0].run_date;
+}
+
+// 특정 venue의 논문 목록 (Supabase에서)
 async function fetchVenueePapers(venue, limit) {
-  const url = 'https://api2.openreview.net/notes?content.venue='
-    + encodeURIComponent(venue) + '&limit=' + (limit || 100);
-  try {
-    const resp = await fetch(url);
-    if (!resp.ok) {
-      console.warn('OpenReview ' + venue + ': ' + resp.status);
-      return [];
-    }
-    const data = await resp.json();
-    const notes = data.notes || [];
-    return notes.map(n => {
-      const c = n.content || {};
-      const title = (c.title && c.title.value) || '';
-      const authors = (c.authors && c.authors.value) || [];
-      const authorNames = authors.map(a => a.fullname || a).filter(Boolean);
-      const forumId = n.forum || n.id || '';
-      return {
-        paper_id: 'openreview:' + forumId,
-        title: title,
-        authors: authorNames.slice(0, 4).join(', '),
-        venue: (c.venue && c.venue.value) || venue,
-        url: 'https://openreview.net/forum?id=' + forumId,
-      };
-    });
-  } catch (e) {
-    console.warn('OpenReview ' + venue + ' 실패:', e);
+  const { data, error } = await supabaseClient
+    .from('daily_conferences')
+    .select('paper_id, title, authors, venue, url')
+    .eq('venue', venue)
+    .limit(limit || 200);
+  if (error) {
+    console.warn('학회 조회 실패 (' + venue + '):', error);
     return [];
   }
+  return (data || []).map(r => ({
+    paper_id: r.paper_id,
+    title: r.title || '',
+    authors: r.authors || '',
+    venue: r.venue || venue,
+    url: r.url || '#',
+  }));
+}
+
+// ============================================
+// 옵션 A: 클라이언트 측 즉시 필터링
+// 오늘 daily_papers 풀을 가져와 최신 키워드/분야로 브라우저에서 필터
+// arXiv/LLM 재호출 없음 — 비용 0, 즉시
+// ============================================
+
+// 특정 날짜의 daily_papers 전체 가져오기 (논문 풀)
+async function fetchDailyPaperPool(runDate) {
+  const { data, error } = await supabaseClient
+    .from('daily_papers')
+    .select('*')
+    .eq('run_date', runDate);
+  if (error) { console.error('논문 풀 조회 실패:', error); return []; }
+  return data || [];
+}
+
+// 논문 1편이 키워드 목록 중 몇 개에 매칭되는지 + 매칭된 키워드 반환
+function matchPaperKeywords(paper, keywords) {
+  const haystack = ((paper.title || '') + ' ' + (paper.abstract || '')).toLowerCase();
+  const matched = [];
+  keywords.forEach(kw => {
+    const k = kw.toLowerCase().trim();
+    if (k && haystack.includes(k)) matched.push(kw);
+  });
+  return matched;
+}
+
+// 풀 + 내 키워드/분야 → { picks, new, field } 즉시 계산
+// keywords: 문자열 배열, fieldIds: 분야 id 배열
+function buildClientRecommendations(pool, keywords, fieldIds, topN) {
+  topN = topN || 10;
+
+  // picks: 키워드 매칭 (매칭 개수 많은 순 → hf_likes 순)
+  let picks = [];
+  if (keywords.length > 0) {
+    picks = pool
+      .map(p => {
+        const m = matchPaperKeywords(p, keywords);
+        return { paper: p, matched: m, score: m.length };
+      })
+      .filter(x => x.score > 0)
+      .sort((a, b) => (b.score - a.score) || ((b.paper.hf_likes || 0) - (a.paper.hf_likes || 0)))
+      .slice(0, topN)
+      .map(x => Object.assign({}, x.paper, { matched_keywords: x.matched }));
+  }
+
+  // new: 24시간 이내 + 키워드 매칭
+  let newPapers = [];
+  if (keywords.length > 0) {
+    newPapers = pool
+      .filter(p => p.is_recent_24h)
+      .map(p => {
+        const m = matchPaperKeywords(p, keywords);
+        return { paper: p, matched: m, score: m.length };
+      })
+      .filter(x => x.score > 0)
+      .sort((a, b) => (b.score - a.score) || ((b.paper.hf_likes || 0) - (a.paper.hf_likes || 0)))
+      .slice(0, topN)
+      .map(x => Object.assign({}, x.paper, { matched_keywords: x.matched }));
+  }
+
+  // field: 분야 arxiv 카테고리 매칭 (키워드 매칭에 안 든 것 중에서)
+  let fieldPapers = [];
+  if (fieldIds.length > 0) {
+    // 분야 → 카테고리 집합
+    const catSet = new Set();
+    fieldIds.forEach(fid => {
+      if (fid.startsWith('custom:')) {
+        catSet.add(fid.replace('custom:', ''));
+      } else {
+        const f = RESEARCH_FIELDS.find(x => x.id === fid);
+        if (f && f.cats) f.cats.forEach(c => catSet.add(c));
+      }
+    });
+    const usedIds = new Set([...picks, ...newPapers].map(p => p.paper_id));
+    fieldPapers = pool
+      .filter(p => !usedIds.has(p.paper_id))
+      .filter(p => (p.categories || []).some(c => catSet.has(c)))
+      .sort((a, b) => (b.hf_likes || 0) - (a.hf_likes || 0))
+      .slice(0, topN);
+  }
+
+  return { picks: picks, new: newPapers, field: fieldPapers };
 }
