@@ -9,91 +9,74 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', sans-serif;
-  background: #f9fafb;
-  color: #191f28;
-  -webkit-font-smoothing: antialiased;
+  background: #f9fafb; color: #191f28; -webkit-font-smoothing: antialiased;
 }
-.container { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; }
+.container { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
 .page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
-.page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 24px; }
-
-.controls {
-  background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
-  padding: 20px 24px; margin-bottom: 20px;
-}
-.control-label { font-size: 13px; font-weight: 600; color: #4e5968; margin-bottom: 10px; }
-
-.venue-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-.venue-chip {
-  padding: 6px 12px; background: #f2f4f6; color: #4e5968;
-  border-radius: 16px; font-size: 12px; font-weight: 500; cursor: pointer;
-  border: 1px solid transparent; user-select: none; transition: all 0.15s ease;
-}
-.venue-chip.active { background: #e8f3ff; color: #3182f6; border-color: #c4dcff; }
-.venue-chip:hover { border-color: #c4dcff; }
-
-.search-row { display: flex; gap: 8px; }
-.search-input {
-  flex: 1; height: 42px; padding: 0 14px; border: 1px solid #e5e8eb;
-  border-radius: 10px; font-size: 14px; font-family: inherit; outline: none;
-}
-.search-input:focus { border-color: #3182f6; }
-.search-btn {
-  height: 42px; padding: 0 20px; background: #3182f6; color: #fff; border: none;
-  border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer;
-}
-.search-btn:hover { background: #2872dc; }
-.search-btn:disabled { background: #d1d6db; cursor: not-allowed; }
-
-.kw-hint {
-  font-size: 12px; color: #8b95a1; margin-top: 8px;
-}
+.page-subtitle { font-size: 15px; color: #4e5968; margin-bottom: 8px; }
+.run-date { font-size: 13px; color: #8b95a1; margin-bottom: 20px; }
 
 .info-box {
   font-size: 12px; color: #8b95a1; background: #f9fafb;
   border: 1px solid #f2f4f6; border-radius: 10px;
-  padding: 10px 14px; margin-bottom: 16px; line-height: 1.6;
+  padding: 10px 14px; margin-bottom: 20px; line-height: 1.6;
 }
 
-.status-bar { font-size: 13px; color: #8b95a1; margin-bottom: 16px; padding: 0 4px; min-height: 20px; }
+.venue-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.vf-chip {
+  padding: 6px 12px; background: #f2f4f6; color: #4e5968;
+  border-radius: 16px; font-size: 12px; font-weight: 500; cursor: pointer;
+  border: 1px solid transparent; user-select: none; transition: all 0.15s ease;
+}
+.vf-chip.active { background: #e8f3ff; color: #3182f6; border-color: #c4dcff; }
+.vf-chip:hover { border-color: #c4dcff; }
 
-.venue-group { margin-bottom: 28px; }
-.venue-group-title {
-  font-size: 14px; font-weight: 700; color: #191f28; margin-bottom: 12px;
-  display: flex; align-items: center; gap: 8px;
-}
-.venue-group-title .count {
-  background: #f2f4f6; color: #6b7684; padding: 2px 8px;
-  border-radius: 10px; font-size: 12px; font-weight: 500;
-}
+.status-bar { font-size: 13px; color: #8b95a1; margin-bottom: 16px; min-height: 20px; }
 
-.paper-card {
-  background: #fff; border: 1px solid #f2f4f6; border-radius: 14px;
-  padding: 16px 20px; margin-bottom: 10px; transition: border-color 0.15s ease;
+.venue-block {
+  background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
+  padding: 22px 24px; margin-bottom: 16px;
 }
-.paper-card:hover { border-color: #d1d6db; }
-.paper-title {
-  font-size: 15px; font-weight: 600; color: #191f28; margin-bottom: 6px;
-  line-height: 1.4;
+.venue-head {
+  display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px;
 }
-.paper-title a { color: inherit; text-decoration: none; }
-.paper-title a:hover { color: #3182f6; }
-.paper-authors { font-size: 12px; color: #8b95a1; margin-bottom: 10px; }
-.paper-foot { display: flex; gap: 10px; align-items: center; }
-.paper-foot a { color: #6b7684; text-decoration: none; font-size: 12px; font-weight: 500; }
-.paper-foot a:hover { color: #3182f6; }
-.venue-tag {
-  font-size: 11px; padding: 2px 8px; border-radius: 6px;
-  background: #f2e8ff; color: #7c3aed; font-weight: 600;
+.venue-name { font-size: 18px; font-weight: 700; }
+.venue-cnt { font-size: 13px; color: #8b95a1; font-weight: 500; }
+
+.kw-freq-label { font-size: 12px; font-weight: 600; color: #8b95a1; margin-bottom: 8px; }
+.kw-freq { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.kw-tag {
+  font-size: 12px; padding: 5px 10px; border-radius: 8px;
+  background: #f2f4f6; color: #4e5968; font-weight: 500;
+  cursor: pointer; transition: all 0.15s ease;
 }
-.bookmark-btn {
-  font-size: 12px; padding: 5px 12px; border-radius: 8px;
-  border: 1px solid #d1d6db; background: #fff; color: #4e5968;
-  cursor: pointer; font-weight: 500; font-family: inherit; margin-left: auto;
+.kw-tag:hover { background: #e8f3ff; color: #3182f6; }
+.kw-tag .n { color: #b0b8c1; font-weight: 600; margin-left: 4px; }
+.kw-tag.rank1 { background: #e8f3ff; color: #3182f6; }
+.kw-tag.rank2 { background: #eef6ec; color: #2a7d2e; }
+
+.toggle-titles {
+  font-size: 13px; color: #3182f6; cursor: pointer; font-weight: 600;
+  user-select: none; display: inline-flex; align-items: center; gap: 4px;
 }
-.bookmark-btn:hover { background: #f9fafb; }
-.bookmark-btn.marked { background: #e8f3ff; color: #3182f6; border-color: #c4dcff; }
-.bookmark-btn:disabled { opacity: 0.5; cursor: wait; }
+.toggle-titles:hover { text-decoration: underline; }
+
+.title-list { margin-top: 14px; display: none; }
+.title-list.open { display: block; }
+.title-search {
+  width: 100%; height: 36px; padding: 0 12px; margin-bottom: 10px;
+  border: 1px solid #e5e8eb; border-radius: 8px; font-size: 13px;
+  font-family: inherit; outline: none;
+}
+.title-search:focus { border-color: #3182f6; }
+.title-item {
+  padding: 10px 0; border-bottom: 1px solid #f7f8fa;
+  font-size: 13px; line-height: 1.5;
+}
+.title-item:last-child { border-bottom: none; }
+.title-item a { color: #4e5968; text-decoration: none; }
+.title-item a:hover { color: #3182f6; }
+.title-item .au { color: #b0b8c1; font-size: 12px; display: block; margin-top: 2px; }
 
 .empty {
   background: #fff; border: 1px solid #f2f4f6; border-radius: 16px;
@@ -107,16 +90,6 @@ body {
   vertical-align: middle; margin-right: 8px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #191f28; color: #fff; padding: 12px 20px; border-radius: 10px;
-  font-size: 13px; opacity: 0; transition: opacity 0.2s ease;
-  pointer-events: none; z-index: 200;
-}
-.toast.show { opacity: 1; }
-.toast.error { background: #c0392b; }
-
 .loading { padding: 40px; text-align: center; color: #8b95a1; }
 </style>
 </head>
@@ -125,32 +98,21 @@ body {
 
   <div class="container" id="main" style="display:none">
     <h1 class="page-title">학회</h1>
-    <p class="page-subtitle">내 관심 분야 학회에 올라온 논문 — 제목으로 트렌드 파악</p>
-
-    <div class="controls">
-      <div class="control-label">학회 선택 (내 관심 분야 기준)</div>
-      <div class="venue-chips" id="venue-chips"></div>
-
-      <div class="control-label">키워드로 좁히기 (선택)</div>
-      <div class="search-row">
-        <input type="text" class="search-input" id="kw-input"
-               placeholder="비워두면 내 등록 키워드로 필터 · 입력하면 그 키워드로" />
-        <button class="search-btn" id="load-btn">불러오기</button>
-      </div>
-      <div class="kw-hint" id="kw-hint"></div>
-    </div>
+    <p class="page-subtitle">최근 3개년 주요 학회 — 어떤 주제가 많이 올라왔나로 트렌드 파악</p>
+    <div class="run-date" id="run-date"></div>
 
     <div class="info-box">
-      ℹ️ OpenReview에 등록된 학회만 표시됩니다. KDD·SIGIR·CVPR 등 일부 학회는
-      OpenReview를 사용하지 않아 빠질 수 있어요. abstract는 "원문 보기"에서 확인하세요.
+      ℹ️ OpenReview에 등록된 학회의 <b>수락 논문 전체</b>입니다. 오랄/포스터 구분 정보는
+      OpenReview에 없어 제공하지 않습니다. 학회별로 제목에서 자주 등장한 키워드를 집계해
+      트렌드를 보여줍니다.
     </div>
 
+    <div class="venue-filter" id="venue-filter"></div>
     <div class="status-bar" id="status-bar"></div>
     <div id="results"></div>
   </div>
 
   <div class="loading" id="loading">로그인 확인 중...</div>
-  <div class="toast" id="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="shared.js"></script>
@@ -161,195 +123,181 @@ body {
     if (!session) return;
     await renderHeader('header', 'conferences');
 
-    const userId = session.user.id;
-    const toastEl = document.getElementById('toast');
-    function toast(msg, isError) {
-      toastEl.textContent = msg;
-      toastEl.className = 'toast show' + (isError ? ' error' : '');
-      setTimeout(() => { toastEl.className = 'toast'; }, 2500);
-    }
-
-    // 내 분야 + 키워드 + 북마크 로드
-    const myFields = await fetchMyFields();
-    const myKeywords = (await fetchMyKeywords()).map(k => k.keyword);
-    let bookmarkedIds = await fetchMyBookmarkIds();
-
-    const fieldIds = myFields.map(f => f.field_id);
-    const allVenues = getVenuesForFields(fieldIds);
-
-    const venueChipsEl = document.getElementById('venue-chips');
-    const kwInput = document.getElementById('kw-input');
-    const kwHint = document.getElementById('kw-hint');
-    const loadBtn = document.getElementById('load-btn');
+    const runDateEl = document.getElementById('run-date');
     const statusBar = document.getElementById('status-bar');
     const resultsEl = document.getElementById('results');
+    const venueFilterEl = document.getElementById('venue-filter');
 
-    // 분야 설정 안 했으면 안내
-    if (allVenues.length === 0) {
-      document.getElementById('main').style.display = 'block';
-      document.getElementById('loading').style.display = 'none';
-      venueChipsEl.innerHTML = '';
+    // 트렌드 분석에서 제외할 흔한 단어
+    const STOPWORDS = new Set([
+      'the','a','an','of','for','and','or','to','in','on','with','via','using','from',
+      'is','are','be','at','by','as','that','this','we','our','it','its','their',
+      'towards','toward','based','approach','method','methods','model','models',
+      'learning','network','networks','neural','deep','via','can','new','novel',
+      'efficient','effective','robust','improving','improved','improve','study',
+      'analysis','framework','generalization','understanding','better','large',
+      'scale','data','task','tasks','problem','problems','system','systems'
+    ]);
+
+    function topKeywords(papers, topN) {
+      const freq = {};
+      papers.forEach(p => {
+        const words = (p.title || '').toLowerCase()
+          .replace(/[^a-z0-9\s\-]/g, ' ')
+          .split(/\s+/)
+          .filter(w => w.length >= 3 && !STOPWORDS.has(w) && !/^\d+$/.test(w));
+        // 중복 단어는 논문당 1회만
+        const uniq = new Set(words);
+        uniq.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
+      });
+      return Object.entries(freq)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, topN || 15)
+        .filter(x => x[1] >= 2);
+    }
+
+    // 최근 학회 데이터 날짜
+    const confDate = await fetchLatestConferenceDate();
+    if (!confDate) {
+      runDateEl.textContent = '';
       resultsEl.innerHTML =
-        '<div class="empty">' +
-          '먼저 <a href="settings.html">설정</a>에서 연구 분야를 선택해주세요.<br>' +
-          '선택한 분야에 맞는 학회가 여기 표시됩니다.' +
-        '</div>';
+        '<div class="empty">아직 학회 데이터가 없어요.<br>' +
+        '매일 배치가 OpenReview에서 수집합니다. 배치 실행 후 표시됩니다.</div>';
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+      return;
+    }
+    runDateEl.textContent = confDate + ' 수집 기준';
+
+    // 전체 학회 데이터 가져오기 (venue별로 그룹)
+    statusBar.innerHTML = '<span class="spinner"></span>학회 논문 불러오는 중...';
+
+    // shared.js의 venue 목록 사용 — 전 분야 합집합
+    const ALL_FIELD_IDS = Object.keys(FIELD_VENUES);
+    const allVenues = getVenuesForFields(ALL_FIELD_IDS);
+
+    const venueData = {};  // venue → papers[]
+    const tasks = allVenues.map(v =>
+      fetchVenueePapers(v, 2000).then(papers => { venueData[v] = papers; })
+    );
+    await Promise.allSettled(tasks);
+
+    // 데이터 있는 venue만, 논문 수 많은 순
+    const venuesWithData = Object.keys(venueData)
+      .filter(v => venueData[v] && venueData[v].length > 0)
+      .sort((a, b) => venueData[b].length - venueData[a].length);
+
+    if (venuesWithData.length === 0) {
+      statusBar.textContent = '';
+      resultsEl.innerHTML =
+        '<div class="empty">학회 논문을 찾지 못했어요.<br>' +
+        'OpenReview에서 아직 수집되지 않았을 수 있어요.</div>';
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
       return;
     }
 
-    // 키워드 힌트
-    if (myKeywords.length > 0) {
-      kwHint.textContent = '내 키워드: ' + myKeywords.join(', ');
-    } else {
-      kwHint.textContent = '등록된 키워드가 없어요. 키워드 없이 전체를 보거나, 위에 직접 입력하세요.';
-    }
+    statusBar.textContent = venuesWithData.length + '개 학회 · 총 ' +
+      venuesWithData.reduce((s, v) => s + venueData[v].length, 0) + '편';
 
-    // venue 칩 (기본 전체 선택)
-    let activeVenues = new Set(allVenues);
-    function renderVenueChips() {
-      venueChipsEl.innerHTML = '';
-      allVenues.forEach(v => {
+    // venue 필터 칩 (기본 전체)
+    let activeVenues = new Set(venuesWithData);
+    function renderFilter() {
+      venueFilterEl.innerHTML = '';
+      venuesWithData.forEach(v => {
         const chip = document.createElement('span');
-        chip.className = 'venue-chip' + (activeVenues.has(v) ? ' active' : '');
-        chip.textContent = v;
+        chip.className = 'vf-chip' + (activeVenues.has(v) ? ' active' : '');
+        chip.textContent = v + ' (' + venueData[v].length + ')';
         chip.addEventListener('click', () => {
           if (activeVenues.has(v)) {
             if (activeVenues.size > 1) activeVenues.delete(v);
           } else {
             activeVenues.add(v);
           }
-          renderVenueChips();
+          renderFilter();
+          renderVenues();
         });
-        venueChipsEl.appendChild(chip);
+        venueFilterEl.appendChild(chip);
       });
     }
-    renderVenueChips();
 
-    // 논문 불러오기
-    async function loadPapers() {
-      const venues = Array.from(activeVenues);
-      if (venues.length === 0) return;
-
-      // 필터 키워드 결정: 입력값 우선, 없으면 내 키워드
-      const inputKw = kwInput.value.trim();
-      let filterKeywords;
-      if (inputKw) {
-        filterKeywords = inputKw.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
-      } else {
-        filterKeywords = myKeywords.map(k => k.toLowerCase());
-      }
-
-      loadBtn.disabled = true;
-      loadBtn.textContent = '불러오는 중...';
+    function renderVenues() {
       resultsEl.innerHTML = '';
-      statusBar.innerHTML = '<span class="spinner"></span>' + venues.length + '개 학회에서 논문 불러오는 중...';
+      venuesWithData.filter(v => activeVenues.has(v)).forEach(venue => {
+        const papers = venueData[venue];
+        const block = document.createElement('div');
+        block.className = 'venue-block';
 
-      // 각 venue 병렬 호출
-      const tasks = venues.map(v => fetchVenueePapers(v, 100).then(papers => ({ venue: v, papers })));
-      const results = await Promise.allSettled(tasks);
+        const kws = topKeywords(papers, 15);
+        const kwHtml = kws.map((kw, i) => {
+          const cls = i === 0 ? ' rank1' : (i < 3 ? ' rank2' : '');
+          return '<span class="kw-tag' + cls + '" data-kw="' + escapeHtml(kw[0]) + '">' +
+            escapeHtml(kw[0]) + '<span class="n">' + kw[1] + '</span></span>';
+        }).join('');
 
-      let totalShown = 0;
-      resultsEl.innerHTML = '';
+        block.innerHTML =
+          '<div class="venue-head">' +
+            '<span class="venue-name">' + escapeHtml(venue) + '</span>' +
+            '<span class="venue-cnt">' + papers.length + '편</span>' +
+          '</div>' +
+          '<div class="kw-freq-label">제목에서 자주 등장한 키워드</div>' +
+          '<div class="kw-freq">' + (kwHtml || '<span class="venue-cnt">집계할 키워드 부족</span>') + '</div>' +
+          '<span class="toggle-titles">▾ 논문 제목 전체 보기 (' + papers.length + '편)</span>' +
+          '<div class="title-list">' +
+            '<input type="text" class="title-search" placeholder="제목 내 검색...">' +
+            '<div class="title-items"></div>' +
+          '</div>';
 
-      results.forEach(r => {
-        if (r.status !== 'fulfilled') return;
-        const { venue, papers } = r.value;
+        const toggle = block.querySelector('.toggle-titles');
+        const titleList = block.querySelector('.title-list');
+        const titleItems = block.querySelector('.title-items');
+        const titleSearch = block.querySelector('.title-search');
 
-        // 키워드 필터 (제목 기준)
-        let filtered = papers;
-        if (filterKeywords.length > 0) {
-          filtered = papers.filter(p => {
-            const t = (p.title || '').toLowerCase();
-            return filterKeywords.some(kw => t.includes(kw));
-          });
+        function renderTitles(filterText) {
+          const ft = (filterText || '').toLowerCase();
+          const shown = papers.filter(p =>
+            !ft || (p.title || '').toLowerCase().includes(ft));
+          titleItems.innerHTML = shown.slice(0, 500).map(p =>
+            '<div class="title-item">' +
+              '<a href="' + p.url + '" target="_blank">' + escapeHtml(p.title) + '</a>' +
+              (p.authors ? '<span class="au">' + escapeHtml(p.authors) + '</span>' : '') +
+            '</div>'
+          ).join('') || '<div class="title-item">검색 결과 없음</div>';
         }
 
-        if (filtered.length === 0) return;
-        totalShown += filtered.length;
+        let opened = false;
+        toggle.addEventListener('click', () => {
+          opened = !opened;
+          titleList.classList.toggle('open', opened);
+          toggle.textContent = (opened ? '▴ 접기' : '▾ 논문 제목 전체 보기 (' + papers.length + '편)');
+          if (opened && titleItems.children.length === 0) renderTitles('');
+        });
+        titleSearch.addEventListener('input', () => renderTitles(titleSearch.value.trim()));
 
-        const group = document.createElement('div');
-        group.className = 'venue-group';
-        group.innerHTML =
-          '<div class="venue-group-title">' + escapeHtml(venue) +
-          '<span class="count">' + filtered.length + '</span></div>';
-
-        filtered.slice(0, 30).forEach(p => {
-          const isMarked = bookmarkedIds.has(p.paper_id);
-          const card = document.createElement('div');
-          card.className = 'paper-card';
-          card.innerHTML =
-            '<div class="paper-title"><a href="' + p.url + '" target="_blank">' +
-              escapeHtml(p.title) + '</a></div>' +
-            (p.authors ? '<div class="paper-authors">' + escapeHtml(p.authors) + '</div>' : '') +
-            '<div class="paper-foot">' +
-              '<span class="venue-tag">' + escapeHtml(p.venue) + '</span>' +
-              '<a href="' + p.url + '" target="_blank">원문 보기</a>' +
-              '<button class="bookmark-btn' + (isMarked ? ' marked' : '') + '">' +
-                (isMarked ? '★ 북마크됨' : '☆ 북마크') +
-              '</button>' +
-            '</div>';
-
-          const bmBtn = card.querySelector('.bookmark-btn');
-          bmBtn.addEventListener('click', async () => {
-            bmBtn.disabled = true;
-            const marked = bookmarkedIds.has(p.paper_id);
-            try {
-              if (marked) {
-                await deleteBookmarkByPaperId(userId, p.paper_id);
-                bookmarkedIds.delete(p.paper_id);
-                bmBtn.className = 'bookmark-btn';
-                bmBtn.textContent = '☆ 북마크';
-                toast('북마크 해제됨');
-              } else {
-                await addBookmark(userId, {
-                  paper_id: p.paper_id,
-                  title: p.title,
-                  abstract: '',
-                  arxiv_url: p.url,
-                  summary_ko: '',
-                });
-                bookmarkedIds.add(p.paper_id);
-                bmBtn.className = 'bookmark-btn marked';
-                bmBtn.textContent = '★ 북마크됨';
-                toast('북마크에 저장됨');
-              }
-            } catch (e) {
-              toast(e.message, true);
-            } finally {
-              bmBtn.disabled = false;
+        // 키워드 태그 클릭 → 그 키워드로 제목 목록 펼치고 필터
+        block.querySelectorAll('.kw-tag').forEach(tag => {
+          tag.addEventListener('click', () => {
+            const kw = tag.dataset.kw;
+            if (!opened) {
+              opened = true;
+              titleList.classList.add('open');
+              toggle.textContent = '▴ 접기';
             }
+            titleSearch.value = kw;
+            renderTitles(kw);
+            titleList.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           });
-
-          group.appendChild(card);
         });
 
-        resultsEl.appendChild(group);
+        resultsEl.appendChild(block);
       });
-
-      if (totalShown === 0) {
-        const kwMsg = filterKeywords.length > 0
-          ? '키워드(' + filterKeywords.join(', ') + ')에 맞는 논문이 없어요. 키워드를 바꾸거나 비워보세요.'
-          : '선택한 학회에서 논문을 찾지 못했어요. OpenReview에 해당 학회 데이터가 없을 수 있어요.';
-        resultsEl.innerHTML = '<div class="empty">' + kwMsg + '</div>';
-        statusBar.textContent = '';
-      } else {
-        statusBar.textContent = '총 ' + totalShown + '편 표시';
-      }
-
-      loadBtn.disabled = false;
-      loadBtn.textContent = '불러오기';
     }
 
-    loadBtn.addEventListener('click', loadPapers);
-    kwInput.addEventListener('keydown', e => {
-      if (e.key === 'Enter') loadPapers();
-    });
+    renderFilter();
+    renderVenues();
 
     document.getElementById('loading').style.display = 'none';
     document.getElementById('main').style.display = 'block';
-
-    // 첫 진입 시 자동 로드
-    loadPapers();
   })();
   </script>
 </body>
