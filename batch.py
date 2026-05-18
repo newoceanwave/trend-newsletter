@@ -380,6 +380,88 @@ def collect_and_save_trending(run_date: str):
 
 
 # ============================================
+# 학회 논문 수집 + 저장 (OpenReview, 전체 공통)
+# ============================================
+# 수집할 venue 목록 — conferences.html의 FIELD_VENUES와 맞춰야 함
+CONFERENCE_VENUES = [
+    # 최근 3개년 주요 학회 (OpenReview 사용 학회)
+    "ICLR 2026", "ICLR 2025", "ICLR 2024",
+    "NeurIPS 2026", "NeurIPS 2025", "NeurIPS 2024",
+    "ICML 2026", "ICML 2025", "ICML 2024",
+    "COLM 2025", "COLM 2024",
+    "CoRL 2025", "CoRL 2024",
+    "LoG 2025", "LoG 2024",
+    "RLC 2025", "RLC 2024",
+]
+
+
+def fetch_openreview_venue(venue: str, limit: int = 200):
+    """OpenReview에서 특정 venue의 논문 목록 가져오기."""
+    url = "https://api2.openreview.net/notes"
+    params = {"content.venue": venue, "limit": limit}
+    try:
+        resp = requests.get(url, params=params, timeout=30)
+        if resp.status_code != 200:
+            print(f"   ⚠ {venue}: HTTP {resp.status_code}")
+            return []
+        data = resp.json()
+    except Exception as e:
+        print(f"   ⚠ {venue}: {e}")
+        return []
+
+    papers = []
+    for note in data.get("notes", []):
+        content = note.get("content", {})
+        title = (content.get("title", {}) or {}).get("value", "")
+        if not title:
+            continue
+        authors_raw = (content.get("authors", {}) or {}).get("value", [])
+        author_names = []
+        for a in authors_raw:
+            if isinstance(a, dict):
+                author_names.append(a.get("fullname", ""))
+            elif isinstance(a, str):
+                author_names.append(a)
+        author_names = [n for n in author_names if n][:4]
+        forum_id = note.get("forum") or note.get("id", "")
+        papers.append({
+            "paper_id": "openreview:" + forum_id,
+            "title": title,
+            "authors": ", ".join(author_names),
+            "venue": (content.get("venue", {}) or {}).get("value", venue),
+            "url": "https://openreview.net/forum?id=" + forum_id,
+        })
+    return papers
+
+
+def collect_and_save_conferences(run_date: str):
+    """모든 venue의 논문 수집 → daily_conferences 테이블에 저장."""
+    print(f"🎓 학회 논문 수집 (OpenReview)")
+    all_rows = []
+    for venue in CONFERENCE_VENUES:
+        papers = fetch_openreview_venue(venue, limit=200)
+        if papers:
+            print(f"   {venue}: {len(papers)}편")
+        for p in papers:
+            all_rows.append({
+                "run_date": run_date,
+                "venue": p["venue"],
+                "paper_id": p["paper_id"],
+                "title": p["title"],
+                "authors": p["authors"],
+                "url": p["url"],
+            })
+
+    if not all_rows:
+        print(f"   ⚠ 수집된 학회 논문 없음")
+        return
+
+    # upsert (venue+paper_id 유니크라 중복은 갱신)
+    sb_insert("daily_conferences", all_rows, upsert=True)
+    print(f"   → 학회 논문 {len(all_rows)}편 저장")
+
+
+# ============================================
 # 메인
 # ============================================
 def main():
@@ -419,6 +501,10 @@ def main():
 
     # 7. 트렌딩 수집 + 저장 (전체 공통)
     collect_and_save_trending(run_date)
+    print()
+
+    # 8. 학회 논문 수집 + 저장 (OpenReview, 전체 공통)
+    collect_and_save_conferences(run_date)
     print()
 
     print("=" * 50)
